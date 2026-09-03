@@ -711,6 +711,38 @@
       margin-top: 22px;
     }
 
+    .auth-helper-row {
+      display: flex;
+      justify-content: flex-end;
+
+      margin-top: 9px;
+    }
+
+    .auth-text-button {
+      padding: 0;
+
+      border: none;
+
+      background: transparent;
+
+      color: var(--green);
+
+      font: inherit;
+      font-size: 12px;
+    }
+
+    .auth-text-button:hover {
+      color: var(--blue);
+
+      text-decoration: underline;
+    }
+
+    .auth-back-button {
+      display: block;
+
+      margin: 16px auto 0;
+    }
+
     .back-link {
       display: inline-flex;
 
@@ -2914,6 +2946,132 @@
       color: var(--muted);
     }
 
+    .contact-form {
+      width: min(100%, 760px);
+
+      margin: 32px auto 0;
+
+      text-align: left;
+    }
+
+    .contact-form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+
+      gap: 18px;
+    }
+
+    .contact-field {
+      display: flex;
+      flex-direction: column;
+
+      gap: 8px;
+    }
+
+    .contact-field.full-width {
+      grid-column: 1 / -1;
+    }
+
+    .contact-field label {
+      color: var(--muted);
+
+      font-size: 13px;
+      font-weight: bold;
+    }
+
+    .contact-field input,
+    .contact-field textarea {
+      width: 100%;
+
+      padding: 12px 14px;
+
+      border: 1px solid var(--border);
+      border-radius: 7px;
+
+      outline: none;
+
+      background: var(--background);
+
+      color: var(--text);
+
+      font: inherit;
+
+      transition: 0.2s ease;
+    }
+
+    .contact-field textarea {
+      min-height: 170px;
+
+      resize: vertical;
+      line-height: 1.6;
+    }
+
+    .contact-field input:focus,
+    .contact-field textarea:focus {
+      border-color: var(--blue);
+
+      box-shadow: 0 0 0 3px color-mix(in srgb, var(--blue) 18%, transparent);
+    }
+
+    .contact-field input::placeholder,
+    .contact-field textarea::placeholder {
+      color: color-mix(in srgb, var(--muted) 72%, transparent);
+    }
+
+    .contact-honeypot {
+      position: absolute !important;
+
+      width: 1px !important;
+      height: 1px !important;
+
+      overflow: hidden !important;
+
+      left: -10000px !important;
+
+      opacity: 0 !important;
+      pointer-events: none !important;
+    }
+
+    .contact-form-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      gap: 16px;
+
+      margin-top: 20px;
+    }
+
+    .contact-submit {
+      min-width: 160px;
+
+      border: 1px solid var(--accent-hover);
+
+      cursor: pointer;
+    }
+
+    .contact-submit:disabled {
+      cursor: wait;
+
+      opacity: 0.7;
+      transform: none;
+    }
+
+    .contact-form-message {
+      min-height: 20px;
+
+      margin: 0 !important;
+
+      color: var(--red) !important;
+
+      font-size: 13px;
+      text-align: right;
+    }
+
+    .contact-form-message.success {
+      color: var(--green) !important;
+    }
+
     .button {
       display: inline-block;
 
@@ -3200,6 +3358,27 @@
 
       .contact {
         padding: 30px 20px;
+      }
+
+      .contact-form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .contact-field.full-width {
+        grid-column: auto;
+      }
+
+      .contact-form-footer {
+        align-items: stretch;
+        flex-direction: column;
+      }
+
+      .contact-submit {
+        width: 100%;
+      }
+
+      .contact-form-message {
+        text-align: left;
       }
 
       .theme-toggle-label {
@@ -3494,7 +3673,7 @@
       </p>
     </div>
 
-    <div class="auth-tabs">
+    <div class="auth-tabs" id="authTabs">
       <button
         type="button"
         class="auth-tab active"
@@ -3543,12 +3722,109 @@
         required
       >
 
+      <div class="auth-helper-row">
+        <button
+          type="button"
+          class="auth-text-button"
+          onclick="showForgotPassword()"
+        >
+          Forgot password?
+        </button>
+      </div>
+
       <button
         type="submit"
         class="platform-button primary auth-submit"
         id="loginSubmitButton"
       >
         Login
+      </button>
+
+    </form>
+
+
+    <form
+      class="platform-form"
+      id="forgotPasswordForm"
+      onsubmit="handleForgotPassword(event)"
+      hidden
+    >
+
+      <label for="forgotPasswordEmail">
+        Email
+      </label>
+
+      <input
+        type="email"
+        id="forgotPasswordEmail"
+        autocomplete="email"
+        required
+      >
+
+      <p class="platform-form-hint">
+        We will email you a secure link to choose a new password.
+      </p>
+
+      <button
+        type="submit"
+        class="platform-button primary auth-submit"
+        id="forgotPasswordSubmitButton"
+      >
+        Send Reset Link
+      </button>
+
+      <button
+        type="button"
+        class="auth-text-button auth-back-button"
+        onclick="showAuthScreen('login')"
+      >
+        Back to Login
+      </button>
+
+    </form>
+
+
+    <form
+      class="platform-form"
+      id="resetPasswordForm"
+      onsubmit="handlePasswordUpdate(event)"
+      hidden
+    >
+
+      <label for="resetPassword">
+        New Password
+      </label>
+
+      <input
+        type="password"
+        id="resetPassword"
+        minlength="6"
+        autocomplete="new-password"
+        required
+      >
+
+      <label for="resetPasswordConfirm">
+        Confirm New Password
+      </label>
+
+      <input
+        type="password"
+        id="resetPasswordConfirm"
+        minlength="6"
+        autocomplete="new-password"
+        required
+      >
+
+      <p class="platform-form-hint">
+        Use at least 6 characters and choose a password you do not use elsewhere.
+      </p>
+
+      <button
+        type="submit"
+        class="platform-button primary auth-submit"
+        id="resetPasswordSubmitButton"
+      >
+        Update Password
       </button>
 
     </form>
@@ -4923,16 +5199,111 @@
 
 
       <p id="contactDescription">
-        GitHub · LinkedIn · Email
+        Have a question, feedback, or want to connect? Send me a message.
       </p>
 
 
-      <a
-        href="#"
-        class="button"
+      <form
+        class="contact-form"
+        id="contactForm"
+        onsubmit="sendContactMessage(event)"
+        novalidate
       >
-        View Resume
-      </a>
+
+        <div class="contact-form-grid">
+
+          <div class="contact-field">
+            <label for="contactName">Name</label>
+
+            <input
+              type="text"
+              id="contactName"
+              name="name"
+              maxlength="100"
+              autocomplete="name"
+              placeholder="Your name"
+              required
+            >
+          </div>
+
+          <div class="contact-field">
+            <label for="contactEmail">Email</label>
+
+            <input
+              type="email"
+              id="contactEmail"
+              name="email"
+              maxlength="254"
+              autocomplete="email"
+              placeholder="you@example.com"
+              required
+            >
+          </div>
+
+          <div class="contact-field full-width">
+            <label for="contactSubject">Subject</label>
+
+            <input
+              type="text"
+              id="contactSubject"
+              name="subject"
+              maxlength="150"
+              placeholder="What would you like to discuss?"
+              required
+            >
+          </div>
+
+          <div class="contact-field full-width">
+            <label for="contactMessage">Message</label>
+
+            <textarea
+              id="contactMessage"
+              name="message"
+              maxlength="3000"
+              placeholder="Write your message here..."
+              required
+            ></textarea>
+          </div>
+
+          <div
+            class="contact-honeypot"
+            aria-hidden="true"
+          >
+            <label for="contactWebsite">
+              Leave this field empty
+            </label>
+
+            <input
+              type="text"
+              id="contactWebsite"
+              name="website"
+              tabindex="-1"
+              autocomplete="off"
+            >
+          </div>
+
+        </div>
+
+        <div class="contact-form-footer">
+
+          <button
+            type="submit"
+            class="button contact-submit"
+            id="contactSubmitButton"
+          >
+            Send Message
+          </button>
+
+          <p
+            class="contact-form-message"
+            id="contactFormMessage"
+            role="status"
+            aria-live="polite"
+          ></p>
+
+        </div>
+
+      </form>
 
 
     </div>
@@ -5831,6 +6202,9 @@
 
   const SUPABASE_KEY = "sb_publishable_bzk-PSNChJcwFG42CqKcOg_PPhY-Wad";
 
+  const PUBLIC_SITE_URL =
+    "https://mydevfoliohub.github.io/";
+
   const supabaseClient =
     supabase.createClient(
       SUPABASE_URL,
@@ -5848,10 +6222,31 @@
 
   let currentAppView = "loading";
   let authMode = "login";
+  let passwordRecoveryEventReceived = false;
 
 
   const USERNAME_PATTERN =
     /^[a-z0-9_-]{3,30}$/;
+
+
+  supabaseClient.auth.onAuthStateChange(
+    (event, session) => {
+
+      if (event !== "PASSWORD_RECOVERY") {
+        return;
+      }
+
+
+      passwordRecoveryEventReceived = true;
+      currentUser = session?.user || null;
+
+
+      window.setTimeout(
+        () => showPasswordReset(),
+        0
+      );
+    }
+  );
 
 
   function showAppView(viewName) {
@@ -6209,19 +6604,38 @@
 
   function selectAuthMode(mode) {
 
-    authMode =
-      mode === "signup"
-        ? "signup"
-        : "login";
+    const supportedModes = [
+      "login",
+      "signup",
+      "forgot",
+      "reset"
+    ];
+
+
+    authMode = supportedModes.includes(mode)
+      ? mode
+      : "login";
 
 
     const isSignup =
       authMode === "signup";
 
 
+    const isLogin =
+      authMode === "login";
+
+
+    const isForgot =
+      authMode === "forgot";
+
+
+    const isReset =
+      authMode === "reset";
+
+
     document.getElementById(
       "loginForm"
-    ).hidden = isSignup;
+    ).hidden = !isLogin;
 
 
     document.getElementById(
@@ -6230,10 +6644,25 @@
 
 
     document.getElementById(
+      "forgotPasswordForm"
+    ).hidden = !isForgot;
+
+
+    document.getElementById(
+      "resetPasswordForm"
+    ).hidden = !isReset;
+
+
+    document.getElementById(
+      "authTabs"
+    ).hidden = isForgot || isReset;
+
+
+    document.getElementById(
       "loginTab"
     ).classList.toggle(
       "active",
-      !isSignup
+      isLogin
     );
 
 
@@ -6247,18 +6676,22 @@
 
     document.getElementById(
       "authHeading"
-    ).textContent =
-      isSignup
-        ? "Create Your Account"
-        : "Welcome Back";
+    ).textContent = {
+      login: "Welcome Back",
+      signup: "Create Your Account",
+      forgot: "Reset Your Password",
+      reset: "Choose a New Password"
+    }[authMode];
 
 
     document.getElementById(
       "authDescription"
-    ).textContent =
-      isSignup
-        ? "Start building your public developer portfolio."
-        : "Login to manage your developer portfolio.";
+    ).textContent = {
+      login: "Login to manage your developer portfolio.",
+      signup: "Start building your public developer portfolio.",
+      forgot: "Enter your account email and we will send you a secure reset link.",
+      reset: "Enter and confirm the new password for your account."
+    }[authMode];
 
 
     setAuthMessage("");
@@ -6280,10 +6713,16 @@
     window.setTimeout(
       () => {
 
+        const focusTargets = {
+          login: "loginEmail",
+          signup: "signupEmail",
+          forgot: "forgotPasswordEmail",
+          reset: "resetPassword"
+        };
+
+
         document.getElementById(
-          mode === "signup"
-            ? "signupEmail"
-            : "loginEmail"
+          focusTargets[authMode]
         )?.focus();
 
       },
@@ -6499,6 +6938,257 @@
   }
 
 
+  function showForgotPassword() {
+
+    const loginEmail =
+      document.getElementById(
+        "loginEmail"
+      ).value.trim();
+
+
+    document.getElementById(
+      "forgotPasswordEmail"
+    ).value = loginEmail;
+
+
+    showAuthScreen("forgot");
+  }
+
+
+  function getPasswordResetRedirectURL() {
+
+    const redirectURL =
+      new URL(
+        PUBLIC_SITE_URL
+      );
+
+
+    redirectURL.search = "";
+    redirectURL.hash = "";
+
+
+    redirectURL.searchParams.set(
+      "view",
+      "reset-password"
+    );
+
+
+    return redirectURL.toString();
+  }
+
+
+  async function handleForgotPassword(
+    event
+  ) {
+
+    event.preventDefault();
+
+
+    const email =
+      document.getElementById(
+        "forgotPasswordEmail"
+      ).value.trim();
+
+
+    const button =
+      document.getElementById(
+        "forgotPasswordSubmitButton"
+      );
+
+
+    button.disabled = true;
+    button.textContent =
+      "Sending link...";
+
+
+    setAuthMessage("");
+
+
+    try {
+
+      const { error } =
+        await supabaseClient.auth
+          .resetPasswordForEmail(
+            email,
+            {
+              redirectTo:
+                getPasswordResetRedirectURL()
+            }
+          );
+
+
+      if (error) {
+        throw error;
+      }
+
+
+      setAuthMessage(
+        "If an account exists for this email, a password reset link has been sent. Check your inbox and spam folder.",
+        true
+      );
+
+    }
+
+    catch (error) {
+
+      setAuthMessage(
+        getFriendlyAuthError(error)
+      );
+
+    }
+
+    finally {
+
+      button.disabled = false;
+      button.textContent =
+        "Send Reset Link";
+
+    }
+  }
+
+
+  function showPasswordReset(
+    message = ""
+  ) {
+
+    showAuthScreen(
+      "reset",
+      message
+    );
+  }
+
+
+  async function handlePasswordUpdate(
+    event
+  ) {
+
+    event.preventDefault();
+
+
+    const password =
+      document.getElementById(
+        "resetPassword"
+      ).value;
+
+
+    const passwordConfirm =
+      document.getElementById(
+        "resetPasswordConfirm"
+      ).value;
+
+
+    if (password.length < 6) {
+      setAuthMessage(
+        "Password must be at least 6 characters."
+      );
+
+      return;
+    }
+
+
+    if (password !== passwordConfirm) {
+      setAuthMessage(
+        "Passwords do not match."
+      );
+
+      return;
+    }
+
+
+    const { data: sessionData } =
+      await supabaseClient.auth
+        .getSession();
+
+
+    if (!sessionData?.session) {
+      setAuthMessage(
+        "This reset link is invalid or has expired. Request a new link."
+      );
+
+      return;
+    }
+
+
+    const button =
+      document.getElementById(
+        "resetPasswordSubmitButton"
+      );
+
+
+    button.disabled = true;
+    button.textContent =
+      "Updating password...";
+
+
+    setAuthMessage("");
+
+
+    try {
+
+      const { error } =
+        await supabaseClient.auth
+          .updateUser({
+            password
+          });
+
+
+      if (error) {
+        throw error;
+      }
+
+
+      await supabaseClient.auth
+        .signOut();
+
+
+      currentUser = null;
+      signedInProfile = null;
+      isPlatformAdmin = false;
+      isAdmin = false;
+
+
+      document.getElementById(
+        "resetPasswordForm"
+      ).reset();
+
+
+      window.history.replaceState(
+        {},
+        "",
+        `${window.location.pathname}?view=login`
+      );
+
+
+      showAuthScreen(
+        "login",
+        "Password updated successfully. Login with your new password."
+      );
+
+
+      document.getElementById(
+        "authMessage"
+      ).classList.add("success");
+
+    }
+
+    catch (error) {
+
+      setAuthMessage(
+        getFriendlyAuthError(error)
+      );
+
+    }
+
+    finally {
+
+      button.disabled = false;
+      button.textContent =
+        "Update Password";
+
+    }
+  }
+
+
   async function handleSignup(event) {
 
     event?.preventDefault();
@@ -6558,7 +7248,11 @@
         await supabaseClient.auth
           .signUp({
             email,
-            password
+            password,
+            options: {
+              emailRedirectTo:
+                `${PUBLIC_SITE_URL}?view=onboarding`
+            }
           });
 
 
@@ -7538,7 +8232,7 @@
     document.getElementById(
       "contactHeading"
     ).textContent =
-      `Connect with ${displayName}`;
+      "Let's Connect";
 
 
     const githubLink =
@@ -7598,19 +8292,10 @@
     }
 
 
-    const availableSocials = [
-      linkedinURL && "LinkedIn",
-      publicEmail && "Email",
-      githubURL && "GitHub"
-    ].filter(Boolean);
-
-
     document.getElementById(
       "contactDescription"
     ).textContent =
-      availableSocials.length > 0
-        ? availableSocials.join(" · ")
-        : "Social links coming soon.";
+      "Have a question, feedback, or want to connect? Send me a message.";
 
 
     renderTechStack(
@@ -7757,6 +8442,23 @@
         parameters.get("view");
 
 
+      if (
+        requestedView ===
+        "reset-password"
+      ) {
+
+        showPasswordReset(
+          currentUser
+          || passwordRecoveryEventReceived
+            ? ""
+            : "This reset link is invalid or has expired. Request a new link."
+        );
+
+
+        return;
+      }
+
+
       if (requestedUsername !== null) {
 
         const username =
@@ -7856,6 +8558,15 @@
 
       if (requestedView === "signup") {
         showAuthScreen("signup");
+        return;
+      }
+
+
+      if (
+        requestedView ===
+        "forgot-password"
+      ) {
+        showAuthScreen("forgot");
         return;
       }
 
@@ -14713,6 +15424,302 @@
 
       }
     );
+
+
+  /* =========================================
+     CONTACT FORM - SUPABASE EDGE FUNCTION
+  ========================================= */
+
+  const CONTACT_COOLDOWN_MS = 30000;
+
+  const CONTACT_COOLDOWN_KEY =
+    "myDevFolioHubContactLastSent";
+
+  let contactRequestInFlight = false;
+
+
+  function setContactFormMessage(
+    message,
+    success = false
+  ) {
+
+    const messageElement =
+      document.getElementById(
+        "contactFormMessage"
+      );
+
+
+    messageElement.textContent =
+      message || "";
+
+
+    messageElement.classList.toggle(
+      "success",
+      success
+    );
+  }
+
+
+  function getLastContactSentAt() {
+
+    try {
+      return Number(
+        sessionStorage.getItem(
+          CONTACT_COOLDOWN_KEY
+        )
+      ) || 0;
+    }
+
+    catch {
+      return 0;
+    }
+  }
+
+
+  function rememberContactSent() {
+
+    try {
+      sessionStorage.setItem(
+        CONTACT_COOLDOWN_KEY,
+        String(Date.now())
+      );
+    }
+
+    catch {
+      // The in-flight guard still prevents duplicate requests.
+    }
+  }
+
+
+  function validateContactMessage(
+    contactData
+  ) {
+
+    const emailPattern =
+      /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+
+    if (!contactData.name) {
+      return "Please enter your name.";
+    }
+
+
+    if (contactData.name.length > 100) {
+      return "Name must not exceed 100 characters.";
+    }
+
+
+    if (
+      !contactData.email
+      ||
+      !emailPattern.test(
+        contactData.email
+      )
+    ) {
+      return "Please enter a valid email address.";
+    }
+
+
+    if (!contactData.subject) {
+      return "Please enter a subject.";
+    }
+
+
+    if (contactData.subject.length > 150) {
+      return "Subject must not exceed 150 characters.";
+    }
+
+
+    if (!contactData.message) {
+      return "Please enter your message.";
+    }
+
+
+    if (contactData.message.length > 3000) {
+      return "Message must not exceed 3000 characters.";
+    }
+
+
+    return "";
+  }
+
+
+  async function sendContactMessage(
+    event
+  ) {
+
+    event.preventDefault();
+
+
+    if (contactRequestInFlight) {
+      return;
+    }
+
+
+    const form = event.currentTarget;
+
+
+    const contactData = {
+      name:
+        document.getElementById(
+          "contactName"
+        ).value.trim(),
+
+      email:
+        document.getElementById(
+          "contactEmail"
+        ).value.trim(),
+
+      subject:
+        document.getElementById(
+          "contactSubject"
+        ).value.trim(),
+
+      message:
+        document.getElementById(
+          "contactMessage"
+        ).value.trim()
+    };
+
+
+    const honeypotValue =
+      document.getElementById(
+        "contactWebsite"
+      ).value.trim();
+
+
+    if (honeypotValue) {
+      form.reset();
+
+      setContactFormMessage(
+        "Message sent successfully ✓",
+        true
+      );
+
+      return;
+    }
+
+
+    const validationError =
+      validateContactMessage(
+        contactData
+      );
+
+
+    if (validationError) {
+      setContactFormMessage(
+        validationError
+      );
+
+      return;
+    }
+
+
+    const timeSinceLastSend =
+      Date.now()
+      -
+      getLastContactSentAt();
+
+
+    if (
+      timeSinceLastSend
+      <
+      CONTACT_COOLDOWN_MS
+    ) {
+
+      const secondsRemaining =
+        Math.ceil(
+          (
+            CONTACT_COOLDOWN_MS
+            -
+            timeSinceLastSend
+          )
+          /
+          1000
+        );
+
+
+      setContactFormMessage(
+        `Please wait ${secondsRemaining} seconds before sending another message.`
+      );
+
+      return;
+    }
+
+
+    const submitButton =
+      document.getElementById(
+        "contactSubmitButton"
+      );
+
+
+    contactRequestInFlight = true;
+    submitButton.disabled = true;
+    submitButton.textContent =
+      "Sending...";
+
+
+    setContactFormMessage("");
+
+
+    try {
+
+      const { data, error } =
+        await supabaseClient.functions
+          .invoke(
+            "send-contact-email",
+            {
+              body: contactData
+            }
+          );
+
+
+      if (
+        error
+        ||
+        data?.success === false
+        ||
+        data?.error
+      ) {
+        throw new Error(
+          "CONTACT_REQUEST_FAILED"
+        );
+      }
+
+
+      rememberContactSent();
+      form.reset();
+
+
+      setContactFormMessage(
+        "Message sent successfully ✓",
+        true
+      );
+
+    }
+
+    catch {
+
+      console.error(
+        "Contact form request failed."
+      );
+
+
+      setContactFormMessage(
+        "Could not send message. Please try again."
+      );
+
+    }
+
+    finally {
+
+      contactRequestInFlight = false;
+      submitButton.disabled = false;
+      submitButton.textContent =
+        "Send Message";
+
+    }
+  }
 
 
 

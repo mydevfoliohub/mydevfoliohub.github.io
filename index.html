@@ -21,7 +21,7 @@
 
   <meta
     name="author"
-    content="Portfolio Forge"
+    content="MyDevFolioHub"
   >
 
   <meta
@@ -37,7 +37,7 @@
 
   <meta property="og:type" content="website">
   <meta property="og:locale" content="en_US">
-  <meta property="og:title" content="Portfolio Forge | Developer Portfolio Builder">
+  <meta property="og:title" content="MyDevFolioHub | Developer Portfolio Builder">
   <meta property="og:url" content="">
   <meta
     property="og:description"
@@ -46,10 +46,10 @@
   <meta property="og:image" content="social-preview.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="Portfolio Forge developer portfolio builder preview">
+  <meta property="og:image:alt" content="MyDevFolioHub developer portfolio builder preview">
 
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Portfolio Forge | Developer Portfolio Builder">
+  <meta name="twitter:title" content="MyDevFolioHub | Developer Portfolio Builder">
   <meta
     name="twitter:description"
     content="Create your portfolio, share your projects, labs, certificates and learning journey."
@@ -69,14 +69,14 @@
     {
       "@context": "https://schema.org",
       "@type": "WebApplication",
-      "name": "Portfolio Forge",
+      "name": "MyDevFolioHub",
       "applicationCategory": "DeveloperApplication",
       "description": "Developer and cybersecurity portfolio builder",
       "operatingSystem": "Web"
     }
   </script>
 
-  <title>Portfolio Forge | Developer Portfolio Builder</title>
+  <title>MyDevFolioHub | Developer Portfolio Builder</title>
 
   <style>
 
@@ -4516,6 +4516,1377 @@
       .user-search-box { grid-column: auto; }
     }
 
+    /* =========================================
+       MYDEVFOLIOHUB V2 LANDING PAGE
+    ========================================= */
+
+    #landingView {
+      width: min(1280px, 92%);
+      overflow: hidden;
+    }
+
+    #landingView .platform-header {
+      position: relative;
+      z-index: 20;
+      padding: 8px 0;
+    }
+
+    #landingView .platform-logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      letter-spacing: .7px;
+    }
+
+    #landingView .platform-logo span {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 34px;
+      height: 34px;
+      border: 1px solid color-mix(in srgb, var(--green) 55%, transparent);
+      border-radius: 9px;
+      background: color-mix(in srgb, var(--accent-strong) 20%, transparent);
+      box-shadow: 0 0 28px color-mix(in srgb, var(--green) 15%, transparent);
+    }
+
+    #landingView .platform-button {
+      position: relative;
+      gap: 8px;
+      min-height: 46px;
+      padding: 11px 20px;
+      overflow: hidden;
+      border-radius: 10px;
+      transition:
+        transform .22s ease,
+        border-color .22s ease,
+        background-color .22s ease,
+        color .22s ease,
+        box-shadow .22s ease;
+    }
+
+    #landingView .platform-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 28px color-mix(in srgb, var(--accent-strong) 20%, transparent);
+    }
+
+    #landingView .platform-button.primary {
+      background: linear-gradient(135deg, var(--accent-strong), var(--accent-hover));
+      box-shadow: 0 10px 34px color-mix(in srgb, var(--accent-strong) 30%, transparent);
+    }
+
+    #landingView .platform-button.primary:hover {
+      box-shadow: 0 14px 38px color-mix(in srgb, var(--accent-hover) 38%, transparent);
+    }
+
+    .landing-hero {
+      position: relative;
+      isolation: isolate;
+      min-height: 690px;
+      grid-template-columns: minmax(0, 1.05fr) minmax(410px, .95fr);
+      gap: clamp(42px, 7vw, 92px);
+      padding: 58px 0 42px;
+    }
+
+    .landing-copy,
+    .landing-terminal-stage {
+      position: relative;
+      z-index: 3;
+    }
+
+    .landing-copy h1 {
+      max-width: 780px;
+      margin-top: 18px;
+      font-size: clamp(50px, 6.7vw, 88px);
+      line-height: .98;
+      letter-spacing: -3.5px;
+    }
+
+    .landing-gradient-title {
+      display: block;
+      padding-bottom: .08em;
+      background: linear-gradient(
+        100deg,
+        var(--green),
+        var(--blue),
+        #c8a7ff,
+        var(--green)
+      );
+      background-size: 220% 100%;
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent !important;
+      -webkit-text-fill-color: transparent;
+      animation: landingGradientShift 12s ease-in-out infinite;
+    }
+
+    @keyframes landingGradientShift {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    .landing-build-line {
+      margin-top: 22px;
+      color: var(--text);
+      font-family: monospace;
+      font-size: clamp(14px, 1.5vw, 18px);
+      font-weight: bold;
+      letter-spacing: .08em;
+    }
+
+    .landing-build-line::before {
+      content: "//";
+      margin-right: 9px;
+      color: var(--green);
+    }
+
+    .landing-tagline {
+      max-width: 620px;
+      margin-top: 22px;
+      font-size: clamp(16px, 1.55vw, 19px);
+      line-height: 1.75;
+    }
+
+    .landing-actions { margin-top: 34px; }
+
+    .landing-terminal-stage { perspective: 1100px; }
+
+    .landing-terminal {
+      position: relative;
+      min-height: 390px;
+      border-color: color-mix(in srgb, var(--blue) 38%, var(--border));
+      border-radius: 16px;
+      background: color-mix(in srgb, var(--card) 92%, transparent);
+      box-shadow:
+        0 30px 90px rgba(0, 0, 0, .42),
+        0 0 60px color-mix(in srgb, var(--accent-strong) 16%, transparent),
+        inset 0 1px 0 rgba(255, 255, 255, .045);
+      transform: rotateY(-1.8deg) rotateX(1deg);
+      backdrop-filter: blur(16px);
+    }
+
+    .landing-terminal::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(115deg, rgba(255,255,255,.035), transparent 28%);
+    }
+
+    .landing-terminal-bar {
+      min-height: 50px;
+      padding: 14px 18px;
+      background: color-mix(in srgb, var(--card2) 86%, transparent);
+    }
+
+    .landing-terminal-title {
+      margin-left: 8px;
+      color: var(--muted);
+      font-family: monospace;
+      font-size: 11px;
+    }
+
+    .landing-terminal-body {
+      min-height: 335px;
+      padding: 31px;
+      font-size: 13px;
+      line-height: 2.15;
+    }
+
+    .landing-terminal-command-line {
+      min-height: 29px;
+      color: var(--text);
+      white-space: nowrap;
+    }
+
+    .landing-terminal-cursor {
+      display: inline-block;
+      width: 8px;
+      height: 1.05em;
+      margin-left: 4px;
+      vertical-align: -.14em;
+      background: var(--green);
+      animation: landingCursorBlink .9s steps(1) infinite;
+    }
+
+    @keyframes landingCursorBlink { 50% { opacity: 0; } }
+
+    .landing-terminal-output-line {
+      opacity: 0;
+      color: var(--muted);
+      transform: translateY(5px);
+      transition: opacity .35s ease, transform .35s ease;
+    }
+
+    .landing-terminal-output-line.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .landing-terminal-output-line.is-success { color: var(--green); }
+    .landing-terminal-output-line.is-url {
+      margin-top: 8px;
+      color: var(--blue);
+    }
+
+    .landing-glow {
+      position: absolute;
+      z-index: -1;
+      border-radius: 50%;
+      pointer-events: none;
+      filter: blur(75px);
+      opacity: .2;
+      will-change: transform;
+    }
+
+    .landing-glow-one {
+      top: 12%;
+      left: -12%;
+      width: 360px;
+      height: 360px;
+      background: var(--accent-strong);
+      animation: landingBlobOne 19s ease-in-out infinite alternate;
+    }
+
+    .landing-glow-two {
+      top: 8%;
+      right: -6%;
+      width: 420px;
+      height: 420px;
+      background: var(--blue);
+      opacity: .15;
+      animation: landingBlobTwo 23s ease-in-out infinite alternate;
+    }
+
+    .landing-glow-three {
+      right: 22%;
+      bottom: 2%;
+      width: 300px;
+      height: 300px;
+      background: var(--green);
+      opacity: .1;
+      animation: landingBlobThree 27s ease-in-out infinite alternate;
+    }
+
+    @keyframes landingBlobOne {
+      to { transform: translate3d(55px, 24px, 0) scale(1.08); }
+    }
+
+    @keyframes landingBlobTwo {
+      to { transform: translate3d(-42px, 36px, 0) scale(.94); }
+    }
+
+    @keyframes landingBlobThree {
+      to { transform: translate3d(30px, -24px, 0) scale(1.12); }
+    }
+
+    .floating-code {
+      position: absolute;
+      z-index: -1;
+      color: var(--green);
+      font-family: monospace;
+      font-size: 20px;
+      font-weight: bold;
+      opacity: .17;
+      text-shadow: 0 0 18px color-mix(in srgb, var(--green) 45%, transparent);
+      animation: landingFloat 8s ease-in-out infinite alternate;
+    }
+
+    .floating-code-one { top: -46px; left: 8%; }
+    .floating-code-two { top: 12%; right: -42px; animation-delay: -3s; }
+    .floating-code-three { right: 8%; bottom: -46px; animation-delay: -5s; }
+    .floating-code-four { left: -37px; bottom: 17%; animation-delay: -1.5s; }
+
+    @keyframes landingFloat {
+      to { transform: translate3d(0, -15px, 0) rotate(3deg); }
+    }
+
+    .landing-section-heading {
+      max-width: 720px;
+      margin-bottom: 28px;
+    }
+
+    .landing-section-heading h2 {
+      margin-top: 9px;
+      font-size: clamp(28px, 4vw, 44px);
+      letter-spacing: -1.4px;
+    }
+
+    .landing-section-heading p {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.65;
+    }
+
+    .landing-tech-showcase {
+      position: relative;
+      padding: 76px 0 82px;
+    }
+
+    .tech-marquee {
+      position: relative;
+      display: grid;
+      gap: 13px;
+      width: 100%;
+      overflow: hidden;
+      padding: 8px 0;
+      mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+      -webkit-mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+    }
+
+    .tech-marquee-row { overflow: hidden; }
+
+    .tech-marquee-track {
+      display: flex;
+      width: max-content;
+      will-change: transform;
+      animation: techMarqueeLeft 45s linear infinite;
+    }
+
+    .tech-marquee-row-one .tech-marquee-track {
+      animation-name: techMarqueeRight;
+      animation-duration: 35s;
+    }
+
+    .tech-marquee-row-two .tech-marquee-track { animation-duration: 45s; }
+
+    .tech-marquee-row-three .tech-marquee-track {
+      animation-name: techMarqueeRight;
+      animation-duration: 40s;
+    }
+
+    .tech-marquee:hover .tech-marquee-track { animation-play-state: paused; }
+
+    @keyframes techMarqueeLeft {
+      from { transform: translate3d(0, 0, 0); }
+      to { transform: translate3d(-50%, 0, 0); }
+    }
+
+    @keyframes techMarqueeRight {
+      from { transform: translate3d(-50%, 0, 0); }
+      to { transform: translate3d(0, 0, 0); }
+    }
+
+    .tech-marquee-group {
+      display: flex;
+      flex: 0 0 auto;
+      gap: 10px;
+      padding-right: 10px;
+    }
+
+    .landing-tech-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      min-height: 44px;
+      padding: 9px 14px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: color-mix(in srgb, var(--card) 88%, transparent);
+      color: var(--text);
+      font-family: monospace;
+      font-size: 12px;
+      white-space: nowrap;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.035);
+      transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+    }
+
+    .landing-tech-chip:hover {
+      z-index: 2;
+      border-color: var(--green);
+      transform: scale(1.035);
+      box-shadow: 0 0 24px color-mix(in srgb, var(--green) 18%, transparent);
+    }
+
+    .landing-tech-chip img,
+    .landing-tech-chip .tech-icon-fallback {
+      width: 19px;
+      height: 19px;
+      object-fit: contain;
+    }
+
+    .landing-tech-chip .tech-icon-fallback {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--green);
+      font-size: 9px;
+    }
+
+    .user-directory {
+      position: relative;
+      margin: 0 0 78px;
+      padding: clamp(24px, 4vw, 42px);
+      overflow: hidden;
+      border-radius: 18px;
+      background:
+        linear-gradient(135deg, color-mix(in srgb, var(--card) 94%, transparent), color-mix(in srgb, var(--card2) 86%, transparent));
+      box-shadow: 0 28px 75px rgba(0,0,0,.2), inset 0 1px 0 rgba(255,255,255,.035);
+    }
+
+    .user-directory::before {
+      content: "";
+      position: absolute;
+      top: -140px;
+      right: -120px;
+      width: 320px;
+      height: 320px;
+      border-radius: 50%;
+      background: var(--accent-strong);
+      filter: blur(90px);
+      opacity: .1;
+      pointer-events: none;
+    }
+
+    .user-directory-heading { position: relative; z-index: 1; }
+    .user-directory-heading h2 {
+      font-size: clamp(28px, 3.5vw, 42px);
+      letter-spacing: -1px;
+    }
+
+    .user-search-controls {
+      padding: 7px;
+      border: 1px solid var(--border);
+      border-radius: 13px;
+      background: color-mix(in srgb, var(--background) 72%, transparent);
+      box-shadow: 0 14px 35px rgba(0,0,0,.16);
+    }
+
+    .user-search-box,
+    .user-search-filter {
+      border-color: transparent;
+      background: color-mix(in srgb, var(--card2) 76%, transparent);
+      transition: border-color .2s ease, background-color .2s ease, box-shadow .2s ease;
+    }
+
+    .user-search-box:focus-within,
+    .user-search-filter:focus {
+      border-color: var(--blue);
+      box-shadow: 0 0 0 3px color-mix(in srgb, var(--blue) 12%, transparent);
+    }
+
+    .user-search-results {
+      position: relative;
+      z-index: 1;
+      gap: 14px;
+      margin-top: 28px;
+    }
+
+    .user-result-card {
+      min-height: 86px;
+      padding: 16px;
+      border-radius: 12px;
+      background: color-mix(in srgb, var(--card2) 86%, transparent);
+      transition: transform .22s ease, border-color .22s ease, background-color .22s ease, box-shadow .22s ease;
+    }
+
+    .user-result-card:hover {
+      border-color: color-mix(in srgb, var(--green) 75%, var(--border));
+      background: color-mix(in srgb, var(--chip) 80%, transparent);
+      box-shadow: 0 12px 34px color-mix(in srgb, var(--accent-strong) 16%, transparent);
+      transform: translateY(-4px);
+    }
+
+    .user-result-avatar {
+      width: 50px;
+      height: 50px;
+      box-shadow: 0 0 24px color-mix(in srgb, var(--accent-strong) 20%, transparent);
+    }
+
+    .user-result-copy strong { font-size: 14px; }
+
+    .landing-features-section { padding: 18px 0 90px; }
+
+    .platform-features { gap: 16px; }
+
+    .platform-feature-card {
+      position: relative;
+      min-height: 205px;
+      padding: 24px;
+      overflow: hidden;
+      border-radius: 14px;
+      background: color-mix(in srgb, var(--card) 88%, transparent);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.035);
+      transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
+    }
+
+    .platform-feature-card::after {
+      content: "";
+      position: absolute;
+      right: -45px;
+      bottom: -70px;
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      background: var(--accent-strong);
+      filter: blur(48px);
+      opacity: 0;
+      transition: opacity .25s ease;
+    }
+
+    .platform-feature-card:hover {
+      border-color: color-mix(in srgb, var(--green) 70%, var(--border));
+      box-shadow: 0 18px 45px color-mix(in srgb, var(--accent-strong) 16%, transparent);
+      transform: translateY(-6px);
+    }
+
+    .platform-feature-card:hover::after { opacity: .18; }
+
+    .platform-feature-icon {
+      display: inline-flex;
+      width: 50px;
+      height: 50px;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 25px;
+      border: 1px solid color-mix(in srgb, var(--green) 45%, var(--border));
+      border-radius: 13px;
+      background: color-mix(in srgb, var(--accent-strong) 24%, transparent);
+      color: var(--green);
+      font-family: monospace;
+      font-size: 25px;
+      box-shadow: 0 0 25px color-mix(in srgb, var(--green) 10%, transparent);
+    }
+
+    .platform-feature-number {
+      position: absolute;
+      top: 23px;
+      right: 22px;
+      color: color-mix(in srgb, var(--muted) 55%, transparent);
+      font-family: monospace;
+      font-size: 11px;
+    }
+
+    .platform-feature-card h3 { font-size: 17px; }
+    .platform-feature-card p {
+      margin-top: 11px;
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .landing-reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity .65s ease, transform .65s cubic-bezier(.22, 1, .36, 1);
+    }
+
+    .landing-reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* =========================================
+       MYDEVFOLIOHUB V2 — PLATFORM EXPERIENCE
+    ========================================= */
+
+    #landingView .platform-header::before,
+    #landingView .platform-header::after {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      top: -95px;
+      width: 440px;
+      height: 240px;
+      border-radius: 50%;
+      pointer-events: none;
+      filter: blur(46px);
+      opacity: .2;
+    }
+
+    #landingView .platform-header::before {
+      left: -170px;
+      background: radial-gradient(ellipse at center, color-mix(in srgb, var(--green) 72%, transparent) 0%, color-mix(in srgb, var(--accent-strong) 32%, transparent) 38%, transparent 72%);
+    }
+
+    #landingView .platform-header::after {
+      right: -170px;
+      background: radial-gradient(ellipse at center, color-mix(in srgb, var(--blue) 62%, transparent) 0%, color-mix(in srgb, var(--green) 26%, transparent) 42%, transparent 74%);
+    }
+
+    #landingView .platform-logo span {
+      box-shadow: 0 0 24px color-mix(in srgb, var(--green) 11%, transparent);
+    }
+
+    #landingView .platform-button.primary {
+      box-shadow: 0 10px 30px color-mix(in srgb, var(--accent-strong) 19%, transparent);
+    }
+
+    .landing-glow {
+      filter: blur(110px);
+      opacity: .16;
+      background: radial-gradient(ellipse at center, color-mix(in srgb, var(--green) 68%, transparent) 0%, color-mix(in srgb, var(--blue) 24%, transparent) 44%, transparent 75%);
+    }
+
+    .landing-glow-one {
+      width: 520px;
+      height: 410px;
+      background: radial-gradient(ellipse at center, color-mix(in srgb, var(--green) 66%, transparent) 0%, color-mix(in srgb, var(--accent-strong) 24%, transparent) 46%, transparent 76%);
+    }
+
+    .landing-glow-two {
+      width: 570px;
+      height: 430px;
+      opacity: .13;
+      background: radial-gradient(ellipse at center, color-mix(in srgb, var(--blue) 64%, transparent) 0%, color-mix(in srgb, var(--green) 22%, transparent) 45%, transparent 76%);
+    }
+
+    .landing-glow-three {
+      width: 430px;
+      height: 330px;
+      opacity: .08;
+    }
+
+    .centered-heading {
+      margin-right: auto;
+      margin-left: auto;
+      text-align: center;
+    }
+
+    .how-it-works-section,
+    .featured-portfolios-section {
+      position: relative;
+      padding: 76px 0 88px;
+    }
+
+    .how-it-works-timeline {
+      position: relative;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 54px minmax(0, 1fr) 54px minmax(0, 1fr);
+      align-items: center;
+      gap: 14px;
+    }
+
+    .how-step-card {
+      position: relative;
+      min-height: 245px;
+      padding: 28px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: color-mix(in srgb, var(--card) 88%, transparent);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.035);
+      transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
+    }
+
+    .how-step-card::after {
+      content: "";
+      position: absolute;
+      right: -65px;
+      bottom: -80px;
+      width: 170px;
+      height: 170px;
+      border-radius: 50%;
+      background: radial-gradient(circle, color-mix(in srgb, var(--green) 32%, transparent), transparent 70%);
+      opacity: .35;
+      pointer-events: none;
+    }
+
+    .how-step-card:hover {
+      border-color: color-mix(in srgb, var(--green) 72%, var(--border));
+      box-shadow: 0 18px 42px color-mix(in srgb, var(--accent-strong) 14%, transparent);
+      transform: translateY(-5px);
+    }
+
+    .how-step-number {
+      display: block;
+      margin-bottom: 25px;
+      color: var(--green);
+      font-family: monospace;
+      font-size: 12px;
+      letter-spacing: .18em;
+    }
+
+    .how-step-icon {
+      display: inline-flex;
+      width: 48px;
+      height: 48px;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      border: 1px solid color-mix(in srgb, var(--blue) 46%, var(--border));
+      border-radius: 13px;
+      background: color-mix(in srgb, var(--accent-strong) 18%, transparent);
+      color: var(--green);
+      font-family: monospace;
+      font-size: 22px;
+    }
+
+    .how-step-card h3 { font-size: 18px; }
+
+    .how-step-card p {
+      margin-top: 11px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .how-step-connector {
+      color: color-mix(in srgb, var(--green) 62%, var(--muted));
+      font-family: monospace;
+      font-size: 25px;
+      text-align: center;
+    }
+
+    .featured-heading {
+      max-width: none;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .featured-heading > div { max-width: 720px; }
+
+    .featured-portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .featured-portfolio-card {
+      display: flex;
+      min-width: 0;
+      min-height: 225px;
+      flex-direction: column;
+      padding: 22px;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: color-mix(in srgb, var(--card) 88%, transparent);
+      color: var(--text);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.035);
+      transition: transform .25s ease, border-color .25s ease, background-color .25s ease, box-shadow .25s ease;
+    }
+
+    .featured-portfolio-card:hover {
+      border-color: color-mix(in srgb, var(--green) 72%, var(--border));
+      background: color-mix(in srgb, var(--card) 94%, var(--chip));
+      box-shadow: 0 18px 46px color-mix(in srgb, var(--accent-strong) 16%, transparent);
+      transform: translateY(-6px);
+    }
+
+    .featured-profile-head {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+    }
+
+    .featured-profile-avatar {
+      width: 56px;
+      height: 56px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex: 0 0 auto;
+      overflow: hidden;
+      border: 1px solid color-mix(in srgb, var(--green) 58%, var(--border));
+      border-radius: 50%;
+      background: var(--accent-strong);
+      font-family: monospace;
+      font-weight: bold;
+      box-shadow: 0 0 28px color-mix(in srgb, var(--green) 18%, transparent);
+    }
+
+    .featured-profile-avatar img { width: 100%; height: 100%; object-fit: cover; }
+    .featured-profile-identity { min-width: 0; }
+    .featured-profile-identity strong,
+    .featured-profile-identity span { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .featured-profile-identity strong { font-size: 16px; }
+    .featured-profile-identity span { margin-top: 4px; color: var(--green); font-family: monospace; font-size: 12px; }
+
+    .featured-specialty {
+      align-self: flex-start;
+      margin-top: 18px;
+      padding: 5px 9px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      color: var(--blue);
+      font-family: monospace;
+      font-size: 10px;
+    }
+
+    .featured-tech-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin: 13px 0 20px;
+    }
+
+    .featured-tech-list span {
+      padding: 5px 8px;
+      border-radius: 7px;
+      background: var(--chip);
+      color: var(--muted);
+      font-family: monospace;
+      font-size: 10px;
+    }
+
+    .featured-view-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: auto;
+      padding-top: 14px;
+      border-top: 1px solid var(--border);
+      color: var(--text);
+      font-size: 12px;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    .featured-view-link span { color: var(--green); }
+
+    .user-search-controls {
+      width: 100%;
+      grid-template-columns: minmax(220px, 1.25fr) repeat(3, minmax(135px, .65fr));
+    }
+
+    .directory-quick-filters {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 18px;
+    }
+
+    .directory-filter-chip {
+      padding: 7px 11px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: color-mix(in srgb, var(--card2) 76%, transparent);
+      color: var(--muted);
+      font-family: monospace;
+      font-size: 10px;
+      transition: .2s ease;
+    }
+
+    .directory-filter-chip:hover,
+    .directory-filter-chip.active {
+      border-color: var(--green);
+      background: color-mix(in srgb, var(--accent-strong) 28%, transparent);
+      color: var(--text);
+      transform: translateY(-1px);
+    }
+
+    .onboarding-screen .platform-card.wide { width: min(1180px, 100%); }
+
+    .onboarding-builder-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.08fr) minmax(320px, .92fr);
+      align-items: start;
+      gap: 34px;
+    }
+
+    .onboarding-live-preview {
+      position: sticky;
+      top: 28px;
+    }
+
+    .onboarding-preview-label {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+      color: var(--green);
+      font-family: monospace;
+      font-size: 11px;
+      letter-spacing: .14em;
+    }
+
+    .onboarding-preview-label i {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 12px var(--green);
+    }
+
+    .onboarding-preview-card {
+      overflow: hidden;
+      border: 1px solid color-mix(in srgb, var(--blue) 42%, var(--border));
+      border-radius: 15px;
+      background: color-mix(in srgb, var(--card2) 91%, transparent);
+      box-shadow: 0 24px 65px rgba(0,0,0,.3), 0 0 45px color-mix(in srgb, var(--accent-strong) 12%, transparent);
+    }
+
+    .onboarding-preview-terminal {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-height: 48px;
+      padding: 13px 16px;
+      border-bottom: 1px solid var(--border);
+      background: color-mix(in srgb, var(--card) 84%, transparent);
+    }
+
+    .onboarding-preview-terminal strong {
+      overflow: hidden;
+      color: var(--muted);
+      font-family: monospace;
+      font-size: 11px;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .onboarding-preview-body { min-height: 410px; padding: 28px; }
+
+    .onboarding-preview-avatar {
+      width: 72px;
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      margin-bottom: 20px;
+      border: 2px solid var(--border);
+      border-radius: 18px;
+      background: var(--accent-strong);
+      font-family: monospace;
+      font-size: 18px;
+      font-weight: bold;
+      box-shadow: 0 0 30px color-mix(in srgb, var(--green) 16%, transparent);
+    }
+
+    .onboarding-preview-avatar img { width: 100%; height: 100%; object-fit: cover; }
+    .onboarding-preview-body h2 { font-size: 26px; }
+    .onboarding-preview-username { margin-top: 5px; color: var(--green); font-family: monospace; font-size: 12px; }
+    .onboarding-preview-body .profile-specialty { margin-top: 13px; }
+
+    .onboarding-preview-bio {
+      min-height: 72px;
+      margin-top: 20px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.7;
+      white-space: pre-line;
+    }
+
+    .onboarding-preview-socials,
+    .onboarding-preview-tech { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 16px; }
+
+    .onboarding-preview-socials span,
+    .onboarding-preview-tech span {
+      padding: 6px 9px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--chip);
+      color: var(--text);
+      font-family: monospace;
+      font-size: 10px;
+    }
+
+    .dashboard-insights-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+      gap: 16px;
+      margin: 24px 0;
+    }
+
+    .dashboard-insight-card {
+      padding: 22px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: color-mix(in srgb, var(--card2) 76%, transparent);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.035);
+    }
+
+    .dashboard-insight-heading {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 15px;
+    }
+
+    .dashboard-insight-heading span {
+      color: var(--green);
+      font-family: monospace;
+      font-size: 10px;
+      letter-spacing: .12em;
+    }
+
+    .dashboard-insight-heading h3 { margin-top: 7px; font-size: 17px; }
+    .dashboard-insight-heading > strong { color: var(--green); font-family: monospace; font-size: 26px; }
+
+    .completion-progress {
+      height: 9px;
+      margin-top: 20px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: var(--background);
+    }
+
+    .completion-progress span {
+      display: block;
+      width: 0;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--green), var(--blue));
+      box-shadow: 0 0 18px color-mix(in srgb, var(--green) 35%, transparent);
+      transition: width .55s ease;
+    }
+
+    .completion-card > p { margin-top: 10px; color: var(--muted); font-size: 11px; }
+
+    .completion-checklist {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px 12px;
+      margin-top: 17px;
+    }
+
+    .completion-check-item {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .completion-check-item.done { color: var(--text); }
+    .completion-check-item b { color: var(--muted); font-family: monospace; }
+    .completion-check-item.done b { color: var(--green); }
+
+    .analytics-live-dot {
+      padding: 4px 7px;
+      border: 1px solid color-mix(in srgb, var(--green) 50%, var(--border));
+      border-radius: 999px;
+      background: color-mix(in srgb, var(--green) 10%, transparent);
+    }
+
+    .analytics-stat-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .analytics-stat-grid > div {
+      min-width: 0;
+      padding: 14px;
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      background: color-mix(in srgb, var(--card) 72%, transparent);
+    }
+
+    .analytics-stat-grid strong { display: block; color: var(--text); font-family: monospace; font-size: 21px; }
+    .analytics-stat-grid span { display: block; margin-top: 5px; color: var(--muted); font-size: 9px; line-height: 1.4; }
+
+    .analytics-most-viewed {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      margin-top: 12px;
+      padding: 13px 14px;
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      background: color-mix(in srgb, var(--card) 72%, transparent);
+    }
+
+    .analytics-most-viewed span { color: var(--muted); font-size: 10px; }
+    .analytics-most-viewed strong { overflow: hidden; font-size: 11px; text-align: right; text-overflow: ellipsis; white-space: nowrap; }
+    .analytics-migration-note { margin-top: 10px; color: var(--muted); font-size: 10px; }
+
+    .portfolio-theme-picker {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 9px;
+      margin-top: 16px;
+    }
+
+    .portfolio-theme-option { margin: 0 !important; cursor: pointer; }
+    .portfolio-theme-option input { position: absolute; width: 1px !important; height: 1px; opacity: 0; pointer-events: none; }
+    .portfolio-theme-option strong { display: block; margin-top: 7px; color: var(--muted); font-size: 11px; text-align: center; }
+
+    .theme-swatch {
+      display: flex;
+      min-height: 68px;
+      align-items: flex-end;
+      gap: 5px;
+      padding: 11px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: #080b10;
+      transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+    }
+
+    .theme-swatch i { display: block; width: 12px; border-radius: 4px; }
+    .theme-swatch i:nth-child(1) { height: 20px; }
+    .theme-swatch i:nth-child(2) { height: 35px; }
+    .theme-swatch i:nth-child(3) { height: 26px; }
+    .theme-swatch-cyber i { background: #3fb950; }
+    .theme-swatch-minimal { background: #151515; }
+    .theme-swatch-minimal i { background: #e5e7eb; }
+    .theme-swatch-github { background: #0d1117; }
+    .theme-swatch-github i { background: #58a6ff; }
+    .theme-swatch-modern { background: #071529; }
+    .theme-swatch-modern i { background: #22d3ee; }
+    .theme-swatch-purple { background: #170b2c; }
+    .theme-swatch-purple i { background: #c084fc; }
+
+    .portfolio-theme-option:hover .theme-swatch,
+    .portfolio-theme-option input:checked + .theme-swatch {
+      border-color: var(--green);
+      box-shadow: 0 0 20px color-mix(in srgb, var(--green) 15%, transparent);
+      transform: translateY(-2px);
+    }
+
+    .portfolio-theme-option input:checked ~ strong { color: var(--text); }
+    .portfolio-theme-picker.is-disabled { opacity: .55; }
+    .portfolio-theme-picker.is-disabled .portfolio-theme-option { cursor: not-allowed; }
+
+    #portfolioView {
+      min-height: 100vh;
+      background-color: var(--background);
+      background-image: linear-gradient(var(--grid-line) 1px, transparent 1px), linear-gradient(90deg, var(--grid-line) 1px, transparent 1px), var(--page-gradient);
+      background-size: 34px 34px, 34px 34px, cover;
+    }
+
+    #portfolioView[data-portfolio-theme="minimal"] {
+      --background: #111214; --card: #191b1f; --card2: #0d0e10; --border: #36393f;
+      --text: #f4f4f5; --muted: #a1a1aa; --green: #f4f4f5; --blue: #d4d4d8;
+      --accent-strong: #3f3f46; --accent-hover: #52525b; --chip: #24262b;
+      --grid-line: rgba(255,255,255,.025); --header-background: rgba(13,14,16,.94);
+      --page-gradient: linear-gradient(to bottom, #111214, #0d0e10);
+    }
+
+    #portfolioView[data-portfolio-theme="github"] {
+      --background: #0d1117; --card: #161b22; --card2: #010409; --border: #30363d;
+      --text: #e6edf3; --muted: #8b949e; --green: #3fb950; --blue: #58a6ff;
+      --accent-strong: #238636; --accent-hover: #2ea043; --chip: #1f2d3d;
+      --grid-line: rgba(88,166,255,.035); --header-background: rgba(1,4,9,.93);
+      --page-gradient: linear-gradient(to bottom, #0d1117, #010409);
+    }
+
+    #portfolioView[data-portfolio-theme="modern"] {
+      --background: #06111f; --card: #0b1b2d; --card2: #040b14; --border: #1e4561;
+      --text: #effaff; --muted: #9ab4c7; --green: #22d3ee; --blue: #38bdf8;
+      --accent-strong: #0369a1; --accent-hover: #0284c7; --chip: #102b40;
+      --grid-line: rgba(34,211,238,.045); --header-background: rgba(4,11,20,.92);
+      --page-gradient: linear-gradient(145deg, #06111f, #0b2440 55%, #06111f);
+    }
+
+    #portfolioView[data-portfolio-theme="purple"] {
+      --background: #11071d; --card: #241037; --card2: #0c0515; --border: #5b2f79;
+      --text: #fbf7ff; --muted: #cbb7db; --green: #d8a4ff; --blue: #a78bfa;
+      --accent-strong: #7c3aed; --accent-hover: #8b5cf6; --chip: #35184e;
+      --grid-line: rgba(216,164,255,.045); --header-background: rgba(12,5,21,.92);
+      --page-gradient: linear-gradient(145deg, #11071d, #32134b 55%, #11071d);
+    }
+
+    :root[data-theme="classic"] #portfolioView[data-portfolio-theme] {
+      --background: #0d1117; --card: #161b22; --card2: #010409; --border: #30363d;
+      --text: #e6edf3; --muted: #8b949e; --green: #3fb950; --blue: #58a6ff;
+      --accent-strong: #238636; --accent-hover: #2ea043; --chip: #1f2d3d;
+      --grid-line: rgba(88,166,255,.035); --header-background: rgba(1,4,9,.92);
+      --page-gradient: linear-gradient(to bottom, #0d1117, #010409);
+    }
+
+    .share-portfolio-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 3100;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: rgba(0,0,0,.82);
+      backdrop-filter: blur(8px);
+    }
+
+    .share-portfolio-modal-content {
+      width: min(100%, 540px);
+      max-height: 92vh;
+      overflow-y: auto;
+      padding: 25px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: var(--card);
+      box-shadow: 0 30px 90px rgba(0,0,0,.45);
+    }
+
+    .share-portfolio-modal-content label { display: block; margin: 18px 0 7px; color: var(--muted); font-size: 12px; }
+    .share-portfolio-copy { color: var(--muted); font-size: 13px; line-height: 1.6; }
+    .share-url-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px; }
+    .share-url-row input { width: 100%; min-width: 0; padding: 11px; border: 1px solid var(--border); border-radius: 8px; outline: none; background: var(--background); color: var(--text); font-family: monospace; font-size: 11px; }
+
+    .share-modal-actions { display: flex; justify-content: flex-end; flex-wrap: wrap; gap: 9px; margin-top: 18px; }
+
+    .platform-footer {
+      width: 100%;
+      display: grid;
+      grid-template-columns: minmax(220px, 1fr) auto;
+      gap: 32px;
+      margin-top: 35px;
+      padding: 46px clamp(20px, 4vw, 46px) 22px;
+      border: 1px solid var(--border);
+      border-radius: 18px 18px 0 0;
+      background: color-mix(in srgb, var(--card2) 90%, transparent);
+      color: var(--text);
+      text-align: left;
+    }
+
+    .landing-platform-footer { margin-bottom: -60px; }
+    .portfolio-platform-footer { width: min(1300px, 92%); margin: 45px auto 0; }
+    .platform-footer-brand strong { color: var(--text); font-family: monospace; font-size: 18px; }
+    .platform-footer-brand strong span { color: var(--green); }
+    .platform-footer-brand p { margin-top: 9px; color: var(--muted); font-size: 12px; }
+
+    .platform-footer-links { display: grid; grid-template-columns: repeat(2, minmax(150px, 1fr)); gap: 38px; }
+    .platform-footer-links h3 { margin-bottom: 12px; color: var(--muted); font-family: monospace; font-size: 10px; letter-spacing: .12em; text-transform: uppercase; }
+    .platform-footer-links a,
+    .platform-footer-links button { display: block; margin-top: 9px; padding: 0; border: 0; background: none; color: var(--text); font: inherit; font-size: 12px; text-align: left; text-decoration: none; transition: color .2s ease, transform .2s ease; }
+    .platform-footer-links a:hover,
+    .platform-footer-links button:hover { color: var(--green); transform: translateX(2px); }
+
+    .platform-footer-bottom {
+      grid-column: 1 / -1;
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-family: monospace;
+      font-size: 10px;
+    }
+
+    @media (max-width: 1050px) {
+      .landing-hero {
+        grid-template-columns: minmax(0, 1fr) minmax(370px, .85fr);
+        gap: 38px;
+      }
+
+      .landing-copy h1 { font-size: clamp(48px, 7vw, 70px); }
+      .platform-features { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .user-search-results { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .featured-portfolio-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .user-search-controls { grid-template-columns: 1fr 1fr; }
+      .user-search-box { grid-column: 1 / -1; }
+      .onboarding-builder-layout { grid-template-columns: minmax(0, 1fr) minmax(300px, .8fr); }
+      .portfolio-theme-picker { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .dashboard-insights-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 800px) {
+      #landingView { width: min(100% - 32px, 680px); }
+
+      #landingView .platform-logo { font-size: 16px; }
+      #landingView .platform-logo span { width: 30px; height: 30px; }
+
+      .landing-hero {
+        min-height: auto;
+        grid-template-columns: 1fr;
+        gap: 54px;
+        padding: 84px 0 76px;
+      }
+
+      .landing-copy h1 {
+        font-size: clamp(44px, 13vw, 66px);
+        letter-spacing: -2.4px;
+      }
+
+      .landing-terminal { transform: none; }
+      .floating-code { display: none; }
+      .landing-tech-showcase { padding: 64px 0 72px; }
+      .tech-marquee { margin-right: -16px; margin-left: -16px; width: calc(100% + 32px); }
+      .user-directory { padding: 26px 20px; }
+      .user-search-controls { padding: 6px; }
+      .user-search-results { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .platform-features { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .platform-feature-card { min-height: 190px; }
+      .how-it-works-timeline { grid-template-columns: 1fr; gap: 0; }
+      .how-step-card { min-height: auto; }
+      .how-step-connector { padding: 10px 0; transform: rotate(90deg); }
+      .onboarding-builder-layout { grid-template-columns: 1fr; }
+      .onboarding-live-preview { position: static; }
+      .platform-footer { grid-template-columns: 1fr; }
+      .platform-footer-links { justify-self: stretch; }
+    }
+
+    @media (max-width: 560px) {
+      #landingView .platform-header-actions .platform-button.primary {
+        display: inline-flex;
+        min-height: 40px;
+        padding: 8px 12px;
+        font-size: 11px;
+      }
+
+      .landing-kicker { font-size: 11px; }
+      .landing-copy h1 { font-size: clamp(42px, 13vw, 56px); }
+      .landing-build-line { font-size: 13px; }
+      .landing-actions { align-items: stretch; }
+      .landing-actions .platform-button { flex: 1 1 100%; }
+      .landing-terminal { min-height: 345px; }
+      .landing-terminal-title { display: none; }
+      .landing-terminal-body {
+        min-height: 292px;
+        padding: 24px 18px;
+        overflow-x: auto;
+        font-size: 11px;
+      }
+      .landing-tech-chip {
+        min-height: 39px;
+        padding: 8px 11px;
+        font-size: 10px;
+      }
+      .landing-tech-chip img,
+      .landing-tech-chip .tech-icon-fallback { width: 16px; height: 16px; }
+      .user-search-results { grid-template-columns: 1fr; }
+      .platform-features { grid-template-columns: 1fr; }
+      .platform-feature-card { min-height: auto; }
+      .featured-heading { align-items: flex-start; flex-direction: column; }
+      .featured-portfolio-grid { grid-template-columns: 1fr; }
+      .user-search-controls { grid-template-columns: 1fr; }
+      .user-search-box { grid-column: auto; }
+      .directory-quick-filters { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 5px; }
+      .directory-filter-chip { flex: 0 0 auto; }
+      .onboarding-screen .platform-card.wide { padding: 22px 16px; }
+      .onboarding-preview-body { min-height: 360px; padding: 22px; }
+      .completion-checklist,
+      .analytics-stat-grid { grid-template-columns: 1fr; }
+      .portfolio-theme-picker { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .share-url-row { grid-template-columns: 1fr; }
+      .share-url-row .platform-button { width: 100%; }
+      .share-modal-actions .platform-button { flex: 1 1 100%; }
+      .platform-footer-links { grid-template-columns: 1fr; gap: 24px; }
+      .platform-footer-bottom { flex-direction: column; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .landing-gradient-title { animation: none; }
+      .landing-glow,
+      .floating-code,
+      .landing-terminal-cursor { animation: none; }
+      .completion-progress span { transition: none; }
+
+      .tech-marquee {
+        overflow: visible;
+        mask-image: none;
+        -webkit-mask-image: none;
+      }
+
+      .tech-marquee-row { overflow: visible; }
+      .tech-marquee-track {
+        width: auto;
+        animation: none !important;
+        transform: none !important;
+      }
+
+      .tech-marquee-group {
+        flex-wrap: wrap;
+        justify-content: center;
+        padding-right: 0;
+      }
+
+      .tech-marquee-group[aria-hidden="true"] { display: none; }
+      .landing-reveal { opacity: 1; transform: none; }
+      .how-step-card,
+      .featured-portfolio-card { transition: none; }
+    }
+
   </style>
 
 </head>
@@ -4546,7 +5917,7 @@
 
     <div class="platform-logo">
       <span>&gt;_</span>
-      PORTFOLIO.FORGE
+      MYDEVFOLIOHUB
     </div>
 
     <div class="platform-header-actions">
@@ -4574,17 +5945,23 @@
   </div>
 
 
-  <section class="landing-hero">
+  <section class="landing-hero" aria-labelledby="landingHeroTitle">
+
+    <div class="landing-glow landing-glow-one" aria-hidden="true"></div>
+    <div class="landing-glow landing-glow-two" aria-hidden="true"></div>
+    <div class="landing-glow landing-glow-three" aria-hidden="true"></div>
 
     <div class="landing-copy">
 
       <div class="landing-kicker">
-        DEVELOPER / CYBERSECURITY PORTFOLIO BUILDER
+        A PORTFOLIO PLATFORM FOR EVERY TECH PATH
       </div>
 
-      <h1>
+      <p class="landing-build-line">Build. Learn. Share. Grow.</p>
+
+      <h1 id="landingHeroTitle">
         Build Your
-        <span>Developer Portfolio</span>
+        <span class="landing-gradient-title">Developer Portfolio</span>
       </h1>
 
       <p class="landing-tagline">
@@ -4607,67 +5984,131 @@
         <button
           type="button"
           class="platform-button"
+          onclick="openDemoPortfolio()"
+        >
+          <span aria-hidden="true">▷</span>
+          View Demo
+        </button>
+
+        <button
+          type="button"
+          class="platform-button"
           id="landingHeroSecondaryAction"
           onclick="showAuthScreen('login')"
         >
           Login
         </button>
 
-        <button
-          type="button"
-          class="platform-button"
-          onclick="openDemoPortfolio()"
-        >
-          View Demo
-        </button>
-
       </div>
 
     </div>
 
 
-    <div
-      class="landing-terminal"
-      aria-label="Portfolio builder preview"
-    >
+    <div class="landing-terminal-stage">
+      <span class="floating-code floating-code-one" aria-hidden="true">{ }</span>
+      <span class="floating-code floating-code-two" aria-hidden="true">&lt;/&gt;</span>
+      <span class="floating-code floating-code-three" aria-hidden="true">01</span>
+      <span class="floating-code floating-code-four" aria-hidden="true">$_</span>
+
+      <div
+        class="landing-terminal"
+        aria-label="Animated portfolio creation preview"
+      >
 
       <div class="landing-terminal-bar">
         <span class="landing-terminal-dot"></span>
         <span class="landing-terminal-dot"></span>
         <span class="landing-terminal-dot"></span>
+        <span class="landing-terminal-title">portfolio-builder — bash</span>
       </div>
 
-      <div class="landing-terminal-body">
-        <div>
+      <div class="landing-terminal-body" aria-live="polite">
+        <div class="landing-terminal-command-line">
           <span class="terminal-prompt">$</span>
-          create-portfolio --username you
+          <span id="landingTerminalCommand"></span><span class="landing-terminal-cursor" aria-hidden="true"></span>
         </div>
-
-        <div class="terminal-response">
-          ✓ Profile created
-        </div>
-
-        <div class="terminal-response">
-          ✓ Projects connected
-        </div>
-
-        <div class="terminal-response">
-          ✓ Learning journey online
-        </div>
-
-        <div>
-          <span class="terminal-prompt">→</span>
-          your-site.dev?u=you
-        </div>
+        <div id="landingTerminalOutput"></div>
       </div>
 
+      </div>
     </div>
 
   </section>
 
 
+  <section class="landing-tech-showcase" aria-labelledby="landingTechTitle">
+    <div class="landing-section-heading">
+      <div class="landing-kicker">TECHNOLOGIES ACROSS THE STACK</div>
+      <h2 id="landingTechTitle">Built for every kind of builder.</h2>
+      <p>Build your portfolio around the tools and technologies you use.</p>
+    </div>
+
+    <div class="tech-marquee" id="landingTechMarquee" aria-label="Technology ecosystem">
+      <div class="tech-marquee-row tech-marquee-row-one" data-marquee-row="programming"></div>
+      <div class="tech-marquee-row tech-marquee-row-two" data-marquee-row="backend"></div>
+      <div class="tech-marquee-row tech-marquee-row-three" data-marquee-row="tools"></div>
+    </div>
+  </section>
+
+
+  <section class="how-it-works-section" aria-labelledby="howItWorksTitle">
+    <div class="landing-section-heading centered-heading">
+      <div class="landing-kicker">HOW IT WORKS</div>
+      <h2 id="howItWorksTitle">From account to portfolio in three steps.</h2>
+      <p>Create your space, make it yours, then share your work with the world.</p>
+    </div>
+
+    <div class="how-it-works-timeline">
+      <article class="how-step-card">
+        <span class="how-step-number">01</span>
+        <span class="how-step-icon" aria-hidden="true">＋</span>
+        <h3>Create Account</h3>
+        <p>Create your MyDevFolioHub account in seconds.</p>
+      </article>
+
+      <span class="how-step-connector" aria-hidden="true">→</span>
+
+      <article class="how-step-card">
+        <span class="how-step-number">02</span>
+        <span class="how-step-icon" aria-hidden="true">⌘</span>
+        <h3>Customize Portfolio</h3>
+        <p>Add your projects, skills, certificates, learning journey and profile information.</p>
+      </article>
+
+      <span class="how-step-connector" aria-hidden="true">→</span>
+
+      <article class="how-step-card">
+        <span class="how-step-number">03</span>
+        <span class="how-step-icon" aria-hidden="true">↗</span>
+        <h3>Share Your Link</h3>
+        <p>Publish and share your portfolio using your personal public URL.</p>
+      </article>
+    </div>
+  </section>
+
+
+  <section class="featured-portfolios-section" aria-labelledby="featuredPortfoliosTitle">
+    <div class="landing-section-heading featured-heading">
+      <div>
+        <div class="landing-kicker">FEATURED PORTFOLIOS</div>
+        <h2 id="featuredPortfoliosTitle">Fresh from the community.</h2>
+        <p>Discover the newest public portfolios built on MyDevFolioHub.</p>
+      </div>
+
+      <button type="button" class="platform-button" onclick="scrollToCommunity()">
+        Explore All
+        <span aria-hidden="true">↓</span>
+      </button>
+    </div>
+
+    <div class="featured-portfolio-grid" id="featuredPortfolioGrid" aria-live="polite"></div>
+    <p class="user-search-message" id="featuredPortfolioMessage" role="status"></p>
+  </section>
+
+
   <section
     class="user-directory"
+    id="community"
     aria-labelledby="userDirectoryTitle"
   >
 
@@ -4695,7 +6136,7 @@
           class="user-search-filter"
           id="userSpecialtyFilter"
           aria-label="Filter by specialty"
-          onchange="loadPublicUserDirectory(document.getElementById('userSearchInput').value)"
+          onchange="handleDirectoryFilterChange()"
         >
           <option value="">All specialties</option>
           <option value="cybersecurity">Cybersecurity</option>
@@ -4712,11 +6153,31 @@
           class="user-search-filter"
           id="userTechFilter"
           aria-label="Filter by Tech Stack"
-          onchange="loadPublicUserDirectory(document.getElementById('userSearchInput').value)"
+          onchange="handleDirectoryFilterChange()"
         >
           <option value="">All technologies</option>
         </select>
+
+        <select
+          class="user-search-filter"
+          id="userSortFilter"
+          aria-label="Sort public portfolios"
+          onchange="handleDirectoryFilterChange()"
+        >
+          <option value="newest">Newest</option>
+          <option value="most_viewed">Most Viewed</option>
+          <option value="name">Name A–Z</option>
+        </select>
       </div>
+    </div>
+
+    <div class="directory-quick-filters" aria-label="Quick specialty filters">
+      <button type="button" class="directory-filter-chip active" data-specialty="" onclick="setDirectorySpecialty('', this)">All</button>
+      <button type="button" class="directory-filter-chip" data-specialty="cybersecurity" onclick="setDirectorySpecialty('cybersecurity', this)">Cybersecurity</button>
+      <button type="button" class="directory-filter-chip" data-specialty="frontend" onclick="setDirectorySpecialty('frontend', this)">Frontend</button>
+      <button type="button" class="directory-filter-chip" data-specialty="backend" onclick="setDirectorySpecialty('backend', this)">Backend</button>
+      <button type="button" class="directory-filter-chip" data-specialty="data_ai" onclick="setDirectorySpecialty('data_ai', this)">Data &amp; AI</button>
+      <button type="button" class="directory-filter-chip" data-specialty="devops_cloud" onclick="setDirectorySpecialty('devops_cloud', this)">DevOps &amp; Cloud</button>
     </div>
 
     <div
@@ -4734,42 +6195,80 @@
   </section>
 
 
-  <section
-    class="platform-features"
-    aria-label="Platform features"
-  >
+  <section class="landing-features-section" aria-labelledby="landingFeaturesTitle">
+    <div class="landing-section-heading">
+      <div class="landing-kicker">YOUR JOURNEY, ONE PLACE</div>
+      <h2 id="landingFeaturesTitle">More than a portfolio.</h2>
+      <p>Turn your work, learning, and progress into a story people remember.</p>
+    </div>
+
+    <div class="platform-features" aria-label="Platform features">
 
     <article class="platform-feature-card">
-      <span class="platform-feature-icon">💻</span>
+      <span class="platform-feature-icon">⌘</span>
+      <span class="platform-feature-number">01</span>
       <h3>Projects</h3>
       <p>Show the work you build and the technologies behind it.</p>
     </article>
 
     <article class="platform-feature-card">
-      <span class="platform-feature-icon">🧪</span>
+      <span class="platform-feature-icon">◇</span>
+      <span class="platform-feature-number">02</span>
       <h3>Labs</h3>
       <p>Document practical cybersecurity and development experiments.</p>
     </article>
 
     <article class="platform-feature-card">
-      <span class="platform-feature-icon">📝</span>
+      <span class="platform-feature-icon">↗</span>
+      <span class="platform-feature-number">03</span>
       <h3>Learning Log</h3>
       <p>Publish short TIL notes and share direct links.</p>
     </article>
 
     <article class="platform-feature-card">
-      <span class="platform-feature-icon">🎓</span>
+      <span class="platform-feature-icon">✓</span>
+      <span class="platform-feature-number">04</span>
       <h3>Certificates</h3>
       <p>Upload achievements and organize them by category.</p>
     </article>
 
     <article class="platform-feature-card">
-      <span class="platform-feature-icon">📈</span>
+      <span class="platform-feature-icon">◫</span>
+      <span class="platform-feature-number">05</span>
       <h3>Growth Tracking</h3>
       <p>Track your roadmap, monthly goals and learning resources.</p>
     </article>
 
+    </div>
   </section>
+
+
+  <footer class="platform-footer landing-platform-footer">
+    <div class="platform-footer-brand">
+      <strong><span>&gt;_</span> MYDEVFOLIOHUB</strong>
+      <p>Build. Learn. Share. Grow.</p>
+    </div>
+
+    <div class="platform-footer-links">
+      <div>
+        <h3>Product</h3>
+        <button type="button" onclick="handleLandingPrimaryAction()">Create Portfolio</button>
+        <button type="button" onclick="scrollToCommunity()">Explore Portfolios</button>
+        <button type="button" onclick="openDemoPortfolio()">View Demo</button>
+      </div>
+
+      <div>
+        <h3>Resources</h3>
+        <a href="https://github.com/mydevfoliohub/mydevfoliohub.github.io" target="_blank" rel="noopener noreferrer">GitHub Repository</a>
+        <a href="https://mydevfoliohub.github.io/" target="_blank" rel="noopener noreferrer">Live Website</a>
+      </div>
+    </div>
+
+    <div class="platform-footer-bottom">
+      <span>© 2026 MyDevFolioHub</span>
+      <span>MyDevFolioHub v2.1.0</span>
+    </div>
+  </footer>
 
 </div>
 
@@ -4796,7 +6295,7 @@
 
     <div class="platform-card-header">
       <div class="landing-kicker">
-        PORTFOLIO.FORGE
+        MYDEVFOLIOHUB
       </div>
 
       <h1 id="authHeading">
@@ -5059,6 +6558,8 @@
     </div>
 
 
+    <div class="onboarding-builder-layout">
+
     <form
       class="platform-form"
       id="onboardingForm"
@@ -5236,6 +6737,35 @@
       ></p>
 
     </form>
+
+
+    <aside class="onboarding-live-preview" aria-label="Live portfolio preview">
+      <div class="onboarding-preview-label">
+        <span>LIVE PORTFOLIO PREVIEW</span>
+        <i aria-hidden="true"></i>
+      </div>
+
+      <div class="onboarding-preview-card">
+        <div class="onboarding-preview-terminal">
+          <span class="readme-preview-dot"></span>
+          <strong id="onboardingPreviewPath">~/yourname/README.md</strong>
+        </div>
+
+        <div class="onboarding-preview-body">
+          <div class="onboarding-preview-avatar" id="onboardingPreviewAvatar">YN</div>
+          <h2 id="onboardingPreviewName">Your Name</h2>
+          <p class="onboarding-preview-username" id="onboardingPreviewUsername">@yourname</p>
+          <span class="profile-specialty" id="onboardingPreviewSpecialty">Your specialty</span>
+          <p class="onboarding-preview-bio" id="onboardingPreviewBio">Your short bio will appear here as you type.</p>
+          <div class="onboarding-preview-socials" id="onboardingPreviewSocials"></div>
+          <div class="onboarding-preview-tech" id="onboardingPreviewTech"></div>
+        </div>
+      </div>
+
+      <p class="platform-form-hint">Preview only — nothing is saved until you finish onboarding.</p>
+    </aside>
+
+    </div>
 
   </div>
 
@@ -5461,6 +6991,14 @@
       <button
         type="button"
         class="platform-button"
+        onclick="openSharePortfolioModal()"
+      >
+        Share Portfolio
+      </button>
+
+      <button
+        type="button"
+        class="platform-button"
         onclick="copyMyPortfolioLink(this)"
       >
         Copy Portfolio Link
@@ -5475,6 +7013,50 @@
       </button>
     </div>
 
+  </div>
+
+  <div class="dashboard-insights-grid">
+    <section class="dashboard-insight-card completion-card" aria-labelledby="portfolioCompletionTitle">
+      <div class="dashboard-insight-heading">
+        <div>
+          <span>PORTFOLIO COMPLETION</span>
+          <h3 id="portfolioCompletionTitle">Build a complete story.</h3>
+        </div>
+        <strong id="portfolioCompletionPercent">0%</strong>
+      </div>
+
+      <div class="completion-progress" aria-hidden="true">
+        <span id="portfolioCompletionBar"></span>
+      </div>
+
+      <p id="portfolioCompletionSummary">Your portfolio is 0% complete</p>
+      <div class="completion-checklist" id="portfolioCompletionChecklist"></div>
+    </section>
+
+    <section class="dashboard-insight-card analytics-card" aria-labelledby="portfolioAnalyticsTitle">
+      <div class="dashboard-insight-heading">
+        <div>
+          <span>PORTFOLIO ANALYTICS</span>
+          <h3 id="portfolioAnalyticsTitle">See what gets attention.</h3>
+        </div>
+        <span class="analytics-live-dot">LIVE</span>
+      </div>
+
+      <div class="analytics-stat-grid">
+        <div><strong id="analyticsPortfolioViews">0</strong><span>Portfolio Views</span></div>
+        <div><strong id="analyticsProjectViews">0</strong><span>Project Views</span></div>
+        <div><strong id="analyticsLearningViews">0</strong><span>Learning Post Views</span></div>
+      </div>
+
+      <div class="analytics-most-viewed">
+        <span>Most Viewed Project</span>
+        <strong id="analyticsMostViewedProject">No project views yet</strong>
+      </div>
+
+      <p class="analytics-migration-note" id="analyticsMigrationNote" hidden>
+        Portfolio page views activate after running portfolio_analytics_migration.sql.
+      </p>
+    </section>
   </div>
 
   <div class="dashboard-shortcuts">
@@ -6923,6 +8505,53 @@
     </div>
 
 
+    <div class="profile-customization-section" id="portfolioThemeEditor">
+      <div class="profile-customization-heading">
+        <div>
+          <h3>Portfolio Theme</h3>
+          <p>Choose a visual style without changing your content or layout.</p>
+        </div>
+        <span id="portfolioThemeStatus">CYBER</span>
+      </div>
+
+      <div class="portfolio-theme-picker" id="portfolioThemePicker">
+        <label class="portfolio-theme-option" data-theme-option="cyber">
+          <input type="radio" name="portfolioTheme" value="cyber" onchange="previewPortfolioTheme(this.value)">
+          <span class="theme-swatch theme-swatch-cyber"><i></i><i></i><i></i></span>
+          <strong>Cyber</strong>
+        </label>
+
+        <label class="portfolio-theme-option" data-theme-option="minimal">
+          <input type="radio" name="portfolioTheme" value="minimal" onchange="previewPortfolioTheme(this.value)">
+          <span class="theme-swatch theme-swatch-minimal"><i></i><i></i><i></i></span>
+          <strong>Minimal</strong>
+        </label>
+
+        <label class="portfolio-theme-option" data-theme-option="github">
+          <input type="radio" name="portfolioTheme" value="github" onchange="previewPortfolioTheme(this.value)">
+          <span class="theme-swatch theme-swatch-github"><i></i><i></i><i></i></span>
+          <strong>GitHub</strong>
+        </label>
+
+        <label class="portfolio-theme-option" data-theme-option="modern">
+          <input type="radio" name="portfolioTheme" value="modern" onchange="previewPortfolioTheme(this.value)">
+          <span class="theme-swatch theme-swatch-modern"><i></i><i></i><i></i></span>
+          <strong>Modern</strong>
+        </label>
+
+        <label class="portfolio-theme-option" data-theme-option="purple">
+          <input type="radio" name="portfolioTheme" value="purple" onchange="previewPortfolioTheme(this.value)">
+          <span class="theme-swatch theme-swatch-purple"><i></i><i></i><i></i></span>
+          <strong>Purple</strong>
+        </label>
+      </div>
+
+      <p class="profile-file-hint theme-migration-note" id="portfolioThemeMigrationNote" hidden>
+        Run portfolio_theme_migration.sql once in Supabase to save this choice.
+      </p>
+    </div>
+
+
     <div class="readme-live-preview">
 
       <div class="readme-live-preview-bar">
@@ -7456,6 +9085,34 @@
 
 
 <!-- =========================================
+     SHARE PORTFOLIO MODAL
+========================================= -->
+
+<div class="share-portfolio-modal" id="sharePortfolioModal">
+  <div class="share-portfolio-modal-content">
+    <div class="modal-header">
+      <h2>Share Portfolio</h2>
+      <button type="button" class="close-modal" onclick="closeSharePortfolioModal()">×</button>
+    </div>
+
+    <p class="share-portfolio-copy">Your public portfolio is ready to share.</p>
+
+    <label for="sharePortfolioUrl">Public Portfolio URL</label>
+    <div class="share-url-row">
+      <input type="text" id="sharePortfolioUrl" readonly>
+      <button type="button" class="platform-button" id="shareCopyButton" onclick="copySharePortfolioLink(this)">Copy Link</button>
+    </div>
+
+    <p class="platform-message" id="sharePortfolioMessage" role="status"></p>
+
+    <div class="share-modal-actions">
+      <button type="button" class="platform-button primary" onclick="viewMyPortfolio()">Open Portfolio</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- =========================================
      PROJECT / LAB MODAL
 ========================================= -->
 
@@ -7758,16 +9415,31 @@
 
 </div>
 
-<footer>
+<footer class="platform-footer portfolio-platform-footer">
+  <div class="platform-footer-brand">
+    <strong><span>&gt;_</span> MYDEVFOLIOHUB</strong>
+    <p>Build. Learn. Share. Grow.</p>
+  </div>
 
-  ©
-  <span id="year"></span>
-  <span id="footerOwnerName">Bassam</span>
+  <div class="platform-footer-links">
+    <div>
+      <h3>Product</h3>
+      <button type="button" onclick="navigateToLanding()">Create Portfolio</button>
+      <button type="button" onclick="navigateToCommunity()">Explore Portfolios</button>
+      <button type="button" onclick="openDemoPortfolio()">View Demo</button>
+    </div>
 
-  ·
+    <div>
+      <h3>Resources</h3>
+      <a href="https://github.com/mydevfoliohub/mydevfoliohub.github.io" target="_blank" rel="noopener noreferrer">GitHub Repository</a>
+      <a href="https://mydevfoliohub.github.io/" target="_blank" rel="noopener noreferrer">Live Website</a>
+    </div>
+  </div>
 
-  Built with HTML, CSS & JavaScript
-
+  <div class="platform-footer-bottom">
+    <span>© <span id="year"></span> MyDevFolioHub</span>
+    <span>MyDevFolioHub v2.0.0</span>
+  </div>
 </footer>
 
 </div>
@@ -7862,8 +9534,20 @@
   };
 
 
+  const PORTFOLIO_THEMES = {
+    cyber: "Cyber",
+    minimal: "Minimal",
+    github: "GitHub",
+    modern: "Modern",
+    purple: "Purple"
+  };
+
+
   let userSearchTimer = null;
   let userSearchRequestId = 0;
+  let featuredPortfolioRequestId = 0;
+  let onboardingPreviewImageUrl = "";
+  let portfolioThemeDatabaseReady = false;
   let currentLayoutOrder =
     JSON.parse(
       JSON.stringify(
@@ -7939,6 +9623,9 @@
     if (viewName === "landing") {
       window.setTimeout(
         () => {
+          initializeLandingExperience();
+
+
           const searchInput =
             document.getElementById(
               "userSearchInput"
@@ -7951,6 +9638,9 @@
         },
         0
       );
+    }
+    else {
+      clearLandingTerminalTimers();
     }
 
     window.scrollTo({
@@ -8049,6 +9739,31 @@
   function navigateToLanding() {
     window.location.href =
       getBasePageURL().href;
+  }
+
+
+  function navigateToCommunity() {
+    const url = getBasePageURL();
+    url.hash = "community";
+    window.location.href = url.href;
+  }
+
+
+  function scrollToCommunity() {
+    const section =
+      document.getElementById("community");
+
+    if (!section || currentAppView !== "landing") {
+      navigateToCommunity();
+      return;
+    }
+
+    section.scrollIntoView({
+      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
+        ? "auto"
+        : "smooth",
+      block: "start"
+    });
   }
 
 
@@ -8182,7 +9897,7 @@
 
       const technologies =
         Array.isArray(profile.tech_stack)
-          ? profile.tech_stack.slice(0, 2)
+          ? profile.tech_stack.slice(0, 3)
           : [];
 
 
@@ -8203,6 +9918,192 @@
       card.appendChild(copy);
       container.appendChild(card);
     });
+  }
+
+
+  function syncDirectoryQuickFilters() {
+    const specialty =
+      document.getElementById("userSpecialtyFilter")?.value || "";
+
+    document
+      .querySelectorAll(".directory-filter-chip")
+      .forEach(button => {
+        button.classList.toggle(
+          "active",
+          button.dataset.specialty === specialty
+        );
+      });
+  }
+
+
+  function handleDirectoryFilterChange() {
+    syncDirectoryQuickFilters();
+    loadPublicUserDirectory(
+      document.getElementById("userSearchInput")?.value || ""
+    );
+  }
+
+
+  function setDirectorySpecialty(value, button) {
+    if (!Object.prototype.hasOwnProperty.call(PROFILE_SPECIALTIES, value) && value !== "") {
+      return;
+    }
+
+    const select = document.getElementById("userSpecialtyFilter");
+    if (!select) return;
+
+    select.value = value;
+    syncDirectoryQuickFilters();
+    loadPublicUserDirectory(
+      document.getElementById("userSearchInput")?.value || ""
+    );
+
+    button?.focus({ preventScroll: true });
+  }
+
+
+  async function sortPublicProfiles(profiles, sortMode) {
+    const sorted = [...profiles];
+
+    if (sortMode === "name") {
+      return sorted.sort((first, second) =>
+        String(first.display_name || first.username).localeCompare(
+          String(second.display_name || second.username),
+          "en",
+          { sensitivity: "base" }
+        )
+      );
+    }
+
+    if (sortMode === "most_viewed" && sorted.length) {
+      const userIds = sorted.map(profile => profile.user_id);
+      const { data, error } = await supabaseClient
+        .from("content_views")
+        .select("user_id, view_count")
+        .eq("content_type", "portfolio")
+        .in("user_id", userIds);
+
+      if (!error) {
+        const viewMap = new Map(
+          (data || []).map(item => [item.user_id, Number(item.view_count) || 0])
+        );
+
+        return sorted.sort((first, second) =>
+          (viewMap.get(second.user_id) || 0) - (viewMap.get(first.user_id) || 0)
+          || String(first.display_name || first.username).localeCompare(
+            String(second.display_name || second.username),
+            "en",
+            { sensitivity: "base" }
+          )
+        );
+      }
+    }
+
+    return sorted.sort((first, second) =>
+      new Date(second.created_at || 0).getTime()
+      - new Date(first.created_at || 0).getTime()
+    );
+  }
+
+
+  function createFeaturedPortfolioCard(profile) {
+    const article = document.createElement("article");
+    article.className = "featured-portfolio-card";
+
+    const head = document.createElement("div");
+    head.className = "featured-profile-head";
+
+    const avatar = document.createElement("span");
+    avatar.className = "featured-profile-avatar";
+
+    if (profile.image_path) {
+      const image = document.createElement("img");
+      image.src = getProfileImageURL(profile.image_path);
+      image.alt = `${profile.display_name || profile.username} profile picture`;
+      image.loading = "lazy";
+      image.addEventListener("error", () => {
+        image.remove();
+        avatar.textContent = getProfileInitials(profile.display_name || profile.username);
+      }, { once: true });
+      avatar.appendChild(image);
+    }
+    else {
+      avatar.textContent = getProfileInitials(profile.display_name || profile.username);
+    }
+
+    const identity = document.createElement("div");
+    identity.className = "featured-profile-identity";
+
+    const name = document.createElement("strong");
+    name.textContent = profile.display_name || profile.username;
+
+    const username = document.createElement("span");
+    username.textContent = `@${profile.username}`;
+
+    identity.append(name, username);
+    head.append(avatar, identity);
+
+    const specialty = document.createElement("span");
+    specialty.className = "featured-specialty";
+    specialty.textContent = PROFILE_SPECIALTIES[profile.specialty] || "Technology";
+
+    const technologies = document.createElement("div");
+    technologies.className = "featured-tech-list";
+    (Array.isArray(profile.tech_stack) ? profile.tech_stack.slice(0, 3) : [])
+      .forEach(technology => {
+        const chip = document.createElement("span");
+        chip.textContent = technology;
+        technologies.appendChild(chip);
+      });
+
+    const link = document.createElement("a");
+    link.className = "featured-view-link";
+    link.href = buildPortfolioURL(profile.username);
+    link.append("View Portfolio");
+
+    const arrow = document.createElement("span");
+    arrow.textContent = "↗";
+    link.appendChild(arrow);
+
+    article.append(head, specialty, technologies, link);
+    return article;
+  }
+
+
+  async function loadFeaturedPortfolios() {
+    const container = document.getElementById("featuredPortfolioGrid");
+    const message = document.getElementById("featuredPortfolioMessage");
+    if (!container || !message) return;
+
+    const requestId = ++featuredPortfolioRequestId;
+    message.textContent = "Loading featured portfolios...";
+
+    const { data, error } = await supabaseClient
+      .from("profiles")
+      .select("user_id, username, display_name, image_path, specialty, tech_stack, created_at")
+      .eq("is_public", true)
+      .order("created_at", { ascending: false })
+      .limit(6);
+
+    if (requestId !== featuredPortfolioRequestId) return;
+
+    container.innerHTML = "";
+
+    if (error) {
+      console.error("Featured portfolios loading error:", error);
+      message.textContent = "Could not load featured portfolios right now.";
+      return;
+    }
+
+    (data || []).forEach(profile =>
+      container.appendChild(createFeaturedPortfolioCard(profile))
+    );
+
+    message.textContent = data?.length
+      ? ""
+      : "No public portfolios are available yet.";
+
+    initializeLandingRevealAnimations();
   }
 
 
@@ -8249,6 +10150,12 @@
       )?.value || "";
 
 
+    const sortMode =
+      document.getElementById(
+        "userSortFilter"
+      )?.value || "newest";
+
+
     message.textContent =
       term || specialty || technology
         ? "Searching..."
@@ -8292,14 +10199,14 @@
             supabaseClient
               .from("profiles")
               .select(
-                "user_id, username, display_name, image_path, specialty, tech_stack"
+                "user_id, username, display_name, image_path, specialty, tech_stack, created_at"
               )
           )
             .order(
               "created_at",
               { ascending: false }
             )
-            .limit(12);
+            .limit(48);
 
 
         if (error) {
@@ -8322,24 +10229,24 @@
             supabaseClient
               .from("profiles")
               .select(
-                "user_id, username, display_name, image_path, specialty, tech_stack"
+                "user_id, username, display_name, image_path, specialty, tech_stack, created_at"
               )
           )
             .ilike("username", pattern)
-            .limit(12),
+            .limit(48),
 
           applyDirectoryFilters(
             supabaseClient
               .from("profiles")
               .select(
-                "user_id, username, display_name, image_path, specialty, tech_stack"
+                "user_id, username, display_name, image_path, specialty, tech_stack, created_at"
               )
           )
             .ilike(
               "display_name",
               pattern
             )
-            .limit(12)
+            .limit(48)
         ]);
 
 
@@ -8370,8 +10277,16 @@
 
         profiles =
           [...uniqueProfiles.values()]
-            .slice(0, 12);
+            .slice(0, 48);
       }
+
+
+      profiles = (
+        await sortPublicProfiles(
+          profiles,
+          sortMode
+        )
+      ).slice(0, 12);
 
 
       if (requestId !== userSearchRequestId) {
@@ -8559,6 +10474,54 @@
         1800
       );
     }
+  }
+
+
+  function openSharePortfolioModal() {
+    if (!currentUser || !signedInProfile || !isAdmin) {
+      return;
+    }
+
+    const modal = document.getElementById("sharePortfolioModal");
+    const input = document.getElementById("sharePortfolioUrl");
+    const message = document.getElementById("sharePortfolioMessage");
+    const portfolioURL = buildPortfolioURL(signedInProfile.username);
+
+    input.value = portfolioURL;
+    message.textContent = "";
+
+    modal.style.display = "flex";
+  }
+
+
+  function closeSharePortfolioModal() {
+    const modal = document.getElementById("sharePortfolioModal");
+    if (modal) modal.style.display = "none";
+  }
+
+
+  async function copySharePortfolioLink(button) {
+    const value = document.getElementById("sharePortfolioUrl")?.value || "";
+    const message = document.getElementById("sharePortfolioMessage");
+    if (!value || !button) return;
+
+    const originalText = button.textContent;
+
+    try {
+      const copied = await copyText(value);
+      button.textContent = copied ? "✓ Copied" : "Copy Failed";
+      message.textContent = copied ? "Portfolio link copied successfully." : "Could not copy the link.";
+      message.classList.toggle("success", copied);
+    }
+    catch {
+      button.textContent = "Copy Failed";
+      message.textContent = "Could not copy the link.";
+      message.classList.remove("success");
+    }
+
+    window.setTimeout(() => {
+      button.textContent = originalText;
+    }, 1800);
   }
 
 
@@ -9412,9 +11375,137 @@
     );
 
 
+    initializeOnboardingLivePreview();
+    updateOnboardingLivePreview();
+
+
     document.getElementById(
       "onboardingMessage"
     ).textContent = "";
+  }
+
+
+  function updateOnboardingPreviewImage() {
+    const avatar = document.getElementById("onboardingPreviewAvatar");
+    const file = document.getElementById("onboardingImage")?.files?.[0];
+    if (!avatar) return;
+
+    if (onboardingPreviewImageUrl) {
+      URL.revokeObjectURL(onboardingPreviewImageUrl);
+      onboardingPreviewImageUrl = "";
+    }
+
+    avatar.innerHTML = "";
+
+    if (file && !validateProfileImageFile(file)) {
+      onboardingPreviewImageUrl = URL.createObjectURL(file);
+      const image = document.createElement("img");
+      image.src = onboardingPreviewImageUrl;
+      image.alt = "Selected profile preview";
+      avatar.appendChild(image);
+      return;
+    }
+
+    const displayName =
+      document.getElementById("onboardingDisplayName")?.value.trim()
+      || "Your Name";
+    avatar.textContent = getProfileInitials(displayName);
+  }
+
+
+  function updateOnboardingLivePreview() {
+    const username =
+      document.getElementById("onboardingUsername")?.value
+        .trim()
+        .toLowerCase()
+        .replace(/[^a-z0-9_-]/g, "")
+        .slice(0, 30)
+      || "yourname";
+
+    const displayName =
+      document.getElementById("onboardingDisplayName")?.value.trim()
+      || "Your Name";
+
+    const bio =
+      document.getElementById("onboardingBio")?.value.trim()
+      || "Your short bio will appear here as you type.";
+
+    const specialty =
+      document.getElementById("onboardingSpecialty")?.value || "";
+
+    document.getElementById("onboardingPreviewPath").textContent =
+      `~/${username}/README.md`;
+    document.getElementById("onboardingPreviewName").textContent = displayName;
+    document.getElementById("onboardingPreviewUsername").textContent = `@${username}`;
+    document.getElementById("onboardingPreviewSpecialty").textContent =
+      PROFILE_SPECIALTIES[specialty] || "Your specialty";
+    document.getElementById("onboardingPreviewBio").textContent = bio;
+
+    const avatar = document.getElementById("onboardingPreviewAvatar");
+    if (avatar && !avatar.querySelector("img")) {
+      avatar.textContent = getProfileInitials(displayName);
+    }
+
+    const socials = document.getElementById("onboardingPreviewSocials");
+    socials.innerHTML = "";
+
+    const socialValues = [
+      ["GitHub", document.getElementById("onboardingGithub")?.value.trim()],
+      ["LinkedIn", document.getElementById("onboardingLinkedin")?.value.trim()]
+    ];
+
+    socialValues.forEach(([label, value]) => {
+      if (!value) return;
+      const chip = document.createElement("span");
+      chip.textContent = label;
+      socials.appendChild(chip);
+    });
+
+    const technologies = document.getElementById("onboardingPreviewTech");
+    technologies.innerHTML = "";
+
+    const previewTechnologies = selectedOnboardingTechnologies.slice(0, 8);
+    if (!previewTechnologies.length) {
+      const empty = document.createElement("span");
+      empty.textContent = "Your Tech Stack";
+      technologies.appendChild(empty);
+    }
+    else {
+      previewTechnologies.forEach(technology => {
+        const chip = document.createElement("span");
+        chip.textContent = technology;
+        technologies.appendChild(chip);
+      });
+    }
+  }
+
+
+  function initializeOnboardingLivePreview() {
+    const fieldIds = [
+      "onboardingUsername",
+      "onboardingDisplayName",
+      "onboardingBio",
+      "onboardingSpecialty",
+      "onboardingGithub",
+      "onboardingLinkedin"
+    ];
+
+    fieldIds.forEach(fieldId => {
+      const field = document.getElementById(fieldId);
+      if (!field || field.dataset.previewBound === "true") return;
+      field.dataset.previewBound = "true";
+      field.addEventListener("input", updateOnboardingLivePreview);
+      field.addEventListener("change", updateOnboardingLivePreview);
+    });
+
+    const imageInput = document.getElementById("onboardingImage");
+    if (imageInput && imageInput.dataset.previewBound !== "true") {
+      imageInput.dataset.previewBound = "true";
+      imageInput.addEventListener("change", () => {
+        updateOnboardingPreviewImage();
+        updateOnboardingLivePreview();
+      });
+    }
   }
 
 
@@ -10133,8 +12224,298 @@
     { name: "Burp Suite", icon: "burpsuite", category: "Cybersecurity" },
     { name: "OWASP", icon: "owasp", category: "Cybersecurity" },
     { name: "Nmap", icon: "nmap", category: "Cybersecurity" },
-    { name: "Metasploit", icon: "metasploit", category: "Cybersecurity" }
+    { name: "Metasploit", icon: "metasploit", category: "Cybersecurity" },
+    { name: "VS Code", icon: "visualstudiocode", category: "Cloud & Tools" },
+    { name: "Postman", icon: "postman", category: "Cloud & Tools" },
+    { name: "Figma", icon: "figma", category: "Cloud & Tools" },
+    { name: "GitHub Actions", icon: "githubactions", category: "Cloud & Tools" },
+    { name: "Terraform", icon: "terraform", category: "Cloud & Tools" },
+    { name: "Jenkins", icon: "jenkins", category: "Cloud & Tools" },
+    { name: "Grafana", icon: "grafana", category: "Cloud & Tools" }
   ];
+
+
+  const LANDING_TECH_ROWS = {
+    programming: [
+      "JavaScript", "TypeScript", "Python", "Java", "C", "C++", "C#",
+      "Go", "Rust", "PHP", "Kotlin", "HTML5", "CSS3", "React", "Vue.js",
+      "Angular", "Bootstrap", "Tailwind CSS"
+    ],
+    backend: [
+      "Node.js", "Express", "Laravel", "Django", "Flask", "Spring Boot",
+      "PostgreSQL", "MySQL", "MongoDB", "Redis", "Supabase", "Firebase",
+      "Docker", "Kubernetes", "AWS", "Azure", "Google Cloud", "Cloudflare",
+      "Vercel"
+    ],
+    tools: [
+      "Git", "GitHub", "Linux", "Kali Linux", "Bash", "VS Code", "Nmap",
+      "Wireshark", "Burp Suite", "OWASP", "Metasploit", "Postman", "Figma",
+      "Canva", "GitHub Actions", "Terraform", "Jenkins", "Grafana"
+    ]
+  };
+
+
+  let landingTerminalTimers = [];
+
+
+  function clearLandingTerminalTimers() {
+    landingTerminalTimers.forEach(timer =>
+      window.clearTimeout(timer)
+    );
+    landingTerminalTimers = [];
+  }
+
+
+  function scheduleLandingTerminalStep(callback, delay) {
+    const timer = window.setTimeout(callback, delay);
+    landingTerminalTimers.push(timer);
+  }
+
+
+  function createLandingTechGroup(names, duplicate = false) {
+    const group = document.createElement("div");
+    group.className = "tech-marquee-group";
+
+
+    if (duplicate) {
+      group.setAttribute("aria-hidden", "true");
+    }
+
+
+    names.forEach(name => {
+      const technology = PROFILE_TECHNOLOGIES.find(item =>
+        item.name === name
+      ) || { name, icon: "" };
+
+
+      const chip = document.createElement("span");
+      chip.className = "landing-tech-chip";
+      chip.appendChild(
+        createSimpleIcon(
+          technology.icon,
+          technology.name
+        )
+      );
+
+
+      const label = document.createElement("span");
+      label.textContent = technology.name;
+      chip.appendChild(label);
+      group.appendChild(chip);
+    });
+
+
+    return group;
+  }
+
+
+  function renderLandingTechMarquee() {
+    document
+      .querySelectorAll("[data-marquee-row]")
+      .forEach(row => {
+        if (row.dataset.rendered === "true") {
+          return;
+        }
+
+
+        const names =
+          LANDING_TECH_ROWS[
+            row.dataset.marqueeRow
+          ] || [];
+
+
+        const track = document.createElement("div");
+        track.className = "tech-marquee-track";
+        track.append(
+          createLandingTechGroup(names),
+          createLandingTechGroup(names, true)
+        );
+        row.appendChild(track);
+        row.dataset.rendered = "true";
+      });
+  }
+
+
+  function renderLandingTerminalStatic() {
+    const command = document.getElementById("landingTerminalCommand");
+    const output = document.getElementById("landingTerminalOutput");
+
+
+    if (!command || !output) return;
+
+
+    command.textContent = "create-portfolio --username you";
+    output.innerHTML = "";
+
+
+    [
+      "✓ Profile created",
+      "✓ Projects connected",
+      "✓ GitHub connected",
+      "✓ Learning journey online",
+      "✓ Portfolio published",
+      "→ mydevfoliohub.github.io/?u=you"
+    ].forEach((text, index) => {
+      const line = document.createElement("div");
+      line.className =
+        "landing-terminal-output-line is-visible "
+        + (index === 5 ? "is-url" : "is-success");
+      line.textContent = text;
+      output.appendChild(line);
+    });
+  }
+
+
+  function startLandingTerminalAnimation() {
+    clearLandingTerminalTimers();
+
+
+    const command = document.getElementById("landingTerminalCommand");
+    const output = document.getElementById("landingTerminalOutput");
+
+
+    if (!command || !output) return;
+
+
+    const reduceMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+
+    if (reduceMotion) {
+      renderLandingTerminalStatic();
+      return;
+    }
+
+
+    const commandText = "create-portfolio --username you";
+    const outputLines = [
+      { text: "✓ Profile created", className: "is-success" },
+      { text: "✓ Projects connected", className: "is-success" },
+      { text: "✓ GitHub connected", className: "is-success" },
+      { text: "✓ Learning journey online", className: "is-success" },
+      { text: "✓ Portfolio published", className: "is-success" },
+      { text: "→ mydevfoliohub.github.io/?u=you", className: "is-url" }
+    ];
+
+
+    command.textContent = "";
+    output.innerHTML = "";
+
+
+    function revealOutputLine(index) {
+      if (currentAppView !== "landing") return;
+
+
+      if (index >= outputLines.length) {
+        scheduleLandingTerminalStep(() => {
+          if (currentAppView === "landing") {
+            startLandingTerminalAnimation();
+          }
+        }, 6500);
+        return;
+      }
+
+
+      const lineData = outputLines[index];
+      const line = document.createElement("div");
+      line.className =
+        `landing-terminal-output-line ${lineData.className}`;
+      line.textContent = lineData.text;
+      output.appendChild(line);
+
+
+      window.requestAnimationFrame(() =>
+        line.classList.add("is-visible")
+      );
+
+
+      scheduleLandingTerminalStep(
+        () => revealOutputLine(index + 1),
+        index === outputLines.length - 2 ? 720 : 520
+      );
+    }
+
+
+    function typeCharacter(index) {
+      if (currentAppView !== "landing") return;
+
+
+      command.textContent = commandText.slice(0, index);
+
+
+      if (index < commandText.length) {
+        scheduleLandingTerminalStep(
+          () => typeCharacter(index + 1),
+          42
+        );
+        return;
+      }
+
+
+      scheduleLandingTerminalStep(
+        () => revealOutputLine(0),
+        480
+      );
+    }
+
+
+    scheduleLandingTerminalStep(
+      () => typeCharacter(1),
+      420
+    );
+  }
+
+
+  function initializeLandingRevealAnimations() {
+    const elements = document.querySelectorAll(
+      ".landing-tech-showcase, .how-it-works-section, .how-step-card, .featured-portfolios-section, .featured-portfolio-card, .user-directory, .landing-features-section, .platform-feature-card"
+    );
+
+
+    const reduceMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+
+    if (reduceMotion || !("IntersectionObserver" in window)) {
+      elements.forEach(element =>
+        element.classList.add("landing-reveal", "is-visible")
+      );
+      return;
+    }
+
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add("is-visible");
+        observer.unobserve(entry.target);
+      });
+    }, { threshold: .12, rootMargin: "0px 0px -35px" });
+
+
+    elements.forEach((element, index) => {
+      element.classList.add("landing-reveal");
+      if (
+        element.classList.contains("platform-feature-card")
+        || element.classList.contains("how-step-card")
+        || element.classList.contains("featured-portfolio-card")
+      ) {
+        element.style.transitionDelay = `${(index % 5) * 55}ms`;
+      }
+      observer.observe(element);
+    });
+  }
+
+
+  function initializeLandingExperience() {
+    renderLandingTechMarquee();
+    startLandingTerminalAnimation();
+    initializeLandingRevealAnimations();
+    loadFeaturedPortfolios();
+    syncDirectoryQuickFilters();
+  }
 
 
   function populateUserTechFilter() {
@@ -11173,6 +13554,9 @@
     renderOnboardingTechPicker(
       searchInput?.value || ""
     );
+
+
+    updateOnboardingLivePreview();
   }
 
 
@@ -11509,7 +13893,7 @@
 
 
     document.title =
-      "Portfolio Forge | Developer Portfolio Builder";
+      "MyDevFolioHub | Developer Portfolio Builder";
 
 
     setMetadataContent(
@@ -11519,12 +13903,12 @@
 
     setMetadataContent(
       'meta[name="author"]',
-      "Portfolio Forge"
+      "MyDevFolioHub"
     );
 
     setMetadataContent(
       'meta[property="og:title"]',
-      "Portfolio Forge | Developer Portfolio Builder"
+      "MyDevFolioHub | Developer Portfolio Builder"
     );
 
     setMetadataContent(
@@ -11534,7 +13918,7 @@
 
     setMetadataContent(
       'meta[name="twitter:title"]',
-      "Portfolio Forge | Developer Portfolio Builder"
+      "MyDevFolioHub | Developer Portfolio Builder"
     );
 
     setMetadataContent(
@@ -11672,6 +14056,66 @@
   }
 
 
+  function normalizePortfolioTheme(value) {
+    return Object.prototype.hasOwnProperty.call(PORTFOLIO_THEMES, value)
+      ? value
+      : "cyber";
+  }
+
+
+  function applyPortfolioTheme(value) {
+    const portfolioView = document.getElementById("portfolioView");
+    if (!portfolioView) return;
+
+    portfolioView.dataset.portfolioTheme =
+      normalizePortfolioTheme(value);
+  }
+
+
+  function getSelectedPortfolioTheme() {
+    return normalizePortfolioTheme(
+      document.querySelector('input[name="portfolioTheme"]:checked')?.value
+      || currentProfile?.portfolio_theme
+      || "cyber"
+    );
+  }
+
+
+  function previewPortfolioTheme(value) {
+    const theme = normalizePortfolioTheme(value);
+    const status = document.getElementById("portfolioThemeStatus");
+    if (status) status.textContent = PORTFOLIO_THEMES[theme].toUpperCase();
+    applyPortfolioTheme(theme);
+  }
+
+
+  function configurePortfolioThemeEditor(profile) {
+    const hasColumn = Object.prototype.hasOwnProperty.call(
+      profile || {},
+      "portfolio_theme"
+    );
+
+    portfolioThemeDatabaseReady = hasColumn;
+    const theme = normalizePortfolioTheme(profile?.portfolio_theme);
+    const selected = document.querySelector(
+      `input[name="portfolioTheme"][value="${theme}"]`
+    );
+
+    if (selected) selected.checked = true;
+
+    const picker = document.getElementById("portfolioThemePicker");
+    const note = document.getElementById("portfolioThemeMigrationNote");
+
+    picker?.classList.toggle("is-disabled", !hasColumn);
+    picker?.querySelectorAll("input").forEach(input => {
+      input.disabled = !hasColumn;
+    });
+
+    if (note) note.hidden = hasColumn;
+    previewPortfolioTheme(theme);
+  }
+
+
   function configurePortfolioIdentity(
     profile
   ) {
@@ -11714,6 +14158,17 @@
         ||
         `~/${username}/README.md`
     };
+
+
+    portfolioThemeDatabaseReady =
+      Object.prototype.hasOwnProperty.call(
+        profile,
+        "portfolio_theme"
+      );
+
+    applyPortfolioTheme(
+      profile.portfolio_theme
+    );
 
 
     const logo =
@@ -11804,11 +14259,6 @@
       "terminalBarText"
     ).textContent =
       currentProfile.terminal_title;
-
-
-    document.getElementById(
-      "footerOwnerName"
-    ).textContent = displayName;
 
 
     document.getElementById(
@@ -11925,7 +14375,7 @@
 
 
     document.title =
-      "Portfolio Not Found | Portfolio Forge";
+      "Portfolio Not Found | MyDevFolioHub";
 
 
     showAppView("notFound");
@@ -12928,6 +15378,131 @@
   }
 
 
+  function formatDashboardMetric(value) {
+    const number = Number(value) || 0;
+    return new Intl.NumberFormat("en", {
+      notation: number >= 1000 ? "compact" : "standard",
+      maximumFractionDigits: 1
+    }).format(number);
+  }
+
+
+  function updatePortfolioCompletion() {
+    if (!isAdmin) return;
+
+    const projects = portfolioItems.filter(item => item.type === "project");
+    const githubConnected = Boolean(
+      currentProfile.github_url
+      || currentProfile.github_username
+      || currentProfile.social_links?.github
+    );
+
+    const checks = [
+      ["Profile created", Boolean(currentProfile.user_id)],
+      ["Bio added", Boolean(String(currentProfile.bio || currentProfile.description || "").trim())],
+      ["Tech Stack added", Array.isArray(currentProfile.tech_stack) && currentProfile.tech_stack.length > 0],
+      ["GitHub connected", githubConnected],
+      ["Add profile picture", Boolean(currentProfile.image_path)],
+      ["Add your first project", projects.length > 0],
+      ["Add certificate", certificates.length > 0],
+      ["Add Learning Log post", learningPosts.length > 0]
+    ];
+
+    const completed = checks.filter(([, done]) => done).length;
+    const percent = Math.round((completed / checks.length) * 100);
+    const percentElement = document.getElementById("portfolioCompletionPercent");
+    const bar = document.getElementById("portfolioCompletionBar");
+    const summary = document.getElementById("portfolioCompletionSummary");
+    const checklist = document.getElementById("portfolioCompletionChecklist");
+
+    percentElement.textContent = `${percent}%`;
+    bar.style.width = `${percent}%`;
+    summary.textContent = percent === 100
+      ? "Portfolio complete 🎉"
+      : `Your portfolio is ${percent}% complete`;
+
+    checklist.innerHTML = "";
+    checks.forEach(([label, done]) => {
+      const item = document.createElement("div");
+      item.className = `completion-check-item${done ? " done" : ""}`;
+
+      const mark = document.createElement("b");
+      mark.textContent = done ? "✓" : "○";
+
+      const text = document.createElement("span");
+      text.textContent = label;
+
+      item.append(mark, text);
+      checklist.appendChild(item);
+    });
+  }
+
+
+  function getFallbackDashboardAnalytics() {
+    const projects = portfolioItems.filter(item => item.type === "project");
+    const projectViews = projects.reduce(
+      (total, item) => total + getContentViewCount("project", item.id),
+      0
+    );
+    const learningViews = learningPosts.reduce(
+      (total, post) => total + getContentViewCount("learning_post", post.id),
+      0
+    );
+    const mostViewed = projects
+      .map(item => ({
+        title: item.title,
+        views: getContentViewCount("project", item.id)
+      }))
+      .sort((first, second) => second.views - first.views)[0];
+
+    return {
+      portfolio_views: getContentViewCount("portfolio", activePortfolioUserId),
+      project_views: projectViews,
+      learning_post_views: learningViews,
+      most_viewed_project: mostViewed?.views
+        ? mostViewed.title
+        : "No project views yet"
+    };
+  }
+
+
+  function renderDashboardAnalytics(analytics, migrationReady) {
+    if (!isAdmin) return;
+
+    document.getElementById("analyticsPortfolioViews").textContent =
+      formatDashboardMetric(analytics.portfolio_views);
+    document.getElementById("analyticsProjectViews").textContent =
+      formatDashboardMetric(analytics.project_views);
+    document.getElementById("analyticsLearningViews").textContent =
+      formatDashboardMetric(analytics.learning_post_views);
+    document.getElementById("analyticsMostViewedProject").textContent =
+      analytics.most_viewed_project || "No project views yet";
+
+    const note = document.getElementById("analyticsMigrationNote");
+    if (note) note.hidden = migrationReady;
+  }
+
+
+  async function loadDashboardAnalytics() {
+    if (!isAdmin || !currentUser) return;
+
+    const fallback = getFallbackDashboardAnalytics();
+    const { data, error } = await supabaseClient.rpc("get_my_portfolio_analytics");
+
+    if (error || !data || typeof data !== "object") {
+      renderDashboardAnalytics(fallback, false);
+      return;
+    }
+
+    renderDashboardAnalytics({
+      portfolio_views: data.portfolio_views ?? fallback.portfolio_views,
+      project_views: data.project_views ?? fallback.project_views,
+      learning_post_views: data.learning_post_views ?? fallback.learning_post_views,
+      most_viewed_project: data.most_viewed_project || fallback.most_viewed_project
+    }, true);
+  }
+
+
   async function loadAllPortfolioData() {
 
     if (!activePortfolioUserId) {
@@ -12957,6 +15532,23 @@
 
     updatePortfolioStatCounts();
     updateScrollInterface();
+
+
+    updatePortfolioCompletion();
+    await loadDashboardAnalytics();
+
+
+    if (
+      !isAdmin
+      && activePortfolioUserId
+      && currentUser?.id !== activePortfolioUserId
+    ) {
+      await recordContentView(
+        "portfolio",
+        activePortfolioUserId,
+        { silent: true }
+      );
+    }
   }
 
 
@@ -13896,7 +16488,8 @@
 
   async function recordContentView(
     contentType,
-    contentId
+    contentId,
+    options = {}
   ) {
 
     const key =
@@ -13954,10 +16547,12 @@
 
       countedContentKeys.delete(key);
 
-      console.error(
-        "Content view count error:",
-        error
-      );
+      if (!options.silent) {
+        console.error(
+          "Content view count error:",
+          error
+        );
+      }
 
       return;
     }
@@ -14008,6 +16603,8 @@
       !contentViewObserver
       ||
       isAdmin
+      ||
+      currentUser?.id === activePortfolioUserId
     ) {
 
       return;
@@ -14553,6 +17150,7 @@
     syncSelectedTechStack();
     renderTechStackPicker();
     updateProfileReadmePreview();
+    configurePortfolioThemeEditor(currentProfile);
 
 
     resetProfilePreview();
@@ -14601,6 +17199,11 @@
 
     removeProfileImageRequested =
       false;
+
+
+    applyPortfolioTheme(
+      currentProfile?.portfolio_theme
+    );
   }
 
 
@@ -14923,6 +17526,10 @@
         .slice(0, 30);
 
 
+    const portfolioTheme =
+      getSelectedPortfolioTheme();
+
+
     if (!displayName) {
       alert("Enter a display name.");
       return;
@@ -15059,33 +17666,32 @@
     }
 
 
+    const profileUpdates = {
+      display_name: displayName,
+      bio: description,
+      specialty,
+      image_path: nextImagePath,
+      terminal_title: terminalTitle,
+      github_url: githubURL || null,
+      linkedin_url: linkedinURL || null,
+      public_email: publicEmail || null,
+      social_links: socialLinks,
+      github_username: githubUsername || null,
+      primary_link_key: primaryLinkKey || null,
+      tech_stack: techStack
+    };
+
+
+    if (portfolioThemeDatabaseReady) {
+      profileUpdates.portfolio_theme =
+        portfolioTheme;
+    }
+
+
     const { error } =
       await supabaseClient
         .from("profiles")
-        .update({
-          display_name:
-            displayName,
-          bio: description,
-          specialty,
-          image_path:
-            nextImagePath,
-          terminal_title:
-            terminalTitle,
-          github_url:
-            githubURL || null,
-          linkedin_url:
-            linkedinURL || null,
-          public_email:
-            publicEmail || null,
-          social_links:
-            socialLinks,
-          github_username:
-            githubUsername || null,
-          primary_link_key:
-            primaryLinkKey || null,
-          tech_stack:
-            techStack
-        })
+        .update(profileUpdates)
         .eq(
           "user_id",
           currentUser.id
@@ -15191,7 +17797,11 @@
         primaryLinkKey || null,
 
       tech_stack:
-        techStack
+        techStack,
+
+      ...(portfolioThemeDatabaseReady
+        ? { portfolio_theme: portfolioTheme }
+        : {})
     };
 
 
@@ -15322,6 +17932,7 @@
 
 
     displayPortfolioItems();
+    updatePortfolioCompletion();
   }
 
 
@@ -16220,6 +18831,7 @@
 
 
     displayLearningPosts();
+    updatePortfolioCompletion();
   }
 
 
@@ -19052,6 +21664,7 @@
 
 
     displayCertificates();
+    updatePortfolioCompletion();
   }
 
 
@@ -21028,6 +23641,8 @@
       closeProfileEntryEditor();
 
       closeDeleteAccountModal();
+
+      closeSharePortfolioModal();
 
     }
   );

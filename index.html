@@ -559,6 +559,176 @@
       line-height: 1.55;
     }
 
+    .user-directory {
+      margin-bottom: 55px;
+      padding: 28px;
+
+      border: 1px solid var(--border);
+      border-radius: 12px;
+
+      background: color-mix(in srgb, var(--card) 91%, transparent);
+    }
+
+    .user-directory-heading {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+
+      gap: 24px;
+    }
+
+    .user-directory-heading h2 {
+      margin-top: 8px;
+
+      font-size: 28px;
+    }
+
+    .user-directory-heading p {
+      margin-top: 7px;
+
+      color: var(--muted);
+
+      font-size: 13px;
+    }
+
+    .user-search-box {
+      width: min(100%, 390px);
+
+      display: flex;
+      align-items: center;
+
+      gap: 10px;
+
+      padding: 0 13px;
+
+      border: 1px solid var(--border);
+      border-radius: 8px;
+
+      background: var(--background);
+    }
+
+    .user-search-box:focus-within {
+      border-color: var(--blue);
+    }
+
+    .user-search-box > span {
+      color: var(--green);
+
+      font-size: 22px;
+    }
+
+    .user-search-box input {
+      width: 100%;
+
+      padding: 13px 0;
+
+      border: none;
+      outline: none;
+
+      background: transparent;
+
+      color: var(--text);
+    }
+
+    .user-search-results {
+      display: grid;
+      grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+
+      gap: 12px;
+
+      margin-top: 22px;
+    }
+
+    .user-result-card {
+      display: flex;
+      align-items: center;
+
+      gap: 12px;
+
+      min-width: 0;
+      padding: 14px;
+
+      border: 1px solid var(--border);
+      border-radius: 8px;
+
+      background: var(--card2);
+
+      text-decoration: none;
+
+      transition: 0.2s ease;
+    }
+
+    .user-result-card:hover {
+      border-color: var(--green);
+
+      transform: translateY(-2px);
+    }
+
+    .user-result-avatar {
+      width: 44px;
+      height: 44px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      flex-shrink: 0;
+      overflow: hidden;
+
+      border: 1px solid var(--border);
+      border-radius: 50%;
+
+      background: var(--accent-strong);
+
+      font-family: monospace;
+      font-weight: bold;
+    }
+
+    .user-result-avatar img {
+      width: 100%;
+      height: 100%;
+
+      object-fit: cover;
+    }
+
+    .user-result-copy {
+      min-width: 0;
+    }
+
+    .user-result-copy strong,
+    .user-result-copy span {
+      display: block;
+
+      overflow: hidden;
+
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .user-result-copy strong {
+      font-size: 13px;
+    }
+
+    .user-result-copy span {
+      margin-top: 4px;
+
+      color: var(--green);
+
+      font-family: monospace;
+      font-size: 11px;
+    }
+
+    .user-search-message {
+      min-height: 18px;
+      margin-top: 16px;
+
+      color: var(--muted);
+
+      font-size: 12px;
+      text-align: center;
+    }
+
     .auth-screen,
     .onboarding-screen,
     .not-found-screen {
@@ -616,7 +786,8 @@
     }
 
     .platform-form input,
-    .platform-form textarea {
+    .platform-form textarea,
+    .platform-form select {
       width: 100%;
 
       padding: 12px;
@@ -638,7 +809,8 @@
     }
 
     .platform-form input:focus,
-    .platform-form textarea:focus {
+    .platform-form textarea:focus,
+    .platform-form select:focus {
       border-color: var(--blue);
     }
 
@@ -822,6 +994,141 @@
       color: var(--green);
     }
 
+    .layout-manager {
+      margin-top: 18px;
+      padding-top: 16px;
+
+      border-top: 1px solid var(--border);
+    }
+
+    .layout-manager summary {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      gap: 14px;
+
+      cursor: pointer;
+
+      color: var(--text);
+
+      font-weight: bold;
+
+      list-style: none;
+    }
+
+    .layout-manager summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .layout-manager summary small {
+      color: var(--muted);
+
+      font-size: 11px;
+      font-weight: normal;
+    }
+
+    .layout-manager-grid {
+      display: grid;
+      grid-template-columns:
+        minmax(0, 0.7fr) minmax(0, 1.3fr);
+
+      gap: 20px;
+
+      margin-top: 20px;
+    }
+
+    .layout-manager-grid h3 {
+      font-size: 14px;
+    }
+
+    .layout-sort-list {
+      display: grid;
+
+      gap: 7px;
+
+      margin-top: 12px;
+    }
+
+    .layout-sort-item {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+
+      gap: 10px;
+
+      padding: 9px 10px;
+
+      border: 1px solid var(--border);
+      border-radius: 7px;
+
+      background: var(--background);
+
+      transition: 0.18s ease;
+    }
+
+    .layout-sort-item[draggable="true"] {
+      cursor: grab;
+    }
+
+    .layout-sort-item.is-dragging {
+      opacity: 0.45;
+    }
+
+    .layout-drag-handle {
+      color: var(--green);
+
+      font-family: monospace;
+    }
+
+    .layout-sort-item strong {
+      font-size: 12px;
+    }
+
+    .layout-arrow-buttons {
+      display: flex;
+
+      gap: 5px;
+    }
+
+    .layout-arrow-buttons button {
+      width: 28px;
+      height: 28px;
+
+      border: 1px solid var(--border);
+      border-radius: 5px;
+
+      background: var(--card2);
+
+      color: var(--text);
+    }
+
+    .layout-arrow-buttons button:hover:not(:disabled) {
+      border-color: var(--green);
+
+      color: var(--green);
+    }
+
+    .layout-arrow-buttons button:disabled {
+      opacity: 0.35;
+
+      cursor: not-allowed;
+    }
+
+    .layout-save-button {
+      margin-top: 18px;
+    }
+
+    .onboarding-tech-section {
+      margin-top: 22px;
+      padding: 18px;
+
+      border: 1px solid var(--border);
+      border-radius: 9px;
+
+      background: var(--card2);
+    }
+
     .tech-stack-empty {
       color: var(--muted);
 
@@ -879,9 +1186,19 @@
     nav {
       display: flex;
       gap: 25px;
+
+      min-width: 0;
+      max-width: calc(100vw - 420px);
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+
+    nav::-webkit-scrollbar {
+      display: none;
     }
 
     nav a {
+      flex: 0 0 auto;
       color: var(--muted);
       text-decoration: none;
       font-size: 14px;
@@ -1192,9 +1509,15 @@
       align-items: center;
       justify-content: center;
 
+      gap: 8px;
+
       padding: 9px 16px;
 
+      border: 1px solid var(--border);
+
       border-radius: 6px;
+
+      background: var(--chip);
 
       color: var(--text);
 
@@ -1208,21 +1531,45 @@
 
     .social-btn:hover {
       transform: translateY(-2px);
-      opacity: 0.9;
-    }
-
-    .social-btn.linkedin {
+      border-color: var(--accent-hover);
       background: var(--accent-strong);
     }
 
-    .social-btn.email {
-      background: var(--border);
+    .social-btn img,
+    .social-btn svg {
+      width: 17px;
+      height: 17px;
+
+      object-fit: contain;
     }
 
-    .social-btn.github {
-      background: var(--chip);
+    .social-btn svg {
+      flex-shrink: 0;
 
-      border: 1px solid var(--border);
+      fill: currentColor;
+    }
+
+    .social-buttons-empty,
+    .tech-stack-empty {
+      color: var(--muted);
+
+      font-size: 13px;
+    }
+
+    .social-icon-fallback,
+    .tech-icon-fallback {
+      display: inline-flex;
+
+      align-items: center;
+      justify-content: center;
+
+      flex-shrink: 0;
+
+      color: var(--green);
+
+      font-family: monospace;
+      font-size: 11px;
+      font-weight: bold;
     }
 
 
@@ -1237,9 +1584,74 @@
       gap: 8px;
     }
 
-    .tech-stack img {
-      height: 28px;
-      max-width: 100%;
+    .tech-display-chip {
+      display: inline-flex;
+
+      align-items: center;
+
+      gap: 7px;
+
+      padding: 7px 10px;
+
+      border: 1px solid var(--border);
+      border-radius: 6px;
+
+      background: var(--chip);
+
+      color: var(--text);
+
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .tech-display-chip img {
+      width: 16px;
+      height: 16px;
+
+      object-fit: contain;
+    }
+
+    .primary-profile-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+
+      gap: 8px;
+
+      margin-top: 13px;
+      padding: 10px 16px;
+
+      border: 1px solid var(--accent-hover);
+      border-radius: 7px;
+
+      background: var(--accent-strong);
+
+      color: var(--text);
+
+      font-size: 13px;
+      font-weight: bold;
+      text-decoration: none;
+
+      transition: 0.2s ease;
+    }
+
+    .primary-profile-link:hover {
+      background: var(--accent-hover);
+
+      transform: translateY(-2px);
+    }
+
+    .primary-profile-link svg {
+      width: 17px;
+      height: 17px;
+
+      flex-shrink: 0;
+
+      fill: currentColor;
+    }
+
+    .primary-profile-link[hidden] {
+      display: none;
     }
 
 
@@ -1589,6 +2001,75 @@
 
     .project-card-link:hover {
       text-decoration: underline;
+    }
+
+    .github-highlights-description {
+      margin-top: 7px;
+
+      color: var(--muted);
+
+      font-size: 13px;
+    }
+
+    .github-profile-button {
+      flex-shrink: 0;
+
+      text-decoration: none;
+    }
+
+    .github-language-summary {
+      display: flex;
+      flex-wrap: wrap;
+
+      gap: 8px;
+
+      margin-bottom: 18px;
+    }
+
+    .github-language-chip {
+      display: inline-flex;
+      align-items: center;
+
+      gap: 7px;
+
+      padding: 7px 10px;
+
+      border: 1px solid var(--border);
+      border-radius: 999px;
+
+      background: var(--chip);
+
+      color: var(--text);
+
+      font-family: monospace;
+      font-size: 11px;
+    }
+
+    .github-language-dot {
+      width: 8px;
+      height: 8px;
+
+      border-radius: 50%;
+
+      background: var(--green);
+    }
+
+    .github-repository-card {
+      min-height: 190px;
+    }
+
+    .github-repository-meta {
+      display: flex;
+      flex-wrap: wrap;
+
+      gap: 12px;
+
+      margin-top: 18px;
+
+      color: var(--muted);
+
+      font-family: monospace;
+      font-size: 11px;
     }
 
     .item-card-actions {
@@ -2750,6 +3231,7 @@
     .certificate-modal-content input,
     .certificate-modal-content select,
     .profile-modal-content input,
+    .profile-modal-content select,
     .profile-modal-content textarea,
     .item-modal-content input,
     .item-modal-content textarea,
@@ -2791,6 +3273,7 @@
     .certificate-modal-content input:focus,
     .certificate-modal-content select:focus,
     .profile-modal-content input:focus,
+    .profile-modal-content select:focus,
     .profile-modal-content textarea:focus,
     .item-modal-content input:focus,
     .item-modal-content textarea:focus,
@@ -2859,6 +3342,10 @@
        PROFILE EDITOR
     ========================================= */
 
+    .profile-modal-content {
+      max-width: 900px;
+    }
+
     .profile-editor-preview {
       width: 120px;
       height: 120px;
@@ -2922,6 +3409,327 @@
     .remove-profile-image-btn:hover {
       background:
         rgba(248, 81, 73, 0.1);
+    }
+
+    .profile-customization-section,
+    .readme-live-preview {
+      margin-top: 25px;
+
+      padding: 18px;
+
+      border: 1px solid var(--border);
+      border-radius: 9px;
+
+      background: var(--card2);
+    }
+
+    .profile-customization-heading,
+    .readme-live-preview-bar {
+      display: flex;
+
+      align-items: center;
+      justify-content: space-between;
+
+      gap: 15px;
+    }
+
+    .profile-customization-heading h3 {
+      margin: 0;
+
+      font-size: 16px;
+    }
+
+    .profile-customization-heading p {
+      margin-top: 5px;
+
+      color: var(--muted);
+
+      font-size: 12px;
+    }
+
+    .profile-customization-heading > span {
+      flex-shrink: 0;
+
+      color: var(--green);
+
+      font-family: monospace;
+      font-size: 12px;
+    }
+
+    .social-editor-grid {
+      display: grid;
+
+      grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+      gap: 0 14px;
+    }
+
+    .profile-featured-link-grid {
+      display: grid;
+      grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+      gap: 0 14px;
+
+      margin-top: 4px;
+      padding-top: 4px;
+
+      border-top: 1px solid var(--border);
+    }
+
+    .profile-modal-content
+    .social-editor-field {
+      margin-top: 13px;
+    }
+
+    .social-editor-field > span {
+      display: block;
+
+      margin-bottom: 6px;
+    }
+
+    .profile-modal-content
+    .profile-tech-search-label {
+      margin-top: 15px;
+    }
+
+    .selected-tech-list {
+      display: flex;
+      flex-wrap: wrap;
+
+      gap: 8px;
+
+      min-height: 43px;
+      margin-top: 12px;
+      padding: 10px;
+
+      border: 1px dashed var(--border);
+      border-radius: 7px;
+
+      background: var(--background);
+    }
+
+    .selected-tech-empty {
+      align-self: center;
+
+      color: var(--muted);
+
+      font-size: 12px;
+    }
+
+    .selected-tech-chip,
+    .tech-picker-option {
+      display: inline-flex;
+
+      align-items: center;
+      justify-content: center;
+
+      gap: 7px;
+
+      border: 1px solid var(--border);
+      border-radius: 6px;
+
+      color: var(--text);
+
+      font-size: 12px;
+
+      transition: 0.2s;
+    }
+
+    .selected-tech-chip {
+      padding: 7px 9px;
+
+      background: var(--accent-strong);
+    }
+
+    .selected-tech-chip img,
+    .tech-picker-option img {
+      width: 15px;
+      height: 15px;
+
+      object-fit: contain;
+    }
+
+    .selected-tech-chip b {
+      color: var(--muted);
+
+      font-size: 15px;
+      line-height: 1;
+    }
+
+    .tech-picker {
+      display: grid;
+
+      grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+      gap: 12px;
+
+      max-height: 310px;
+      margin-top: 14px;
+      padding-right: 5px;
+
+      overflow-y: auto;
+    }
+
+    .tech-picker-category {
+      min-width: 0;
+    }
+
+    .tech-picker-category h4 {
+      margin-bottom: 8px;
+
+      color: var(--muted);
+
+      font-family: monospace;
+      font-size: 11px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .tech-picker-options {
+      display: flex;
+      flex-wrap: wrap;
+
+      gap: 6px;
+    }
+
+    .tech-picker-option {
+      padding: 7px 9px;
+
+      background: var(--background);
+    }
+
+    .tech-picker-option:hover,
+    .tech-picker-option.is-selected {
+      border-color: var(--accent-hover);
+      background: var(--accent-strong);
+    }
+
+    .tech-picker-option.is-selected::after {
+      content: "✓";
+
+      color: var(--green);
+    }
+
+    .tech-picker-empty {
+      grid-column: 1 / -1;
+
+      padding: 18px;
+
+      color: var(--muted);
+
+      text-align: center;
+      font-size: 12px;
+    }
+
+    .readme-live-preview {
+      padding: 0;
+
+      overflow: hidden;
+    }
+
+    .readme-live-preview-bar {
+      justify-content: flex-start;
+
+      padding: 11px 14px;
+
+      border-bottom: 1px solid var(--border);
+
+      background: var(--background);
+
+      font-family: monospace;
+      font-size: 11px;
+    }
+
+    .readme-live-preview-bar strong {
+      min-width: 0;
+
+      overflow: hidden;
+
+      color: var(--text);
+
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .readme-live-preview-bar > span:last-child {
+      margin-left: auto;
+
+      color: var(--green);
+    }
+
+    .readme-preview-dot {
+      width: 9px;
+      height: 9px;
+
+      flex-shrink: 0;
+
+      border-radius: 50%;
+
+      background: var(--green);
+
+      box-shadow: 0 0 10px var(--green);
+    }
+
+    .readme-live-preview-body {
+      padding: 20px;
+    }
+
+    .readme-live-preview-body h3 {
+      margin-bottom: 7px;
+    }
+
+    .readme-live-preview-body > p {
+      margin-bottom: 16px;
+
+      color: var(--muted);
+
+      line-height: 1.6;
+      white-space: pre-line;
+    }
+
+    .social-buttons-preview {
+      margin-bottom: 14px;
+    }
+
+    .readme-live-preview-body
+    .primary-profile-link {
+      margin-top: 0;
+      margin-bottom: 14px;
+
+      padding: 8px 11px;
+
+      font-size: 11px;
+    }
+
+    .social-buttons-preview .social-btn {
+      padding: 7px 10px;
+
+      font-size: 11px;
+    }
+
+    .tech-stack-preview .tech-display-chip {
+      padding: 6px 8px;
+
+      font-size: 11px;
+    }
+
+    @media (max-width: 760px) {
+      .social-editor-grid,
+      .profile-featured-link-grid,
+      .tech-picker {
+        grid-template-columns: 1fr;
+      }
+
+      .profile-customization-section {
+        padding: 14px;
+      }
+
+      .profile-customization-heading {
+        align-items: flex-start;
+      }
     }
 
 
@@ -3264,6 +4072,20 @@
         grid-template-columns: 1fr;
       }
 
+      .user-directory-heading {
+        align-items: stretch;
+        flex-direction: column;
+      }
+
+      .user-search-box {
+        width: 100%;
+      }
+
+      .user-search-results,
+      .layout-manager-grid {
+        grid-template-columns: 1fr;
+      }
+
       .platform-header-actions .platform-button:not(.primary) {
         display: none;
       }
@@ -3285,6 +4107,7 @@
         display: flex;
 
         gap: 7px;
+        max-width: none;
       }
 
       nav a {
@@ -3449,6 +4272,250 @@
     }
 
 
+    /* =========================================
+       COMMUNITY PROFILE FEATURES
+    ========================================= */
+
+    .user-search-controls {
+      width: min(100%, 760px);
+      display: grid;
+      grid-template-columns: minmax(240px, 1fr) repeat(2, minmax(150px, .65fr));
+      gap: 10px;
+    }
+
+    .user-search-filter {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      outline: none;
+      background: var(--background);
+      color: var(--text);
+    }
+
+    .user-search-filter:focus { border-color: var(--blue); }
+
+    .user-result-copy small {
+      display: block;
+      margin-top: 5px;
+      overflow: hidden;
+      color: var(--muted);
+      font-size: 10px;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .profile-specialty {
+      display: inline-flex;
+      margin-top: 9px;
+      padding: 5px 9px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: var(--chip);
+      color: var(--green);
+      font-family: monospace;
+      font-size: 11px;
+    }
+
+    .profile-specialty[hidden] { display: none; }
+
+    .contact-card-button {
+      margin-top: 10px;
+      border-color: var(--border);
+      background: transparent;
+      color: var(--blue);
+    }
+
+    .community-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .community-card {
+      position: relative;
+      min-height: 185px;
+      padding: 22px;
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      background: var(--card);
+      transition: .2s ease;
+    }
+
+    .community-card:hover {
+      border-color: var(--accent-hover);
+      transform: translateY(-3px);
+    }
+
+    .community-card:hover .item-card-actions { opacity: 1; }
+
+    .community-card-icon {
+      display: inline-flex;
+      width: 42px;
+      height: 42px;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      background: var(--accent-strong);
+      font-size: 21px;
+    }
+
+    .community-card h3 {
+      padding-right: 65px;
+      font-size: 17px;
+      line-height: 1.4;
+    }
+
+    .community-card p {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.65;
+      white-space: pre-line;
+    }
+
+    .community-card-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-top: 15px;
+      color: var(--green);
+      font-family: monospace;
+      font-size: 11px;
+    }
+
+    .community-card-link {
+      display: inline-flex;
+      margin-top: 15px;
+      color: var(--blue);
+      font-size: 12px;
+      text-decoration: none;
+    }
+
+    .community-card-link:hover { text-decoration: underline; }
+
+    .profile-entry-modal,
+    .delete-account-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 1200;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: rgba(0, 0, 0, .82);
+    }
+
+    .profile-entry-modal-content,
+    .delete-account-modal-content {
+      width: 100%;
+      max-width: 580px;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 25px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: var(--card);
+    }
+
+    .profile-entry-fields[hidden] { display: none; }
+
+    .profile-entry-modal-content label,
+    .delete-account-modal-content label {
+      display: block;
+      margin-top: 17px;
+      margin-bottom: 6px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .profile-entry-modal-content input,
+    .profile-entry-modal-content textarea,
+    .profile-entry-modal-content select,
+    .delete-account-modal-content input {
+      width: 100%;
+      padding: 11px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      outline: none;
+      background: var(--background);
+      color: var(--text);
+    }
+
+    .profile-entry-modal-content textarea {
+      min-height: 110px;
+      resize: vertical;
+    }
+
+    .profile-entry-modal-content input:focus,
+    .profile-entry-modal-content textarea:focus,
+    .profile-entry-modal-content select:focus,
+    .delete-account-modal-content input:focus { border-color: var(--blue); }
+
+    .save-profile-entry-btn {
+      width: 100%;
+      margin-top: 25px;
+      padding: 12px;
+      border: none;
+      border-radius: 6px;
+      background: var(--accent-strong);
+      color: var(--text);
+      font-weight: bold;
+    }
+
+    .danger-zone {
+      margin-top: 18px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+    }
+
+    .danger-zone summary {
+      cursor: pointer;
+      color: var(--red);
+      font-weight: bold;
+    }
+
+    .danger-zone p {
+      margin: 10px 0 14px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .danger-button {
+      padding: 9px 13px;
+      border: 1px solid var(--red);
+      border-radius: 6px;
+      background: rgba(248, 81, 73, .08);
+      color: var(--red);
+      font-weight: bold;
+    }
+
+    .danger-button:disabled { opacity: .55; cursor: not-allowed; }
+
+    .delete-account-warning {
+      padding: 13px;
+      border: 1px solid rgba(248, 81, 73, .45);
+      border-radius: 7px;
+      background: rgba(248, 81, 73, .08);
+      color: var(--text);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 900px) {
+      .user-search-controls { grid-template-columns: 1fr 1fr; }
+      .user-search-box { grid-column: 1 / -1; width: 100%; }
+      .community-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 620px) {
+      .user-search-controls,
+      .community-grid { grid-template-columns: 1fr; }
+      .user-search-box { grid-column: auto; }
+    }
+
   </style>
 
 </head>
@@ -3595,6 +4662,74 @@
       </div>
 
     </div>
+
+  </section>
+
+
+  <section
+    class="user-directory"
+    aria-labelledby="userDirectoryTitle"
+  >
+
+    <div class="user-directory-heading">
+      <div>
+        <div class="landing-kicker">EXPLORE THE COMMUNITY</div>
+        <h2 id="userDirectoryTitle">Find a Portfolio</h2>
+        <p>Search public portfolios by name, specialty, or Tech Stack.</p>
+      </div>
+
+      <div class="user-search-controls">
+        <label class="user-search-box" for="userSearchInput">
+          <span aria-hidden="true">⌕</span>
+          <input
+            type="search"
+            id="userSearchInput"
+            maxlength="80"
+            autocomplete="off"
+            placeholder="Search users..."
+            oninput="handleUserSearchInput(this.value)"
+          >
+        </label>
+
+        <select
+          class="user-search-filter"
+          id="userSpecialtyFilter"
+          aria-label="Filter by specialty"
+          onchange="loadPublicUserDirectory(document.getElementById('userSearchInput').value)"
+        >
+          <option value="">All specialties</option>
+          <option value="cybersecurity">Cybersecurity</option>
+          <option value="frontend">Frontend</option>
+          <option value="backend">Backend</option>
+          <option value="fullstack">Full Stack</option>
+          <option value="mobile">Mobile</option>
+          <option value="data_ai">Data & AI</option>
+          <option value="devops_cloud">DevOps & Cloud</option>
+          <option value="other">Other</option>
+        </select>
+
+        <select
+          class="user-search-filter"
+          id="userTechFilter"
+          aria-label="Filter by Tech Stack"
+          onchange="loadPublicUserDirectory(document.getElementById('userSearchInput').value)"
+        >
+          <option value="">All technologies</option>
+        </select>
+      </div>
+    </div>
+
+    <div
+      class="user-search-results"
+      id="userSearchResults"
+      aria-live="polite"
+    ></div>
+
+    <p
+      class="user-search-message"
+      id="userSearchMessage"
+      role="status"
+    ></p>
 
   </section>
 
@@ -3969,6 +5104,22 @@
 
       </div>
 
+      <label for="onboardingSpecialty">
+        Specialty
+      </label>
+
+      <select id="onboardingSpecialty" required>
+        <option value="">Choose your specialty</option>
+        <option value="cybersecurity">Cybersecurity</option>
+        <option value="frontend">Frontend</option>
+        <option value="backend">Backend</option>
+        <option value="fullstack">Full Stack</option>
+        <option value="mobile">Mobile</option>
+        <option value="data_ai">Data & AI</option>
+        <option value="devops_cloud">DevOps & Cloud</option>
+        <option value="other">Other</option>
+      </select>
+
 
       <label for="onboardingBio">
         Short Bio
@@ -4022,6 +5173,42 @@
             placeholder="https://linkedin.com/in/..."
           >
         </div>
+
+      </div>
+
+
+      <div class="onboarding-tech-section">
+
+        <div class="profile-customization-heading">
+          <div>
+            <h3>Choose Your Tech Stack</h3>
+            <p>Select the technologies you want to show from day one.</p>
+          </div>
+          <span id="onboardingTechCount">0 / 30</span>
+        </div>
+
+        <label for="onboardingTechSearch">
+          Search technologies
+        </label>
+
+        <input
+          type="search"
+          id="onboardingTechSearch"
+          autocomplete="off"
+          placeholder="Search JavaScript, Linux, Supabase..."
+          oninput="renderOnboardingTechPicker(this.value)"
+        >
+
+        <div
+          class="selected-tech-list"
+          id="onboardingSelectedTech"
+          aria-live="polite"
+        ></div>
+
+        <div
+          class="tech-picker onboarding-tech-picker"
+          id="onboardingTechPicker"
+        ></div>
 
       </div>
 
@@ -4194,6 +5381,14 @@
       Projects
     </a>
 
+    <a
+      href="#github-highlights"
+      id="githubHighlightsNavLink"
+      hidden
+    >
+      GitHub
+    </a>
+
     <a href="#labs">
       Labs
     </a>
@@ -4205,6 +5400,12 @@
     <a href="#currently-learning">
       Currently Learning
     </a>
+
+    <a href="#education">Education</a>
+
+    <a href="#achievements">Badges</a>
+
+    <a href="#testimonials">Testimonials</a>
 
     <a href="#growth">
       Growth
@@ -4279,13 +5480,74 @@
   <div class="dashboard-shortcuts">
     <a href="#home">Profile</a>
     <a href="#projects">Projects</a>
+    <a href="#github-highlights">GitHub</a>
     <a href="#labs">Labs</a>
     <a href="#learning-log">Learning Log</a>
     <a href="#currently-learning">Currently Learning</a>
+    <a href="#education">Education</a>
+    <a href="#achievements">Badges</a>
+    <a href="#testimonials">Testimonials</a>
     <a href="#growth">Growth Hub</a>
     <a href="#knowledge">Knowledge Base</a>
     <a href="#certificates">Certificates</a>
   </div>
+
+  <details class="layout-manager" id="layoutManager">
+
+    <summary>
+      <span>↕ Customize Section Order</span>
+      <small>Drag, or use the arrow buttons</small>
+    </summary>
+
+    <div class="layout-manager-grid">
+
+      <div>
+        <h3>Overview Blocks</h3>
+        <p>Arrange Socials and Tech Stack inside your README card.</p>
+        <div
+          class="layout-sort-list"
+          id="profileBlockOrderList"
+        ></div>
+      </div>
+
+      <div>
+        <h3>Portfolio Sections</h3>
+        <p>Arrange the main sections of your public portfolio.</p>
+        <div
+          class="layout-sort-list"
+          id="contentSectionOrderList"
+        ></div>
+      </div>
+
+    </div>
+
+    <button
+      type="button"
+      class="platform-button primary layout-save-button"
+      id="saveLayoutButton"
+      onclick="savePortfolioLayout()"
+    >
+      Save Section Order
+    </button>
+
+    <p
+      class="platform-message"
+      id="layoutManagerMessage"
+      role="status"
+    ></p>
+
+  </details>
+
+  <details class="danger-zone">
+    <summary>Delete Account</summary>
+    <p>
+      Permanently delete your account, portfolio content, and uploaded files.
+      This action cannot be undone.
+    </p>
+    <button type="button" class="danger-button" onclick="openDeleteAccountModal()">
+      Delete My Account Permanently
+    </button>
+  </details>
 
 </div>
 
@@ -4333,6 +5595,8 @@
       >
         @bassam
       </div>
+
+      <span class="profile-specialty" id="profileSpecialty" hidden></span>
 
 
       <p
@@ -4418,7 +5682,10 @@
 
         <!-- SOCIALS -->
 
-        <div class="profile-section">
+        <div
+          class="profile-section"
+          data-profile-block-key="socials"
+        >
 
 
           <h3>
@@ -4430,40 +5697,27 @@
             class="social-buttons"
             id="socialButtons"
           >
-
-
-            <a
-              href="https://linkedin.com/in/bassam-mahfouz-al-zahrani-21565230a"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="social-btn linkedin"
-              id="linkedinLink"
-            >
-              LinkedIn
-            </a>
-
-
-            <a
-              href="mailto:bmmalzahrani@gmail.com"
-              class="social-btn email"
-              id="publicEmailLink"
-            >
-              Email
-            </a>
-
-
-            <a
-              href="https://github.com/bassamalzahrani"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="social-btn github"
-              id="githubLink"
-            >
-              GitHub
-            </a>
-
-
+            <span class="social-buttons-empty">
+              No social links added yet.
+            </span>
           </div>
+
+          <a
+            class="primary-profile-link"
+            id="primaryProfileLink"
+            target="_blank"
+            rel="noopener noreferrer"
+            hidden
+          ></a>
+
+          <button
+            type="button"
+            class="primary-profile-link contact-card-button"
+            id="downloadVCardButton"
+            onclick="downloadContactCard()"
+          >
+            ↓ Download Contact Card
+          </button>
 
 
         </div>
@@ -4472,7 +5726,10 @@
 
         <!-- TECH STACK -->
 
-        <div class="profile-section">
+        <div
+          class="profile-section"
+          data-profile-block-key="tech_stack"
+        >
 
 
           <h3>
@@ -4484,50 +5741,9 @@
             class="tech-stack"
             id="techStack"
           >
-
-
-            <img
-              src="https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white"
-              alt="Java"
-            >
-
-
-            <img
-              src="https://img.shields.io/badge/JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E"
-              alt="JavaScript"
-            >
-
-
-            <img
-              src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white"
-              alt="HTML5"
-            >
-
-
-            <img
-              src="https://img.shields.io/badge/Python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54"
-              alt="Python"
-            >
-
-
-            <img
-              src="https://img.shields.io/badge/PHP-777BB4?style=for-the-badge&logo=php&logoColor=white"
-              alt="PHP"
-            >
-
-
-            <img
-              src="https://img.shields.io/badge/Canva-00C4CC?style=for-the-badge&logo=Canva&logoColor=white"
-              alt="Canva"
-            >
-
-
-            <img
-              src="https://img.shields.io/badge/GitHub-121011?style=for-the-badge&logo=github&logoColor=white"
-              alt="GitHub"
-            >
-
-
+            <span class="tech-stack-empty">
+              No technologies added yet.
+            </span>
           </div>
 
 
@@ -4608,7 +5824,10 @@
        PROJECTS
   ========================================= -->
 
-  <section id="projects">
+  <section
+    id="projects"
+    data-portfolio-section-key="projects"
+  >
 
 
     <div class="section-small-title">
@@ -4653,12 +5872,60 @@
   </section>
 
 
+  <!-- =========================================
+       GITHUB HIGHLIGHTS
+  ========================================= -->
+
+  <section
+    id="github-highlights"
+    data-portfolio-section-key="github_highlights"
+    hidden
+  >
+
+    <div class="section-small-title">OPEN SOURCE</div>
+
+    <div class="dynamic-section-header">
+      <div>
+        <h2 class="section-title">GitHub Highlights</h2>
+        <p class="github-highlights-description" id="githubHighlightsDescription">
+          Public repositories and languages loaded from GitHub.
+        </p>
+      </div>
+
+      <a
+        class="button github-profile-button"
+        id="githubProfileButton"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        View GitHub ↗
+      </a>
+    </div>
+
+    <div
+      class="github-language-summary"
+      id="githubLanguageSummary"
+    ></div>
+
+    <div
+      class="projects github-repositories"
+      id="githubRepositoriesGrid"
+    ></div>
+
+    <div
+      class="items-empty"
+      id="githubHighlightsMessage"
+    ></div>
+
+  </section>
+
+
 
   <!-- =========================================
        LABS
   ========================================= -->
 
-  <section id="labs">
+  <section id="labs" data-portfolio-section-key="labs">
 
 
     <div class="section-small-title">
@@ -4708,7 +5975,7 @@
        LEARNING LOG
   ========================================= -->
 
-  <section id="learning-log">
+  <section id="learning-log" data-portfolio-section-key="learning_log">
 
 
     <div class="section-small-title">
@@ -4758,7 +6025,7 @@
        CURRENTLY LEARNING
   ========================================= -->
 
-  <section id="currently-learning">
+  <section id="currently-learning" data-portfolio-section-key="currently_learning">
 
 
     <div class="section-small-title">
@@ -4808,7 +6075,7 @@
        GROWTH HUB
   ========================================= -->
 
-  <section id="growth">
+  <section id="growth" data-portfolio-section-key="growth">
 
 
     <div class="section-small-title">
@@ -4961,7 +6228,7 @@
        KNOWLEDGE
   ========================================= -->
 
-  <section id="knowledge">
+  <section id="knowledge" data-portfolio-section-key="knowledge">
 
 
     <div class="section-small-title">
@@ -5008,10 +6275,64 @@
 
 
   <!-- =========================================
+       EDUCATION
+  ========================================= -->
+
+  <section id="education" data-portfolio-section-key="education">
+    <div class="section-small-title">ACADEMIC JOURNEY</div>
+    <div class="dynamic-section-header">
+      <h2 class="section-title">Education</h2>
+      <button type="button" class="add-item-btn admin-only"
+        onclick="openProfileEntryEditor('education')">
+        + Add Education
+      </button>
+    </div>
+    <div class="community-grid" id="educationGrid"></div>
+    <div class="items-empty" id="educationEmpty">No education entries yet.</div>
+  </section>
+
+
+  <!-- =========================================
+       ACHIEVEMENTS & BADGES
+  ========================================= -->
+
+  <section id="achievements" data-portfolio-section-key="achievements">
+    <div class="section-small-title">MILESTONES</div>
+    <div class="dynamic-section-header">
+      <h2 class="section-title">Achievements & Badges</h2>
+      <button type="button" class="add-item-btn admin-only"
+        onclick="openProfileEntryEditor('achievement')">
+        + Add Badge
+      </button>
+    </div>
+    <div class="community-grid" id="achievementsGrid"></div>
+    <div class="items-empty" id="achievementsEmpty">No achievements or badges yet.</div>
+  </section>
+
+
+  <!-- =========================================
+       TESTIMONIALS
+  ========================================= -->
+
+  <section id="testimonials" data-portfolio-section-key="testimonials">
+    <div class="section-small-title">RECOMMENDATIONS</div>
+    <div class="dynamic-section-header">
+      <h2 class="section-title">Testimonials</h2>
+      <button type="button" class="add-item-btn admin-only"
+        onclick="openProfileEntryEditor('testimonial')">
+        + Add Testimonial
+      </button>
+    </div>
+    <div class="community-grid" id="testimonialsGrid"></div>
+    <div class="items-empty" id="testimonialsEmpty">No testimonials yet.</div>
+  </section>
+
+
+  <!-- =========================================
        CERTIFICATES
   ========================================= -->
 
-  <section id="certificates">
+  <section id="certificates" data-portfolio-section-key="certificates">
 
 
     <div class="section-small-title">
@@ -5179,7 +6500,7 @@
        CONTACT
   ========================================= -->
 
-  <section id="contact">
+  <section id="contact" data-portfolio-section-key="contact">
 
 
     <div class="contact">
@@ -5369,6 +6690,7 @@
       id="profileDisplayNameInput"
       maxlength="80"
       placeholder="Your public name"
+      oninput="updateProfileReadmePreview()"
     >
 
 
@@ -5384,6 +6706,23 @@
 
     <p class="profile-file-hint">
       Your public portfolio link uses this username.
+    </p>
+
+
+    <label for="profileReadmeTitleInput">
+      README / Terminal Title
+    </label>
+
+    <input
+      type="text"
+      id="profileReadmeTitleInput"
+      maxlength="120"
+      placeholder="~/username/README.md"
+      oninput="updateProfileReadmePreview()"
+    >
+
+    <p class="profile-file-hint">
+      This title appears in the terminal bar at the top of your profile.
     </p>
 
 
@@ -5406,6 +6745,22 @@
 
 
 
+    <label for="profileSpecialtyInput">
+      Specialty
+    </label>
+
+    <select id="profileSpecialtyInput">
+      <option value="cybersecurity">Cybersecurity</option>
+      <option value="frontend">Frontend</option>
+      <option value="backend">Backend</option>
+      <option value="fullstack">Full Stack</option>
+      <option value="mobile">Mobile</option>
+      <option value="data_ai">Data & AI</option>
+      <option value="devops_cloud">DevOps & Cloud</option>
+      <option value="other">Other</option>
+    </select>
+
+
     <label for="profileDescriptionInput">
       Description
     </label>
@@ -5415,55 +6770,184 @@
       id="profileDescriptionInput"
       maxlength="500"
       placeholder="Write a short description..."
+      oninput="updateProfileReadmePreview()"
     ></textarea>
 
 
-    <label for="profileGithubInput">
-      GitHub Link
-    </label>
+    <div class="profile-customization-section">
 
-    <input
-      type="url"
-      id="profileGithubInput"
-      placeholder="https://github.com/..."
-    >
+      <div class="profile-customization-heading">
+        <div>
+          <h3>Social Icons</h3>
+          <p>Add only the links you want to show publicly.</p>
+        </div>
+        <span>Optional</span>
+      </div>
+
+      <div class="social-editor-grid">
+
+        <label class="social-editor-field" for="profileGithubInput">
+          <span>GitHub</span>
+          <input type="url" id="profileGithubInput" maxlength="500"
+            placeholder="https://github.com/username"
+            oninput="syncGitHubUsernameFromLink(); updateProfileReadmePreview()">
+        </label>
+
+        <label class="social-editor-field" for="profileLinkedinInput">
+          <span>LinkedIn</span>
+          <input type="url" id="profileLinkedinInput" maxlength="500"
+            placeholder="https://linkedin.com/in/username"
+            oninput="updateProfileReadmePreview()">
+        </label>
+
+        <label class="social-editor-field" for="profileXInput">
+          <span>X / Twitter</span>
+          <input type="url" id="profileXInput" maxlength="500"
+            placeholder="https://x.com/username"
+            oninput="updateProfileReadmePreview()">
+        </label>
+
+        <label class="social-editor-field" for="profileInstagramInput">
+          <span>Instagram</span>
+          <input type="url" id="profileInstagramInput" maxlength="500"
+            placeholder="https://instagram.com/username"
+            oninput="updateProfileReadmePreview()">
+        </label>
+
+        <label class="social-editor-field" for="profileYoutubeInput">
+          <span>YouTube</span>
+          <input type="url" id="profileYoutubeInput" maxlength="500"
+            placeholder="https://youtube.com/@username"
+            oninput="updateProfileReadmePreview()">
+        </label>
+
+        <label class="social-editor-field" for="profileDiscordInput">
+          <span>Discord Invite</span>
+          <input type="url" id="profileDiscordInput" maxlength="500"
+            placeholder="https://discord.gg/invite"
+            oninput="updateProfileReadmePreview()">
+        </label>
+
+        <label class="social-editor-field" for="profileWebsiteInput">
+          <span>Website</span>
+          <input type="url" id="profileWebsiteInput" maxlength="500"
+            placeholder="https://example.com"
+            oninput="updateProfileReadmePreview()">
+        </label>
+
+        <label class="social-editor-field" for="profilePublicEmailInput">
+          <span>Public Email</span>
+          <input type="email" id="profilePublicEmailInput" maxlength="254"
+            placeholder="you@example.com"
+            oninput="updateProfileReadmePreview()">
+        </label>
+
+      </div>
+
+      <div class="profile-featured-link-grid">
+
+        <div>
+          <label for="profileGithubUsernameInput">
+            GitHub Username
+          </label>
+
+          <input
+            type="text"
+            id="profileGithubUsernameInput"
+            maxlength="39"
+            placeholder="github-username"
+            autocomplete="off"
+          >
+
+          <p class="profile-file-hint">
+            Used to load your public repositories and languages automatically.
+          </p>
+        </div>
+
+        <div>
+          <label for="profilePrimaryLinkInput">
+            Featured Link
+          </label>
+
+          <select
+            id="profilePrimaryLinkInput"
+            onchange="updateProfileReadmePreview()"
+          >
+            <option value="">No featured link</option>
+            <option value="github">GitHub</option>
+            <option value="linkedin">LinkedIn</option>
+            <option value="x">X / Twitter</option>
+            <option value="instagram">Instagram</option>
+            <option value="youtube">YouTube</option>
+            <option value="discord">Discord</option>
+            <option value="website">Website</option>
+            <option value="email">Email</option>
+          </select>
+
+          <p class="profile-file-hint">
+            The selected link appears as a highlighted button.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
 
 
-    <label for="profileLinkedinInput">
-      LinkedIn Link
-    </label>
+    <div class="profile-customization-section">
 
-    <input
-      type="url"
-      id="profileLinkedinInput"
-      placeholder="https://linkedin.com/in/..."
-    >
+      <div class="profile-customization-heading">
+        <div>
+          <h3>Tech Stack</h3>
+          <p>Search and select up to 30 technologies.</p>
+        </div>
+        <span id="profileTechCount">0 / 30</span>
+      </div>
+
+      <label class="profile-tech-search-label" for="profileTechSearch">
+        Search technologies
+      </label>
+
+      <input type="search" id="profileTechSearch"
+        placeholder="Search JavaScript, Linux, Supabase..."
+        autocomplete="off"
+        oninput="renderTechStackPicker(this.value)">
+
+      <input type="hidden" id="profileTechStackInput">
+
+      <div class="selected-tech-list" id="profileSelectedTech"
+        aria-live="polite"></div>
+
+      <div class="tech-picker" id="profileTechPicker"></div>
+
+    </div>
 
 
-    <label for="profilePublicEmailInput">
-      Public Email
-    </label>
+    <div class="readme-live-preview">
 
-    <input
-      type="email"
-      id="profilePublicEmailInput"
-      placeholder="you@example.com"
-    >
+      <div class="readme-live-preview-bar">
+        <span class="readme-preview-dot"></span>
+        <strong id="profilePreviewReadmeTitle">~/portfolio/README.md</strong>
+        <span>Live Preview</span>
+      </div>
 
+      <div class="readme-live-preview-body">
+        <h3 id="profilePreviewDisplayName">Developer</h3>
+        <p id="profilePreviewBio">Your profile description will appear here.</p>
+        <div class="social-buttons social-buttons-preview"
+          id="profileSocialPreview"></div>
+        <a
+          class="primary-profile-link"
+          id="profilePrimaryLinkPreview"
+          target="_blank"
+          rel="noopener noreferrer"
+          hidden
+        ></a>
+        <div class="tech-stack tech-stack-preview"
+          id="profileTechPreview"></div>
+      </div>
 
-    <label for="profileTechStackInput">
-      Tech Stack
-    </label>
-
-    <input
-      type="text"
-      id="profileTechStackInput"
-      placeholder="JavaScript, Python, Linux"
-    >
-
-    <p class="profile-file-hint">
-      Separate technologies using commas.
-    </p>
+    </div>
 
 
 
@@ -5879,6 +7363,99 @@
 
 
 <!-- =========================================
+     EDUCATION / BADGE / TESTIMONIAL MODAL
+========================================= -->
+
+<div class="profile-entry-modal" id="profileEntryModal">
+  <div class="profile-entry-modal-content">
+    <div class="modal-header">
+      <h2 id="profileEntryModalTitle">Add Entry</h2>
+      <button type="button" class="close-modal" onclick="closeProfileEntryEditor()">×</button>
+    </div>
+
+    <div class="profile-entry-fields" id="educationEntryFields" hidden>
+      <label for="educationInstitution">University / Institution</label>
+      <input type="text" id="educationInstitution" maxlength="150">
+      <label for="educationDegree">Degree</label>
+      <input type="text" id="educationDegree" maxlength="100" placeholder="Bachelor's">
+      <label for="educationField">Major / Field of Study</label>
+      <input type="text" id="educationField" maxlength="120" placeholder="Computer Science">
+      <label for="educationLevel">Current Level</label>
+      <input type="text" id="educationLevel" maxlength="80" placeholder="Third year">
+      <div class="platform-form-grid">
+        <div>
+          <label for="educationStartDate">Start Date</label>
+          <input type="date" id="educationStartDate">
+        </div>
+        <div>
+          <label for="educationGraduationDate">Graduation / Expected Date</label>
+          <input type="date" id="educationGraduationDate">
+        </div>
+      </div>
+      <label for="educationGpa">GPA (optional)</label>
+      <input type="text" id="educationGpa" maxlength="30" placeholder="4.50 / 5.00">
+      <label for="educationDescription">Description (optional)</label>
+      <textarea id="educationDescription" maxlength="500"></textarea>
+    </div>
+
+    <div class="profile-entry-fields" id="achievementEntryFields" hidden>
+      <label for="achievementTitle">Badge / Achievement Title</label>
+      <input type="text" id="achievementTitle" maxlength="120">
+      <label for="achievementIcon">Icon</label>
+      <input type="text" id="achievementIcon" maxlength="12" placeholder="🏆">
+      <label for="achievementDate">Date</label>
+      <input type="date" id="achievementDate">
+      <label for="achievementDescription">Description (optional)</label>
+      <textarea id="achievementDescription" maxlength="500"></textarea>
+    </div>
+
+    <div class="profile-entry-fields" id="testimonialEntryFields" hidden>
+      <label for="testimonialAuthorName">Name</label>
+      <input type="text" id="testimonialAuthorName" maxlength="100">
+      <label for="testimonialAuthorRole">Role / Position</label>
+      <input type="text" id="testimonialAuthorRole" maxlength="120">
+      <label for="testimonialContent">Recommendation</label>
+      <textarea id="testimonialContent" maxlength="1000"></textarea>
+      <label for="testimonialAuthorUrl">Profile Link (optional)</label>
+      <input type="url" id="testimonialAuthorUrl" maxlength="500" placeholder="https://...">
+    </div>
+
+    <button type="button" class="save-profile-entry-btn" id="saveProfileEntryButton"
+      onclick="saveProfileEntry()">Save</button>
+  </div>
+</div>
+
+
+<!-- =========================================
+     DELETE ACCOUNT MODAL
+========================================= -->
+
+<div class="delete-account-modal" id="deleteAccountModal">
+  <div class="delete-account-modal-content">
+    <div class="modal-header">
+      <h2>Delete Account Permanently</h2>
+      <button type="button" class="close-modal" onclick="closeDeleteAccountModal()">×</button>
+    </div>
+    <p class="delete-account-warning">
+      This permanently removes your public portfolio, all content, certificates,
+      profile image, and login account. It cannot be undone.
+    </p>
+    <label for="deleteAccountPassword">Current Password</label>
+    <input type="password" id="deleteAccountPassword" autocomplete="current-password">
+    <label for="deleteAccountConfirmation">
+      Type <strong id="deleteAccountPhrase">DELETE @username</strong> to confirm
+    </label>
+    <input type="text" id="deleteAccountConfirmation" autocomplete="off">
+    <button type="button" class="danger-button" id="confirmDeleteAccountButton"
+      onclick="deleteCurrentAccount()" style="width:100%; margin-top:22px;">
+      Delete My Account Permanently
+    </button>
+    <p class="platform-message" id="deleteAccountMessage" role="status"></p>
+  </div>
+</div>
+
+
+<!-- =========================================
      PROJECT / LAB MODAL
 ========================================= -->
 
@@ -6229,6 +7806,72 @@
     /^[a-z0-9_-]{3,30}$/;
 
 
+  const GITHUB_USERNAME_PATTERN =
+    /^[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,37}[a-zA-Z0-9])?$/;
+
+
+  const DEFAULT_SECTION_ORDER = {
+    profile: [
+      "socials",
+      "tech_stack"
+    ],
+    content: [
+      "projects",
+      "github_highlights",
+      "labs",
+      "learning_log",
+      "currently_learning",
+      "education",
+      "achievements",
+      "testimonials",
+      "growth",
+      "knowledge",
+      "certificates",
+      "contact"
+    ]
+  };
+
+
+  const SECTION_LABELS = {
+    socials: "Socials",
+    tech_stack: "Tech Stack",
+    projects: "Projects",
+    github_highlights: "GitHub Highlights",
+    labs: "Labs",
+    learning_log: "Learning Log",
+    currently_learning: "Currently Learning",
+    education: "Education",
+    achievements: "Achievements & Badges",
+    testimonials: "Testimonials",
+    growth: "Growth Hub",
+    knowledge: "Knowledge Base",
+    certificates: "Certificates",
+    contact: "Contact"
+  };
+
+
+  const PROFILE_SPECIALTIES = {
+    cybersecurity: "Cybersecurity",
+    frontend: "Frontend",
+    backend: "Backend",
+    fullstack: "Full Stack",
+    mobile: "Mobile",
+    data_ai: "Data & AI",
+    devops_cloud: "DevOps & Cloud",
+    other: "Other"
+  };
+
+
+  let userSearchTimer = null;
+  let userSearchRequestId = 0;
+  let currentLayoutOrder =
+    JSON.parse(
+      JSON.stringify(
+        DEFAULT_SECTION_ORDER
+      )
+    );
+
+
   supabaseClient.auth.onAuthStateChange(
     (event, session) => {
 
@@ -6292,6 +7935,24 @@
 
     currentAppView = viewName;
 
+
+    if (viewName === "landing") {
+      window.setTimeout(
+        () => {
+          const searchInput =
+            document.getElementById(
+              "userSearchInput"
+            );
+
+
+          loadPublicUserDirectory(
+            searchInput?.value || ""
+          );
+        },
+        0
+      );
+    }
+
     window.scrollTo({
       top: 0,
       behavior: "auto"
@@ -6330,6 +7991,61 @@
   }
 
 
+  function extractGitHubUsername(value) {
+
+    const rawValue =
+      String(value || "").trim();
+
+
+    if (!rawValue) {
+      return "";
+    }
+
+
+    if (
+      GITHUB_USERNAME_PATTERN
+        .test(rawValue)
+    ) {
+      return rawValue;
+    }
+
+
+    try {
+      const url = new URL(rawValue);
+
+
+      if (
+        ![
+          "github.com",
+          "www.github.com"
+        ].includes(
+          url.hostname.toLowerCase()
+        )
+      ) {
+        return "";
+      }
+
+
+      const username =
+        url.pathname
+          .split("/")
+          .filter(Boolean)[0]
+        ||
+        "";
+
+
+      return GITHUB_USERNAME_PATTERN
+        .test(username)
+          ? username
+          : "";
+    }
+
+    catch {
+      return "";
+    }
+  }
+
+
   function navigateToLanding() {
     window.location.href =
       getBasePageURL().href;
@@ -6339,6 +8055,356 @@
   function openDemoPortfolio() {
     window.location.href =
       buildPortfolioURL("bassam");
+  }
+
+
+  function handleUserSearchInput(value) {
+
+    window.clearTimeout(
+      userSearchTimer
+    );
+
+
+    userSearchTimer =
+      window.setTimeout(
+        () => {
+          loadPublicUserDirectory(
+            value
+          );
+        },
+        300
+      );
+  }
+
+
+  function renderPublicUserCards(
+    profiles
+  ) {
+
+    const container =
+      document.getElementById(
+        "userSearchResults"
+      );
+
+
+    if (!container) {
+      return;
+    }
+
+
+    container.innerHTML = "";
+
+
+    profiles.forEach(profile => {
+      const card =
+        document.createElement("a");
+
+      card.className =
+        "user-result-card";
+
+      card.href =
+        buildPortfolioURL(
+          profile.username
+        );
+
+
+      const avatar =
+        document.createElement("span");
+
+      avatar.className =
+        "user-result-avatar";
+
+
+      if (profile.image_path) {
+        const image =
+          document.createElement("img");
+
+        image.src =
+          getProfileImageURL(
+            profile.image_path
+          );
+
+        image.alt = "";
+        image.loading = "lazy";
+
+        image.addEventListener(
+          "error",
+          () => {
+            avatar.textContent =
+              getProfileInitials(
+                profile.display_name
+              );
+          },
+          { once: true }
+        );
+
+        avatar.appendChild(image);
+      }
+
+      else {
+        avatar.textContent =
+          getProfileInitials(
+            profile.display_name
+          );
+      }
+
+
+      const copy =
+        document.createElement("span");
+
+      copy.className =
+        "user-result-copy";
+
+
+      const name =
+        document.createElement("strong");
+
+      name.textContent =
+        profile.display_name
+        || profile.username;
+
+
+      const username =
+        document.createElement("span");
+
+      username.textContent =
+        `@${profile.username}`;
+
+
+      const details =
+        document.createElement("small");
+
+
+      const specialtyLabel =
+        PROFILE_SPECIALTIES[profile.specialty]
+        || "";
+
+
+      const technologies =
+        Array.isArray(profile.tech_stack)
+          ? profile.tech_stack.slice(0, 2)
+          : [];
+
+
+      details.textContent =
+        [specialtyLabel, ...technologies]
+          .filter(Boolean)
+          .join(" · ");
+
+
+      copy.appendChild(name);
+      copy.appendChild(username);
+
+
+      if (details.textContent) {
+        copy.appendChild(details);
+      }
+      card.appendChild(avatar);
+      card.appendChild(copy);
+      container.appendChild(card);
+    });
+  }
+
+
+  async function loadPublicUserDirectory(
+    searchValue = ""
+  ) {
+
+    const container =
+      document.getElementById(
+        "userSearchResults"
+      );
+
+
+    const message =
+      document.getElementById(
+        "userSearchMessage"
+      );
+
+
+    if (!container || !message) {
+      return;
+    }
+
+
+    const requestId =
+      ++userSearchRequestId;
+
+
+    const term =
+      String(searchValue || "")
+        .trim()
+        .slice(0, 80);
+
+
+    const specialty =
+      document.getElementById(
+        "userSpecialtyFilter"
+      )?.value || "";
+
+
+    const technology =
+      document.getElementById(
+        "userTechFilter"
+      )?.value || "";
+
+
+    message.textContent =
+      term || specialty || technology
+        ? "Searching..."
+        : "Loading public portfolios...";
+
+
+    try {
+      let profiles = [];
+
+
+      const applyDirectoryFilters = query => {
+        let filteredQuery = query
+          .eq("is_public", true);
+
+
+        if (specialty) {
+          filteredQuery =
+            filteredQuery.eq(
+              "specialty",
+              specialty
+            );
+        }
+
+
+        if (technology) {
+          filteredQuery =
+            filteredQuery.contains(
+              "tech_stack",
+              [technology]
+            );
+        }
+
+
+        return filteredQuery;
+      };
+
+
+      if (!term) {
+        const { data, error } =
+          await applyDirectoryFilters(
+            supabaseClient
+              .from("profiles")
+              .select(
+                "user_id, username, display_name, image_path, specialty, tech_stack"
+              )
+          )
+            .order(
+              "created_at",
+              { ascending: false }
+            )
+            .limit(12);
+
+
+        if (error) {
+          throw error;
+        }
+
+
+        profiles = data || [];
+      }
+
+      else {
+        const pattern = `%${term}%`;
+
+
+        const [
+          usernameResult,
+          displayNameResult
+        ] = await Promise.all([
+          applyDirectoryFilters(
+            supabaseClient
+              .from("profiles")
+              .select(
+                "user_id, username, display_name, image_path, specialty, tech_stack"
+              )
+          )
+            .ilike("username", pattern)
+            .limit(12),
+
+          applyDirectoryFilters(
+            supabaseClient
+              .from("profiles")
+              .select(
+                "user_id, username, display_name, image_path, specialty, tech_stack"
+              )
+          )
+            .ilike(
+              "display_name",
+              pattern
+            )
+            .limit(12)
+        ]);
+
+
+        if (usernameResult.error) {
+          throw usernameResult.error;
+        }
+
+
+        if (displayNameResult.error) {
+          throw displayNameResult.error;
+        }
+
+
+        const uniqueProfiles =
+          new Map();
+
+
+        [
+          ...(usernameResult.data || []),
+          ...(displayNameResult.data || [])
+        ].forEach(profile => {
+          uniqueProfiles.set(
+            profile.user_id,
+            profile
+          );
+        });
+
+
+        profiles =
+          [...uniqueProfiles.values()]
+            .slice(0, 12);
+      }
+
+
+      if (requestId !== userSearchRequestId) {
+        return;
+      }
+
+
+      renderPublicUserCards(profiles);
+
+      message.textContent =
+        profiles.length
+          ? ""
+          : term || specialty || technology
+            ? "No public portfolio matches your search."
+            : "No public portfolios are available yet.";
+    }
+
+    catch (error) {
+      console.error(
+        "Public user search error:",
+        error
+      );
+
+
+      if (requestId !== userSearchRequestId) {
+        return;
+      }
+
+
+      container.innerHTML = "";
+      message.textContent =
+        "Could not load public portfolios right now.";
+    }
   }
 
 
@@ -7338,6 +9404,14 @@
     }
 
 
+    syncOnboardingTechStack();
+    renderOnboardingTechPicker(
+      document.getElementById(
+        "onboardingTechSearch"
+      )?.value || ""
+    );
+
+
     document.getElementById(
       "onboardingMessage"
     ).textContent = "";
@@ -7401,6 +9475,12 @@
       ).value.trim();
 
 
+    const specialty =
+      document.getElementById(
+        "onboardingSpecialty"
+      ).value;
+
+
     const githubInput =
       document.getElementById(
         "onboardingGithub"
@@ -7411,6 +9491,15 @@
       document.getElementById(
         "onboardingLinkedin"
       ).value.trim();
+
+
+    const techStack =
+      selectedOnboardingTechnologies
+        .map(item =>
+          String(item || "").trim()
+        )
+        .filter(Boolean)
+        .slice(0, 30);
 
 
     const imageFile =
@@ -7441,6 +9530,22 @@
     }
 
 
+    if (!PROFILE_SPECIALTIES[specialty]) {
+      message.textContent =
+        "Choose a valid specialty.";
+
+      return;
+    }
+
+
+    if (!techStack.length) {
+      message.textContent =
+        "Choose at least one technology for your Tech Stack.";
+
+      return;
+    }
+
+
     const githubURL =
       githubInput
         ? safeHttpUrl(githubInput)
@@ -7451,6 +9556,12 @@
       linkedinInput
         ? safeHttpUrl(linkedinInput)
         : "";
+
+
+    const githubUsername =
+      extractGitHubUsername(
+        githubURL
+      );
 
 
     if (githubInput && !githubURL) {
@@ -7555,6 +9666,7 @@
             username,
             display_name: displayName,
             bio,
+            specialty,
             image_path:
               uploadedImagePath,
             terminal_title:
@@ -7564,7 +9676,27 @@
             linkedin_url:
               linkedinURL || null,
             public_email: null,
-            tech_stack: [],
+            social_links:
+              {
+                ...(githubURL
+                  ? { github: githubURL }
+                  : {}),
+                ...(linkedinURL
+                  ? { linkedin: linkedinURL }
+                  : {})
+              },
+            github_username:
+              githubUsername || null,
+            primary_link_key:
+              githubURL
+                ? "github"
+                : linkedinURL
+                  ? "linkedin"
+                  : null,
+            section_order:
+              DEFAULT_SECTION_ORDER,
+            tech_stack:
+              techStack,
             is_public: true
           })
           .select("*")
@@ -7632,6 +9764,7 @@
     activePortfolioUsername = "";
     isPlatformAdmin = false;
     isAdmin = false;
+    selectedOnboardingTechnologies = [];
 
     navigateToLanding();
   }
@@ -7869,13 +10002,661 @@
   }
 
 
-  function renderTechStack(
-    technologies
+  const PROFILE_SOCIAL_PLATFORMS = [
+    {
+      key: "github",
+      label: "GitHub",
+      icon: "github",
+      inputId: "profileGithubInput",
+      legacyField: "github_url",
+      type: "url"
+    },
+    {
+      key: "linkedin",
+      label: "LinkedIn",
+      icon: "linkedin",
+      inputId: "profileLinkedinInput",
+      legacyField: "linkedin_url",
+      type: "url"
+    },
+    {
+      key: "x",
+      label: "X",
+      icon: "x",
+      inputId: "profileXInput",
+      type: "url"
+    },
+    {
+      key: "instagram",
+      label: "Instagram",
+      icon: "instagram",
+      inputId: "profileInstagramInput",
+      type: "url"
+    },
+    {
+      key: "youtube",
+      label: "YouTube",
+      icon: "youtube",
+      inputId: "profileYoutubeInput",
+      type: "url"
+    },
+    {
+      key: "discord",
+      label: "Discord",
+      icon: "discord",
+      inputId: "profileDiscordInput",
+      type: "url"
+    },
+    {
+      key: "website",
+      label: "Website",
+      icon: "googlechrome",
+      inputId: "profileWebsiteInput",
+      type: "url"
+    },
+    {
+      key: "email",
+      label: "Email",
+      icon: "maildotru",
+      inputId: "profilePublicEmailInput",
+      legacyField: "public_email",
+      type: "email"
+    }
+  ];
+
+
+  const PROFILE_SOCIAL_ICON_PATHS = {
+    github:
+      "M12 .7a11.3 11.3 0 0 0-3.57 22c.57.1.78-.25.78-.55v-2.13c-3.19.7-3.86-1.35-3.86-1.35-.52-1.34-1.28-1.7-1.28-1.7-1.05-.72.08-.71.08-.71 1.16.08 1.77 1.2 1.77 1.2 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.23-1.27-5.23-5.6 0-1.24.44-2.25 1.17-3.04-.12-.29-.51-1.46.11-3 0 0 .96-.31 3.12 1.16A10.8 10.8 0 0 1 12 6.85c.97 0 1.93.13 2.84.38 2.17-1.47 3.12-1.16 3.12-1.16.62 1.54.23 2.71.11 3 .73.79 1.17 1.8 1.17 3.04 0 4.34-2.69 5.3-5.25 5.59.41.36.78 1.06.78 2.14v3.31c0 .3.21.66.79.55A11.3 11.3 0 0 0 12 .7Z",
+    linkedin:
+      "M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.47-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM7.12 20.45H3.56V9h3.56v11.45Z",
+    x:
+      "M18.9 2H22l-6.78 7.75L23.2 22h-6.25l-4.9-6.4L6.46 22H3.34l7.25-8.29L2.94 2h6.4l4.42 5.84L18.9 2Zm-1.1 17.84h1.73L8.4 4.05H6.55L17.8 19.84Z",
+    instagram:
+      "M7.8 2h8.4A5.8 5.8 0 0 1 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8A5.8 5.8 0 0 1 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2Zm-.2 2A3.6 3.6 0 0 0 4 7.6v8.8A3.6 3.6 0 0 0 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6A3.6 3.6 0 0 0 16.4 4H7.6Zm9.65 1.5a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6Z",
+    youtube:
+      "M23.5 6.2a3 3 0 0 0-2.1-2.12C19.53 3.57 12 3.57 12 3.57s-7.53 0-9.4.5A3 3 0 0 0 .5 6.2 31.2 31.2 0 0 0 0 12a31.2 31.2 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.12c1.87.51 9.4.51 9.4.51s7.53 0 9.4-.5a3 3 0 0 0 2.1-2.13A31.2 31.2 0 0 0 24 12a31.2 31.2 0 0 0-.5-5.8ZM9.6 15.6V8.4l6.27 3.6-6.27 3.6Z",
+    discord:
+      "M20.32 4.37A19.8 19.8 0 0 0 15.44 3a13.4 13.4 0 0 0-.62 1.28 18.4 18.4 0 0 0-5.64 0A13.4 13.4 0 0 0 8.56 3a19.8 19.8 0 0 0-4.88 1.37C.6 8.94-.24 13.4.18 17.8a19.6 19.6 0 0 0 5.99 3.02c.48-.66.91-1.36 1.29-2.1-.71-.27-1.4-.6-2.05-.99.17-.13.34-.26.5-.4 3.96 1.84 8.26 1.84 12.17 0 .17.14.34.27.51.4-.65.39-1.34.72-2.05.99.38.74.81 1.44 1.29 2.1a19.6 19.6 0 0 0 5.99-3.02c.5-5.1-.85-9.51-3.5-13.43ZM8.02 15.1c-1.2 0-2.18-1.1-2.18-2.45s.96-2.45 2.18-2.45c1.23 0 2.2 1.11 2.18 2.45 0 1.35-.96 2.45-2.18 2.45Zm7.96 0c-1.2 0-2.18-1.1-2.18-2.45s.96-2.45 2.18-2.45c1.23 0 2.2 1.11 2.18 2.45 0 1.35-.95 2.45-2.18 2.45Z",
+    googlechrome:
+      "M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm6.92 6h-3.1a7.6 7.6 0 0 0-1.12-3.24A8.05 8.05 0 0 1 18.92 8ZM12 4c.83 1.01 1.46 2.38 1.72 4h-3.44C10.54 6.38 11.17 5.01 12 4ZM9.3 4.76A7.6 7.6 0 0 0 8.18 8h-3.1A8.05 8.05 0 0 1 9.3 4.76ZM4.26 10h3.7a15 15 0 0 0 0 4h-3.7a8.1 8.1 0 0 1 0-4Zm.82 6h3.1a7.6 7.6 0 0 0 1.12 3.24A8.05 8.05 0 0 1 5.08 16ZM12 20c-.83-1.01-1.46-2.38-1.72-4h3.44c-.26 1.62-.89 2.99-1.72 4Zm2.04-6H9.96a13 13 0 0 1 0-4h4.08a13 13 0 0 1 0 4Zm.66 5.24A7.6 7.6 0 0 0 15.82 16h3.1a8.05 8.05 0 0 1-4.22 3.24ZM16.04 14a15 15 0 0 0 0-4h3.7a8.1 8.1 0 0 1 0 4h-3.7Z",
+    maildotru:
+      "M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2Zm0 4-8 5-8-5V6l8 5 8-5v2Z"
+  };
+
+
+  const PROFILE_TECHNOLOGIES = [
+    { name: "JavaScript", icon: "javascript", category: "Languages" },
+    { name: "TypeScript", icon: "typescript", category: "Languages" },
+    { name: "Python", icon: "python", category: "Languages" },
+    { name: "Java", icon: "openjdk", category: "Languages" },
+    { name: "C", icon: "c", category: "Languages" },
+    { name: "C++", icon: "cplusplus", category: "Languages" },
+    { name: "C#", icon: "csharp", category: "Languages" },
+    { name: "Go", icon: "go", category: "Languages" },
+    { name: "Rust", icon: "rust", category: "Languages" },
+    { name: "PHP", icon: "php", category: "Languages" },
+    { name: "Kotlin", icon: "kotlin", category: "Languages" },
+    { name: "Bash", icon: "gnubash", category: "Languages" },
+    { name: "HTML5", icon: "html5", category: "Frontend" },
+    { name: "CSS3", icon: "css", category: "Frontend" },
+    { name: "React", icon: "react", category: "Frontend" },
+    { name: "Vue.js", icon: "vuedotjs", category: "Frontend" },
+    { name: "Angular", icon: "angular", category: "Frontend" },
+    { name: "Bootstrap", icon: "bootstrap", category: "Frontend" },
+    { name: "Tailwind CSS", icon: "tailwindcss", category: "Frontend" },
+    { name: "Node.js", icon: "nodedotjs", category: "Backend" },
+    { name: "Express", icon: "express", category: "Backend" },
+    { name: "Laravel", icon: "laravel", category: "Backend" },
+    { name: "Django", icon: "django", category: "Backend" },
+    { name: "Flask", icon: "flask", category: "Backend" },
+    { name: "Spring Boot", icon: "springboot", category: "Backend" },
+    { name: "PostgreSQL", icon: "postgresql", category: "Databases" },
+    { name: "MySQL", icon: "mysql", category: "Databases" },
+    { name: "MongoDB", icon: "mongodb", category: "Databases" },
+    { name: "Redis", icon: "redis", category: "Databases" },
+    { name: "Supabase", icon: "supabase", category: "Databases" },
+    { name: "Firebase", icon: "firebase", category: "Databases" },
+    { name: "Git", icon: "git", category: "Cloud & Tools" },
+    { name: "GitHub", icon: "github", category: "Cloud & Tools" },
+    { name: "Docker", icon: "docker", category: "Cloud & Tools" },
+    { name: "Kubernetes", icon: "kubernetes", category: "Cloud & Tools" },
+    { name: "AWS", icon: "amazonwebservices", category: "Cloud & Tools" },
+    { name: "Azure", icon: "microsoftazure", category: "Cloud & Tools" },
+    { name: "Google Cloud", icon: "googlecloud", category: "Cloud & Tools" },
+    { name: "Cloudflare", icon: "cloudflare", category: "Cloud & Tools" },
+    { name: "Vercel", icon: "vercel", category: "Cloud & Tools" },
+    { name: "Linux", icon: "linux", category: "Cloud & Tools" },
+    { name: "Canva", icon: "canva", category: "Cloud & Tools" },
+    { name: "Kali Linux", icon: "kalilinux", category: "Cybersecurity" },
+    { name: "Wireshark", icon: "wireshark", category: "Cybersecurity" },
+    { name: "Burp Suite", icon: "burpsuite", category: "Cybersecurity" },
+    { name: "OWASP", icon: "owasp", category: "Cybersecurity" },
+    { name: "Nmap", icon: "nmap", category: "Cybersecurity" },
+    { name: "Metasploit", icon: "metasploit", category: "Cybersecurity" }
+  ];
+
+
+  function populateUserTechFilter() {
+    const select =
+      document.getElementById(
+        "userTechFilter"
+      );
+
+
+    if (!select || select.options.length > 1) {
+      return;
+    }
+
+
+    PROFILE_TECHNOLOGIES.forEach(technology => {
+      const option =
+        document.createElement("option");
+
+
+      option.value = technology.name;
+      option.textContent = technology.name;
+      select.appendChild(option);
+    });
+  }
+
+
+  let selectedProfileTechnologies = [];
+  let selectedOnboardingTechnologies = [];
+
+
+  function createSimpleIcon(
+    iconName,
+    label,
+    fallbackClass = "tech-icon-fallback"
+  ) {
+
+    const safeIconName =
+      String(iconName || "")
+        .toLowerCase()
+        .replace(/[^a-z0-9]/g, "");
+
+
+    if (!safeIconName) {
+      const fallback =
+        document.createElement("span");
+
+      fallback.className = fallbackClass;
+      fallback.textContent =
+        String(label || "?")
+          .slice(0, 2)
+          .toUpperCase();
+
+      return fallback;
+    }
+
+
+    const image =
+      document.createElement("img");
+
+
+    image.src =
+      `https://cdn.simpleicons.org/${safeIconName}/d8c7ff`;
+
+    image.alt = "";
+    image.loading = "lazy";
+    image.setAttribute(
+      "aria-hidden",
+      "true"
+    );
+
+
+    image.addEventListener(
+      "error",
+      () => {
+        const fallback =
+          document.createElement("span");
+
+        fallback.className =
+          fallbackClass;
+
+        fallback.textContent =
+          String(label || "?")
+            .slice(0, 2)
+            .toUpperCase();
+
+        image.replaceWith(fallback);
+      },
+      { once: true }
+    );
+
+
+    return image;
+  }
+
+
+  function createSocialIcon(platform) {
+
+    const pathData =
+      PROFILE_SOCIAL_ICON_PATHS[
+        platform.icon
+      ];
+
+
+    if (!pathData) {
+      return createSimpleIcon(
+        platform.icon,
+        platform.label,
+        "social-icon-fallback"
+      );
+    }
+
+
+    const namespace =
+      "http://www.w3.org/2000/svg";
+
+
+    const svg =
+      document.createElementNS(
+        namespace,
+        "svg"
+      );
+
+
+    svg.setAttribute(
+      "viewBox",
+      "0 0 24 24"
+    );
+
+    svg.setAttribute(
+      "aria-hidden",
+      "true"
+    );
+
+
+    const path =
+      document.createElementNS(
+        namespace,
+        "path"
+      );
+
+
+    path.setAttribute("d", pathData);
+    svg.appendChild(path);
+
+
+    return svg;
+  }
+
+
+  function getProfileSocialLinks(
+    profile = {}
+  ) {
+
+    const storedLinks =
+      profile.social_links
+      &&
+      typeof profile.social_links
+        === "object"
+      &&
+      !Array.isArray(
+        profile.social_links
+      )
+        ? profile.social_links
+        : {};
+
+
+    const links = {};
+
+
+    PROFILE_SOCIAL_PLATFORMS
+      .forEach(platform => {
+
+        const rawValue =
+          storedLinks[platform.key]
+          ||
+          (
+            platform.legacyField
+              ? profile[
+                  platform.legacyField
+                ]
+              : ""
+          );
+
+
+        const safeValue =
+          platform.type === "email"
+            ? safePublicEmail(rawValue)
+            : safeHttpUrl(rawValue);
+
+
+        if (safeValue) {
+          links[platform.key] =
+            safeValue;
+        }
+      });
+
+
+    return links;
+  }
+
+
+  function escapeVCardValue(value) {
+    return String(value || "")
+      .replace(/\\/g, "\\\\")
+      .replace(/\r?\n/g, "\\n")
+      .replace(/;/g, "\\;")
+      .replace(/,/g, "\\,");
+  }
+
+
+  function downloadContactCard() {
+    if (!currentProfile?.username) {
+      return;
+    }
+
+
+    const links =
+      getProfileSocialLinks(
+        currentProfile
+      );
+
+
+    const displayName =
+      currentProfile.display_name
+      || currentProfile.username;
+
+
+    const rows = [
+      "BEGIN:VCARD",
+      "VERSION:3.0",
+      `FN:${escapeVCardValue(displayName)}`,
+      `N:${escapeVCardValue(displayName)};;;;`
+    ];
+
+
+    if (links.email) {
+      rows.push(
+        `EMAIL;TYPE=INTERNET:${escapeVCardValue(links.email)}`
+      );
+    }
+
+
+    if (links.website) {
+      rows.push(
+        `URL;TYPE=Website:${escapeVCardValue(links.website)}`
+      );
+    }
+
+
+    if (links.github) {
+      rows.push(
+        `URL;TYPE=GitHub:${escapeVCardValue(links.github)}`
+      );
+    }
+
+
+    if (links.linkedin) {
+      rows.push(
+        `URL;TYPE=LinkedIn:${escapeVCardValue(links.linkedin)}`
+      );
+    }
+
+
+    if (currentProfile.bio) {
+      rows.push(
+        `NOTE:${escapeVCardValue(currentProfile.bio)}`
+      );
+    }
+
+
+    rows.push("END:VCARD");
+
+
+    const blob = new Blob(
+      [rows.join("\r\n")],
+      { type: "text/vcard;charset=utf-8" }
+    );
+
+
+    const downloadURL =
+      URL.createObjectURL(blob);
+
+
+    const anchor =
+      document.createElement("a");
+
+
+    anchor.href = downloadURL;
+    anchor.download =
+      `${currentProfile.username}.vcf`;
+    document.body.appendChild(anchor);
+    anchor.click();
+    anchor.remove();
+    URL.revokeObjectURL(downloadURL);
+  }
+
+
+  function renderSocialButtons(
+    profile,
+    containerId = "socialButtons"
   ) {
 
     const container =
       document.getElementById(
-        "techStack"
+        containerId
+      );
+
+
+    if (!container) {
+      return;
+    }
+
+
+    const links =
+      getProfileSocialLinks(profile);
+
+
+    container.innerHTML = "";
+
+
+    PROFILE_SOCIAL_PLATFORMS
+      .forEach(platform => {
+
+        const value =
+          links[platform.key];
+
+
+        if (!value) {
+          return;
+        }
+
+
+        const anchor =
+          document.createElement("a");
+
+
+        anchor.className =
+          "social-btn";
+
+        anchor.href =
+          platform.type === "email"
+            ? `mailto:${value}`
+            : value;
+
+        anchor.setAttribute(
+          "aria-label",
+          platform.label
+        );
+
+
+        if (platform.type !== "email") {
+          anchor.target = "_blank";
+          anchor.rel =
+            "noopener noreferrer";
+        }
+
+
+        anchor.appendChild(
+          createSocialIcon(platform)
+        );
+
+
+        const label =
+          document.createElement("span");
+
+
+        label.textContent =
+          platform.label;
+
+        anchor.appendChild(label);
+        container.appendChild(anchor);
+      });
+
+
+    if (!container.children.length) {
+      const empty =
+        document.createElement("span");
+
+      empty.className =
+        "social-buttons-empty";
+
+      empty.textContent =
+        "No social links added yet.";
+
+      container.appendChild(empty);
+    }
+  }
+
+
+  function renderPrimaryProfileLink(
+    profile,
+    elementId = "primaryProfileLink"
+  ) {
+
+    const element =
+      document.getElementById(
+        elementId
+      );
+
+
+    if (!element) {
+      return;
+    }
+
+
+    const platform =
+      PROFILE_SOCIAL_PLATFORMS
+        .find(item =>
+          item.key ===
+          profile.primary_link_key
+        );
+
+
+    const links =
+      getProfileSocialLinks(profile);
+
+
+    const value =
+      platform
+        ? links[platform.key]
+        : "";
+
+
+    if (!platform || !value) {
+      element.hidden = true;
+      element.removeAttribute("href");
+      element.textContent = "";
+      return;
+    }
+
+
+    element.innerHTML = "";
+    element.href =
+      platform.type === "email"
+        ? `mailto:${value}`
+        : value;
+
+    element.hidden = false;
+
+    element.appendChild(
+      createSocialIcon(platform)
+    );
+
+
+    const label =
+      document.createElement("span");
+
+    label.textContent =
+      platform.type === "email"
+        ? "Send Me an Email"
+        : `Visit My ${platform.label}`;
+
+    element.appendChild(label);
+  }
+
+
+  function getTechnologyDefinition(
+    technology
+  ) {
+
+    const normalized =
+      String(technology || "")
+        .trim()
+        .toLowerCase();
+
+
+    return PROFILE_TECHNOLOGIES
+      .find(item =>
+        item.name.toLowerCase()
+        === normalized
+      )
+      ||
+      null;
+  }
+
+
+  function createTechnologyChip(
+    technology,
+    className = "tech-display-chip"
+  ) {
+
+    const definition =
+      getTechnologyDefinition(
+        technology
+      );
+
+
+    const chip =
+      document.createElement("span");
+
+
+    chip.className = className;
+
+    chip.appendChild(
+      createSimpleIcon(
+        definition?.icon,
+        technology
+      )
+    );
+
+
+    const label =
+      document.createElement("span");
+
+
+    label.textContent = technology;
+
+    chip.appendChild(label);
+
+
+    return chip;
+  }
+
+
+  function renderTechStackInto(
+    technologies,
+    containerId
+  ) {
+
+    const container =
+      document.getElementById(
+        containerId
       );
 
 
@@ -7898,10 +10679,8 @@
 
 
     if (values.length === 0) {
-
       const empty =
         document.createElement("span");
-
 
       empty.className =
         "tech-stack-empty";
@@ -7910,23 +10689,797 @@
         "No technologies added yet.";
 
       container.appendChild(empty);
-
       return;
     }
 
 
-    values.forEach(
-      technology => {
+    values.forEach(technology => {
+      container.appendChild(
+        createTechnologyChip(
+          technology
+        )
+      );
+    });
+  }
 
-        const chip =
+
+  function renderTechStack(
+    technologies
+  ) {
+    renderTechStackInto(
+      technologies,
+      "techStack"
+    );
+  }
+
+
+  function syncSelectedTechStack() {
+
+    const hiddenInput =
+      document.getElementById(
+        "profileTechStackInput"
+      );
+
+
+    if (hiddenInput) {
+      hiddenInput.value =
+        selectedProfileTechnologies
+          .join(", ");
+    }
+
+
+    const count =
+      document.getElementById(
+        "profileTechCount"
+      );
+
+
+    if (count) {
+      count.textContent =
+        `${selectedProfileTechnologies.length} / 30`;
+    }
+
+
+    const selectedContainer =
+      document.getElementById(
+        "profileSelectedTech"
+      );
+
+
+    if (selectedContainer) {
+      selectedContainer.innerHTML = "";
+
+
+      if (
+        selectedProfileTechnologies
+          .length === 0
+      ) {
+        const empty =
           document.createElement("span");
 
+        empty.className =
+          "selected-tech-empty";
 
-        chip.className = "tag";
-        chip.textContent = technology;
+        empty.textContent =
+          "Choose technologies from the list below.";
 
-        container.appendChild(chip);
+        selectedContainer
+          .appendChild(empty);
       }
+
+
+      selectedProfileTechnologies
+        .forEach(technology => {
+
+          const button =
+            document.createElement("button");
+
+
+          button.type = "button";
+          button.className =
+            "selected-tech-chip";
+
+          button.title =
+            `Remove ${technology}`;
+
+          button.setAttribute(
+            "aria-label",
+            `Remove ${technology}`
+          );
+
+
+          const chip =
+            createTechnologyChip(
+              technology,
+              "selected-tech-chip-content"
+            );
+
+
+          while (chip.firstChild) {
+            button.appendChild(
+              chip.firstChild
+            );
+          }
+
+
+          const removeMark =
+            document.createElement("b");
+
+
+          removeMark.textContent = "×";
+          button.appendChild(removeMark);
+
+          button.addEventListener(
+            "click",
+            () => {
+              toggleProfileTechnology(
+                technology
+              );
+            }
+          );
+
+
+          selectedContainer
+            .appendChild(button);
+        });
+    }
+
+
+    renderTechStackInto(
+      selectedProfileTechnologies,
+      "profileTechPreview"
+    );
+  }
+
+
+  function toggleProfileTechnology(
+    technology
+  ) {
+
+    const existingIndex =
+      selectedProfileTechnologies
+        .findIndex(item =>
+          item.toLowerCase()
+          === technology.toLowerCase()
+        );
+
+
+    if (existingIndex >= 0) {
+      selectedProfileTechnologies
+        .splice(existingIndex, 1);
+    }
+
+    else {
+      if (
+        selectedProfileTechnologies
+          .length >= 30
+      ) {
+        alert(
+          "You can select up to 30 technologies."
+        );
+        return;
+      }
+
+
+      selectedProfileTechnologies
+        .push(technology);
+    }
+
+
+    syncSelectedTechStack();
+
+
+    const searchInput =
+      document.getElementById(
+        "profileTechSearch"
+      );
+
+
+    renderTechStackPicker(
+      searchInput?.value || ""
+    );
+  }
+
+
+  function renderTechStackPicker(
+    searchValue = ""
+  ) {
+
+    const picker =
+      document.getElementById(
+        "profileTechPicker"
+      );
+
+
+    if (!picker) {
+      return;
+    }
+
+
+    const query =
+      String(searchValue || "")
+        .trim()
+        .toLowerCase();
+
+
+    const matches =
+      PROFILE_TECHNOLOGIES
+        .filter(technology =>
+          !query
+          ||
+          technology.name
+            .toLowerCase()
+            .includes(query)
+          ||
+          technology.category
+            .toLowerCase()
+            .includes(query)
+        );
+
+
+    picker.innerHTML = "";
+
+
+    if (!matches.length) {
+      const empty =
+        document.createElement("div");
+
+      empty.className =
+        "tech-picker-empty";
+
+      empty.textContent =
+        "No matching technology found.";
+
+      picker.appendChild(empty);
+      return;
+    }
+
+
+    const categories =
+      [...new Set(
+        matches.map(item =>
+          item.category
+        )
+      )];
+
+
+    categories.forEach(category => {
+      const group =
+        document.createElement("section");
+
+      group.className =
+        "tech-picker-category";
+
+
+      const heading =
+        document.createElement("h4");
+
+      heading.textContent = category;
+      group.appendChild(heading);
+
+
+      const options =
+        document.createElement("div");
+
+      options.className =
+        "tech-picker-options";
+
+
+      matches
+        .filter(item =>
+          item.category === category
+        )
+        .forEach(technology => {
+
+          const isSelected =
+            selectedProfileTechnologies
+              .some(item =>
+                item.toLowerCase()
+                ===
+                technology.name
+                  .toLowerCase()
+              );
+
+
+          const button =
+            document.createElement("button");
+
+          button.type = "button";
+          button.className =
+            "tech-picker-option"
+            +
+            (isSelected
+              ? " is-selected"
+              : "");
+
+          button.setAttribute(
+            "aria-pressed",
+            String(isSelected)
+          );
+
+          button.appendChild(
+            createSimpleIcon(
+              technology.icon,
+              technology.name
+            )
+          );
+
+
+          const label =
+            document.createElement("span");
+
+          label.textContent =
+            technology.name;
+
+          button.appendChild(label);
+
+          button.addEventListener(
+            "click",
+            () => {
+              toggleProfileTechnology(
+                technology.name
+              );
+            }
+          );
+
+          options.appendChild(button);
+        });
+
+
+      group.appendChild(options);
+      picker.appendChild(group);
+    });
+  }
+
+
+  function syncOnboardingTechStack() {
+
+    const count =
+      document.getElementById(
+        "onboardingTechCount"
+      );
+
+
+    if (count) {
+      count.textContent =
+        `${selectedOnboardingTechnologies.length} / 30`;
+    }
+
+
+    const container =
+      document.getElementById(
+        "onboardingSelectedTech"
+      );
+
+
+    if (!container) {
+      return;
+    }
+
+
+    container.innerHTML = "";
+
+
+    if (
+      selectedOnboardingTechnologies
+        .length === 0
+    ) {
+      const empty =
+        document.createElement("span");
+
+      empty.className =
+        "selected-tech-empty";
+
+      empty.textContent =
+        "Choose at least one technology.";
+
+      container.appendChild(empty);
+      return;
+    }
+
+
+    selectedOnboardingTechnologies
+      .forEach(technology => {
+        const button =
+          document.createElement("button");
+
+        button.type = "button";
+        button.className =
+          "selected-tech-chip";
+
+        button.setAttribute(
+          "aria-label",
+          `Remove ${technology}`
+        );
+
+
+        const chip =
+          createTechnologyChip(
+            technology,
+            "selected-tech-chip-content"
+          );
+
+
+        while (chip.firstChild) {
+          button.appendChild(
+            chip.firstChild
+          );
+        }
+
+
+        const removeMark =
+          document.createElement("b");
+
+        removeMark.textContent = "×";
+        button.appendChild(removeMark);
+
+        button.addEventListener(
+          "click",
+          () => {
+            toggleOnboardingTechnology(
+              technology
+            );
+          }
+        );
+
+        container.appendChild(button);
+      });
+  }
+
+
+  function toggleOnboardingTechnology(
+    technology
+  ) {
+
+    const existingIndex =
+      selectedOnboardingTechnologies
+        .findIndex(item =>
+          item.toLowerCase()
+          === technology.toLowerCase()
+        );
+
+
+    if (existingIndex >= 0) {
+      selectedOnboardingTechnologies
+        .splice(existingIndex, 1);
+    }
+
+    else {
+      if (
+        selectedOnboardingTechnologies
+          .length >= 30
+      ) {
+        alert(
+          "You can select up to 30 technologies."
+        );
+        return;
+      }
+
+
+      selectedOnboardingTechnologies
+        .push(technology);
+    }
+
+
+    syncOnboardingTechStack();
+
+
+    const searchInput =
+      document.getElementById(
+        "onboardingTechSearch"
+      );
+
+
+    renderOnboardingTechPicker(
+      searchInput?.value || ""
+    );
+  }
+
+
+  function renderOnboardingTechPicker(
+    searchValue = ""
+  ) {
+
+    const picker =
+      document.getElementById(
+        "onboardingTechPicker"
+      );
+
+
+    if (!picker) {
+      return;
+    }
+
+
+    const query =
+      String(searchValue || "")
+        .trim()
+        .toLowerCase();
+
+
+    const matches =
+      PROFILE_TECHNOLOGIES
+        .filter(technology =>
+          !query
+          ||
+          technology.name
+            .toLowerCase()
+            .includes(query)
+          ||
+          technology.category
+            .toLowerCase()
+            .includes(query)
+        );
+
+
+    picker.innerHTML = "";
+
+
+    if (!matches.length) {
+      const empty =
+        document.createElement("div");
+
+      empty.className =
+        "tech-picker-empty";
+
+      empty.textContent =
+        "No matching technology found.";
+
+      picker.appendChild(empty);
+      return;
+    }
+
+
+    const categories =
+      [...new Set(
+        matches.map(item =>
+          item.category
+        )
+      )];
+
+
+    categories.forEach(category => {
+      const group =
+        document.createElement("section");
+
+      group.className =
+        "tech-picker-category";
+
+
+      const heading =
+        document.createElement("h4");
+
+      heading.textContent = category;
+      group.appendChild(heading);
+
+
+      const options =
+        document.createElement("div");
+
+      options.className =
+        "tech-picker-options";
+
+
+      matches
+        .filter(item =>
+          item.category === category
+        )
+        .forEach(technology => {
+          const isSelected =
+            selectedOnboardingTechnologies
+              .some(item =>
+                item.toLowerCase()
+                ===
+                technology.name
+                  .toLowerCase()
+              );
+
+
+          const button =
+            document.createElement("button");
+
+          button.type = "button";
+          button.className =
+            "tech-picker-option"
+            +
+            (isSelected
+              ? " is-selected"
+              : "");
+
+          button.setAttribute(
+            "aria-pressed",
+            String(isSelected)
+          );
+
+          button.appendChild(
+            createSimpleIcon(
+              technology.icon,
+              technology.name
+            )
+          );
+
+
+          const label =
+            document.createElement("span");
+
+          label.textContent =
+            technology.name;
+
+          button.appendChild(label);
+
+          button.addEventListener(
+            "click",
+            () => {
+              toggleOnboardingTechnology(
+                technology.name
+              );
+            }
+          );
+
+          options.appendChild(button);
+        });
+
+
+      group.appendChild(options);
+      picker.appendChild(group);
+    });
+  }
+
+
+  function readProfileSocialEditor() {
+
+    const links = {};
+
+
+    PROFILE_SOCIAL_PLATFORMS
+      .forEach(platform => {
+        const input =
+          document.getElementById(
+            platform.inputId
+          );
+
+        links[platform.key] =
+          input?.value.trim() || "";
+      });
+
+
+    return links;
+  }
+
+
+  function syncGitHubUsernameFromLink() {
+
+    const linkInput =
+      document.getElementById(
+        "profileGithubInput"
+      );
+
+
+    const usernameInput =
+      document.getElementById(
+        "profileGithubUsernameInput"
+      );
+
+
+    if (!linkInput || !usernameInput) {
+      return;
+    }
+
+
+    const username =
+      extractGitHubUsername(
+        linkInput.value
+      );
+
+
+    if (username) {
+      usernameInput.value = username;
+    }
+  }
+
+
+  function updateProfileReadmePreview() {
+
+    const displayName =
+      document.getElementById(
+        "profileDisplayNameInput"
+      )?.value.trim()
+      ||
+      "Developer";
+
+
+    const bio =
+      document.getElementById(
+        "profileDescriptionInput"
+      )?.value.trim()
+      ||
+      "Your profile description will appear here.";
+
+
+    const previewName =
+      document.getElementById(
+        "profilePreviewDisplayName"
+      );
+
+
+    const previewBio =
+      document.getElementById(
+        "profilePreviewBio"
+      );
+
+
+    const previewTitle =
+      document.getElementById(
+        "profilePreviewReadmeTitle"
+      );
+
+
+    if (previewName) {
+      previewName.textContent =
+        displayName;
+    }
+
+
+    if (previewBio) {
+      previewBio.textContent = bio;
+    }
+
+
+    if (previewTitle) {
+      previewTitle.textContent =
+        document.getElementById(
+          "profileReadmeTitleInput"
+        )?.value.trim()
+        ||
+        currentProfile.terminal_title
+        ||
+        `~/${currentProfile.username || "portfolio"}/README.md`;
+    }
+
+
+    const socialLinks =
+      readProfileSocialEditor();
+
+
+    renderSocialButtons(
+      {
+        social_links: socialLinks,
+        github_url:
+          socialLinks.github,
+        linkedin_url:
+          socialLinks.linkedin,
+        public_email:
+          socialLinks.email,
+        primary_link_key:
+          document.getElementById(
+            "profilePrimaryLinkInput"
+          )?.value || ""
+      },
+      "profileSocialPreview"
+    );
+
+
+    renderPrimaryProfileLink(
+      {
+        social_links: socialLinks,
+        github_url:
+          socialLinks.github,
+        linkedin_url:
+          socialLinks.linkedin,
+        public_email:
+          socialLinks.email,
+        primary_link_key:
+          document.getElementById(
+            "profilePrimaryLinkInput"
+          )?.value || ""
+      },
+      "profilePrimaryLinkPreview"
+    );
+
+
+    renderTechStackInto(
+      selectedProfileTechnologies,
+      "profileTechPreview"
     );
   }
 
@@ -8077,10 +11630,19 @@
     }
 
 
-    const sameAs = [
-      safeHttpUrl(profile.github_url),
-      safeHttpUrl(profile.linkedin_url)
-    ].filter(Boolean);
+    const socialLinks =
+      getProfileSocialLinks(profile);
+
+
+    const sameAs =
+      PROFILE_SOCIAL_PLATFORMS
+        .filter(platform =>
+          platform.type === "url"
+        )
+        .map(platform =>
+          socialLinks[platform.key]
+        )
+        .filter(Boolean);
 
 
     const structuredData =
@@ -8178,6 +11740,26 @@
     ).textContent = `@${username}`;
 
 
+    const specialtyElement =
+      document.getElementById(
+        "profileSpecialty"
+      );
+
+
+    if (specialtyElement) {
+      const specialtyLabel =
+        PROFILE_SPECIALTIES[
+          profile.specialty
+        ] || "";
+
+
+      specialtyElement.textContent =
+        specialtyLabel;
+      specialtyElement.hidden =
+        !specialtyLabel;
+    }
+
+
     document.getElementById(
       "profileInitials"
     ).textContent = initials;
@@ -8235,61 +11817,8 @@
       "Let's Connect";
 
 
-    const githubLink =
-      document.getElementById(
-        "githubLink"
-      );
-
-
-    const githubURL =
-      safeHttpUrl(profile.github_url);
-
-
-    githubLink.hidden = !githubURL;
-
-    if (githubURL) {
-      githubLink.href = githubURL;
-    }
-
-
-    const linkedinLink =
-      document.getElementById(
-        "linkedinLink"
-      );
-
-
-    const linkedinURL =
-      safeHttpUrl(profile.linkedin_url);
-
-
-    linkedinLink.hidden =
-      !linkedinURL;
-
-    if (linkedinURL) {
-      linkedinLink.href =
-        linkedinURL;
-    }
-
-
-    const publicEmailLink =
-      document.getElementById(
-        "publicEmailLink"
-      );
-
-
-    const publicEmail =
-      safePublicEmail(
-        profile.public_email
-      );
-
-
-    publicEmailLink.hidden =
-      !publicEmail;
-
-    if (publicEmail) {
-      publicEmailLink.href =
-        `mailto:${publicEmail}`;
-    }
+    renderSocialButtons(profile);
+    renderPrimaryProfileLink(profile);
 
 
     document.getElementById(
@@ -8301,6 +11830,16 @@
     renderTechStack(
       profile.tech_stack
     );
+
+
+    applyPortfolioSectionOrder(profile);
+
+
+    if (isAdmin) {
+      renderPortfolioLayoutManager(
+        profile.section_order
+      );
+    }
 
 
     if (profile.image_path) {
@@ -8393,6 +11932,1002 @@
   }
 
 
+  function getGitHubUsernameForProfile(
+    profile
+  ) {
+
+    const storedUsername =
+      String(
+        profile?.github_username
+        ||
+        ""
+      ).trim();
+
+
+    if (
+      GITHUB_USERNAME_PATTERN
+        .test(storedUsername)
+    ) {
+      return storedUsername;
+    }
+
+
+    return extractGitHubUsername(
+      getProfileSocialLinks(profile)
+        .github
+    );
+  }
+
+
+  function renderGitHubLanguages(
+    repositories
+  ) {
+
+    const container =
+      document.getElementById(
+        "githubLanguageSummary"
+      );
+
+
+    if (!container) {
+      return;
+    }
+
+
+    const counts = new Map();
+
+
+    repositories.forEach(repository => {
+      const language =
+        String(
+          repository.language || ""
+        ).trim();
+
+
+      if (!language) {
+        return;
+      }
+
+
+      counts.set(
+        language,
+        (counts.get(language) || 0) + 1
+      );
+    });
+
+
+    const languages =
+      [...counts.entries()]
+        .sort((a, b) => b[1] - a[1])
+        .slice(0, 8);
+
+
+    container.innerHTML = "";
+
+
+    languages.forEach(
+      ([language, count]) => {
+        const chip =
+          document.createElement("span");
+
+        chip.className =
+          "github-language-chip";
+
+
+        const dot =
+          document.createElement("span");
+
+        dot.className =
+          "github-language-dot";
+
+
+        const label =
+          document.createElement("span");
+
+        label.textContent =
+          `${language} · ${count}`;
+
+
+        chip.appendChild(dot);
+        chip.appendChild(label);
+        container.appendChild(chip);
+      }
+    );
+  }
+
+
+  function renderGitHubRepositories(
+    repositories
+  ) {
+
+    const container =
+      document.getElementById(
+        "githubRepositoriesGrid"
+      );
+
+
+    if (!container) {
+      return;
+    }
+
+
+    container.innerHTML = "";
+
+
+    repositories.forEach(repository => {
+      const card =
+        document.createElement("article");
+
+      card.className =
+        "project-card github-repository-card";
+
+
+      const heading =
+        document.createElement("div");
+
+      heading.className =
+        "project-card-heading";
+
+
+      const icon =
+        document.createElement("span");
+
+      icon.className =
+        "project-card-icon";
+
+      icon.textContent = "⌘";
+
+
+      const title =
+        document.createElement("div");
+
+      title.className =
+        "project-title";
+
+      title.textContent =
+        repository.name;
+
+
+      heading.appendChild(icon);
+      heading.appendChild(title);
+
+
+      const description =
+        document.createElement("p");
+
+      description.textContent =
+        repository.description
+        ||
+        "Public GitHub repository.";
+
+
+      const metadata =
+        document.createElement("div");
+
+      metadata.className =
+        "github-repository-meta";
+
+
+      [
+        repository.language
+          ? `● ${repository.language}`
+          : "",
+        `★ ${Number(
+          repository.stargazers_count
+          || 0
+        )}`,
+        `⑂ ${Number(
+          repository.forks_count
+          || 0
+        )}`
+      ]
+        .filter(Boolean)
+        .forEach(value => {
+          const item =
+            document.createElement("span");
+
+          item.textContent = value;
+          metadata.appendChild(item);
+        });
+
+
+      const link =
+        document.createElement("a");
+
+      link.className =
+        "project-card-link";
+
+      link.href =
+        safeHttpUrl(
+          repository.html_url
+        );
+
+      link.target = "_blank";
+      link.rel =
+        "noopener noreferrer";
+
+      link.textContent =
+        "Open repository ↗";
+
+
+      card.appendChild(heading);
+      card.appendChild(description);
+      card.appendChild(metadata);
+      card.appendChild(link);
+      container.appendChild(card);
+    });
+  }
+
+
+  async function loadGitHubHighlights() {
+
+    const section =
+      document.getElementById(
+        "github-highlights"
+      );
+
+
+    const message =
+      document.getElementById(
+        "githubHighlightsMessage"
+      );
+
+
+    const repositoriesGrid =
+      document.getElementById(
+        "githubRepositoriesGrid"
+      );
+
+
+    const languageSummary =
+      document.getElementById(
+        "githubLanguageSummary"
+      );
+
+
+    if (
+      !section
+      || !message
+      || !repositoriesGrid
+      || !languageSummary
+    ) {
+      return;
+    }
+
+
+    const username =
+      getGitHubUsernameForProfile(
+        currentProfile
+      );
+
+
+    const navLink =
+      document.getElementById(
+        "githubHighlightsNavLink"
+      );
+
+
+    if (navLink) {
+      navLink.hidden = !username;
+    }
+
+
+    repositoriesGrid.innerHTML = "";
+    languageSummary.innerHTML = "";
+
+
+    if (!username) {
+      section.hidden = !isAdmin;
+      message.style.display =
+        isAdmin ? "block" : "none";
+
+      message.textContent =
+        isAdmin
+          ? "Add your GitHub username from Edit Profile to show repositories automatically."
+          : "";
+
+      return;
+    }
+
+
+    section.hidden = false;
+    message.style.display = "block";
+    message.textContent =
+      "Loading GitHub repositories...";
+
+
+    const profileURL =
+      `https://github.com/${encodeURIComponent(
+        username
+      )}`;
+
+
+    const profileButton =
+      document.getElementById(
+        "githubProfileButton"
+      );
+
+
+    if (profileButton) {
+      profileButton.href = profileURL;
+    }
+
+
+    const description =
+      document.getElementById(
+        "githubHighlightsDescription"
+      );
+
+
+    if (description) {
+      description.textContent =
+        `Top public repositories and languages from @${username}.`;
+    }
+
+
+    try {
+      const response = await fetch(
+        `https://api.github.com/users/${encodeURIComponent(
+          username
+        )}/repos?per_page=100&type=owner&sort=updated`,
+        {
+          headers: {
+            Accept:
+              "application/vnd.github+json"
+          }
+        }
+      );
+
+
+      if (!response.ok) {
+        throw new Error(
+          `GITHUB_HTTP_${response.status}`
+        );
+      }
+
+
+      const data = await response.json();
+
+
+      if (!Array.isArray(data)) {
+        throw new Error(
+          "INVALID_GITHUB_RESPONSE"
+        );
+      }
+
+
+      const repositories =
+        data
+          .filter(repository =>
+            repository
+            && !repository.fork
+            && !repository.archived
+            && safeHttpUrl(
+              repository.html_url
+            )
+          )
+          .sort((a, b) => {
+            const popularity =
+              Number(
+                b.stargazers_count || 0
+              )
+              -
+              Number(
+                a.stargazers_count || 0
+              );
+
+
+            if (popularity !== 0) {
+              return popularity;
+            }
+
+
+            return new Date(
+              b.pushed_at || 0
+            )
+              -
+              new Date(
+                a.pushed_at || 0
+              );
+          })
+          .slice(0, 6);
+
+
+      renderGitHubLanguages(data);
+      renderGitHubRepositories(
+        repositories
+      );
+
+
+      message.style.display =
+        repositories.length
+          ? "none"
+          : "block";
+
+      message.textContent =
+        repositories.length
+          ? ""
+          : "No public repositories found for this GitHub account.";
+    }
+
+    catch (error) {
+      console.error(
+        "GitHub highlights error:",
+        error
+      );
+
+      message.style.display = "block";
+      message.textContent =
+        "GitHub highlights are temporarily unavailable. Visit the GitHub profile using the button above.";
+    }
+  }
+
+
+  function normalizePortfolioSectionOrder(
+    value
+  ) {
+
+    const rawValue =
+      value
+      && typeof value === "object"
+      && !Array.isArray(value)
+        ? value
+        : {};
+
+
+    const normalizeGroup =
+      (groupName) => {
+        const allowed =
+          DEFAULT_SECTION_ORDER[
+            groupName
+          ];
+
+
+        const requested =
+          Array.isArray(
+            rawValue[groupName]
+          )
+            ? rawValue[groupName]
+            : [];
+
+
+        const validRequested =
+          requested.filter(
+            (key, index) =>
+              allowed.includes(key)
+              &&
+              requested.indexOf(key)
+              === index
+          );
+
+
+        const normalized = [
+          ...validRequested
+        ];
+
+
+        allowed.forEach(
+          (key, defaultIndex) => {
+            if (normalized.includes(key)) {
+              return;
+            }
+
+
+            const nextExistingKey =
+              allowed
+                .slice(defaultIndex + 1)
+                .find(nextKey =>
+                  normalized.includes(nextKey)
+                );
+
+
+            if (!nextExistingKey) {
+              normalized.push(key);
+              return;
+            }
+
+
+            normalized.splice(
+              normalized.indexOf(nextExistingKey),
+              0,
+              key
+            );
+          }
+        );
+
+
+        return normalized;
+      };
+
+
+    return {
+      profile:
+        normalizeGroup("profile"),
+      content:
+        normalizeGroup("content")
+    };
+  }
+
+
+  function applyPortfolioSectionOrder(
+    profile
+  ) {
+
+    const order =
+      normalizePortfolioSectionOrder(
+        profile?.section_order
+      );
+
+
+    const heroText =
+      document.querySelector(
+        ".hero-text"
+      );
+
+
+    const terminal =
+      heroText?.querySelector(
+        ":scope > .terminal"
+      );
+
+
+    if (heroText && terminal) {
+      const profileBlocks =
+        new Map(
+          [...heroText.querySelectorAll(
+            ":scope > [data-profile-block-key]"
+          )]
+            .map(element => [
+              element.dataset
+                .profileBlockKey,
+              element
+            ])
+        );
+
+
+      order.profile.forEach(key => {
+        const block =
+          profileBlocks.get(key);
+
+
+        if (block) {
+          heroText.insertBefore(
+            block,
+            terminal
+          );
+        }
+      });
+    }
+
+
+    const main =
+      document.querySelector(
+        "#portfolioView main"
+      );
+
+
+    if (main) {
+      const sections =
+        new Map(
+          [...main.querySelectorAll(
+            ":scope > [data-portfolio-section-key]"
+          )]
+            .map(element => [
+              element.dataset
+                .portfolioSectionKey,
+              element
+            ])
+        );
+
+
+      order.content.forEach(key => {
+        const section =
+          sections.get(key);
+
+
+        if (section) {
+          main.appendChild(section);
+        }
+      });
+    }
+  }
+
+
+  function moveLayoutOrderItem(
+    groupName,
+    key,
+    direction
+  ) {
+
+    const items =
+      currentLayoutOrder[groupName];
+
+
+    const index =
+      items.indexOf(key);
+
+
+    const nextIndex =
+      index + direction;
+
+
+    if (
+      index < 0
+      || nextIndex < 0
+      || nextIndex >= items.length
+    ) {
+      return;
+    }
+
+
+    [
+      items[index],
+      items[nextIndex]
+    ] = [
+      items[nextIndex],
+      items[index]
+    ];
+
+
+    renderPortfolioLayoutManager(
+      currentLayoutOrder
+    );
+  }
+
+
+  function moveLayoutOrderBefore(
+    groupName,
+    sourceKey,
+    targetKey
+  ) {
+
+    const items =
+      currentLayoutOrder[groupName];
+
+
+    const sourceIndex =
+      items.indexOf(sourceKey);
+
+
+    const targetIndex =
+      items.indexOf(targetKey);
+
+
+    if (
+      sourceIndex < 0
+      || targetIndex < 0
+      || sourceIndex === targetIndex
+    ) {
+      return;
+    }
+
+
+    const [movedItem] =
+      items.splice(sourceIndex, 1);
+
+
+    const adjustedTargetIndex =
+      items.indexOf(targetKey);
+
+
+    items.splice(
+      adjustedTargetIndex,
+      0,
+      movedItem
+    );
+
+
+    renderPortfolioLayoutManager(
+      currentLayoutOrder
+    );
+  }
+
+
+  function renderLayoutOrderList(
+    groupName,
+    containerId
+  ) {
+
+    const container =
+      document.getElementById(
+        containerId
+      );
+
+
+    if (!container) {
+      return;
+    }
+
+
+    const items =
+      currentLayoutOrder[groupName];
+
+
+    container.innerHTML = "";
+
+
+    items.forEach((key, index) => {
+      const item =
+        document.createElement("div");
+
+      item.className =
+        "layout-sort-item";
+
+      item.draggable = true;
+      item.dataset.layoutGroup =
+        groupName;
+
+      item.dataset.layoutKey = key;
+
+
+      item.addEventListener(
+        "dragstart",
+        event => {
+          item.classList.add(
+            "is-dragging"
+          );
+
+          event.dataTransfer
+            .setData(
+              "text/plain",
+              `${groupName}:${key}`
+            );
+
+          event.dataTransfer
+            .effectAllowed = "move";
+        }
+      );
+
+
+      item.addEventListener(
+        "dragend",
+        () => {
+          item.classList.remove(
+            "is-dragging"
+          );
+        }
+      );
+
+
+      item.addEventListener(
+        "dragover",
+        event => {
+          event.preventDefault();
+          event.dataTransfer.dropEffect =
+            "move";
+        }
+      );
+
+
+      item.addEventListener(
+        "drop",
+        event => {
+          event.preventDefault();
+
+          const [
+            sourceGroup,
+            sourceKey
+          ] = event.dataTransfer
+            .getData("text/plain")
+            .split(":");
+
+
+          if (sourceGroup !== groupName) {
+            return;
+          }
+
+
+          moveLayoutOrderBefore(
+            groupName,
+            sourceKey,
+            key
+          );
+        }
+      );
+
+
+      const handle =
+        document.createElement("span");
+
+      handle.className =
+        "layout-drag-handle";
+
+      handle.textContent = "⠿";
+      handle.setAttribute(
+        "aria-hidden",
+        "true"
+      );
+
+
+      const label =
+        document.createElement("strong");
+
+      label.textContent =
+        SECTION_LABELS[key] || key;
+
+
+      const arrows =
+        document.createElement("span");
+
+      arrows.className =
+        "layout-arrow-buttons";
+
+
+      const upButton =
+        document.createElement("button");
+
+      upButton.type = "button";
+      upButton.textContent = "↑";
+      upButton.disabled = index === 0;
+      upButton.setAttribute(
+        "aria-label",
+        `Move ${label.textContent} up`
+      );
+
+      upButton.addEventListener(
+        "click",
+        () => {
+          moveLayoutOrderItem(
+            groupName,
+            key,
+            -1
+          );
+        }
+      );
+
+
+      const downButton =
+        document.createElement("button");
+
+      downButton.type = "button";
+      downButton.textContent = "↓";
+      downButton.disabled =
+        index === items.length - 1;
+
+      downButton.setAttribute(
+        "aria-label",
+        `Move ${label.textContent} down`
+      );
+
+      downButton.addEventListener(
+        "click",
+        () => {
+          moveLayoutOrderItem(
+            groupName,
+            key,
+            1
+          );
+        }
+      );
+
+
+      arrows.appendChild(upButton);
+      arrows.appendChild(downButton);
+      item.appendChild(handle);
+      item.appendChild(label);
+      item.appendChild(arrows);
+      container.appendChild(item);
+    });
+  }
+
+
+  function renderPortfolioLayoutManager(
+    sectionOrder
+  ) {
+
+    currentLayoutOrder =
+      normalizePortfolioSectionOrder(
+        sectionOrder
+      );
+
+
+    renderLayoutOrderList(
+      "profile",
+      "profileBlockOrderList"
+    );
+
+
+    renderLayoutOrderList(
+      "content",
+      "contentSectionOrderList"
+    );
+  }
+
+
+  async function savePortfolioLayout() {
+
+    if (!isAdmin || !currentUser) {
+      alert(
+        "Open your Dashboard to edit this portfolio."
+      );
+      return;
+    }
+
+
+    const button =
+      document.getElementById(
+        "saveLayoutButton"
+      );
+
+
+    const message =
+      document.getElementById(
+        "layoutManagerMessage"
+      );
+
+
+    button.disabled = true;
+    button.textContent =
+      "Saving order...";
+
+    message.classList.remove(
+      "success"
+    );
+
+    message.textContent = "";
+
+
+    const sectionOrder =
+      normalizePortfolioSectionOrder(
+        currentLayoutOrder
+      );
+
+
+    const { error } =
+      await supabaseClient
+        .from("profiles")
+        .update({
+          section_order:
+            sectionOrder
+        })
+        .eq(
+          "user_id",
+          currentUser.id
+        );
+
+
+    button.disabled = false;
+    button.textContent =
+      "Save Section Order";
+
+
+    if (error) {
+      console.error(
+        "Section order save error:",
+        error
+      );
+
+      message.textContent =
+        "Could not save the section order.";
+
+      return;
+    }
+
+
+    currentProfile.section_order =
+      sectionOrder;
+
+
+    if (signedInProfile) {
+      signedInProfile.section_order =
+        sectionOrder;
+    }
+
+
+    applyPortfolioSectionOrder(
+      currentProfile
+    );
+
+
+    message.classList.add(
+      "success"
+    );
+
+    message.textContent =
+      "Section order saved successfully ✓";
+  }
+
+
   async function loadAllPortfolioData() {
 
     if (!activePortfolioUserId) {
@@ -8407,9 +12942,13 @@
     await Promise.all([
       loadContentViewCounts(),
       loadProfile(),
+      loadGitHubHighlights(),
       loadPortfolioItems(),
       loadLearningPosts(),
       loadCurrentLearningItems(),
+      loadEducationItems(),
+      loadAchievementBadges(),
+      loadTestimonials(),
       loadGrowthItems(),
       loadKnowledgeSections(),
       loadCertificates()
@@ -8424,6 +12963,8 @@
   async function initializeApplication() {
 
     try {
+
+      populateUserTechFilter();
 
       await checkExistingAdminSession();
 
@@ -9908,6 +14449,16 @@
 
     document
       .getElementById(
+        "profileReadmeTitleInput"
+      )
+      .value =
+      currentProfile.terminal_title
+      ||
+      `~/${currentProfile.username || "portfolio"}/README.md`;
+
+
+    document
+      .getElementById(
         "profileDescriptionInput"
       )
       .value =
@@ -9916,45 +14467,92 @@
 
     document
       .getElementById(
-        "profileGithubInput"
+        "profileSpecialtyInput"
       )
       .value =
-      currentProfile.github_url
-      ||
-      "";
+      PROFILE_SPECIALTIES[
+        currentProfile.specialty
+      ]
+        ? currentProfile.specialty
+        : "other";
+
+
+    const socialLinks =
+      getProfileSocialLinks(
+        currentProfile
+      );
+
+
+    PROFILE_SOCIAL_PLATFORMS
+      .forEach(platform => {
+        const input =
+          document.getElementById(
+            platform.inputId
+          );
+
+
+        if (input) {
+          input.value =
+            socialLinks[platform.key]
+            ||
+            "";
+        }
+      });
 
 
     document
       .getElementById(
-        "profileLinkedinInput"
+        "profileGithubUsernameInput"
       )
       .value =
-      currentProfile.linkedin_url
+      currentProfile.github_username
       ||
-      "";
+      extractGitHubUsername(
+        socialLinks.github
+      );
 
 
     document
       .getElementById(
-        "profilePublicEmailInput"
+        "profilePrimaryLinkInput"
       )
       .value =
-      currentProfile.public_email
+      currentProfile.primary_link_key
       ||
       "";
 
 
-    document
-      .getElementById(
-        "profileTechStackInput"
-      )
-      .value =
+    selectedProfileTechnologies =
       Array.isArray(
         currentProfile.tech_stack
       )
-        ? currentProfile.tech_stack
-            .join(", ")
-        : "";
+        ? [
+            ...new Set(
+              currentProfile.tech_stack
+                .map(item =>
+                  String(item || "")
+                    .trim()
+                )
+                .filter(Boolean)
+            )
+          ].slice(0, 30)
+        : [];
+
+
+    const techSearch =
+      document.getElementById(
+        "profileTechSearch"
+      );
+
+
+    if (techSearch) {
+      techSearch.value = "";
+    }
+
+
+    syncSelectedTechStack();
+    renderTechStackPicker();
+    updateProfileReadmePreview();
 
 
     resetProfilePreview();
@@ -10220,66 +14818,109 @@
         .trim();
 
 
-    const githubInput =
+    const specialty =
       document
         .getElementById(
-          "profileGithubInput"
+          "profileSpecialtyInput"
+        )
+        .value;
+
+
+    const terminalTitle =
+      document
+        .getElementById(
+          "profileReadmeTitleInput"
         )
         .value
         .trim();
 
 
-    const linkedinInput =
+    const githubUsernameInput =
       document
         .getElementById(
-          "profileLinkedinInput"
+          "profileGithubUsernameInput"
         )
         .value
         .trim();
 
 
-    const publicEmailInput =
+    const primaryLinkKey =
       document
         .getElementById(
-          "profilePublicEmailInput"
+          "profilePrimaryLinkInput"
         )
-        .value
-        .trim();
+        .value;
 
 
-    const techStack =
-      [
-        ...new Set(
-          document
-            .getElementById(
-              "profileTechStackInput"
-            )
-            .value
-            .split(",")
-            .map(item => item.trim())
-            .filter(Boolean)
-        )
-      ].slice(0, 30);
+    const socialInputs =
+      readProfileSocialEditor();
+
+
+    const socialLinks = {};
+
+
+    for (
+      const platform
+      of PROFILE_SOCIAL_PLATFORMS
+    ) {
+      const inputValue =
+        socialInputs[platform.key];
+
+
+      if (!inputValue) {
+        continue;
+      }
+
+
+      const safeValue =
+        platform.type === "email"
+          ? safePublicEmail(inputValue)
+          : safeHttpUrl(inputValue);
+
+
+      if (!safeValue) {
+        alert(
+          platform.type === "email"
+            ? "Enter a valid public email."
+            : `Enter a valid http or https link for ${platform.label}.`
+        );
+
+        return;
+      }
+
+
+      socialLinks[platform.key] =
+        safeValue;
+    }
 
 
     const githubURL =
-      githubInput
-        ? safeHttpUrl(githubInput)
-        : "";
+      socialLinks.github || "";
 
 
     const linkedinURL =
-      linkedinInput
-        ? safeHttpUrl(linkedinInput)
-        : "";
+      socialLinks.linkedin || "";
 
 
     const publicEmail =
-      publicEmailInput
-        ? safePublicEmail(
-            publicEmailInput
-          )
-        : "";
+      socialLinks.email || "";
+
+
+    const githubUsername =
+      githubUsernameInput
+      ||
+      extractGitHubUsername(
+        githubURL
+      );
+
+
+    const techStack =
+      selectedProfileTechnologies
+        .map(item =>
+          String(item || "").trim()
+        )
+        .filter(Boolean)
+        .slice(0, 30);
 
 
     if (!displayName) {
@@ -10298,24 +14939,45 @@
     }
 
 
-    if (githubInput && !githubURL) {
+    if (!PROFILE_SPECIALTIES[specialty]) {
+      alert("Choose a valid specialty.");
+      return;
+    }
+
+
+    if (
+      !terminalTitle
+      ||
+      terminalTitle.length > 120
+    ) {
       alert(
-        "Enter a valid GitHub http or https link."
+        "README title must be between 1 and 120 characters."
       );
       return;
     }
 
 
-    if (linkedinInput && !linkedinURL) {
+    if (
+      githubUsername
+      &&
+      !GITHUB_USERNAME_PATTERN
+        .test(githubUsername)
+    ) {
       alert(
-        "Enter a valid LinkedIn http or https link."
+        "Enter a valid GitHub username."
       );
       return;
     }
 
 
-    if (publicEmailInput && !publicEmail) {
-      alert("Enter a valid public email.");
+    if (
+      primaryLinkKey
+      &&
+      !socialLinks[primaryLinkKey]
+    ) {
+      alert(
+        "Add the selected featured link before saving."
+      );
       return;
     }
 
@@ -10404,14 +15066,23 @@
           display_name:
             displayName,
           bio: description,
+          specialty,
           image_path:
             nextImagePath,
+          terminal_title:
+            terminalTitle,
           github_url:
             githubURL || null,
           linkedin_url:
             linkedinURL || null,
           public_email:
             publicEmail || null,
+          social_links:
+            socialLinks,
+          github_username:
+            githubUsername || null,
+          primary_link_key:
+            primaryLinkKey || null,
           tech_stack:
             techStack
         })
@@ -10491,10 +15162,15 @@
 
       bio: description,
 
+      specialty,
+
       description,
 
       image_path:
         nextImagePath,
+
+      terminal_title:
+        terminalTitle,
 
       github_url:
         githubURL || null,
@@ -10504,6 +15180,15 @@
 
       public_email:
         publicEmail || null,
+
+      social_links:
+        socialLinks,
+
+      github_username:
+        githubUsername || null,
+
+      primary_link_key:
+        primaryLinkKey || null,
 
       tech_stack:
         techStack
@@ -10516,6 +15201,8 @@
 
 
     renderProfile();
+
+    await loadGitHubHighlights();
 
     closeProfileEditor();
   }
@@ -15427,6 +20114,448 @@
 
 
   /* =========================================
+     EDUCATION / BADGES / TESTIMONIALS
+  ========================================= */
+
+  let educationItems = [];
+  let achievementBadges = [];
+  let testimonials = [];
+  let profileEntryEditorType = "";
+  let editingProfileEntryId = null;
+
+
+  function formatProfileDate(value) {
+    if (!value) return "";
+    const date = new Date(`${value}T00:00:00`);
+    return Number.isNaN(date.getTime())
+      ? String(value)
+      : date.toLocaleDateString(undefined, {
+          year: "numeric",
+          month: "short"
+        });
+  }
+
+
+  function createCommunityCard(options) {
+    const card = document.createElement("article");
+    card.className = "community-card";
+
+    const actions = document.createElement("div");
+    actions.className = "item-card-actions admin-only";
+
+    const editButton = document.createElement("button");
+    editButton.type = "button";
+    editButton.className = "edit-item-btn";
+    editButton.title = "Edit";
+    editButton.textContent = "✎";
+    editButton.onclick = () =>
+      openProfileEntryEditor(options.type, options.id);
+
+    const deleteButton = document.createElement("button");
+    deleteButton.type = "button";
+    deleteButton.className = "delete-item-btn";
+    deleteButton.title = "Delete";
+    deleteButton.textContent = "×";
+    deleteButton.onclick = () =>
+      deleteProfileEntry(options.type, options.id);
+
+    actions.append(editButton, deleteButton);
+    card.appendChild(actions);
+
+    const icon = document.createElement("span");
+    icon.className = "community-card-icon";
+    icon.textContent = options.icon || "•";
+    card.appendChild(icon);
+
+    const heading = document.createElement("h3");
+    heading.textContent = options.title;
+    card.appendChild(heading);
+
+    if (options.description) {
+      const paragraph = document.createElement("p");
+      paragraph.textContent = options.description;
+      card.appendChild(paragraph);
+    }
+
+    const cleanMeta = (options.meta || []).filter(Boolean);
+    if (cleanMeta.length) {
+      const metadata = document.createElement("div");
+      metadata.className = "community-card-meta";
+      cleanMeta.forEach(value => {
+        const item = document.createElement("span");
+        item.textContent = value;
+        metadata.appendChild(item);
+      });
+      card.appendChild(metadata);
+    }
+
+    const safeLink = safeHttpUrl(options.link || "");
+    if (safeLink) {
+      const anchor = document.createElement("a");
+      anchor.className = "community-card-link";
+      anchor.href = safeLink;
+      anchor.target = "_blank";
+      anchor.rel = "noopener noreferrer";
+      anchor.textContent = options.linkLabel || "View Profile ↗";
+      card.appendChild(anchor);
+    }
+
+    return card;
+  }
+
+
+  function displayEducationItems() {
+    const grid = document.getElementById("educationGrid");
+    const empty = document.getElementById("educationEmpty");
+    grid.innerHTML = "";
+    empty.style.display = educationItems.length ? "none" : "block";
+
+    educationItems.forEach(item => {
+      const dates = [
+        formatProfileDate(item.start_date),
+        item.graduation_date
+          ? `to ${formatProfileDate(item.graduation_date)}`
+          : ""
+      ].filter(Boolean).join(" ");
+
+      const card = createCommunityCard({
+        icon: "🎓",
+        title: item.institution,
+        description: [
+          [item.degree, item.field_of_study].filter(Boolean).join(" · "),
+          item.description
+        ].filter(Boolean).join("\n"),
+        meta: [item.current_level, dates, item.gpa ? `GPA ${item.gpa}` : ""],
+        type: "education",
+        id: item.id
+      });
+      grid.appendChild(card);
+      observeRevealElement(card);
+    });
+  }
+
+
+  function displayAchievementBadges() {
+    const grid = document.getElementById("achievementsGrid");
+    const empty = document.getElementById("achievementsEmpty");
+    grid.innerHTML = "";
+    empty.style.display = achievementBadges.length ? "none" : "block";
+
+    achievementBadges.forEach(item => {
+      const card = createCommunityCard({
+        icon: item.icon || "🏆",
+        title: item.title,
+        description: item.description || "",
+        meta: [formatProfileDate(item.badge_date)],
+        type: "achievement",
+        id: item.id
+      });
+      grid.appendChild(card);
+      observeRevealElement(card);
+    });
+  }
+
+
+  function displayTestimonials() {
+    const grid = document.getElementById("testimonialsGrid");
+    const empty = document.getElementById("testimonialsEmpty");
+    grid.innerHTML = "";
+    empty.style.display = testimonials.length ? "none" : "block";
+
+    testimonials.forEach(item => {
+      const card = createCommunityCard({
+        icon: "❝",
+        title: item.author_name,
+        description: item.content,
+        meta: [item.author_role],
+        link: item.author_url || "",
+        type: "testimonial",
+        id: item.id
+      });
+      grid.appendChild(card);
+      observeRevealElement(card);
+    });
+  }
+
+
+  async function loadEducationItems() {
+    const { data, error } = await supabaseClient
+      .from("education_items")
+      .select("*")
+      .eq("user_id", activePortfolioUserId)
+      .order("graduation_date", { ascending: false, nullsFirst: true })
+      .order("created_at", { ascending: false });
+
+    educationItems = error ? [] : (data || []);
+    if (error) console.error("Education loading error:", error);
+    displayEducationItems();
+  }
+
+
+  async function loadAchievementBadges() {
+    const { data, error } = await supabaseClient
+      .from("achievement_badges")
+      .select("*")
+      .eq("user_id", activePortfolioUserId)
+      .order("badge_date", { ascending: false })
+      .order("created_at", { ascending: false });
+
+    achievementBadges = error ? [] : (data || []);
+    if (error) console.error("Achievement loading error:", error);
+    displayAchievementBadges();
+  }
+
+
+  async function loadTestimonials() {
+    const { data, error } = await supabaseClient
+      .from("testimonials")
+      .select("*")
+      .eq("user_id", activePortfolioUserId)
+      .order("display_order", { ascending: true })
+      .order("created_at", { ascending: false });
+
+    testimonials = error ? [] : (data || []);
+    if (error) console.error("Testimonials loading error:", error);
+    displayTestimonials();
+  }
+
+
+  function getProfileEntryCollection(type) {
+    if (type === "education") return educationItems;
+    if (type === "achievement") return achievementBadges;
+    if (type === "testimonial") return testimonials;
+    return [];
+  }
+
+
+  function clearProfileEntryFields() {
+    [
+      "educationInstitution", "educationDegree", "educationField",
+      "educationLevel", "educationStartDate", "educationGraduationDate",
+      "educationGpa", "educationDescription", "achievementTitle",
+      "achievementIcon", "achievementDate", "achievementDescription",
+      "testimonialAuthorName", "testimonialAuthorRole",
+      "testimonialContent", "testimonialAuthorUrl"
+    ].forEach(id => {
+      const element = document.getElementById(id);
+      if (element) element.value = "";
+    });
+  }
+
+
+  function openProfileEntryEditor(type, itemId = null) {
+    if (!isAdmin) {
+      alert("Open your Dashboard to edit this portfolio.");
+      return;
+    }
+
+    const titles = {
+      education: itemId ? "Edit Education" : "Add Education",
+      achievement: itemId ? "Edit Badge" : "Add Badge",
+      testimonial: itemId ? "Edit Testimonial" : "Add Testimonial"
+    };
+
+    if (!titles[type]) return;
+
+    profileEntryEditorType = type;
+    editingProfileEntryId = itemId;
+    clearProfileEntryFields();
+
+    ["education", "achievement", "testimonial"].forEach(entryType => {
+      document.getElementById(`${entryType}EntryFields`).hidden =
+        entryType !== type;
+    });
+
+    document.getElementById("profileEntryModalTitle").textContent =
+      titles[type];
+
+    const item = itemId
+      ? getProfileEntryCollection(type).find(entry => entry.id === itemId)
+      : null;
+
+    if (item && type === "education") {
+      document.getElementById("educationInstitution").value = item.institution || "";
+      document.getElementById("educationDegree").value = item.degree || "";
+      document.getElementById("educationField").value = item.field_of_study || "";
+      document.getElementById("educationLevel").value = item.current_level || "";
+      document.getElementById("educationStartDate").value = item.start_date || "";
+      document.getElementById("educationGraduationDate").value = item.graduation_date || "";
+      document.getElementById("educationGpa").value = item.gpa || "";
+      document.getElementById("educationDescription").value = item.description || "";
+    }
+    else if (item && type === "achievement") {
+      document.getElementById("achievementTitle").value = item.title || "";
+      document.getElementById("achievementIcon").value = item.icon || "";
+      document.getElementById("achievementDate").value = item.badge_date || "";
+      document.getElementById("achievementDescription").value = item.description || "";
+    }
+    else if (item && type === "testimonial") {
+      document.getElementById("testimonialAuthorName").value = item.author_name || "";
+      document.getElementById("testimonialAuthorRole").value = item.author_role || "";
+      document.getElementById("testimonialContent").value = item.content || "";
+      document.getElementById("testimonialAuthorUrl").value = item.author_url || "";
+    }
+
+    document.getElementById("profileEntryModal").style.display = "flex";
+  }
+
+
+  function closeProfileEntryEditor() {
+    document.getElementById("profileEntryModal").style.display = "none";
+    profileEntryEditorType = "";
+    editingProfileEntryId = null;
+  }
+
+
+  function readProfileEntryPayload(type) {
+    if (type === "education") {
+      const institution = document.getElementById("educationInstitution").value.trim();
+      const degree = document.getElementById("educationDegree").value.trim();
+      const field = document.getElementById("educationField").value.trim();
+      const startDate = document.getElementById("educationStartDate").value;
+      const graduationDate = document.getElementById("educationGraduationDate").value;
+
+      if (!institution || !degree || !field) {
+        throw new Error("University, degree, and field of study are required.");
+      }
+      if (startDate && graduationDate && graduationDate < startDate) {
+        throw new Error("Graduation date cannot be before the start date.");
+      }
+
+      return {
+        institution,
+        degree,
+        field_of_study: field,
+        current_level: document.getElementById("educationLevel").value.trim() || null,
+        start_date: startDate || null,
+        graduation_date: graduationDate || null,
+        gpa: document.getElementById("educationGpa").value.trim() || null,
+        description: document.getElementById("educationDescription").value.trim() || null
+      };
+    }
+
+    if (type === "achievement") {
+      const title = document.getElementById("achievementTitle").value.trim();
+      if (!title) throw new Error("Badge or achievement title is required.");
+      return {
+        title,
+        icon: document.getElementById("achievementIcon").value.trim() || "🏆",
+        badge_date: document.getElementById("achievementDate").value || null,
+        description: document.getElementById("achievementDescription").value.trim() || null
+      };
+    }
+
+    if (type !== "testimonial") {
+      throw new Error("Unknown entry type.");
+    }
+
+    const authorName = document.getElementById("testimonialAuthorName").value.trim();
+    const authorRole = document.getElementById("testimonialAuthorRole").value.trim();
+    const content = document.getElementById("testimonialContent").value.trim();
+    const rawURL = document.getElementById("testimonialAuthorUrl").value.trim();
+    const authorURL = rawURL ? safeHttpUrl(rawURL) : "";
+
+    if (!authorName || !authorRole || !content) {
+      throw new Error("Name, role, and recommendation are required.");
+    }
+    if (rawURL && !authorURL) {
+      throw new Error("Enter a valid http or https profile link.");
+    }
+
+    return {
+      author_name: authorName,
+      author_role: authorRole,
+      content,
+      author_url: authorURL || null
+    };
+  }
+
+
+  async function saveProfileEntry() {
+    if (!isAdmin || !currentUser) return;
+
+    const type = profileEntryEditorType;
+    const tableNames = {
+      education: "education_items",
+      achievement: "achievement_badges",
+      testimonial: "testimonials"
+    };
+    const loaders = {
+      education: loadEducationItems,
+      achievement: loadAchievementBadges,
+      testimonial: loadTestimonials
+    };
+
+    if (!tableNames[type]) return;
+
+    let payload;
+    try {
+      payload = readProfileEntryPayload(type);
+    }
+    catch (error) {
+      alert(error.message);
+      return;
+    }
+
+    const button = document.getElementById("saveProfileEntryButton");
+    button.disabled = true;
+    button.textContent = "Saving...";
+
+    let query = supabaseClient.from(tableNames[type]);
+    query = editingProfileEntryId
+      ? query.update(payload)
+          .eq("id", editingProfileEntryId)
+          .eq("user_id", currentUser.id)
+      : query.insert({ ...payload, user_id: currentUser.id });
+
+    const { error } = await query;
+    button.disabled = false;
+    button.textContent = "Save";
+
+    if (error) {
+      console.error("Profile entry save error:", error);
+      alert("Could not save this entry.");
+      return;
+    }
+
+    closeProfileEntryEditor();
+    await loaders[type]();
+  }
+
+
+  async function deleteProfileEntry(type, itemId) {
+    if (!isAdmin || !currentUser) return;
+
+    const tableNames = {
+      education: "education_items",
+      achievement: "achievement_badges",
+      testimonial: "testimonials"
+    };
+    const loaders = {
+      education: loadEducationItems,
+      achievement: loadAchievementBadges,
+      testimonial: loadTestimonials
+    };
+
+    if (!tableNames[type] || !confirm("Delete this entry permanently?")) return;
+
+    const { error } = await supabaseClient
+      .from(tableNames[type])
+      .delete()
+      .eq("id", itemId)
+      .eq("user_id", currentUser.id);
+
+    if (error) {
+      console.error("Profile entry delete error:", error);
+      alert("Could not delete this entry.");
+      return;
+    }
+
+    await loaders[type]();
+  }
+
+
+  /* =========================================
      CONTACT FORM - SUPABASE EDGE FUNCTION
   ========================================= */
 
@@ -15724,6 +20853,146 @@
 
 
   /* =========================================
+     PERMANENT ACCOUNT DELETION
+  ========================================= */
+
+  function setDeleteAccountMessage(message) {
+    const element = document.getElementById("deleteAccountMessage");
+    if (element) element.textContent = message;
+  }
+
+
+  function openDeleteAccountModal() {
+    if (!currentUser || !signedInProfile) return;
+
+    if (isPlatformAdmin) {
+      alert(
+        "The Platform Admin account is protected from self-deletion. Transfer or remove the platform-admin role first if deletion is ever required."
+      );
+      return;
+    }
+
+    const phrase = `DELETE @${signedInProfile.username}`;
+    document.getElementById("deleteAccountPhrase").textContent = phrase;
+    document.getElementById("deleteAccountPassword").value = "";
+    document.getElementById("deleteAccountConfirmation").value = "";
+    setDeleteAccountMessage("");
+    document.getElementById("deleteAccountModal").style.display = "flex";
+  }
+
+
+  function closeDeleteAccountModal() {
+    document.getElementById("deleteAccountModal").style.display = "none";
+    document.getElementById("deleteAccountPassword").value = "";
+    document.getElementById("deleteAccountConfirmation").value = "";
+    setDeleteAccountMessage("");
+  }
+
+
+  async function listOwnedStorageFiles(folder) {
+    const { data, error } = await supabaseClient.storage
+      .from("portfolio-files")
+      .list(folder, { limit: 1000 });
+
+    if (error) throw error;
+
+    return (data || [])
+      .filter(item => item.id)
+      .map(item => `${folder}/${item.name}`);
+  }
+
+
+  async function deleteCurrentAccount() {
+    if (!currentUser || !signedInProfile || isPlatformAdmin) return;
+
+    const password = document.getElementById("deleteAccountPassword").value;
+    const confirmation = document.getElementById("deleteAccountConfirmation").value.trim();
+    const expectedPhrase = `DELETE @${signedInProfile.username}`;
+    const button = document.getElementById("confirmDeleteAccountButton");
+
+    if (!password) {
+      setDeleteAccountMessage("Enter your current password.");
+      return;
+    }
+
+    if (confirmation !== expectedPhrase) {
+      setDeleteAccountMessage(`Type ${expectedPhrase} exactly to continue.`);
+      return;
+    }
+
+    button.disabled = true;
+    button.textContent = "Deleting account...";
+    setDeleteAccountMessage("");
+
+    try {
+      const { error: authenticationError } =
+        await supabaseClient.auth.signInWithPassword({
+          email: currentUser.email,
+          password
+        });
+
+      if (authenticationError) {
+        throw new Error("PASSWORD_INVALID");
+      }
+
+      const userRoot = `users/${currentUser.id}`;
+      const [profileFiles, certificateFiles] = await Promise.all([
+        listOwnedStorageFiles(`${userRoot}/profile`),
+        listOwnedStorageFiles(`${userRoot}/certificates`)
+      ]);
+
+      const storedPaths = new Set([
+        ...profileFiles,
+        ...certificateFiles,
+        ...(currentProfile.image_path ? [currentProfile.image_path] : []),
+        ...certificates
+          .map(certificate => certificate.file_path)
+          .filter(Boolean)
+      ]);
+
+      if (storedPaths.size) {
+        const { error: storageError } = await supabaseClient.storage
+          .from("portfolio-files")
+          .remove([...storedPaths]);
+
+        if (storageError) {
+          console.error("Account storage cleanup error:", storageError);
+          throw new Error("STORAGE_DELETE_FAILED");
+        }
+      }
+
+      const { error: deletionError } =
+        await supabaseClient.rpc("delete_own_account");
+
+      if (deletionError) {
+        console.error("Account deletion error:", deletionError);
+        throw new Error("ACCOUNT_DELETE_FAILED");
+      }
+
+      await supabaseClient.auth.signOut({ scope: "local" });
+      currentUser = null;
+      signedInProfile = null;
+      activePortfolioUserId = null;
+      activePortfolioUsername = "";
+      isAdmin = false;
+      isPlatformAdmin = false;
+      window.location.replace(getBasePageURL().href);
+    }
+    catch (error) {
+      const message = error.message === "PASSWORD_INVALID"
+        ? "The current password is incorrect."
+        : error.message === "STORAGE_DELETE_FAILED"
+          ? "Could not delete your uploaded files. Your account was not deleted."
+          : "Could not delete your account. Please try again.";
+
+      setDeleteAccountMessage(message);
+      button.disabled = false;
+      button.textContent = "Delete My Account Permanently";
+    }
+  }
+
+
+  /* =========================================
      ESC KEY
   ========================================= */
 
@@ -15755,6 +21024,10 @@
       closeKnowledgeEditor();
 
       closeCertificateForm();
+
+      closeProfileEntryEditor();
+
+      closeDeleteAccountModal();
 
     }
   );

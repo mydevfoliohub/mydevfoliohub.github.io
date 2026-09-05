@@ -5887,6 +5887,154 @@
       .featured-portfolio-card { transition: none; }
     }
 
+    /* Landing editorial refresh — scoped to the platform home. */
+    #landingView .landing-hero-notes { display:flex; flex-wrap:wrap; gap:12px 20px; margin-top:24px; color:var(--muted); font-size:11px; line-height:1.7; }
+    #landingView .landing-hero-notes a { color:var(--green); text-decoration:none; }
+    #landingView .landing-studio { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:clamp(32px,7vw,100px); align-items:center; padding:70px 0 110px; scroll-margin-top:30px; }
+    #landingView .landing-studio-copy h2,
+    #landingView .landing-final-cta h2 { margin:20px 0; font-size:clamp(32px,4.2vw,58px); line-height:1.12; letter-spacing:-1.8px; }
+    #landingView .landing-studio-copy h2 span,
+    #landingView .landing-final-cta h2 span { color:var(--green); }
+    #landingView .landing-studio-copy > p { max-width:470px; color:var(--muted); font-size:15px; line-height:1.9; }
+    #landingView .landing-studio-benefits { list-style:none; padding:0; margin:30px 0; display:grid; gap:22px; }
+    #landingView .landing-studio-benefits li { display:flex; gap:16px; align-items:flex-start; }
+    #landingView .landing-studio-benefits li > span { font:11px monospace; color:var(--green); padding-top:4px; }
+    #landingView .landing-studio-benefits strong { font-size:14px; }
+    #landingView .landing-studio-benefits p { color:var(--muted); font-size:12px; line-height:1.7; margin-top:5px; }
+    #landingView .landing-studio-demo { --studio-accent:#6ee7b7; min-width:0; border:1px solid var(--border); border-radius:20px; padding:20px; background:color-mix(in srgb,var(--card) 94%,transparent); box-shadow:0 24px 70px #0003; }
+    #landingView .landing-studio-demo[data-preview-tone="blue"] { --studio-accent:#7dbbff; }
+    #landingView .landing-studio-demo[data-preview-tone="purple"] { --studio-accent:#c4a0ff; }
+    #landingView .landing-studio-toolbar { display:flex; justify-content:space-between; align-items:center; gap:10px; margin-bottom:20px; font:10px monospace; letter-spacing:.08em; color:var(--muted); }
+    #landingView .studio-status-dot { display:inline-block; width:6px; height:6px; background:var(--green); border-radius:50%; margin-right:7px; vertical-align:middle; }
+    #landingView .studio-demo-label { border:1px solid var(--border); border-radius:5px; padding:4px 7px; }
+    #landingView .landing-studio-window { border:1px solid color-mix(in srgb,var(--studio-accent) 28%,transparent); background:color-mix(in srgb,var(--card) 97%,var(--studio-accent)); border-radius:12px; padding:24px; }
+    #landingView .studio-window-path { display:flex; justify-content:space-between; gap:12px; color:var(--studio-accent); padding-bottom:20px; font:11px monospace; overflow-wrap:anywhere; }
+    #landingView .studio-profile-heading { display:flex; gap:13px; align-items:center; margin:8px 0 18px; }
+    #landingView .studio-avatar { display:grid; place-items:center; flex:0 0 46px; height:46px; border:1px solid color-mix(in srgb,var(--studio-accent) 35%,transparent); border-radius:13px; color:var(--studio-accent); background:color-mix(in srgb,var(--studio-accent) 9%,transparent); font:bold 17px monospace; }
+    #landingView .studio-profile-heading h3 { font-size:19px; letter-spacing:-.5px; }
+    #landingView .studio-profile-heading p { color:var(--muted); font-size:10px; margin-top:6px; line-height:1.6; }
+    #landingView .studio-profile-bio { color:var(--muted); font-size:12px; line-height:1.85; }
+    #landingView .studio-tech-pills { display:flex; flex-wrap:wrap; gap:7px; margin:17px 0 22px; }
+    #landingView .studio-tech-pills span { padding:5px 8px; border:1px solid color-mix(in srgb,var(--studio-accent) 24%,transparent); border-radius:5px; color:var(--studio-accent); font:10px monospace; }
+    #landingView .studio-project { padding:18px; border:1px solid var(--border); border-radius:9px; background:color-mix(in srgb,var(--studio-accent) 4%,transparent); }
+    #landingView .studio-mini-label { display:flex; justify-content:space-between; color:var(--studio-accent); font:9px monospace; letter-spacing:.06em; margin-bottom:15px; }
+    #landingView .studio-project h4 { font-size:14px; }
+    #landingView .studio-project p { color:var(--muted); font-size:11px; margin-top:7px; line-height:1.6; }
+    #landingView .studio-code-lines { display:grid; gap:7px; margin-top:20px; }
+    #landingView .studio-code-lines i { height:4px; width:80%; border-radius:4px; background:color-mix(in srgb,var(--studio-accent) 22%,transparent); }
+    #landingView .studio-code-lines i:nth-child(2) { width:55%; opacity:.65; }
+    #landingView .studio-code-lines i:nth-child(3) { width:68%; opacity:.4; }
+    #landingView .studio-note { display:flex; gap:10px; align-items:center; border-top:1px solid var(--border); margin-top:19px; padding-top:17px; color:var(--studio-accent); }
+    #landingView .studio-note strong { color:var(--text); font-size:11px; }
+    #landingView .studio-note p { color:var(--muted); font-size:10px; line-height:1.6; margin-top:4px; }
+    #landingView .studio-note-tag { margin-left:auto; font:9px monospace; }
+    #landingView .studio-palette { display:flex; align-items:center; gap:9px; padding-top:19px; }
+    #landingView .studio-palette > span { flex:1; color:var(--muted); font-size:11px; }
+    #landingView .studio-swatch { width:30px; height:30px; padding:5px; border:1px solid transparent; border-radius:50%; background:transparent; cursor:pointer; display:grid; place-items:center; }
+    #landingView .studio-swatch::after { content:""; width:16px; height:16px; border-radius:50%; background:var(--swatch); }
+    #landingView .studio-swatch-emerald { --swatch:#6ee7b7; }
+    #landingView .studio-swatch-blue { --swatch:#7dbbff; }
+    #landingView .studio-swatch-purple { --swatch:#c4a0ff; }
+    #landingView .studio-swatch[aria-pressed="true"] { border-color:var(--swatch); }
+    #landingView .studio-swatch:hover { background:color-mix(in srgb,var(--swatch) 15%,transparent); }
+    #landingView .landing-faq { display:grid; grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr); gap:60px; padding:35px 0 95px; }
+    #landingView .landing-faq h2 { font-size:clamp(28px,3vw,40px); line-height:1.2; letter-spacing:-1px; }
+    #landingView .landing-faq details { border-bottom:1px solid var(--border); }
+    #landingView .landing-faq summary { list-style:none; display:flex; justify-content:space-between; gap:20px; cursor:pointer; padding:23px 0; font-size:14px; font-weight:600; line-height:1.6; }
+    #landingView .landing-faq summary::-webkit-details-marker { display:none; }
+    #landingView .landing-faq summary span { color:var(--green); transition:transform .2s; }
+    #landingView .landing-faq details[open] summary span { transform:rotate(45deg); }
+    #landingView .landing-faq details p { padding:0 24px 23px 0; color:var(--muted); font-size:13px; line-height:1.9; }
+    #landingView .landing-final-cta { isolation:isolate; position:relative; text-align:center; padding:65px 24px; margin:0 0 80px; border:1px solid var(--border); border-radius:24px; background:var(--card); overflow:hidden; }
+    #landingView .landing-final-cta::before { content:""; position:absolute; z-index:-1; inset:0; background:radial-gradient(ellipse at 50% 100%,color-mix(in srgb,var(--green) 11%,transparent),transparent 70%); pointer-events:none; }
+    #landingView .landing-final-cta > p { color:var(--muted); font-size:14px; line-height:1.8; }
+    #landingView .landing-final-cta .landing-actions { justify-content:center; margin-top:28px; }
+    #landingView .landing-final-path { margin-top:25px; color:var(--muted); font:11px monospace; overflow-wrap:anywhere; }
+    #landingView .landing-final-path span { color:var(--green); }
+    #landingView :is(.studio-swatch,summary,.landing-hero-notes a):focus-visible { outline:2px solid var(--green); outline-offset:5px; }
+    @media (max-width:800px) {
+      #landingView .landing-studio { grid-template-columns:1fr; gap:35px; padding:35px 0 70px; }
+      #landingView .landing-studio-demo { width:100%; max-width:580px; margin-inline:auto; }
+      #landingView .landing-faq { grid-template-columns:1fr; gap:8px; padding:15px 0 65px; }
+      #landingView .landing-final-cta { padding:44px 20px; margin-bottom:45px; }
+    }
+    @media (max-width:480px) {
+      #landingView .landing-studio-demo { padding:13px; border-radius:15px; }
+      #landingView .landing-studio-window { padding:16px; }
+      #landingView .studio-profile-heading h3 { font-size:17px; }
+      #landingView .landing-studio-copy h2,
+      #landingView .landing-final-cta h2 { letter-spacing:-1px; }
+      #landingView .studio-note-tag { display:none; }
+    }
+    @media (prefers-reduced-motion:reduce) {
+      #landingView .landing-faq summary span { transition:none; }
+    }
+    #landingView .landing-updates { padding:20px 0 85px; scroll-margin-top:30px; }
+    #landingView .release-list { border-top:1px solid var(--border); }
+    #landingView .release-entry { display:grid; grid-template-columns:180px minmax(0,1fr); gap:32px; padding:30px 0; border-bottom:1px solid var(--border); }
+    #landingView .release-date { display:flex; flex-direction:column; gap:12px; color:var(--muted); font:12px monospace; }
+    #landingView .release-date span { color:var(--green); font-size:10px; }
+    #landingView .release-entry h3 { font-size:20px; line-height:1.4; margin-bottom:12px; }
+    #landingView .release-entry p { color:var(--muted); font-size:13px; line-height:1.9; max-width:760px; }
+    #landingView .release-tags { display:flex; flex-wrap:wrap; gap:8px; margin-top:16px; }
+    #landingView .release-tags span { border:1px solid var(--border); border-radius:5px; padding:5px 9px; color:var(--green); font:10px monospace; }
+    .cv-status { display:block; margin-top:8px; font-size:12px; color:var(--muted); }
+    .portfolio-cv-dialog { margin:auto; width:min(1040px,94vw); height:92vh; padding:0; border:1px solid var(--border); border-radius:14px; background:var(--card); color:var(--text); max-height:94vh; }
+    .portfolio-cv-dialog::backdrop { background:rgba(0,0,0,.8); }
+    .cv-dialog-toolbar { display:flex; justify-content:space-between; align-items:center; gap:20px; padding:20px; }
+    .cv-dialog-toolbar h2 { font-size:18px; }
+    .cv-dialog-toolbar p { font-size:12px; color:var(--muted); line-height:1.7; max-width:500px; margin-top:6px; }
+    .cv-dialog-actions { display:flex; gap:8px; flex-shrink:0; }
+    #portfolioCvFrame { display:block; width:100%; height:calc(100% - 110px); min-height:300px; border:0; background:#e8eaed; }
+    @media(max-width:650px) {
+      #landingView .release-entry { grid-template-columns:1fr; gap:16px; }
+      #landingView .release-date { flex-direction:row; align-items:center; }
+      .cv-dialog-toolbar { flex-direction:column; align-items:stretch; gap:10px; padding:14px; }
+      .cv-dialog-actions { flex-wrap:wrap; }
+      #portfolioCvFrame { height:calc(100% - 175px); }
+    }
+    /* Portfolio navigation: account controls and section links have their own rows. */
+    #portfolioView .portfolio-header { display:block; padding:14px 5% 10px; }
+    .portfolio-header-top { display:flex; align-items:center; justify-content:space-between; gap:20px; }
+    #portfolioView .portfolio-header .logo { display:flex; align-items:center; gap:10px; font-size:21px; min-width:0; overflow-wrap:anywhere; }
+    #portfolioView .portfolio-header .logo span { display:grid; place-items:center; flex:0 0 34px; height:34px; border:1px solid var(--border); border-radius:9px; font-size:18px; }
+    .portfolio-header-controls { display:flex; align-items:center; justify-content:flex-end; flex-wrap:wrap; gap:8px; }
+    #portfolioView .portfolio-header-controls button { min-height:38px; border-radius:9px; padding:8px 12px; border:1px solid var(--border); background:var(--card); color:var(--text); font-size:12px; cursor:pointer; white-space:nowrap; }
+    #portfolioView .portfolio-header-controls button:hover { border-color:var(--green); color:var(--green); }
+    #portfolioView .portfolio-header-controls .theme-toggle { width:auto; height:auto; gap:7px; }
+    #portfolioView .portfolio-header-controls .theme-toggle-label { display:inline; }
+    #portfolioView #portfolioSectionNav { display:flex; flex-wrap:wrap; gap:5px; max-width:100%; overflow:visible; padding-top:12px; margin-top:12px; border-top:1px solid var(--border); }
+    #portfolioView #portfolioSectionNav a { display:block; flex:0 1 auto; padding:8px 11px; border:1px solid transparent; border-radius:7px; font-size:12px; line-height:1.4; text-decoration:none; color:var(--muted); }
+    #portfolioView #portfolioSectionNav a[hidden] { display:none; }
+    #portfolioView #portfolioSectionNav a::after { display:none; }
+    #portfolioView #portfolioSectionNav a:hover,
+    #portfolioView #portfolioSectionNav a.active { color:var(--green); background:color-mix(in srgb,var(--green) 9%,transparent); border-color:color-mix(in srgb,var(--green) 22%,transparent); }
+    #portfolioView .portfolio-menu-button { display:none; }
+    #portfolioView .portfolio-header :is(button,a):focus-visible { outline:2px solid var(--green); outline-offset:3px; }
+    #landingView .landing-contact-section { display:grid; grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr); gap:55px; align-items:start; padding:15px 0 85px; }
+    #landingView .landing-contact-intro h2 { margin:20px 0; font-size:clamp(35px,4.5vw,58px); letter-spacing:-1.8px; }
+    #landingView .landing-contact-intro h2 span { color:var(--green); }
+    #landingView .landing-contact-intro p { color:var(--muted); font-size:14px; line-height:1.9; max-width:410px; }
+    #landingView .landing-contact-topics { display:flex; flex-wrap:wrap; gap:8px; margin:25px 0; }
+    #landingView .landing-contact-topics span { color:var(--green); border:1px solid var(--border); border-radius:6px; padding:7px 9px; font:10px monospace; }
+    #landingView .landing-contact-intro .landing-contact-note { font-size:11px; }
+    #landingView .landing-contact-card { min-width:0; padding:26px; background:var(--card); border:1px solid var(--border); border-radius:16px; }
+    #landingView .landing-contact-card .contact-form { margin:0; max-width:none; }
+    @media(max-width:800px) {
+      #portfolioView .portfolio-header { padding:12px 4%; }
+      .portfolio-header-top { align-items:flex-start; flex-direction:column; gap:12px; }
+      .portfolio-header-controls { width:100%; justify-content:flex-start; }
+      #portfolioView .portfolio-menu-button { display:block; margin-left:auto; }
+      #portfolioView #portfolioSectionNav { display:none; grid-template-columns:repeat(3,minmax(0,1fr)); max-height:45vh; overflow-y:auto; }
+      #portfolioView .portfolio-header:has(#portfolioMenuButton[aria-expanded="true"]) #portfolioSectionNav { display:grid; }
+      #portfolioView #portfolioSectionNav a { white-space:normal; overflow-wrap:anywhere; }
+      #landingView .landing-contact-section { grid-template-columns:1fr; gap:25px; }
+    }
+    @media(max-width:420px) {
+      #portfolioView .portfolio-header-controls button { padding:7px 9px; font-size:11px; }
+      #portfolioView .portfolio-header-controls .theme-toggle-label { display:none; }
+      #landingView .landing-contact-card { padding:18px; }
+    }
   </style>
 
 </head>
@@ -5965,9 +6113,8 @@
       </h1>
 
       <p class="landing-tagline">
-        Create your portfolio, share your projects,
-        labs, certificates and learning journey.
-        No framework or coding knowledge required.
+        Your projects tell a story. Your learning adds the chapters.
+        Bring it all together in a developer portfolio that grows with you.
       </p>
 
       <div class="landing-actions">
@@ -6000,6 +6147,7 @@
         </button>
 
       </div>
+      <div class="landing-hero-notes"><span>✓ No coding required</span><span>✓ Your own public link</span><a href="#portfolioStudio">See what you can build ↓</a></div>
 
     </div>
 
@@ -6087,111 +6235,38 @@
   </section>
 
 
-  <section class="featured-portfolios-section" aria-labelledby="featuredPortfoliosTitle">
-    <div class="landing-section-heading featured-heading">
-      <div>
-        <div class="landing-kicker">FEATURED PORTFOLIOS</div>
-        <h2 id="featuredPortfoliosTitle">Fresh from the community.</h2>
-        <p>Discover the newest public portfolios built on MyDevFolioHub.</p>
-      </div>
-
-      <button type="button" class="platform-button" onclick="scrollToCommunity()">
-        Explore All
-        <span aria-hidden="true">↓</span>
-      </button>
+  <section class="landing-studio" id="portfolioStudio" aria-labelledby="landingStudioTitle">
+    <div class="landing-studio-copy">
+      <div class="landing-kicker">YOUR SPACE ON THE INTERNET</div>
+      <h2 id="landingStudioTitle">Your work deserves<br><span>a home of its own.</span></h2>
+      <p>A project you shipped. A lesson that clicked. A milestone you earned. Bring them together in a portfolio that grows with you.</p>
+      <ul class="landing-studio-benefits">
+        <li><span aria-hidden="true">01</span><div><strong>Start with your story</strong><p>Your bio, your skills, your next chapter.</p></div></li>
+        <li><span aria-hidden="true">02</span><div><strong>Make it feel like you</strong><p>Choose a theme and arrange your sections.</p></div></li>
+        <li><span aria-hidden="true">03</span><div><strong>One link. Your whole journey.</strong><p>A public page ready to share when you are.</p></div></li>
+      </ul>
+      <button type="button" class="platform-button" onclick="openDemoPortfolio()">See a real portfolio <span aria-hidden="true">↗</span></button>
     </div>
-
-    <div class="featured-portfolio-grid" id="featuredPortfolioGrid" aria-live="polite"></div>
-    <p class="user-search-message" id="featuredPortfolioMessage" role="status"></p>
-  </section>
-
-
-  <section
-    class="user-directory"
-    id="community"
-    aria-labelledby="userDirectoryTitle"
-  >
-
-    <div class="user-directory-heading">
-      <div>
-        <div class="landing-kicker">EXPLORE THE COMMUNITY</div>
-        <h2 id="userDirectoryTitle">Find a Portfolio</h2>
-        <p>Search public portfolios by name, specialty, or Tech Stack.</p>
+    <div class="landing-studio-demo" data-preview-tone="emerald">
+      <div class="landing-studio-toolbar">
+        <span><span class="studio-status-dot" aria-hidden="true"></span> PORTFOLIO PREVIEW</span>
+        <span class="studio-demo-label">Example</span>
       </div>
-
-      <div class="user-search-controls">
-        <label class="user-search-box" for="userSearchInput">
-          <span aria-hidden="true">⌕</span>
-          <input
-            type="search"
-            id="userSearchInput"
-            maxlength="80"
-            autocomplete="off"
-            placeholder="Search users..."
-            oninput="handleUserSearchInput(this.value)"
-          >
-        </label>
-
-        <select
-          class="user-search-filter"
-          id="userSpecialtyFilter"
-          aria-label="Filter by specialty"
-          onchange="handleDirectoryFilterChange()"
-        >
-          <option value="">All specialties</option>
-          <option value="cybersecurity">Cybersecurity</option>
-          <option value="frontend">Frontend</option>
-          <option value="backend">Backend</option>
-          <option value="fullstack">Full Stack</option>
-          <option value="mobile">Mobile</option>
-          <option value="data_ai">Data & AI</option>
-          <option value="devops_cloud">DevOps & Cloud</option>
-          <option value="other">Other</option>
-        </select>
-
-        <select
-          class="user-search-filter"
-          id="userTechFilter"
-          aria-label="Filter by Tech Stack"
-          onchange="handleDirectoryFilterChange()"
-        >
-          <option value="">All technologies</option>
-        </select>
-
-        <select
-          class="user-search-filter"
-          id="userSortFilter"
-          aria-label="Sort public portfolios"
-          onchange="handleDirectoryFilterChange()"
-        >
-          <option value="newest">Newest</option>
-          <option value="most_viewed">Most Viewed</option>
-          <option value="name">Name A–Z</option>
-        </select>
+      <div class="landing-studio-window">
+        <div class="studio-window-path">~/you/README.md <span aria-hidden="true">↗</span></div>
+        <div class="studio-profile-heading"><div class="studio-avatar" aria-hidden="true">&lt;/&gt;</div><div><h3>Your next chapter.</h3><p>@you · Developer &amp; lifelong learner</p></div></div>
+        <p class="studio-profile-bio">Building useful things. Learning something new.<br>Documenting the journey along the way.</p>
+        <div class="studio-tech-pills"><span>JavaScript</span><span>Linux</span><span>GitHub</span></div>
+        <div class="studio-project"><div class="studio-mini-label"><span>01 / PROJECT</span><span aria-hidden="true">↗</span></div><h4>Something worth sharing</h4><p>Give your ideas a place to live.</p><div class="studio-code-lines" aria-hidden="true"><i></i><i></i><i></i></div></div>
+        <div class="studio-note"><span aria-hidden="true">↳</span><div><strong>Today I learned</strong><p>Small discoveries become a bigger story.</p></div><span class="studio-note-tag">TIL</span></div>
+      </div>
+      <div class="studio-palette" role="group" aria-label="Preview accent color">
+        <span>Try a different mood</span>
+        <button type="button" class="studio-swatch studio-swatch-emerald" aria-label="Emerald preview" aria-pressed="true" onclick="setLandingStudioTone('emerald')"></button>
+        <button type="button" class="studio-swatch studio-swatch-blue" aria-label="Blue preview" aria-pressed="false" onclick="setLandingStudioTone('blue')"></button>
+        <button type="button" class="studio-swatch studio-swatch-purple" aria-label="Purple preview" aria-pressed="false" onclick="setLandingStudioTone('purple')"></button>
       </div>
     </div>
-
-    <div class="directory-quick-filters" aria-label="Quick specialty filters">
-      <button type="button" class="directory-filter-chip active" data-specialty="" onclick="setDirectorySpecialty('', this)">All</button>
-      <button type="button" class="directory-filter-chip" data-specialty="cybersecurity" onclick="setDirectorySpecialty('cybersecurity', this)">Cybersecurity</button>
-      <button type="button" class="directory-filter-chip" data-specialty="frontend" onclick="setDirectorySpecialty('frontend', this)">Frontend</button>
-      <button type="button" class="directory-filter-chip" data-specialty="backend" onclick="setDirectorySpecialty('backend', this)">Backend</button>
-      <button type="button" class="directory-filter-chip" data-specialty="data_ai" onclick="setDirectorySpecialty('data_ai', this)">Data &amp; AI</button>
-      <button type="button" class="directory-filter-chip" data-specialty="devops_cloud" onclick="setDirectorySpecialty('devops_cloud', this)">DevOps &amp; Cloud</button>
-    </div>
-
-    <div
-      class="user-search-results"
-      id="userSearchResults"
-      aria-live="polite"
-    ></div>
-
-    <p
-      class="user-search-message"
-      id="userSearchMessage"
-      role="status"
-    ></p>
-
   </section>
 
 
@@ -6243,6 +6318,172 @@
   </section>
 
 
+  <section class="landing-updates" id="platformUpdates" aria-labelledby="platformUpdatesTitle">
+    <div class="landing-section-heading">
+      <div class="landing-kicker">WHAT'S NEW</div>
+      <h2 id="platformUpdatesTitle">Always moving forward.</h2>
+      <p>The latest additions, improvements and changes to MyDevFolioHub.</p>
+    </div>
+    <!-- Add new release notes here, newest first. -->
+    <div class="release-list">
+      <article class="release-entry">
+        <div class="release-date"><time datetime="2026-09-05">Sep 5, 2026</time><span>New features</span></div>
+        <div><h3>v2.1.1 — Navigation & Contact Improvements</h3><p>T• Improved the main navigation layout to keep actions and section links organized and visible.
+          • Added a mobile “Sections” menu for easier navigation on smaller screens.
+          • Added a Home button to quickly return to the main landing page.
+          • Added a new “Let’s Connect” contact section on the homepage.
+          • Connected the new contact section to the existing email service without changing the portfolio contact form.
+          • Improved form validation and tested the new navigation flow.</p><div class="release-tags"<span>v2.1.1</span></div></div>
+    </article>
+      <article class="release-entry">
+        <div class="release-date"><time datetime="2026-09-05">Sep 5, 2026</time><span>New features</span></div>
+        <div><h3>Your portfolio, ready for your next opportunity.</h3><p>Turn your profile information into a clean CV with a print-ready PDF export. Platform updates now have a home of their own, too.</p><div class="release-tags"><span>CV export</span><span>Release notes</span></div></div>
+      </article>
+      <article class="release-entry">
+        <div class="release-date"><time datetime="2026-09-05">Sep 5, 2026</time><span>Design update</span></div>
+        <div><h3>A fresh introduction to your next portfolio.</h3><p>A new interactive portfolio preview, clearer getting-started steps and answers to common questions. The homepage now focuses on building your own space.</p><div class="release-tags"><span>Homepage</span><span>Interactive preview</span></div></div>
+      </article>
+    </div>
+  </section>
+
+  <section class="landing-faq" aria-labelledby="landingFaqTitle">
+    <div class="landing-section-heading">
+      <div class="landing-kicker">BEFORE YOU BUILD</div>
+      <h2 id="landingFaqTitle">A few things<br>you might be wondering.</h2>
+      <p>Less setup. More room for your work.</p>
+    </div>
+    <div class="landing-faq-list">
+      <details><summary>Do I need to know how to code?<span aria-hidden="true">＋</span></summary><p>No. Create your account, fill in your profile and add your work from the dashboard. You do not need to edit HTML or set up hosting.</p></details>
+      <details><summary>Is this only for developers?<span aria-hidden="true">＋</span></summary><p>It is for people across technology: students, developers, security learners, data enthusiasts and more. Use the sections that fit your journey.</p></details>
+      <details><summary>Can I update my portfolio later?<span aria-hidden="true">＋</span></summary><p>Yes. Return to your dashboard to edit your profile, add projects, record new lessons or change your portfolio theme.</p></details>
+      <details><summary>How do I share my portfolio?<span aria-hidden="true">＋</span></summary><p>Your username gives you a personal public link. Copy it from your dashboard and add it to your resume, social profiles or messages.</p></details>
+    </div>
+  </section>
+
+  <section class="landing-final-cta" aria-labelledby="landingFinalTitle">
+    <div class="landing-kicker"><span class="studio-status-dot" aria-hidden="true"></span> YOUR NEXT COMMIT STARTS HERE</div>
+    <h2 id="landingFinalTitle">You build the work.<br><span>Give it a place to shine.</span></h2>
+    <p>You do not need a finished journey to start sharing it.</p>
+    <div class="landing-actions">
+      <button type="button" class="platform-button primary" onclick="handleLandingPrimaryAction()">Start building <span aria-hidden="true">↗</span></button>
+      <button type="button" class="platform-button" onclick="openDemoPortfolio()">Take a look first</button>
+    </div>
+    <div class="landing-final-path" aria-label="Example portfolio address">mydevfoliohub.github.io/<span>?u=you</span></div>
+  </section>
+
+  <section class="landing-contact-section" id="landingContact" aria-labelledby="landingContactHeading">
+    <div class="landing-contact-intro">
+      <div class="landing-kicker">LET'S BUILD SOMETHING BETTER</div>
+      <h2 id="landingContactHeading">Let's Connect<span>.</span></h2>
+      <p>Have a question about MyDevFolioHub, an idea for a feature, or feedback to share? We'd love to hear from you.</p>
+      <div class="landing-contact-topics"><span>Platform questions</span><span>Feature ideas</span><span>Feedback</span></div>
+      <p class="landing-contact-note">Your message goes to the MyDevFolioHub team.</p>
+    </div>
+    <div class="landing-contact-card">
+      <form
+        class="contact-form"
+        id="landingContactForm"
+        onsubmit="sendContactMessage(event)"
+        novalidate
+      >
+
+        <div class="contact-form-grid">
+
+          <div class="contact-field">
+            <label for="landingContactName">Name</label>
+
+            <input
+              type="text"
+              id="landingContactName"
+              name="name"
+              maxlength="100"
+              autocomplete="name"
+              placeholder="Your name"
+              required
+            >
+          </div>
+
+          <div class="contact-field">
+            <label for="landingContactEmail">Email</label>
+
+            <input
+              type="email"
+              id="landingContactEmail"
+              name="email"
+              maxlength="254"
+              autocomplete="email"
+              placeholder="you@example.com"
+              required
+            >
+          </div>
+
+          <div class="contact-field full-width">
+            <label for="landingContactSubject">Subject</label>
+
+            <input
+              type="text"
+              id="landingContactSubject"
+              name="subject"
+              maxlength="150"
+              placeholder="What would you like to discuss?"
+              required
+            >
+          </div>
+
+          <div class="contact-field full-width">
+            <label for="landingContactMessage">Message</label>
+
+            <textarea
+              id="landingContactMessage"
+              name="message"
+              maxlength="3000"
+              placeholder="Write your message here..."
+              required
+            ></textarea>
+          </div>
+
+          <div
+            class="contact-honeypot"
+            aria-hidden="true"
+          >
+            <label for="landingContactWebsite">
+              Leave this field empty
+            </label>
+
+            <input
+              type="text"
+              id="landingContactWebsite"
+              name="website"
+              tabindex="-1"
+              autocomplete="off"
+            >
+          </div>
+
+        </div>
+
+        <div class="contact-form-footer">
+
+          <button
+            type="submit"
+            class="button contact-submit"
+            id="landingContactSubmitButton"
+          >
+            Send Message
+          </button>
+
+          <p
+            class="contact-form-message"
+            id="landingContactFormMessage"
+            role="status"
+            aria-live="polite"
+          ></p>
+
+        </div>
+
+      </form>
+    </div>
+  </section>
+
   <footer class="platform-footer landing-platform-footer">
     <div class="platform-footer-brand">
       <strong><span>&gt;_</span> MYDEVFOLIOHUB</strong>
@@ -6253,7 +6494,9 @@
       <div>
         <h3>Product</h3>
         <button type="button" onclick="handleLandingPrimaryAction()">Create Portfolio</button>
-        <button type="button" onclick="scrollToCommunity()">Explore Portfolios</button>
+        <a href="#howItWorksTitle">How It Works</a>
+        <a href="#platformUpdates">What's New</a>
+        <a href="#landingContact">Contact</a>
         <button type="button" onclick="openDemoPortfolio()">View Demo</button>
       </div>
 
@@ -6266,7 +6509,7 @@
 
     <div class="platform-footer-bottom">
       <span>© 2026 MyDevFolioHub</span>
-      <span>MyDevFolioHub v2.1.0</span>
+      <span>MyDevFolioHub v2.1.1</span>
     </div>
   </footer>
 
@@ -6840,7 +7083,8 @@
      HEADER
 ========================================= -->
 
-<header>
+<header class="portfolio-header">
+  <div class="portfolio-header-top">
 
   <div
     class="logo"
@@ -6851,6 +7095,8 @@
   </div>
 
 
+  <div class="portfolio-header-controls">
+  <button type="button" class="portfolio-home-button" onclick="navigateToLanding()" title="MyDevFolioHub home">⌂ <span>Home</span></button>
   <button
     type="button"
     class="theme-toggle"
@@ -6874,8 +7120,6 @@
       Classic
     </span>
   </button>
-
-  <nav>
 
     <button
       type="button"
@@ -6903,6 +7147,13 @@
       Logout
     </button>
 
+    <button type="button" class="portfolio-menu-button" id="portfolioMenuButton"
+      aria-controls="portfolioSectionNav" aria-expanded="false" onclick="togglePortfolioMenu()">Sections <span aria-hidden="true">☰</span></button>
+  </div>
+  </div>
+
+  <nav id="portfolioSectionNav" aria-label="Portfolio sections"
+    onclick="if(event.target.closest('a')) document.getElementById('portfolioMenuButton').setAttribute('aria-expanded','false')">
     <a href="#home">
       Overview
     </a>
@@ -7300,6 +7551,11 @@
           >
             ↓ Download Contact Card
           </button>
+          <button type="button" class="primary-profile-link contact-card-button"
+            id="downloadCvButton" onclick="openPortfolioCv()" disabled>
+            ↓ Download CV (PDF)
+          </button>
+          <span id="portfolioCvStatus" role="status" class="cv-status">Preparing portfolio data…</span>
 
 
         </div>
@@ -9088,6 +9344,17 @@
      SHARE PORTFOLIO MODAL
 ========================================= -->
 
+<dialog id="portfolioCvDialog" class="portfolio-cv-dialog" aria-labelledby="portfolioCvHeading">
+  <div class="cv-dialog-toolbar">
+    <div><h2 id="portfolioCvHeading">Your portfolio CV</h2><p>Choose Save as PDF in the print window. Use A4, 100% scale and turn off headers and footers.</p></div>
+    <div class="cv-dialog-actions">
+      <button type="button" class="platform-button primary" id="printPortfolioCvButton" onclick="printPortfolioCv()" disabled>Print / Save PDF</button>
+      <button type="button" class="platform-button" onclick="closePortfolioCv()" aria-label="Close CV preview">Close</button>
+    </div>
+  </div>
+  <iframe id="portfolioCvFrame" title="CV document preview"></iframe>
+</dialog>
+
 <div class="share-portfolio-modal" id="sharePortfolioModal">
   <div class="share-portfolio-modal-content">
     <div class="modal-header">
@@ -9425,7 +9692,7 @@
     <div>
       <h3>Product</h3>
       <button type="button" onclick="navigateToLanding()">Create Portfolio</button>
-      <button type="button" onclick="navigateToCommunity()">Explore Portfolios</button>
+      <button type="button" onclick="navigateToLanding()">About the Platform</button>
       <button type="button" onclick="openDemoPortfolio()">View Demo</button>
     </div>
 
@@ -9438,7 +9705,7 @@
 
   <div class="platform-footer-bottom">
     <span>© <span id="year"></span> MyDevFolioHub</span>
-    <span>MyDevFolioHub v2.1.0</span>
+    <span>MyDevFolioHub v2.1.1</span>
   </div>
 </footer>
 
@@ -9626,15 +9893,6 @@
           initializeLandingExperience();
 
 
-          const searchInput =
-            document.getElementById(
-              "userSearchInput"
-            );
-
-
-          loadPublicUserDirectory(
-            searchInput?.value || ""
-          );
         },
         0
       );
@@ -9736,6 +9994,11 @@
   }
 
 
+  function togglePortfolioMenu() {
+    const button = document.getElementById("portfolioMenuButton");
+    button.setAttribute("aria-expanded", String(button.getAttribute("aria-expanded") !== "true"));
+  }
+
   function navigateToLanding() {
     window.location.href =
       getBasePageURL().href;
@@ -9744,14 +10007,14 @@
 
   function navigateToCommunity() {
     const url = getBasePageURL();
-    url.hash = "community";
+    url.hash = "portfolioStudio";
     window.location.href = url.href;
   }
 
 
   function scrollToCommunity() {
     const section =
-      document.getElementById("community");
+      document.getElementById("portfolioStudio");
 
     if (!section || currentAppView !== "landing") {
       navigateToCommunity();
@@ -12469,7 +12732,7 @@
 
   function initializeLandingRevealAnimations() {
     const elements = document.querySelectorAll(
-      ".landing-tech-showcase, .how-it-works-section, .how-step-card, .featured-portfolios-section, .featured-portfolio-card, .user-directory, .landing-features-section, .platform-feature-card"
+      ".landing-tech-showcase, .how-it-works-section, .how-step-card, .landing-studio, .landing-updates, .landing-faq, .landing-final-cta, .landing-contact-section, .landing-features-section, .platform-feature-card"
     );
 
 
@@ -12509,12 +12772,22 @@
   }
 
 
+  function setLandingStudioTone(tone) {
+    if (!["emerald", "blue", "purple"].includes(tone)) return;
+    const preview = document.querySelector(".landing-studio-demo");
+    if (!preview) return;
+    preview.dataset.previewTone = tone;
+    preview.querySelectorAll(".studio-swatch").forEach(button => {
+      button.setAttribute("aria-pressed", String(button.classList.contains("studio-swatch-" + tone)));
+    });
+  }
+
+
   function initializeLandingExperience() {
     renderLandingTechMarquee();
     startLandingTerminalAnimation();
     initializeLandingRevealAnimations();
-    loadFeaturedPortfolios();
-    syncDirectoryQuickFilters();
+    // This landing page introduces the builder without fetching user directories.
   }
 
 
@@ -12716,6 +12989,122 @@
     return links;
   }
 
+
+  /* CV export uses only the viewed profile and owner-scoped public content.
+     Browser PDF printing preserves selectable text, Arabic shaping and links. */
+  function buildPortfolioCvDocument(profile, sections) {
+    const text = value => escapeHTML(String(value ?? ""));
+    const paragraph = value => value ? '<p dir="auto">' + text(value).replace(/\r?\n/g, "<br>") + "</p>" : "";
+    const link = (url, label) => {
+      const safe = safeHttpUrl(url || "");
+      return safe ? '<a dir="auto" href="' + text(safe) + '">' + text(label || safe) + "</a>" : "";
+    };
+    const section = (heading, rows) => rows.length
+      ? "<section><h2>" + text(heading) + "</h2>" + rows.join("") + "</section>" : "";
+    const date = value => {
+      if (!value || !/^\d{4}-\d{2}-\d{2}/.test(String(value))) return "";
+      const parsed = new Date(String(value).slice(0, 10) + "T00:00:00");
+      return Number.isNaN(parsed.getTime()) ? "" : parsed.toLocaleDateString("en", {month:"short",year:"numeric"});
+    };
+    const entry = (title, meta, description, url) =>
+      '<article><h3 dir="auto">' + text(title) + "</h3>" +
+      (meta ? '<p class="meta" dir="auto">' + text(meta) + "</p>" : "") +
+      paragraph(description) + (url ? '<p class="item-link">' + link(url) + "</p>" : "") + "</article>";
+    const name = profile.display_name || profile.username;
+    const socials = getProfileSocialLinks(profile);
+    const contacts = [
+      link(buildPortfolioURL(profile.username), "Portfolio: @" + profile.username),
+      link(socials.github, socials.github),
+      link(socials.linkedin, socials.linkedin),
+      link(socials.website, socials.website)
+    ].filter(Boolean);
+    // getProfileSocialLinks reads public_email / explicitly public socials, never auth email.
+    if (socials.email) contacts.push('<span dir="auto">' + text(socials.email) + "</span>");
+    const education = sections.education.map(item => entry(
+      item.institution,
+      [item.degree, item.field_of_study, item.current_level,
+        [date(item.start_date), date(item.graduation_date)].filter(Boolean).join(" - "),
+        item.gpa ? "GPA: " + item.gpa : ""].filter(Boolean).join(" · "),
+      item.description
+    ));
+    const work = items => items.map(item => entry(item.title,
+      Array.isArray(item.tags) ? item.tags.join(" · ") : "", item.description, item.link));
+    const certificates = sections.certificates.map(item =>
+      entry(item.name, date(item.certificate_date), item.description || ""));
+    const achievements = sections.achievements.map(item =>
+      entry(item.title, date(item.badge_date), item.description));
+    const skills = Array.isArray(profile.tech_stack) ? profile.tech_stack.filter(item => typeof item === "string" && item.trim()) : [];
+    return '<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8">' +
+      '<meta name="viewport" content="width=device-width,initial-scale=1">' +
+      "<title>" + text(name) + " - CV</title><style>" +
+      '@page{size:A4;margin:17mm 18mm}*{box-sizing:border-box}html{background:#e8eaed}body{margin:24px auto;padding:18mm;max-width:210mm;background:#fff;color:#192532;font:10.5pt/1.6 Arial,Tahoma,sans-serif;overflow-wrap:anywhere}' +
+      'header{border-bottom:2px solid #183d48;padding-bottom:18px;margin-bottom:22px}h1{font-size:28pt;line-height:1.18;letter-spacing:-.7px;margin:0 0 7px;color:#142d37}h2{font-size:11pt;color:#183d48;border-bottom:1px solid #ccd6dc;padding-bottom:5px;margin:22px 0 11px;text-transform:uppercase;letter-spacing:1.2px;break-after:avoid-page}h3{font-size:11pt;margin:0;color:#192532;break-after:avoid-page}p{margin:5px 0;orphans:3;widows:3}article{margin:0 0 14px}article>h3+p{break-before:avoid-page}.specialty{font-size:12pt;color:#47606b}.contacts{display:flex;flex-wrap:wrap;gap:4px 16px;margin-top:13px;font-size:9pt}.contacts>*{max-width:100%}a{color:#254c5d;text-decoration:none;overflow-wrap:anywhere}.meta{font-size:9.5pt;color:#53616c}.item-link{font-size:9pt}.skills{line-height:1.9}footer{border-top:1px solid #ccd6dc;margin-top:24px;padding-top:10px;font-size:8pt;color:#64727d}' +
+      '@media(max-width:600px){body{margin:0;padding:24px;max-width:100%}h1{font-size:25pt}}@media print{html,body{background:white}body{padding:0;margin:0;max-width:none;font-size:10.5pt}a{color:inherit}header{break-inside:avoid}h1{font-size:28pt}}' +
+      '</style></head><body><header><h1 dir="auto">' + text(name) + "</h1>" +
+      (profile.specialty !== "other" && PROFILE_SPECIALTIES[profile.specialty] ? '<p class="specialty">' + text(PROFILE_SPECIALTIES[profile.specialty]) + "</p>" : "") +
+      '<div class="contacts">' + contacts.join("") + "</div></header><main>" +
+      section("Profile", profile.bio || profile.description ? [paragraph(profile.bio || profile.description)] : []) +
+      section("Technical skills", skills.length ? ['<p class="skills" dir="auto">' + skills.map(text).join(" · ") + "</p>"] : []) +
+      section("Education", education) + section("Projects", work(sections.projects)) +
+      section("Practical labs", work(sections.labs)) + section("Certificates", certificates) +
+      section("Achievements", achievements) + "</main><footer>" +
+      link(buildPortfolioURL(profile.username), "Full portfolio: " + buildPortfolioURL(profile.username)) +
+      "</footer></body></html>";
+  }
+
+  async function openPortfolioCv() {
+    if (!currentProfile?.username || !activePortfolioUserId) return;
+    const button = document.getElementById("downloadCvButton");
+    if (button.disabled) return;
+    const status = document.getElementById("portfolioCvStatus");
+    const profile = structuredClone(currentProfile);
+    const owner = activePortfolioUserId;
+    button.disabled = true;
+    button.textContent = "Preparing CV…";
+    status.textContent = "";
+    try {
+      // Re-read on export so edits and failed earlier page loads cannot produce stale CV data.
+      const tables = ["projects", "labs", "education_items", "certificates", "achievement_badges"];
+      const results = await Promise.all(tables.map(table =>
+        supabaseClient.from(table).select("*").eq("user_id", owner).order("created_at", {ascending:false})
+      ));
+      if (results.some(result => result.error)) throw new Error("CV_DATA_UNAVAILABLE");
+      if (activePortfolioUserId !== owner || currentProfile.username !== profile.username) return;
+      const byDate = (items, field) => [...items].sort((a,b) => String(b[field] || "").localeCompare(String(a[field] || "")));
+      const doc = buildPortfolioCvDocument(profile, {
+        projects: results[0].data || [], labs: results[1].data || [],
+        education: byDate(results[2].data || [], "graduation_date"),
+        certificates: byDate(results[3].data || [], "certificate_date"),
+        achievements: byDate(results[4].data || [], "badge_date")
+      });
+      const frame = document.getElementById("portfolioCvFrame");
+      const printButton = document.getElementById("printPortfolioCvButton");
+      printButton.disabled = true;
+      frame.onload = () => { printButton.disabled = false; };
+      frame.srcdoc = doc;
+      document.getElementById("portfolioCvDialog").showModal();
+    }
+    catch {
+      status.textContent = "Could not prepare the CV. Please try again.";
+    }
+    finally {
+      button.disabled = false;
+      button.textContent = "↓ Download CV (PDF)";
+    }
+  }
+
+  function printPortfolioCv() {
+    const frame = document.getElementById("portfolioCvFrame");
+    if (!frame?.contentWindow || document.getElementById("printPortfolioCvButton").disabled) return;
+    frame.contentWindow.focus();
+    frame.contentWindow.print();
+  }
+
+  function closePortfolioCv() {
+    document.getElementById("portfolioCvDialog").close();
+    document.getElementById("portfolioCvFrame").srcdoc = "";
+    document.getElementById("downloadCvButton").focus();
+  }
 
   function escapeVCardValue(value) {
     return String(value || "")
@@ -15504,6 +15893,8 @@
 
 
   async function loadAllPortfolioData() {
+    document.getElementById("downloadCvButton").disabled = true;
+    document.getElementById("portfolioCvStatus").textContent = "Preparing portfolio data…";
 
     if (!activePortfolioUserId) {
       return;
@@ -15535,6 +15926,8 @@
 
 
     updatePortfolioCompletion();
+    document.getElementById("downloadCvButton").disabled = false;
+    document.getElementById("portfolioCvStatus").textContent = "";
     await loadDashboardAnalytics();
 
 
@@ -23182,13 +23575,12 @@
 
   function setContactFormMessage(
     message,
-    success = false
+    success = false,
+    form = document.getElementById("contactForm")
   ) {
 
-    const messageElement =
-      document.getElementById(
-        "contactFormMessage"
-      );
+    const messageElement = form?.querySelector(".contact-form-message");
+    if (!messageElement) return;
 
 
     messageElement.textContent =
@@ -23299,41 +23691,32 @@
 
 
     const form = event.currentTarget;
+    const setMessage = (message, success = false) => setContactFormMessage(message, success, form);
 
 
     const contactData = {
       name:
-        document.getElementById(
-          "contactName"
-        ).value.trim(),
+        form.elements.namedItem("name").value.trim(),
 
       email:
-        document.getElementById(
-          "contactEmail"
-        ).value.trim(),
+        form.elements.namedItem("email").value.trim(),
 
       subject:
-        document.getElementById(
-          "contactSubject"
-        ).value.trim(),
+        form.elements.namedItem("subject").value.trim(),
 
       message:
-        document.getElementById(
-          "contactMessage"
-        ).value.trim()
+        form.elements.namedItem("message").value.trim()
     };
 
 
     const honeypotValue =
-      document.getElementById(
-        "contactWebsite"
-      ).value.trim();
+      form.elements.namedItem("website").value.trim();
 
 
     if (honeypotValue) {
       form.reset();
 
-      setContactFormMessage(
+      setMessage(
         "Message sent successfully ✓",
         true
       );
@@ -23349,7 +23732,7 @@
 
 
     if (validationError) {
-      setContactFormMessage(
+      setMessage(
         validationError
       );
 
@@ -23381,7 +23764,7 @@
         );
 
 
-      setContactFormMessage(
+      setMessage(
         `Please wait ${secondsRemaining} seconds before sending another message.`
       );
 
@@ -23390,9 +23773,7 @@
 
 
     const submitButton =
-      document.getElementById(
-        "contactSubmitButton"
-      );
+      form.querySelector('button[type="submit"]');
 
 
     contactRequestInFlight = true;
@@ -23401,7 +23782,7 @@
       "Sending...";
 
 
-    setContactFormMessage("");
+    setMessage("");
 
 
     try {
@@ -23433,7 +23814,7 @@
       form.reset();
 
 
-      setContactFormMessage(
+      setMessage(
         "Message sent successfully ✓",
         true
       );
@@ -23447,7 +23828,7 @@
       );
 
 
-      setContactFormMessage(
+      setMessage(
         "Could not send message. Please try again."
       );
 

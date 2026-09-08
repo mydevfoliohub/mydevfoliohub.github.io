@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="background" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0" stop-color="#11010a"/>
+      <stop offset="0.10" stop-color="#2c0f25"/>
+      <stop offset="0.20" stop-color="#441544"/>
+      <stop offset="0.30" stop-color="#571f69"/>
+      <stop offset="0.40" stop-color="#612f95"/>
+      <stop offset="0.50" stop-color="#6134a9"/>
+      <stop offset="0.60" stop-color="#5c3bbe"/>
+      <stop offset="0.70" stop-color="#5242d4"/>
+      <stop offset="0.80" stop-color="#503bd1"/>
+      <stop offset="0.87" stop-color="#4f34cf"/>
+      <stop offset="0.94" stop-color="#4d2dcc"/>
+      <stop offset="1" stop-color="#4c24c9"/>
+    </linearGradient>
+    <pattern id="grid" width="42" height="42" patternUnits="userSpaceOnUse">
+      <path d="M 42 0 L 0 0 0 42" fill="none" stroke="#d89cff" stroke-opacity="0.08" stroke-width="1"/>
+    </pattern>
+    <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="13" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#background)"/>
+  <rect width="1200" height="630" fill="url(#grid)"/>
+
+  <circle cx="1050" cy="90" r="220" fill="#9f8cff" opacity="0.09"/>
+  <circle cx="1050" cy="90" r="115" fill="#d89cff" opacity="0.08"/>
+
+  <rect x="76" y="66" width="1048" height="498" rx="24" fill="#11010a" fill-opacity="0.76" stroke="#571f69" stroke-width="2"/>
+  <rect x="76" y="66" width="1048" height="64" rx="24" fill="#2c0f25"/>
+  <rect x="76" y="106" width="1048" height="24" fill="#2c0f25"/>
+
+  <circle cx="116" cy="98" r="8" fill="#9f8cff"/>
+  <circle cx="144" cy="98" r="8" fill="#d89cff"/>
+  <circle cx="172" cy="98" r="8" fill="#5c3bbe"/>
+
+  <text x="110" y="226" fill="#d89cff" font-family="monospace" font-size="34" font-weight="700" filter="url(#glow)">&gt;_ PORTFOLIO.FORGE</text>
+  <text x="110" y="324" fill="#fbf7ff" font-family="Arial, sans-serif" font-size="58" font-weight="700">Build Your Developer Portfolio</text>
+  <text x="110" y="388" fill="#d8c3ec" font-family="Arial, sans-serif" font-size="29">Show your projects. Document your learning.</text>
+  <text x="110" y="435" fill="#d8c3ec" font-family="Arial, sans-serif" font-size="29">Share your journey.</text>
+
+  <rect x="110" y="486" width="330" height="3" rx="2" fill="#9f8cff"/>
+  <text x="110" y="530" fill="#d89cff" font-family="monospace" font-size="20">Projects • Labs • Certificates • Learning Log</text>
+</svg>

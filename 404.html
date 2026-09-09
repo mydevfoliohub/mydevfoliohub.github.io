@@ -1,1 +1,30 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Page not found | MyDevFolioHub</title><link rel="stylesheet" href="css/main.css"></head><body><main style="max-width:650px;margin:15vh auto;padding:24px"><h1>Page not found</h1><p>This address does not point to a portfolio. Portfolio links use ?u=username.</p><p><a href="./index.html">Return to MyDevFolioHub</a></p></main></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex, follow">
+  <meta name="theme-color" content="#11010a">
+  <title>Page Not Found | MyDevFolioHub</title>
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/css/main.css">
+  <style>
+    .not-found-page{min-height:100vh;display:grid;place-items:center;padding:24px}
+    .not-found-card{width:min(620px,100%);padding:clamp(28px,6vw,56px);border:1px solid var(--border);border-radius:16px;background:var(--card);box-shadow:0 24px 70px rgba(0,0,0,.28)}
+    .not-found-code{margin:0 0 14px;color:var(--green);font:700 12px monospace;letter-spacing:1.4px}
+    .not-found-card h1{margin:0 0 14px;font-size:clamp(32px,7vw,52px)}
+    .not-found-card p{margin:0 0 26px;color:var(--muted);line-height:1.75}
+  </style>
+</head>
+<body>
+  <main class="not-found-page">
+    <section class="not-found-card" aria-labelledby="notFoundHeading">
+      <p class="not-found-code">404 / PAGE_NOT_FOUND</p>
+      <h1 id="notFoundHeading">Page not found</h1>
+      <p>This address does not point to a MyDevFolioHub page or public portfolio.</p>
+      <a class="platform-button primary" href="/">Return to MyDevFolioHub</a>
+    </section>
+  </main>
+</body>
+</html>

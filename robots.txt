@@ -1,7 +1,4 @@
-# www.robotstxt.org/
-
-# Allow crawling of all content
 User-agent: *
-Disallow:
+Allow: /
 
 Sitemap: https://mydevfoliohub.github.io/sitemap.xml

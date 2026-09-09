@@ -2,10 +2,7 @@
 <html lang="en">
 
 <head>
-
   <meta charset="UTF-8">
-
-  <meta name="google-site-verification" content="qBQVcTARI3vRb7t12objCJBzfGpHvPFkZP857R7qV_E" />
 
   <meta
     name="viewport"
@@ -14,12 +11,7 @@
 
   <meta
     name="description"
-    content="Build and share a developer or cybersecurity portfolio with projects, labs, certificates and a learning journey."
-  >
-
-  <meta
-    name="keywords"
-    content="developer portfolio builder, cybersecurity portfolio, projects, labs, certificates, learning log"
+    content="Create and share a developer portfolio with projects, skills, certificates, learning logs, achievements, and more."
   >
 
   <meta
@@ -29,7 +21,7 @@
 
   <meta
     name="robots"
-    content="index, follow"
+    content="index, follow, max-image-preview:large"
   >
 
   <meta
@@ -40,11 +32,12 @@
 
   <meta property="og:type" content="website">
   <meta property="og:locale" content="en_US">
+  <meta property="og:site_name" content="MyDevFolioHub">
   <meta property="og:title" content="MyDevFolioHub | Developer Portfolio Builder">
   <meta property="og:url" content="https://mydevfoliohub.github.io/">
   <meta
     property="og:description"
-    content="Create your portfolio, share your projects, labs, certificates and learning journey."
+    content="Create and share a developer portfolio with projects, skills, certificates, learning logs, achievements, and more."
   >
   <meta property="og:image" content="https://mydevfoliohub.github.io/social-preview.png">
   <meta property="og:image:width" content="1200">
@@ -55,9 +48,10 @@
   <meta name="twitter:title" content="MyDevFolioHub | Developer Portfolio Builder">
   <meta
     name="twitter:description"
-    content="Create your portfolio, share your projects, labs, certificates and learning journey."
+    content="Create and share a developer portfolio with projects, skills, certificates, learning logs, achievements, and more."
   >
   <meta name="twitter:image" content="https://mydevfoliohub.github.io/social-preview.png">
+  <meta name="twitter:image:alt" content="MyDevFolioHub developer portfolio builder preview">
 
   <link
     rel="canonical"
@@ -73,13 +67,19 @@
       "@context": "https://schema.org",
       "@type": "WebApplication",
       "name": "MyDevFolioHub",
+      "url": "https://mydevfoliohub.github.io/",
       "applicationCategory": "DeveloperApplication",
-      "description": "Developer and cybersecurity portfolio builder",
-      "operatingSystem": "Web"
+      "description": "Create and share a developer portfolio with projects, skills, certificates, learning logs, achievements, and more.",
+      "operatingSystem": "Any"
     }
   </script>
 
   <title>MyDevFolioHub | Developer Portfolio Builder</title>
+
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/icon.png">
+  <link rel="manifest" href="/site.webmanifest">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -90,6 +90,8 @@
 
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/product.css">
+
+  <noscript><style>#appLoading{display:none!important}</style></noscript>
 
 </head>
 
@@ -116,7 +118,6 @@
 <div
   class="platform-screen"
   id="landingView"
-  hidden
 >
 
   <div class="announce-bar" id="announceBar" hidden>
@@ -135,7 +136,7 @@
 
     <div class="platform-header-actions">
 
-      <button type="button" class="platform-button community-entry" onclick="navigateToCommunity()" data-en-html="Community" data-ar-html="المجتمع">Community</button>
+      <a class="platform-button community-entry" href="?view=community" data-en-html="Community" data-ar-html="المجتمع">Community</a>
 
       <button
         type="button"
@@ -1618,6 +1619,8 @@
           id="profileImage"
           class="profile-image"
           alt="Bassam Profile Picture"
+          width="260"
+          height="260"
         >
 
         <span id="profileInitials">
@@ -2728,6 +2731,8 @@
       <img
         id="profilePreviewImage"
         alt="Profile Preview"
+        width="96"
+        height="96"
       >
 
       <span id="profilePreviewInitials">

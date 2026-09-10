@@ -1,50 +1,22 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Deviloq — Developer Portfolio Builder</title>
+  <desc id="desc">A clean dark social card for the Deviloq developer portfolio platform.</desc>
   <defs>
-    <linearGradient id="background" x1="0" y1="1" x2="0" y2="0">
-      <stop offset="0" stop-color="#11010a"/>
-      <stop offset="0.10" stop-color="#2c0f25"/>
-      <stop offset="0.20" stop-color="#441544"/>
-      <stop offset="0.30" stop-color="#571f69"/>
-      <stop offset="0.40" stop-color="#612f95"/>
-      <stop offset="0.50" stop-color="#6134a9"/>
-      <stop offset="0.60" stop-color="#5c3bbe"/>
-      <stop offset="0.70" stop-color="#5242d4"/>
-      <stop offset="0.80" stop-color="#503bd1"/>
-      <stop offset="0.87" stop-color="#4f34cf"/>
-      <stop offset="0.94" stop-color="#4d2dcc"/>
-      <stop offset="1" stop-color="#4c24c9"/>
-    </linearGradient>
-    <pattern id="grid" width="42" height="42" patternUnits="userSpaceOnUse">
-      <path d="M 42 0 L 0 0 0 42" fill="none" stroke="#d89cff" stroke-opacity="0.08" stroke-width="1"/>
-    </pattern>
-    <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
-      <feGaussianBlur stdDeviation="13" result="blur"/>
-      <feMerge>
-        <feMergeNode in="blur"/>
-        <feMergeNode in="SourceGraphic"/>
-      </feMerge>
-    </filter>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#07111d"/><stop offset="1" stop-color="#0b1b25"/></linearGradient>
+    <linearGradient id="line" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#34d399"/><stop offset="1" stop-color="#38bdf8"/></linearGradient>
+    <pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse"><path d="M48 0H0V48" fill="none" stroke="#8ed8d1" stroke-opacity=".055"/></pattern>
   </defs>
-
-  <rect width="1200" height="630" fill="url(#background)"/>
-  <rect width="1200" height="630" fill="url(#grid)"/>
-
-  <circle cx="1050" cy="90" r="220" fill="#9f8cff" opacity="0.09"/>
-  <circle cx="1050" cy="90" r="115" fill="#d89cff" opacity="0.08"/>
-
-  <rect x="76" y="66" width="1048" height="498" rx="24" fill="#11010a" fill-opacity="0.76" stroke="#571f69" stroke-width="2"/>
-  <rect x="76" y="66" width="1048" height="64" rx="24" fill="#2c0f25"/>
-  <rect x="76" y="106" width="1048" height="24" fill="#2c0f25"/>
-
-  <circle cx="116" cy="98" r="8" fill="#9f8cff"/>
-  <circle cx="144" cy="98" r="8" fill="#d89cff"/>
-  <circle cx="172" cy="98" r="8" fill="#5c3bbe"/>
-
-  <text x="110" y="226" fill="#d89cff" font-family="monospace" font-size="34" font-weight="700" filter="url(#glow)">&gt;_ PORTFOLIO.FORGE</text>
-  <text x="110" y="324" fill="#fbf7ff" font-family="Arial, sans-serif" font-size="58" font-weight="700">Build Your Developer Portfolio</text>
-  <text x="110" y="388" fill="#d8c3ec" font-family="Arial, sans-serif" font-size="29">Show your projects. Document your learning.</text>
-  <text x="110" y="435" fill="#d8c3ec" font-family="Arial, sans-serif" font-size="29">Share your journey.</text>
-
-  <rect x="110" y="486" width="330" height="3" rx="2" fill="#9f8cff"/>
-  <text x="110" y="530" fill="#d89cff" font-family="monospace" font-size="20">Projects • Labs • Certificates • Learning Log</text>
+  <rect width="1200" height="630" fill="url(#bg)"/><rect width="1200" height="630" fill="url(#grid)"/>
+  <circle cx="1040" cy="94" r="260" fill="#38bdf8" opacity=".045"/><circle cx="1090" cy="550" r="250" fill="#34d399" opacity=".04"/>
+  <rect x="72" y="64" width="1056" height="502" rx="30" fill="#09141f" stroke="#244152" stroke-width="2"/>
+  <rect x="112" y="108" width="78" height="78" rx="19" fill="#0b1220" stroke="#1f3b4d" stroke-width="2.5"/>
+  <path d="M131 126h15c16 0 26 9 26 21s-10 21-26 21h-15v-42Z" fill="none" stroke="#34d399" stroke-width="6" stroke-linejoin="round"/>
+  <path d="m139 137 9 10-9 10" fill="none" stroke="#38bdf8" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M153 157h10" fill="none" stroke="#34d399" stroke-width="5" stroke-linecap="round"/>
+  <text x="214" y="163" fill="#f8fafc" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="52" font-weight="750" letter-spacing="-1">Deviloq</text>
+  <text x="112" y="302" fill="#f8fafc" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="66" font-weight="760" letter-spacing="-1.8">Developer Portfolio Builder</text>
+  <text x="112" y="370" fill="#a7bac7" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="30">Your work. Your skills. Your progress. One place.</text>
+  <rect x="112" y="425" width="390" height="4" rx="2" fill="url(#line)"/>
+  <text x="112" y="488" fill="#d7e4ea" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="25">Build. Learn. Share. Grow.</text>
+  <g transform="translate(854 390)" opacity=".95"><rect width="188" height="110" rx="16" fill="#0e202c" stroke="#244152" stroke-width="2"/><rect x="22" y="24" width="74" height="8" rx="4" fill="#34d399"/><rect x="22" y="48" width="144" height="7" rx="3.5" fill="#78909e" opacity=".75"/><rect x="22" y="69" width="112" height="7" rx="3.5" fill="#78909e" opacity=".5"/><circle cx="155" cy="88" r="9" fill="#38bdf8"/></g>
 </svg>

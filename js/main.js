@@ -3,7 +3,7 @@
   const SUPABASE_KEY = "sb_publishable_bzk-PSNChJcwFG42CqKcOg_PPhY-Wad";
 
   const PUBLIC_SITE_URL =
-    "https://mydevfoliohub.github.io/";
+    BRAND.productionUrl;
 
   const supabaseClient =
     supabase.createClient(
@@ -1306,6 +1306,13 @@
 
     showAppView("auth");
 
+    setPrivateViewMetadata({
+      signup: "Create Account",
+      forgot: "Reset Password",
+      reset: "Choose New Password",
+      login: "Login"
+    }[mode] || "Login");
+
     selectAuthMode(mode);
 
     setAuthMessage(message);
@@ -1919,6 +1926,10 @@
 
 
     showAppView("onboarding");
+
+    setPrivateViewMetadata(
+      "Create Your Portfolio"
+    );
 
 
     const emailName =
@@ -3510,7 +3521,7 @@
     try {
       localStorage.setItem(
         ANNOUNCE_STORAGE_KEY,
-        "v2.2.0"
+        BRAND.version
       );
     } catch {
       // Dismissal memory is best-effort only.
@@ -3541,7 +3552,7 @@
       seen = "";
     }
 
-    bar.hidden = seen === "v2.2.0";
+    bar.hidden = seen === BRAND.version;
   }
 
 
@@ -5158,14 +5169,55 @@
   }
 
 
+  function setStructuredData(value) {
+
+    const structuredData =
+      document.getElementById(
+        "personStructuredData"
+      );
+
+
+    if (structuredData) {
+      structuredData.textContent =
+        JSON.stringify(value);
+    }
+  }
+
+
+  function getSeoDescription(
+    value,
+    fallback
+  ) {
+
+    const text =
+      String(value || fallback || "")
+        .replace(/\s+/g, " ")
+        .trim();
+
+
+    if (text.length <= 160) {
+      return text;
+    }
+
+
+    const shortened =
+      text.slice(0, 157)
+        .replace(/\s+\S*$/, "")
+        .trim();
+
+
+    return `${shortened || text.slice(0, 157)}…`;
+  }
+
+
   function setLandingMetadata() {
 
     const description =
-      "Build and share a developer or cybersecurity portfolio with projects, labs, certificates and a learning journey.";
+      "Create and share a developer portfolio with projects, skills, certificates, learning logs, achievements, and more.";
 
 
     document.title =
-      "MyDevFolioHub | Developer Portfolio Builder";
+      `${BRAND.name} | Developer Portfolio Builder`;
 
 
     setMetadataContent(
@@ -5175,12 +5227,17 @@
 
     setMetadataContent(
       'meta[name="author"]',
-      "MyDevFolioHub"
+      BRAND.name
+    );
+
+    setMetadataContent(
+      'meta[name="robots"]',
+      "index, follow, max-image-preview:large"
     );
 
     setMetadataContent(
       'meta[property="og:title"]',
-      "MyDevFolioHub | Developer Portfolio Builder"
+      `${BRAND.name} | Developer Portfolio Builder`
     );
 
     setMetadataContent(
@@ -5189,13 +5246,28 @@
     );
 
     setMetadataContent(
+      'meta[property="og:url"]',
+      getBasePageURL().href
+    );
+
+    setMetadataContent(
+      'meta[property="og:image:alt"]',
+      `${BRAND.name} developer portfolio builder preview`
+    );
+
+    setMetadataContent(
       'meta[name="twitter:title"]',
-      "MyDevFolioHub | Developer Portfolio Builder"
+      `${BRAND.name} | Developer Portfolio Builder`
     );
 
     setMetadataContent(
       'meta[name="twitter:description"]',
       description
+    );
+
+    setMetadataContent(
+      'meta[name="twitter:image:alt"]',
+      `${BRAND.name} developer portfolio builder preview`
     );
 
 
@@ -5204,6 +5276,82 @@
         "canonicalUrl"
       );
 
+
+    if (canonical) {
+      canonical.href =
+        getBasePageURL().href;
+    }
+
+
+    setStructuredData({
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      name: BRAND.name,
+      url: getBasePageURL().href,
+      applicationCategory: "DeveloperApplication",
+      description,
+      operatingSystem: "Any"
+    });
+  }
+
+
+  function setCommunityMetadata() {
+
+    const title =
+      `Developer Portfolio Community | ${BRAND.name}`;
+
+    const description =
+      `Discover public developer portfolios, projects, skills, certificates, and learning journeys from the ${BRAND.name} community.`;
+
+    const url = getBasePageURL();
+    url.searchParams.set("view", "community");
+
+
+    document.title = title;
+
+    setMetadataContent('meta[name="description"]', description);
+    setMetadataContent('meta[name="author"]', BRAND.name);
+    setMetadataContent('meta[name="robots"]', "index, follow, max-image-preview:large");
+    setMetadataContent('meta[property="og:title"]', title);
+    setMetadataContent('meta[property="og:description"]', description);
+    setMetadataContent('meta[property="og:url"]', url.href);
+    setMetadataContent('meta[property="og:image:alt"]', `${BRAND.name} developer portfolio community preview`);
+    setMetadataContent('meta[name="twitter:title"]', title);
+    setMetadataContent('meta[name="twitter:description"]', description);
+    setMetadataContent('meta[name="twitter:image:alt"]', `${BRAND.name} developer portfolio community preview`);
+
+    const canonical = document.getElementById("canonicalUrl");
+    if (canonical) canonical.href = url.href;
+
+    setStructuredData({
+      "@context": "https://schema.org",
+      "@type": "CollectionPage",
+      name: title,
+      description,
+      url: url.href,
+      isPartOf: {
+        "@type": "WebSite",
+        name: BRAND.name,
+        url: getBasePageURL().href
+      }
+    });
+  }
+
+
+  function setPrivateViewMetadata(title) {
+
+    document.title =
+      `${title} | ${BRAND.name}`;
+
+    setMetadataContent(
+      'meta[name="robots"]',
+      "noindex, follow"
+    );
+
+    const canonical =
+      document.getElementById(
+        "canonicalUrl"
+      );
 
     if (canonical) {
       canonical.href =
@@ -5221,13 +5369,14 @@
 
 
     const description =
-      profile.bio
-      ||
-      `${displayName}'s developer portfolio.`;
+      getSeoDescription(
+        profile.bio,
+        `Explore ${displayName}'s developer portfolio, projects, skills, certificates, and learning journey.`
+      );
 
 
     const title =
-      `${displayName} | Portfolio`;
+      `${String(displayName).replace(/\s+/g, " ").trim().slice(0, 48)} | Developer Portfolio`;
 
 
     document.title = title;
@@ -5241,6 +5390,11 @@
     setMetadataContent(
       'meta[name="author"]',
       displayName
+    );
+
+    setMetadataContent(
+      'meta[name="robots"]',
+      "index, follow, max-image-preview:large"
     );
 
     setMetadataContent(
@@ -5268,11 +5422,22 @@
       description
     );
 
+    setMetadataContent(
+      'meta[name="twitter:image:alt"]',
+      `${displayName} portfolio preview`
+    );
+
 
     const portfolioURL =
       buildPortfolioURL(
         profile.username
       );
+
+
+    setMetadataContent(
+      'meta[property="og:url"]',
+      portfolioURL
+    );
 
 
     const canonical =
@@ -5301,30 +5466,21 @@
         .filter(Boolean);
 
 
-    const structuredData =
-      document.getElementById(
-        "personStructuredData"
-      );
-
-
-    if (structuredData) {
-      structuredData.textContent =
-        JSON.stringify({
-          "@context":
-            "https://schema.org",
-          "@type": "Person",
-          name: displayName,
-          description,
-          url: portfolioURL,
-          sameAs,
-          knowsAbout:
-            Array.isArray(
-              profile.tech_stack
-            )
-              ? profile.tech_stack
-              : []
-        });
-    }
+    setStructuredData({
+      "@context":
+        "https://schema.org",
+      "@type": "Person",
+      name: displayName,
+      description,
+      url: portfolioURL,
+      sameAs,
+      knowsAbout:
+        Array.isArray(
+          profile.tech_stack
+        )
+          ? profile.tech_stack
+          : []
+    });
   }
 
 
@@ -5648,7 +5804,18 @@
 
 
     document.title =
-      "Portfolio Not Found | MyDevFolioHub";
+      `Portfolio Not Found | ${BRAND.name}`;
+
+
+    setMetadataContent(
+      'meta[name="robots"]',
+      "noindex, follow"
+    );
+
+    setMetadataContent(
+      'meta[name="description"]',
+      `This public ${BRAND.name} portfolio could not be found.`
+    );
 
 
     showAppView("notFound");
@@ -6876,7 +7043,7 @@
 
       if (requestedView === "community") {
         isAdmin = false;
-        setLandingMetadata();
+        setCommunityMetadata();
         updateLandingForSession();
         showAppView("community");
         await Promise.all([loadFeaturedPortfolios(), loadPublicUserDirectory()]);
@@ -6964,10 +7131,20 @@
           signedInProfile
         );
 
+        setPrivateViewMetadata(
+          "Dashboard"
+        );
+
         showAppView("portfolio");
         updateAdminInterface();
 
         await loadAllPortfolioData();
+
+        // Loading the signed-in profile refreshes public portfolio metadata.
+        // Restore the private dashboard directive after all profile data is ready.
+        setPrivateViewMetadata(
+          "Dashboard"
+        );
 
         return;
       }

@@ -274,6 +274,12 @@
       animation: loadingLogoPulse 2s ease-in-out infinite;
     }
 
+    .app-loading-mark {
+      padding: 0;
+      border: 0;
+      background: none;
+    }
+
     @keyframes loadingLogoPulse {
       50% { transform: scale(1.06); box-shadow: 0 0 60px color-mix(in srgb, var(--green) 30%, transparent); }
     }
@@ -352,15 +358,24 @@
     }
 
     .platform-logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
       color: var(--text);
-
+      text-decoration: none;
       font-family: monospace;
       font-size: 22px;
       font-weight: bold;
     }
 
-    .platform-logo span {
-      color: var(--green);
+    .platform-logo img {
+      width: 34px;
+      height: 34px;
+      flex: 0 0 auto;
+    }
+
+    .platform-logo .platform-logo-word {
+      color: var(--text);
     }
 
     .platform-header-actions,
@@ -766,6 +781,20 @@
 
     .platform-card-header {
       margin-bottom: 24px;
+    }
+
+    .brand-lockup {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--text);
+      font: 700 13px/1 monospace;
+      letter-spacing: 1.2px;
+    }
+
+    .brand-lockup img {
+      width: 38px;
+      height: 38px;
     }
 
     .platform-card-header h1,
@@ -4524,7 +4553,7 @@
     }
 
     /* =========================================
-       MYDEVFOLIOHUB V2 LANDING PAGE
+       DEVILOQ LANDING PAGE
     ========================================= */
 
     #landingView {
@@ -4545,15 +4574,7 @@
       letter-spacing: .7px;
     }
 
-    #landingView .platform-logo span {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 34px;
-      height: 34px;
-      border: 1px solid color-mix(in srgb, var(--green) 55%, transparent);
-      border-radius: 9px;
-      background: color-mix(in srgb, var(--accent-strong) 20%, transparent);
+    #landingView .platform-logo img {
       box-shadow: 0 0 28px color-mix(in srgb, var(--green) 15%, transparent);
     }
 
@@ -5155,7 +5176,7 @@
     }
 
     /* =========================================
-       MYDEVFOLIOHUB V2 — PLATFORM EXPERIENCE
+       DEVILOQ — PLATFORM EXPERIENCE
     ========================================= */
 
     #landingView .platform-header::before,
@@ -5182,7 +5203,7 @@
       background: radial-gradient(ellipse at center, color-mix(in srgb, var(--blue) 62%, transparent) 0%, color-mix(in srgb, var(--green) 26%, transparent) 42%, transparent 74%);
     }
 
-    #landingView .platform-logo span {
+    #landingView .platform-logo img {
       box-shadow: 0 0 24px color-mix(in srgb, var(--green) 11%, transparent);
     }
 
@@ -5809,7 +5830,9 @@
     .landing-platform-footer { margin-bottom: -60px; }
     .portfolio-platform-footer { width: min(1300px, 92%); margin: 45px auto 0; }
     .platform-footer-brand strong { color: var(--text); font-family: monospace; font-size: 18px; }
-    .platform-footer-brand strong span { color: var(--green); }
+    .footer-brand-lockup { display: inline-flex; align-items: center; gap: 10px; }
+    .footer-brand-lockup img { width: 32px; height: 32px; }
+    .platform-footer-brand .footer-brand-lockup span { color: var(--text); }
     .platform-footer-brand p { margin-top: 9px; color: var(--muted); font-size: 12px; }
 
     .platform-footer-links { display: grid; grid-template-columns: repeat(2, minmax(150px, 1fr)); gap: 38px; }
@@ -5852,7 +5875,7 @@
       #landingView { width: min(100% - 32px, 680px); }
 
       #landingView .platform-logo { font-size: 16px; }
-      #landingView .platform-logo span { width: 30px; height: 30px; }
+      #landingView .platform-logo img { width: 30px; height: 30px; }
 
       .landing-hero {
         min-height: auto;

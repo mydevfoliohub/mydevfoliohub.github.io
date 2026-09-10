@@ -1,11 +1,18 @@
 {
-  "short_name": "MyDevFolioHub",
-  "name": "MyDevFolioHub | Developer Portfolio Builder",
-  "icons": [{
-    "src": "icon.png",
-    "type": "image/png",
-    "sizes": "192x192"
-  }],
+  "short_name": "Deviloq",
+  "name": "Deviloq | Developer Portfolio Builder",
+  "icons": [
+    {
+      "src": "/favicon-192x192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/favicon-512x512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
   "start_url": "/?utm_source=homescreen",
   "background_color": "#11010a",
   "theme_color": "#11010a"

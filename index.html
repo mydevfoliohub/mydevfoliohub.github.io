@@ -3575,23 +3575,62 @@
 <dialog id="portfolioCvDialog" class="product-dialog resume-dialog" aria-labelledby="portfolioCvHeading">
   <header class="product-dialog-header"><div><p class="product-eyebrow dialog-brand"><img src="/assets/brand/deviloq-mark.svg" alt="" aria-hidden="true" width="22" height="22"><span>DEVILOQ RESUME STUDIO</span></p><h2 id="portfolioCvHeading">Resume Studio</h2><p>Build a resume from your portfolio.</p></div><button type="button" class="platform-button" data-close-dialog aria-label="Close Resume Studio">Close</button></header>
   <div class="resume-studio-body" id="resumeStudioBody">
-    <aside id="resumeControls" class="resume-controls" aria-label="Resume controls" onchange="changeResumeOption(event)">
-      <div class="resume-controls-intro"><span>LIVE A4</span><h3>Choose your starting point</h3><p>Every change updates the preview instantly.</p></div>
-      <div class="resume-template-grid" role="group" aria-label="Resume template">
-        <button type="button" data-resume-template="ats" aria-pressed="true" onclick="selectResumeTemplate('ats')"><strong>ATS</strong><small>Clean, single column and parser friendly.</small></button>
-        <button type="button" data-resume-template="modern" aria-pressed="false" onclick="selectResumeTemplate('modern')"><strong>Modern</strong><small>Professional layout with a subtle accent.</small></button>
-      </div>
-      <label class="resume-template-native-label" for="resume-template">Template</label><select class="resume-template-native" id="resume-template" data-resume-option="template"><option value="ats">ATS — clean &amp; minimal</option><option value="modern">Modern — subtle accent</option></select>
-      <label for="resume-accent">Modern accent</label><select id="resume-accent" data-resume-option="accent"><option value="teal">Teal</option><option value="purple">Purple</option><option value="blue">Blue</option></select>
-      <label for="resume-density">Page spacing</label><select id="resume-density" data-resume-option="density"><option value="comfortable">Comfortable</option><option value="compact">Compact</option></select>
-      <div class="resume-data-summary" id="resumeDataSummary" role="status" aria-live="polite"></div>
-      <div class="resume-section-heading"><div><h3>Sections</h3><p>Only sections with content appear. Use arrows to set resume order.</p></div><button type="button" class="resume-preview-jump" onclick="scrollResumePreviewIntoView()">Preview ↓</button></div>
-      <div class="resume-presets" aria-label="Resume section presets"><button type="button" onclick="applyResumeSectionPreset('recommended')">Recommended</button><button type="button" onclick="applyResumeSectionPreset('essential')">Essentials</button><button type="button" onclick="applyResumeSectionPreset('compact')">Compact</button></div>
-      <div id="resumeSectionList"></div>
-      <h3>Options</h3><label class="product-check"><input id="resume-photo" type="checkbox" data-resume-option="photo">Include profile photo</label><label class="product-check"><input id="resume-email" type="checkbox" data-resume-option="email">Include public email</label><label class="product-check"><input id="resume-github" type="checkbox" data-resume-option="github">GitHub contact link</label><label class="product-check"><input id="resume-linkedin" type="checkbox" data-resume-option="linkedin">LinkedIn contact link</label>
-      <label for="resume-maxProjects">Maximum projects</label><input id="resume-maxProjects" type="number" min="1" max="30" data-resume-option="maxProjects">
-      <label for="resume-maxCertificates">Maximum certificates</label><input id="resume-maxCertificates" type="number" min="1" max="30" data-resume-option="maxCertificates">
-      <label class="product-check"><input id="resume-public" type="checkbox" data-resume-option="public">Public resume</label><p>Visitors see Download Resume only after you save this preference and your portfolio is public.</p><p id="resumeMigrationNote" class="migration-note" hidden>Export is available. Saving preferences requires sql/resume_settings_migration.sql.</p>
+    <aside id="resumeControls" class="resume-controls" aria-label="Resume controls" oninput="changeResumeOption(event)">
+      <div class="resume-controls-intro"><span>LIVE A4</span><h3>Build it step by step</h3><p>Your resume content is separate from your public portfolio.</p></div>
+      <nav class="resume-step-nav" aria-label="Resume Studio steps">
+        <button type="button" data-resume-step-button="content" aria-current="step" onclick="setResumeStep('content')"><span>1</span>Content</button>
+        <button type="button" data-resume-step-button="experience" onclick="setResumeStep('experience')"><span>2</span>Experience</button>
+        <button type="button" data-resume-step-button="sections" onclick="setResumeStep('sections')"><span>3</span>Sections</button>
+        <button type="button" data-resume-step-button="design" onclick="setResumeStep('design')"><span>4</span>Design</button>
+        <button type="button" data-resume-step-button="review" onclick="setResumeStep('review')"><span>5</span>Review</button>
+      </nav>
+
+      <section class="resume-control-panel" data-resume-step-panel="content">
+        <div class="resume-panel-heading"><span>STEP 1</span><h3>Resume content</h3><p>Tailor this version without changing your portfolio profile.</p></div>
+        <label for="resume-targetRole">Target role</label><input id="resume-targetRole" type="text" maxlength="120" data-resume-option="targetRole" placeholder="e.g. Junior Cybersecurity Analyst">
+        <label for="resume-summary">Professional summary</label><textarea id="resume-summary" maxlength="1200" rows="6" data-resume-option="summary" placeholder="Leave blank to use your portfolio bio, or write a role-focused summary."></textarea><div class="resume-field-meta"><span>Used only in your resume</span><span id="resumeSummaryCount">0/1200</span></div>
+        <label for="resume-prioritySkills">Priority skills</label><input id="resume-prioritySkills" type="text" maxlength="900" data-resume-option="prioritySkillsText" placeholder="JavaScript, Supabase, PostgreSQL"><p>Listed first; remaining portfolio skills follow automatically.</p>
+      </section>
+
+      <section class="resume-control-panel" data-resume-step-panel="experience" hidden>
+        <div class="resume-panel-heading"><span>STEP 2</span><h3>Experience</h3><p>Add real work, internship or volunteer experience. Nothing is invented.</p></div>
+        <div id="resumeExperienceList" class="resume-experience-list"></div>
+        <button type="button" class="resume-add-experience" onclick="addResumeExperience()">＋ Add experience</button>
+      </section>
+
+      <section class="resume-control-panel" data-resume-step-panel="sections" hidden>
+        <div class="resume-panel-heading"><span>STEP 3</span><h3>Sections</h3><p>Only sections with content appear. Use arrows to set resume order.</p></div>
+        <div class="resume-presets" aria-label="Resume section presets"><button type="button" onclick="applyResumeSectionPreset('recommended')">Recommended</button><button type="button" onclick="applyResumeSectionPreset('essential')">Essentials</button><button type="button" onclick="applyResumeSectionPreset('compact')">Compact</button></div>
+        <div id="resumeSectionList"></div>
+        <label for="resume-maxProjects">Maximum projects</label><input id="resume-maxProjects" type="number" min="1" max="30" data-resume-option="maxProjects">
+        <label for="resume-maxCertificates">Maximum certificates</label><input id="resume-maxCertificates" type="number" min="1" max="30" data-resume-option="maxCertificates">
+      </section>
+
+      <section class="resume-control-panel" data-resume-step-panel="design" hidden>
+        <div class="resume-panel-heading"><span>STEP 4</span><h3>Design</h3><p>Choose a polished ATS or Modern presentation.</p></div>
+        <div class="resume-template-grid" role="group" aria-label="Resume template">
+          <button type="button" data-resume-template="ats" aria-pressed="true" onclick="selectResumeTemplate('ats')"><span class="resume-template-preview ats" aria-hidden="true"><i></i><i></i><i></i><i></i></span><strong>ATS</strong><small>Clean, single column and parser friendly.</small></button>
+          <button type="button" data-resume-template="modern" aria-pressed="false" onclick="selectResumeTemplate('modern')"><span class="resume-template-preview modern" aria-hidden="true"><i></i><i></i><i></i><i></i></span><strong>Modern</strong><small>Professional layout with a subtle accent.</small></button>
+        </div>
+        <label class="resume-template-native-label" for="resume-template">Template</label><select class="resume-template-native" id="resume-template" data-resume-option="template"><option value="ats">ATS — clean &amp; minimal</option><option value="modern">Modern — subtle accent</option></select>
+        <label for="resume-accent">Modern accent</label><select id="resume-accent" data-resume-option="accent"><option value="teal">Teal</option><option value="purple">Purple</option><option value="blue">Blue</option></select>
+        <label for="resume-density">Page spacing</label><select id="resume-density" data-resume-option="density"><option value="comfortable">Comfortable</option><option value="compact">Compact</option></select>
+        <label class="product-check"><input id="resume-onePage" type="checkbox" data-resume-option="onePage">Fit to one page</label><p>Uses compact spacing and prioritizes your first entries. The preview warns you if the selected content still needs another page.</p>
+        <button type="button" class="resume-fit-button" onclick="fitResumeToOnePage()">Fit this resume to one page</button>
+        <h3>Contact &amp; visibility</h3><label class="product-check"><input id="resume-photo" type="checkbox" data-resume-option="photo">Include profile photo</label><label class="product-check"><input id="resume-email" type="checkbox" data-resume-option="email">Include public email</label><label class="product-check"><input id="resume-github" type="checkbox" data-resume-option="github">GitHub contact link</label><label class="product-check"><input id="resume-linkedin" type="checkbox" data-resume-option="linkedin">LinkedIn contact link</label>
+        <label class="product-check"><input id="resume-public" type="checkbox" data-resume-option="public">Public resume</label><p>Visitors see Download Resume only after you save this preference and your portfolio is public.</p><p id="resumeMigrationNote" class="migration-note" hidden>Export remains available. Saving tailored content requires sql/resume_content_migration.sql after the existing resume settings migration.</p>
+      </section>
+
+      <section class="resume-control-panel" data-resume-step-panel="review" hidden>
+        <div class="resume-panel-heading"><span>STEP 5</span><h3>Review &amp; ATS check</h3><p>Finish the essentials, then compare your resume with a job description locally.</p></div>
+        <div class="resume-data-summary" id="resumeDataSummary" role="status" aria-live="polite"></div>
+        <div id="resumeAtsChecklist" class="resume-ats-checklist"></div>
+        <label for="resumeJobDescription">Job description</label><textarea id="resumeJobDescription" rows="7" maxlength="8000" placeholder="Paste the job description here. It stays in this browser session and is not saved."></textarea>
+        <button type="button" class="resume-ats-button" onclick="analyzeResumeForJob()">Analyze keyword match</button>
+        <div id="resumeKeywordResults" class="resume-keyword-results" aria-live="polite"></div>
+      </section>
+
+      <div class="resume-step-actions"><button type="button" class="platform-button" id="resumeStepBack" onclick="moveResumeStep(-1)">Back</button><button type="button" class="platform-button primary" id="resumeStepNext" onclick="moveResumeStep(1)">Next</button><button type="button" class="resume-preview-jump" onclick="scrollResumePreviewIntoView()">Preview ↓</button></div>
     </aside>
     <div class="resume-workspace"><div class="resume-preview-label"><span>LIVE A4 PREVIEW</span><span id="resumePages" aria-live="polite"></span></div><div id="resumePaper" class="resume-paper"><iframe id="portfolioCvFrame" title="Live A4 resume preview" sandbox="allow-same-origin allow-modals"></iframe></div></div>
   </div>

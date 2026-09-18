@@ -32,14 +32,19 @@ jobs:
       - name: Install Android 16 SDK
         shell: bash
         run: |
-          yes | sdkmanager "platforms;android-36" "build-tools;36.0.0" "platform-tools" >/dev/null
+          yes | sdkmanager --licenses >/dev/null || true
+          sdkmanager "platforms;android-36" "build-tools;36.0.0" "platform-tools" >/dev/null
 
       - name: Create Capacitor project
         shell: bash
         run: |
           mkdir -p mobile-build/www mobile-build/resources
           cp index.html mobile-build/www/
-          cp -R assets css img js mobile-build/www/
+          for dir in assets css img js; do
+            if [ -d "$dir" ]; then
+              cp -R "$dir" mobile-build/www/
+            fi
+          done
           cp favicon-192x192.png favicon-32x32.png favicon-512x512.png favicon.ico favicon.svg icon.png icon.svg site.webmanifest mobile-build/www/
           cp favicon-512x512.png mobile-build/resources/icon.png
 

@@ -29,8 +29,14 @@ jobs:
       - name: Install Android 16 SDK
         shell: bash
         run: |
-          yes | sdkmanager --licenses >/dev/null || true
-          sdkmanager "platforms;android-36" "build-tools;36.0.0" "platform-tools" >/dev/null
+          SDK_ROOT="${ANDROID_SDK_ROOT:-$ANDROID_HOME}"
+          SDKMANAGER_PATH="$(find "$SDK_ROOT/cmdline-tools" -type f -name sdkmanager | sort -V | tail -n 1)"
+          if [ -z "$SDKMANAGER_PATH" ]; then
+            echo "sdkmanager was not found under $SDK_ROOT/cmdline-tools" >&2
+            exit 1
+          fi
+          yes | "$SDKMANAGER_PATH" --licenses >/dev/null || true
+          "$SDKMANAGER_PATH" "platforms;android-36" "build-tools;36.0.0" "platform-tools" >/dev/null
 
       - name: Create Capacitor project
         shell: bash

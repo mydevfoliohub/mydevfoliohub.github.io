@@ -9,14 +9,14 @@ async function openPlatformAdmin() {
     const check = await supabaseClient.rpc('is_admin');
     if (currentUser?.id !== owner) return;
     if (check.error || check.data !== true) {
-      productStatus('ownerActionStatus', 'Access denied. A verified Platform Admin account is required.');
+      productStatus('ownerActionStatus', uiText('Access denied. A verified Platform Admin account is required.','تم رفض الوصول. يلزم حساب مسؤول منصة موثّق.'));
       return;
     }
   } catch {
-    productStatus('ownerActionStatus', 'Could not verify platform access. Please retry.');
+    productStatus('ownerActionStatus', uiText('Could not verify platform access. Please retry.','تعذّر التحقق من صلاحية الوصول. حاول مرة أخرى.'));
     return;
   }
-  productStatus('adminStatus', 'Verifying platform access…');
+  productStatus('adminStatus', uiText('Verifying platform access…','جارٍ التحقق من صلاحية الوصول…'));
   document.getElementById('adminMetrics').replaceChildren();
   document.getElementById('adminUsers').replaceChildren();
   document.getElementById('adminSearch').value = '';
@@ -32,7 +32,7 @@ async function loadPlatformAdmin() {
   document.getElementById('adminMetrics').replaceChildren();
   document.getElementById('adminPrevious').disabled = true;
   document.getElementById('adminNext').disabled = true;
-  productStatus('adminStatus', 'Loading platform overview…');
+  productStatus('adminStatus', uiText('Loading platform overview…','جارٍ تحميل نظرة عامة على المنصة…'));
   try {
     const check = await supabaseClient.rpc('is_admin');
     if (check.error || check.data !== true) throw new Error('Access denied. A verified Platform Admin account is required.');
@@ -40,12 +40,13 @@ async function loadPlatformAdmin() {
       p_search: document.getElementById('adminSearch').value.trim().slice(0,80), p_offset: adminOffset
     });
     if (request !== adminRequest || currentUser?.id !== owner) return;
-    if (error) throw new Error('Admin overview unavailable. Verify sql/admin_dashboard_migration.sql is installed and your admin role is active.');
+    if (error) throw new Error(uiText('The admin overview is unavailable right now. Please try again later.','نظرة الإدارة العامة غير متاحة الآن. حاول مجددًا لاحقًا.'));
     if (!data?.metrics || !Array.isArray(data.profiles)) throw new Error('The admin response could not be read.');
+    const metricLabelsAr = {total_profiles:'إجمالي الملفات الشخصية',public_portfolios:'الملفات الشخصية العامة',new_this_week:'ملفات جديدة هذا الأسبوع',total_projects:'إجمالي المشاريع',total_labs:'إجمالي المختبرات',total_certificates:'إجمالي الشهادات',total_learning_posts:'إجمالي منشورات التعلم'};
     Object.entries({total_profiles:'Total Profiles', public_portfolios:'Public Portfolios', new_this_week:'New Profiles This Week', total_projects:'Total Projects', total_labs:'Total Labs', total_certificates:'Total Certificates', total_learning_posts:'Total Learning Posts'}).forEach(([key,label]) => {
       const card = document.createElement('div'); card.className = 'admin-metric';
-      const value = document.createElement('strong'); value.textContent = Number(data.metrics[key] || 0).toLocaleString();
-      const title = document.createElement('span'); title.textContent = label;
+      const value = document.createElement('strong'); value.textContent = Number(data.metrics[key] || 0).toLocaleString(document.documentElement.lang === 'ar' ? 'ar-SA' : 'en');
+      const title = document.createElement('span'); title.textContent = uiText(label,metricLabelsAr[key] || label);
       card.append(value,title); document.getElementById('adminMetrics').append(card);
     });
     for (const profile of data.profiles) {
@@ -59,19 +60,19 @@ async function loadPlatformAdmin() {
       const name = document.createElement('strong'); name.textContent = profile.display_name;
       const username = document.createElement(profile.is_public ? 'a' : 'span'); username.textContent = '@' + profile.username;
       if (profile.is_public) { username.href = buildPortfolioURL(profile.username); username.target = '_blank'; username.rel = 'noopener'; }
-      const specialty = document.createElement('small'); specialty.textContent = PROFILE_SPECIALTIES[profile.specialty] || profile.specialty || 'No specialty';
+      const specialty = document.createElement('small'); specialty.textContent = specialtyText(profile.specialty) || profile.specialty || uiText('No specialty','دون تخصص');
       identity.append(name,username,specialty);
       const meta = document.createElement('div'); meta.className = 'admin-user-meta';
-      const status = document.createElement('span'); status.textContent = profile.is_public ? 'Public' : 'Private';
-      const date = document.createElement('time'); date.dateTime = profile.created_at; date.textContent = new Date(profile.created_at).toLocaleDateString();
+      const status = document.createElement('span'); status.textContent = profile.is_public ? uiText('Public','عام') : uiText('Private','خاص');
+      const date = document.createElement('time'); date.dateTime = profile.created_at; date.textContent = new Date(profile.created_at).toLocaleDateString(document.documentElement.lang === 'ar' ? 'ar-SA' : 'en');
       meta.append(status,date); row.append(avatar,identity,meta); document.getElementById('adminUsers').append(row);
     }
     const count = Number(data.total_matches || 0);
     document.getElementById('adminPrevious').disabled = adminOffset === 0;
     document.getElementById('adminNext').disabled = adminOffset + 25 >= count;
-    productStatus('adminStatus', count ? `${adminOffset + 1}–${Math.min(adminOffset + 25,count)} of ${count} profiles. Week starts Monday (UTC).` : 'No portfolios match your search.');
+    productStatus('adminStatus', count ? uiText(`${adminOffset + 1}–${Math.min(adminOffset + 25,count)} of ${count} profiles. Week starts Monday (UTC).`,`الملفات ${adminOffset + 1}–${Math.min(adminOffset + 25,count)} من ${count}. يبدأ الأسبوع يوم الاثنين (UTC).`) : uiText('No portfolios match your search.','لا توجد ملفات شخصية تطابق بحثك.'));
   } catch (error) {
-    if (request === adminRequest && currentUser?.id === owner) productStatus('adminStatus', error.message || 'Could not load platform data.');
+    if (request === adminRequest && currentUser?.id === owner) productStatus('adminStatus', uiText(error.message || 'Could not load platform data.','تعذّر تحميل بيانات المنصة.'));
   }
 }
 function searchPlatformAdmin() { clearTimeout(adminSearchTimer); adminSearchTimer = setTimeout(() => { adminOffset = 0; loadPlatformAdmin(); }, 300); }

@@ -1,7 +1,7 @@
 /* v2.2.0 application surfaces use existing colors and typography. */
 [hidden]{display:none!important}
 .product-dialog-open{overflow:hidden}
-.product-dialog{color:var(--text);background:var(--card);border:1px solid var(--border);border-radius:18px;margin:auto;padding:0;width:min(960px,calc(100vw - 40px));max-width:calc(100vw - 24px);max-height:92dvh;overflow:auto;box-shadow:0 24px 100px #0008;color-scheme:dark}
+.product-dialog{color:var(--text);background:var(--card);border:1px solid var(--border);border-radius:18px;margin:auto;padding:0;width:min(960px,calc(100vw - 40px));max-width:calc(100vw - 24px);max-height:92dvh;overflow:auto;box-shadow:0 24px 100px #0008}
 .product-dialog::backdrop{background:rgba(4,4,12,.82);backdrop-filter:blur(5px)}
 .product-dialog-header{display:flex;justify-content:space-between;align-items:flex-start;gap:20px;padding:24px 28px;border-bottom:1px solid var(--border);background:var(--card)}
 .product-dialog-header h2{font-size:24px;line-height:1.3;letter-spacing:-.5px;margin:4px 0 8px}
@@ -129,3 +129,325 @@ dialog#deleteAccountModal{position:fixed;inset:0;width:min(600px,calc(100vw - 24
 @media(max-width:768px){.resume-dialog{width:calc(100vw - 16px)}.resume-studio-body{display:block}.resume-controls{padding:16px}.resume-step-nav{position:sticky;top:-16px;z-index:5;margin-inline:-16px;padding:10px 16px;background:color-mix(in srgb,var(--background) 95%,transparent);backdrop-filter:blur(12px)}.resume-step-actions{bottom:-16px;margin:20px -16px -16px;padding:10px 16px}.resume-preview-jump{margin-inline-start:auto}.resume-workspace{min-height:440px}.resume-template-grid button{min-height:130px}}
 @media(max-width:430px){.resume-step-nav button{font-size:0;min-height:45px}.resume-step-nav button span{font-size:9px}.resume-experience-dates{grid-template-columns:1fr}.resume-template-grid{grid-template-columns:1fr 1fr}.resume-template-grid button{min-height:125px;padding:10px}.resume-template-grid button small{font-size:8px}.resume-step-actions .platform-button{padding-inline:10px;font-size:10px}}
 @media(prefers-reduced-motion:reduce){.resume-step-nav button,.resume-trigger-progress i{transition:none}}
+
+/* Owner tools stay compact while every section link and ordering control remains available. */
+#dashboardBar .dashboard-quick-actions{grid-template-columns:repeat(3,minmax(0,1fr));padding:10px 0 18px}
+#dashboardBar .dashboard-quick-actions .platform-button{min-height:48px;justify-content:flex-start;text-align:start}
+#dashboardBar .dashboard-account-actions{padding:16px 0;margin:0 0 22px;border-top:1px solid var(--border)}
+#dashboardBar .dashboard-section-tools{padding:0;border:1px solid var(--border);border-radius:12px;background:color-mix(in srgb,var(--card) 90%,transparent)}
+#dashboardBar .dashboard-section-tools>summary{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:18px 20px;list-style:none;font-size:14px;font-weight:700}
+#dashboardBar .dashboard-section-tools>summary::-webkit-details-marker{display:none}
+#dashboardBar .dashboard-section-tools>summary::after{content:"⌄";color:var(--green);font-size:20px;line-height:1;transition:transform .2s ease}
+#dashboardBar .dashboard-section-tools[open]>summary::after{transform:rotate(180deg)}
+#dashboardBar .dashboard-section-tools>summary small{margin-inline-start:auto;color:var(--muted);font-size:11px;font-weight:400}
+#dashboardBar .dashboard-section-tools .dashboard-shortcuts{margin:0 20px;padding:16px 0;border-top:1px solid var(--border)}
+#dashboardBar .dashboard-section-tools .layout-manager{margin:0 20px 20px}
+#dashboardBar .dashboard-section-tools :is(summary,a,button):focus-visible{outline:2px solid var(--green);outline-offset:3px}
+
+/* A single scrollable navigation row avoids a tall, wrapped portfolio header. */
+#portfolioView #portfolioSectionNav{flex-wrap:nowrap;overflow-x:auto;overflow-y:hidden;white-space:nowrap;scrollbar-width:thin;overscroll-behavior-inline:contain}
+#portfolioView #portfolioSectionNav a{flex:0 0 auto;white-space:nowrap}
+#portfolioView #portfolioSectionNav a[aria-current=location]{font-weight:700}
+
+/* Quick Preview is an explicit inline disclosure; the project link always has its own row. */
+#portfolioView .project-card{height:100%;min-width:0}
+#portfolioView .project-card>p{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;overflow:hidden;overflow-wrap:anywhere}
+#portfolioView .project-card .tags{margin-top:16px}
+#portfolioView .project-hover-preview,
+#portfolioView .project-card:hover .project-hover-preview,
+#portfolioView .project-card:focus-within .project-hover-preview{display:block;position:static;inset:auto;order:0;max-height:none;margin:14px 0 0;padding:0;border:0;border-radius:0;background:none;box-shadow:none;opacity:1;overflow:visible;transform:none;transition:none;pointer-events:auto}
+#portfolioView .project-hover-preview summary{display:inline-flex;align-items:center;gap:8px;min-height:40px;padding:6px 0;color:var(--green);font-size:11px;font-weight:700;cursor:pointer;list-style:none}
+#portfolioView .project-hover-preview summary::-webkit-details-marker{display:none}
+#portfolioView .project-hover-preview summary::after{content:"⌄";font-size:16px;transition:transform .2s ease}
+#portfolioView .project-hover-preview[open] summary::after{transform:rotate(180deg)}
+#portfolioView .project-hover-preview[open] :is(p,.project-hover-tools){display:block;max-width:65ch;margin:8px 0 0;line-height:1.7;overflow-wrap:anywhere}
+#portfolioView .project-card-footer{order:1;min-height:56px;margin-top:auto;padding-top:14px;border-top:1px solid var(--border)}
+#portfolioView .project-card-footer .project-card-link{min-height:44px;direction:ltr;unicode-bidi:isolate}
+#portfolioView .project-hover-preview summary:focus-visible,#portfolioView .project-card-footer .project-card-link:focus-visible{outline:2px solid var(--green);outline-offset:3px}
+
+/* Resume editing keeps progress and save state visible without shrinking controls. */
+.resume-step-progress{margin:12px 0 0!important;color:var(--green)!important;font-size:11px!important;font-weight:700}
+.resume-step-nav button{font-size:10px;line-height:1.25}
+.resume-template-grid button small{font-size:10px}
+.resume-controls p{font-size:12px;line-height:1.65}
+.resume-toolbar-feedback{display:flex;flex-direction:column;align-items:flex-start;gap:3px;min-width:0}
+.resume-save-state{display:inline-flex;align-items:center;gap:7px;color:var(--green);font-size:11px;font-weight:700;white-space:nowrap}
+.resume-save-state::before{content:"✓";display:grid;place-items:center;width:17px;height:17px;border-radius:50%;background:color-mix(in srgb,var(--green) 18%,transparent)}
+.resume-save-state.is-dirty{color:#eba74e}
+.resume-save-state.is-dirty::before{content:"•";background:rgba(235,167,78,.16)}
+.resume-toolbar .product-status{min-height:0;margin:0}
+
+/* Arabic copy and compact screens need room to wrap without page overflow. */
+html[dir=rtl] #landingView .release-entry :is(h3,p),html[dir=rtl] #portfolioView :is(.project-card>p,.learning-post-card p){line-height:1.85;overflow-wrap:anywhere}
+html[dir=rtl] #portfolioView .project-card-heading{padding-inline-end:70px;padding-inline-start:0}
+html[dir=rtl] #portfolioView .project-card-footer{direction:rtl}
+html[dir=rtl] .resume-preview-label{direction:ltr}
+html[dir=rtl] #landingView .landing-terminal-output-line{direction:rtl;text-align:right;unicode-bidi:plaintext}
+.contact-honeypot{left:auto!important;right:auto!important;clip-path:inset(50%)!important;white-space:nowrap!important}
+@media(max-width:1024px){#dashboardBar .dashboard-quick-actions{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:800px){#portfolioView #portfolioSectionNav{display:none;white-space:normal;overflow-y:auto}#portfolioView .portfolio-header:has(#portfolioMenuButton[aria-expanded=true]) #portfolioSectionNav{display:grid}#portfolioView #portfolioSectionNav a{white-space:normal}#portfolioView .portfolio-header-controls{min-width:0}}
+@media(max-width:540px){#dashboardBar .dashboard-quick-actions{grid-template-columns:1fr}#dashboardBar .dashboard-section-tools>summary{flex-wrap:wrap;padding:16px}#dashboardBar .dashboard-section-tools>summary small{order:2;width:100%;margin:0}#dashboardBar .dashboard-section-tools .dashboard-shortcuts{margin-inline:16px}#dashboardBar .dashboard-section-tools .layout-manager{margin-inline:16px}.resume-step-nav{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));grid-auto-flow:row;overflow:visible}.resume-step-nav button{min-height:56px;font-size:9px;overflow-wrap:anywhere}.resume-toolbar .product-actions{gap:7px}.resume-toolbar .product-actions .primary{min-height:50px}.resume-preview-label{font-size:11px}}
+@media(prefers-reduced-motion:reduce){#dashboardBar .dashboard-section-tools>summary::after,#portfolioView .project-hover-preview summary::after{transition:none}}
+
+/* Shared accessibility refinements keep the existing surfaces and purple palette. */
+.skip-link{position:fixed;inset-block-start:12px;inset-inline-start:12px;z-index:5000;transform:translateY(-180%);padding:10px 16px;border-radius:var(--control-radius);background:var(--card);color:var(--text);border:2px solid var(--green);font-weight:700;text-decoration:none}
+.skip-link:focus{transform:none}
+main[tabindex="-1"]:focus{outline:none}
+.legacy-dialog-open{overflow:hidden}
+.mobile-site-nav,.portfolio-nav-heading{display:none}
+.platform-button,.product-dialog .platform-button{min-height:var(--control-height);border-radius:var(--control-radius)}
+.theme-toggle,.lang-toggle{min-height:var(--control-height);min-width:var(--control-height)}
+.close-modal,.announce-close{min-width:var(--control-height);min-height:var(--control-height);display:inline-grid;place-items:center}
+#landingView .studio-swatch{width:var(--control-height);height:var(--control-height)}
+#landingView .landing-terminal-tabs button{min-height:var(--control-height);font-size:12px}
+:is(.platform-button,.close-modal,.announce-close,.directory-filter-chip,.landing-terminal-tabs button,.portfolio-menu-button):focus-visible{outline:2px solid var(--green);outline-offset:3px}
+:is(.platform-form,.contact-form,.product-dialog,[data-legacy-dialog],.user-search-controls) :is(input:not([type="checkbox"]):not([type="radio"]):not([type="file"]):not([type="range"]):not([type="color"]):not([type="hidden"]),textarea,select):not(:focus){border-color:var(--control-border)}
+:is(.platform-form,.contact-form,[data-legacy-dialog],.user-search-controls) :is(input:not([type="checkbox"]):not([type="radio"]):not([type="file"]):not([type="range"]):not([type="color"]):not([type="hidden"]),textarea,select){min-height:var(--control-height);border-radius:var(--control-radius)}
+.product-dialog{border-radius:var(--card-radius)}
+:root:not([data-theme="light"]) .product-dialog{color-scheme:dark}
+:root[data-theme="light"] .product-dialog{color-scheme:light}
+.product-dialog :is(input:not([type="checkbox"]),select,textarea){min-height:var(--control-height);border-radius:var(--control-radius)}
+.product-dialog p,.product-dialog label,.product-dialog .settings-nav button{font-size:14px}
+.share-url-row input{font-size:14px;min-height:var(--control-height)}
+.share-portfolio-modal-content{border-radius:var(--card-radius)}
+.share-portfolio-modal-content label,.share-portfolio-copy{font-size:14px}
+#landingView .landing-hero-notes{font-size:13px}
+#landingView .landing-studio-benefits p,#landingView .studio-profile-bio{font-size:13px}
+#landingView :is(.studio-profile-heading p,.studio-project p,.studio-note p,.studio-mini-label,.studio-note-tag){font-size:11px}
+.resume-controls p,.resume-field-meta,.resume-ats-checklist li,.resume-keyword-score span,.resume-keyword-group h4,.resume-template-grid button small{font-size:12px}
+.resume-trigger-copy small{font-size:12px}
+.resume-remove-experience{min-height:var(--control-height);padding:8px;font-size:12px}
+.resume-section-row button{min-width:var(--control-height);min-height:var(--control-height)}
+.resume-step-nav button{font-size:12px}
+.resume-step-progress,.resume-save-state{font-size:12px!important}
+.notification-item a{min-height:var(--control-height);font-size:14px}
+#portfolioView[data-portfolio-theme]{--control-border:color-mix(in srgb,var(--muted) 70%,var(--border))}
+#landingView .landing-terminal-body{font-size:13px}
+#landingView .landing-faq details p{font-size:14px}
+.community-screen .user-search-controls label:not(.user-search-box){font-size:13px}
+.community-screen .user-result-copy small{font-size:12px}
+.directory-filter-chip{min-height:var(--control-height)}
+.platform-footer-links :is(a,button){min-height:var(--control-height);display:flex;align-items:center}
+#portfolioView .portfolio-header-controls button{min-height:var(--control-height)}
+#portfolioView #portfolioSectionNav a{min-height:var(--control-height);display:inline-flex;align-items:center;font-size:13px}
+#portfolioView #portfolioSectionNav a[aria-current="location"]{border-color:var(--green);background:color-mix(in srgb,var(--green) 14%,var(--card));color:var(--text)}
+
+@media(max-width:800px){
+  #landingView .announce-bar{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;justify-content:stretch;gap:2px 10px;margin-bottom:var(--space-3);padding:10px 12px;border-radius:var(--card-radius);text-align:start}
+  #landingView .announce-bar .announce-dot{grid-column:1;grid-row:1}
+  #landingView .announce-bar p{grid-column:2;grid-row:1;margin:0;line-height:1.45}
+  #landingView .announce-bar a{grid-column:2;grid-row:2}
+  #landingView .announce-bar .announce-close{grid-column:3;grid-row:1/3;margin:0}
+  #landingView .platform-header-actions #landingPrimaryAction{display:none}
+  #landingView .platform-header{position:relative;z-index:20;flex-wrap:wrap;gap:var(--space-3)}
+  .community-header{flex-wrap:wrap;gap:var(--space-3)}
+  .community-header .platform-header-actions{order:2;width:100%;justify-content:flex-start}
+  #landingView .platform-logo{order:0}
+  #landingView .mobile-site-nav{display:block;order:1;position:relative;margin-inline-start:auto}
+  #landingView .mobile-site-nav summary{display:flex;align-items:center;justify-content:center;min-height:var(--control-height);padding:8px 14px;border:1px solid var(--border);border-radius:var(--control-radius);background:var(--card);color:var(--text);font-size:14px;font-weight:700;cursor:pointer;list-style:none}
+  #landingView .mobile-site-nav summary::-webkit-details-marker{display:none}
+  #landingView .mobile-site-nav summary::after{content:"☰";margin-inline-start:8px;color:var(--green)}
+  #landingView .mobile-site-nav[open] summary{border-color:var(--green)}
+  #landingView .mobile-site-nav nav{position:absolute;inset-block-start:calc(100% + 8px);inset-inline-end:0;z-index:100;display:grid;gap:var(--space-1);width:min(280px,calc(100vw - 32px));max-width:none;padding:var(--space-2);border:1px solid var(--control-border);border-radius:var(--card-radius);background:var(--card);box-shadow:0 20px 45px rgba(0,0,0,.35);overflow:visible;scrollbar-width:auto}
+  #landingView .mobile-site-nav nav :is(a,button){display:flex;align-items:center;min-height:var(--control-height);width:100%;padding:10px 12px;border:0;border-radius:var(--control-radius);background:transparent;color:var(--text);font:inherit;font-size:14px;text-align:start;text-decoration:none}
+  #landingView .mobile-site-nav nav :is(a,button):hover,#landingView .mobile-site-nav nav :is(a,button):focus-visible{background:color-mix(in srgb,var(--green) 12%,var(--card));outline:2px solid var(--green);outline-offset:0}
+  #landingView .platform-header-actions{order:2;width:100%;justify-content:flex-start;margin:0}
+  #landingView .landing-hero{padding:44px 0 54px;gap:36px}
+  #portfolioView #portfolioSectionNav{grid-template-columns:repeat(2,minmax(0,1fr));gap:4px 8px;max-height:min(70dvh,560px);padding-bottom:12px}
+  #portfolioView .portfolio-nav-heading{display:block;grid-column:1/-1;margin-top:8px;padding:7px 8px 2px;color:var(--green);font:700 11px/1.4 monospace;letter-spacing:.06em;text-transform:uppercase}
+  #portfolioView #portfolioSectionNav a{white-space:normal;overflow-wrap:anywhere}
+  #portfolioView .portfolio-menu-button{display:inline-flex;align-items:center;gap:8px}
+  #portfolioView .portfolio-menu-button small{max-width:115px;overflow:hidden;text-overflow:ellipsis;color:var(--green);font-size:11px}
+}
+@media(max-width:560px){
+  .community-header .platform-header-actions .platform-button:not(.primary){display:inline-flex}
+  .community-header .platform-header-actions{width:100%;gap:8px}
+  .community-header .platform-header-actions .platform-button{padding-inline:10px;font-size:12px}
+  #landingView .landing-hero{padding:28px 0 42px;gap:26px}
+  #landingView .landing-terminal{min-height:0}
+  #landingView .landing-terminal-body{min-height:220px;padding:18px 16px}
+  #landingView .float-card{display:none}
+  .resume-step-nav{display:flex;overflow-x:auto;grid-template-columns:none;gap:6px}
+  .resume-step-nav button{flex:0 0 88px;min-height:56px;font-size:11px}
+  .resume-template-grid button small{font-size:11px}
+  :is(.platform-form,.contact-form,.product-dialog,[data-legacy-dialog],.user-search-controls) :is(input,textarea,select){font-size:16px}
+}
+
+/* Product polish: shared surfaces and controls, scoped to the existing views. */
+.platform-card,.user-directory,.dashboard-bar,.product-dialog,
+#portfolioView :is(.hero-content,.project-card),#landingView .landing-contact-card{
+  border-color:var(--border);
+  border-radius:var(--card-radius);
+  background:var(--card);
+  box-shadow:var(--shadow-card);
+}
+.product-dialog{box-shadow:var(--shadow-dialog)}
+.product-dialog::backdrop{background:rgba(9,6,17,.72)}
+.platform-card{padding:clamp(24px,3vw,36px)}
+.platform-card-header{margin-bottom:var(--space-6)}
+.platform-card-header :is(h1,h2){line-height:1.15;letter-spacing:-.025em}
+.platform-card-header p{font-size:15px;line-height:1.65}
+.platform-form label,.contact-field label{color:var(--text);font-size:14px;font-weight:600}
+.platform-form :is(input,select,textarea),.contact-field :is(input,textarea),
+.product-dialog :is(input:not([type=checkbox]),select,textarea){
+  border-color:var(--control-border);
+  border-radius:var(--control-radius);
+  background:var(--background);
+  color:var(--text);
+}
+.platform-form :is(input,select,textarea):focus,.contact-field :is(input,textarea):focus,
+.product-dialog :is(input:not([type=checkbox]),select,textarea):focus{
+  border-color:var(--green);
+  outline:2px solid color-mix(in srgb,var(--green) 55%,transparent);
+  outline-offset:1px;
+}
+.platform-form :is(input,textarea)::placeholder,.contact-field :is(input,textarea)::placeholder{color:var(--muted);opacity:.82}
+.platform-button.primary,.button,.auth-tab.active{color:var(--on-accent)}
+.button{min-height:var(--control-height);border-radius:var(--control-radius)}
+.platform-button:active,.button:active{transform:translateY(0)}
+:is(.platform-button,.button,.auth-tab,.directory-filter-chip):disabled{opacity:.55;cursor:not-allowed;box-shadow:none;transform:none}
+:is(.platform-button,.button,.auth-tab):focus-visible{outline:2px solid var(--green);outline-offset:3px}
+.contact-field [aria-invalid="true"]{border-color:var(--red);outline:2px solid color-mix(in srgb,var(--red) 38%,transparent)}
+.contact-field-error{display:block;margin-top:6px;color:var(--red);font-size:13px;line-height:1.5}
+.contact-form-message{text-align:start;font-size:14px}
+.product-dialog .product-eyebrow{font-size:12px;letter-spacing:.06em}
+.product-dialog-header,.product-dialog-content,.settings-content{padding:var(--space-6)}
+.product-dialog-header h2{letter-spacing:-.025em}
+.settings-nav button:hover,.settings-nav button:focus-visible{background:color-mix(in srgb,var(--green) 9%,var(--card));color:var(--text)}
+.settings-nav button[aria-pressed=true]{border-color:var(--green);background:color-mix(in srgb,var(--green) 12%,var(--card));color:var(--text);font-weight:700}
+.notification-item{background:var(--card);border-radius:var(--card-radius)}
+.notification-item.unread{background:color-mix(in srgb,var(--green) 7%,var(--card))}
+.share-portfolio-modal-content{padding:var(--space-6);box-shadow:var(--shadow-dialog)}
+.share-portfolio-modal-content .platform-message:empty{display:none}
+.share-portfolio-modal-content label{color:var(--text);font-weight:600}
+.share-url-row input{border-color:var(--control-border);border-radius:var(--control-radius)}
+.share-modal-actions{margin-top:var(--space-6)}
+.admin-metric{border-radius:var(--card-radius)}
+.admin-metric span,.admin-user small,.admin-user time{font-size:12px}
+.dashboard-bar{width:min(86%,1300px);margin-top:var(--space-6);padding:var(--space-6)}
+.dashboard-bar h2{font-size:22px;letter-spacing:-.02em}
+.dashboard-bar p{font-size:14px;line-height:1.55}
+.dashboard-insights-grid>section{margin:0}
+.dashboard-insight-card{padding:var(--space-6);border-radius:var(--card-radius);background:var(--card2);box-shadow:none}
+.dashboard-insight-heading span{font-size:12px;letter-spacing:.05em}
+.dashboard-insight-heading h3{font-size:18px;line-height:1.3}
+.completion-card>p,.completion-check-item{font-size:13px;line-height:1.5}
+.analytics-stat-grid>div{padding:8px 12px;border:0;border-inline-end:1px solid var(--border);border-radius:0;background:transparent}
+.analytics-stat-grid>div:last-child{border-inline-end:0}
+.analytics-stat-grid strong{font-size:24px}
+.analytics-stat-grid span,.analytics-most-viewed span,.analytics-most-viewed strong,.analytics-migration-note{font-size:12px;line-height:1.5}
+.analytics-most-viewed{padding:var(--space-3) 0;border:0;border-top:1px solid var(--border);border-radius:0;background:transparent}
+.resume-workspace{background:var(--card2)}
+.resume-controls-intro,.resume-experience-card,.resume-ats-checklist{border-radius:var(--card-radius)}
+.resume-controls-intro p,.resume-data-summary p,.resume-ats-checklist li{font-size:13px;line-height:1.6}
+.resume-step-nav button:hover,.resume-template-grid button:hover{border-color:var(--green)}
+
+/* Landing: calmer product framing and a clear progression through the page. */
+body::after{display:none}
+#landingView .platform-header{padding-block:var(--space-4);border-bottom:1px solid var(--border)}
+#landingView .platform-logo img{box-shadow:none}
+#landingView .landing-copy h1{max-width:none;font-size:clamp(44px,4.6vw,66px)}
+#landingView .landing-hero{padding:clamp(48px,5vw,72px) 0 var(--space-8)}
+#landingView .landing-highlights{margin-bottom:var(--space-12)}
+#landingView .landing-hero-notes{font-size:13px;gap:8px 14px}
+#landingView .landing-hero-notes .landing-notes-dot{opacity:.55}
+#landingView .landing-terminal{box-shadow:var(--shadow-card)}
+#landingView .landing-terminal-status{font-size:12px;letter-spacing:0;bottom:10px}
+#landingView .landing-terminal-tabs button{font-size:13px}
+#landingView :is(.landing-tech-showcase,.how-it-works-section,.landing-studio,.landing-features-section,.landing-updates,.landing-faq,.landing-contact-section)::after{display:none}
+#landingView :is(.landing-tech-showcase,.how-it-works-section,.landing-studio,.landing-features-section,.landing-updates,.landing-faq,.landing-contact-section)::before{width:100%;background:var(--border);opacity:1}
+#landingView .landing-section-heading{margin-bottom:var(--space-8)}
+#landingView .landing-section-heading h2{font-size:clamp(28px,3.2vw,42px);line-height:1.16;letter-spacing:-.03em}
+#landingView .landing-section-heading p{font-size:16px;line-height:1.65}
+#landingView .landing-tech-showcase{padding:var(--section-space) 0}
+#landingView .tech-marquee:not(:has(.tech-marquee-track)){display:none}
+#landingView .how-it-works-section{padding:var(--section-space) 0}
+#landingView .landing-features-section{padding:var(--section-space) 0}
+#landingView .landing-studio{padding:var(--section-space) 0;gap:clamp(32px,5vw,72px)}
+#landingView .landing-faq{padding:var(--section-space) 0;gap:clamp(28px,5vw,60px)}
+#landingView .landing-contact-section{padding:var(--section-space) 0}
+#landingView .how-it-works-timeline{grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--space-4)}
+#landingView .how-step-connector{display:none}
+#landingView .how-step-card{min-height:0;padding:var(--space-6);border-radius:var(--card-radius);background:var(--card);box-shadow:none}
+#landingView .how-step-card::after{display:none}
+#landingView .how-step-card:hover{transform:translateY(-2px);box-shadow:var(--shadow-card)}
+#landingView .how-step-number{margin-bottom:var(--space-6);font-size:13px}
+#landingView .how-step-icon{display:none}
+#landingView .how-step-card p{font-size:14px;line-height:1.6}
+#landingView .platform-feature-card{min-height:0;padding:var(--space-6);border-radius:var(--card-radius);background:var(--card);box-shadow:none}
+#landingView .platform-feature-card::before,#landingView .platform-feature-card::after{display:none}
+#landingView .platform-feature-card:hover{transform:translateY(-2px);box-shadow:var(--shadow-card)}
+#landingView .platform-feature-card .platform-feature-icon{display:none}
+#landingView .platform-feature-card h3{font-size:17px}
+#landingView .platform-feature-card p{font-size:14px;line-height:1.6}
+#landingView .landing-studio-demo{border-radius:var(--card-radius);box-shadow:var(--shadow-card)}
+#landingView .landing-studio-copy>p{font-size:16px;line-height:1.7}
+#landingView .landing-studio-benefits{gap:var(--space-4)}
+#landingView .landing-studio-benefits :is(strong,p){font-size:14px}
+#landingView .landing-final-cta{margin-bottom:var(--section-space);padding:var(--space-16) var(--space-6);border-radius:var(--card-radius);background:var(--card);box-shadow:var(--shadow-card)}
+#landingView .landing-final-cta::before{display:none}
+#landingView .landing-final-cta h2{font-size:clamp(30px,3.8vw,50px)}
+#landingView .landing-final-cta>p{font-size:16px}
+
+/* Directory and public portfolio: scanable content with fewer competing surfaces. */
+.community-main{padding-top:var(--space-4)}
+.community-screen .featured-portfolios-section{padding:var(--space-12) 0 var(--space-6);margin-bottom:var(--space-6)}
+.community-screen .featured-portfolios-section:has(.featured-portfolio-grid:empty){padding-bottom:0;margin-bottom:var(--space-6)}
+.community-screen .user-directory{margin-bottom:var(--space-12);padding:var(--space-8)}
+.community-screen .user-directory::before{display:none}
+.community-screen .user-search-controls{box-shadow:none;background:var(--card2)}
+.community-screen .user-result-card{border-radius:var(--card-radius);box-shadow:none}
+.community-screen .user-result-card:hover{transform:translateY(-1px);box-shadow:var(--shadow-card)}
+.community-screen .user-result-avatar{box-shadow:none}
+#portfolioMain{margin-block:var(--space-8) var(--space-16)}
+#portfolioMain>section{margin-bottom:var(--section-space)}
+#portfolioView .hero{grid-template-columns:160px minmax(0,1fr);gap:var(--space-8);margin-bottom:var(--space-16)}
+#portfolioView .avatar{width:144px;height:144px;font-size:42px}
+#portfolioView .profile h1{font-size:22px;line-height:1.25}
+#portfolioView .hero-text h2{font-size:clamp(28px,3vw,40px)}
+#portfolioView .about-description{font-size:15px;line-height:1.7}
+#portfolioView .project-card{min-height:0;padding:var(--space-6)}
+#portfolioView .project-card:hover{transform:translateY(-1px);box-shadow:var(--shadow-card)}
+#portfolioView .section-title{font-size:clamp(24px,2.6vw,30px);letter-spacing:-.025em}
+
+@media(min-width:1051px){
+  #landingView .platform-features{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+@media(max-width:800px){
+  #landingView .platform-header{padding-block:var(--space-3)}
+  #landingView .landing-hero{padding:var(--space-8) 0 var(--space-12);gap:var(--space-8)}
+  #landingView .landing-copy h1{max-width:13ch;font-size:clamp(40px,8vw,60px)}
+  #landingView .how-it-works-timeline{grid-template-columns:1fr;gap:var(--space-3)}
+  #landingView .how-step-card{padding:var(--space-6)}
+  #landingView .landing-studio,#landingView .landing-faq{gap:var(--space-8)}
+  #portfolioView .hero{grid-template-columns:1fr;gap:var(--space-6)}
+  #portfolioView .avatar{width:112px;height:112px;font-size:34px}
+  .community-screen .featured-portfolios-section{padding-top:var(--space-8)}
+  .community-header{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:var(--space-3)}
+  .community-header .platform-logo{grid-column:1;grid-row:1;order:0;width:auto}
+  .community-header>.platform-button{grid-column:2;grid-row:1}
+  .community-header .platform-header-actions{grid-column:1/-1;grid-row:2;order:0;width:100%}
+}
+@media(max-width:560px){
+  #landingView .landing-hero{padding:var(--space-6) 0 var(--space-8);gap:var(--space-6)}
+  #landingView .landing-highlights{grid-template-columns:1fr;gap:var(--space-3);margin-bottom:var(--space-12);padding:var(--space-4) 0}
+  #landingView .landing-highlights li{gap:2px}
+  #landingView .landing-terminal-body{min-height:210px;padding:var(--space-4);font-size:12px}
+  #landingView .landing-terminal-bar{padding:10px 14px}
+  #landingView .landing-terminal-status{position:static;width:max-content;margin:0 0 10px auto}
+  #landingView .landing-section-heading p{font-size:15px}
+  #landingView :is(.landing-tech-showcase,.how-it-works-section,.landing-studio,.landing-features-section,.landing-faq,.landing-contact-section){padding-block:var(--space-12)}
+  #landingView .landing-final-cta{padding:var(--space-12) var(--space-4)}
+  .community-screen .user-directory{padding:var(--space-4)}
+  #portfolioView .hero-text{padding:var(--space-6)}
+  #portfolioView .hero-text h2{font-size:30px}
+  .dashboard-bar{width:calc(100% - 24px);padding:var(--space-4)}
+  .dashboard-insight-card{padding:var(--space-6)}
+  .analytics-stat-grid{gap:0}
+  .analytics-stat-grid>div{padding:10px 0;border-inline-end:0;border-bottom:1px solid var(--border)}
+  .analytics-stat-grid>div:last-child{border-bottom:0}
+  .product-dialog-header,.product-dialog-content,.settings-content{padding:var(--space-4)}
+}
+@media(prefers-reduced-motion:reduce){
+  :is(.platform-button,.button,.project-card,.platform-feature-card,.how-step-card,.user-result-card){transition:none}
+}

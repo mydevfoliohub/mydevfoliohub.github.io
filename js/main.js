@@ -5,11 +5,9 @@
   const PUBLIC_SITE_URL =
     BRAND.productionUrl;
 
-  const supabaseClient =
-    supabase.createClient(
-      SUPABASE_URL,
-      SUPABASE_KEY
-    );
+  const supabaseClient = window.supabase?.createClient
+    ? window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY)
+    : null;
   let currentUser = null;
   let signedInProfile = null;
   let activePortfolioUserId = null;
@@ -84,6 +82,27 @@
     other: "Other"
   };
 
+  const PROFILE_SPECIALTIES_AR = {
+    cybersecurity: "الأمن السيبراني",
+    frontend: "تطوير الواجهات",
+    backend: "تطوير الخلفية",
+    fullstack: "التطوير الشامل",
+    mobile: "تطبيقات الجوال",
+    data_ai: "البيانات والذكاء الاصطناعي",
+    devops_cloud: "ديف أوبس والسحابة",
+    other: "أخرى"
+  };
+
+  function uiText(english, arabic) {
+    return document.documentElement.lang === "ar" ? arabic : english;
+  }
+
+  function specialtyText(code) {
+    return document.documentElement.lang === "ar"
+      ? PROFILE_SPECIALTIES_AR[code] || ""
+      : PROFILE_SPECIALTIES[code] || "";
+  }
+
 
   const PORTFOLIO_THEMES = {
     cyber: "Cyber",
@@ -97,6 +116,8 @@
   let userSearchTimer = null;
   let userSearchRequestId = 0;
   let featuredPortfolioRequestId = 0;
+  let visibleDirectoryProfiles = [];
+  let visibleFeaturedProfiles = [];
   let onboardingPreviewImageUrl = "";
   let portfolioThemeDatabaseReady = false;
   let currentLayoutOrder =
@@ -107,7 +128,7 @@
     );
 
 
-  supabaseClient.auth.onAuthStateChange(
+  supabaseClient?.auth.onAuthStateChange(
     (event, session) => {
 
       if (event === "SIGNED_OUT") {
@@ -179,6 +200,18 @@
 
 
     currentAppView = viewName;
+
+    const contentTargets = {
+      landing: "landingMain",
+      community: "communityMain",
+      auth: "authView",
+      onboarding: "onboardingView",
+      notFound: "userNotFoundView",
+      portfolio: "portfolioMain"
+    };
+    document.getElementById("skipToContent")?.setAttribute(
+      "href", `#${contentTargets[viewName] || "landingMain"}`
+    );
 
 
     if (viewName === "landing") {
@@ -293,6 +326,104 @@
     button.setAttribute("aria-expanded", String(button.getAttribute("aria-expanded") !== "true"));
   }
 
+  document.addEventListener("keydown", event => {
+    const button = document.getElementById("portfolioMenuButton");
+    if (event.key === "Escape" && button?.getAttribute("aria-expanded") === "true") {
+      button.setAttribute("aria-expanded", "false");
+      button.focus();
+    }
+  });
+  document.addEventListener("click", event => {
+    const button = document.getElementById("portfolioMenuButton");
+    if (button?.getAttribute("aria-expanded") === "true" && !event.target.closest("#portfolioMenuButton,#portfolioSectionNav")) {
+      button.setAttribute("aria-expanded", "false");
+    }
+  });
+
+  const mobileSiteNav = document.getElementById("mobileSiteNav");
+  mobileSiteNav?.addEventListener("click", event => {
+    if (event.target.closest("a, nav button")) mobileSiteNav.open = false;
+  });
+  mobileSiteNav?.addEventListener("keydown", event => {
+    if (event.key === "Escape" && mobileSiteNav.open) {
+      mobileSiteNav.open = false;
+      mobileSiteNav.querySelector("summary")?.focus();
+    }
+  });
+  document.addEventListener("click", event => {
+    if (mobileSiteNav?.open && !mobileSiteNav.contains(event.target)) mobileSiteNav.open = false;
+  });
+  window.addEventListener("resize", () => {
+    if (window.innerWidth > 800 && mobileSiteNav) mobileSiteNav.open = false;
+  });
+
+  function initPortfolioSectionNavigation() {
+    const view = document.getElementById("portfolioView");
+    const nav = document.getElementById("portfolioSectionNav");
+    const header = view?.querySelector(".portfolio-header");
+    if (!view || !nav || !header) return;
+    const links = [...nav.querySelectorAll('a[href^="#"]')];
+    const menuButton = document.getElementById("portfolioMenuButton");
+    let activeLink = null;
+    let scheduled = false;
+    const update = () => {
+      scheduled = false;
+      if (view.hidden || getComputedStyle(view).display === "none") return;
+      const edge = header.getBoundingClientRect().bottom + 24;
+      let current = links.find(link => !link.hidden && link.getAttribute("href") === "#home");
+      links.forEach(link => {
+        if (link.hidden) return;
+        const section = document.getElementById(link.hash.slice(1));
+        if (section && section.getBoundingClientRect().top <= edge) current = link;
+      });
+      links.forEach(link => {
+        const active = link === current;
+        link.classList.toggle("active", active);
+        if (active) link.setAttribute("aria-current", "location");
+        else link.removeAttribute("aria-current");
+      });
+      if (current) {
+        const section = current.textContent.trim();
+        menuButton?.setAttribute("aria-label", uiText(`Sections. Current: ${section}`, `الأقسام. الحالي: ${section}`));
+        const currentLabel = document.getElementById("portfolioCurrentSection");
+        if (currentLabel) currentLabel.textContent = section;
+      }
+      if (current && current !== activeLink) {
+        activeLink = current;
+        if (getComputedStyle(nav).display === "flex") {
+          const navRect = nav.getBoundingClientRect();
+          const linkRect = current.getBoundingClientRect();
+          if (linkRect.left < navRect.left || linkRect.right > navRect.right) {
+            nav.scrollBy({ left: linkRect.left - navRect.left - (navRect.width - linkRect.width) / 2,
+              behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+          }
+        }
+      }
+    };
+    const schedule = () => {
+      if (scheduled) return;
+      scheduled = true;
+      requestAnimationFrame(update);
+    };
+    nav.addEventListener("click", event => {
+      if (event.target.closest('a[href^="#"]')) schedule();
+    });
+    nav.addEventListener("keydown", event => {
+      if (event.key === "Escape" && menuButton?.getAttribute("aria-expanded") === "true") {
+        menuButton.setAttribute("aria-expanded", "false");
+        menuButton.focus();
+      }
+    });
+    window.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("resize", schedule);
+    window.addEventListener("hashchange", schedule);
+    new MutationObserver(schedule).observe(view, { attributes: true, attributeFilter: ["class", "style", "hidden"] });
+    new MutationObserver(schedule).observe(nav, { attributes: true, attributeFilter: ["hidden"], subtree: true });
+    schedule();
+  }
+
+  initPortfolioSectionNavigation();
+
   function navigateToLanding() {
     window.location.href =
       getBasePageURL().href;
@@ -352,6 +483,7 @@
 
 
     container.innerHTML = "";
+    visibleDirectoryProfiles = profiles;
 
 
     profiles.forEach(profile => {
@@ -435,8 +567,7 @@
 
 
       const specialtyLabel =
-        PROFILE_SPECIALTIES[profile.specialty]
-        || "";
+        specialtyText(profile.specialty);
 
 
       const technologies =
@@ -472,10 +603,9 @@
     document
       .querySelectorAll(".directory-filter-chip")
       .forEach(button => {
-        button.classList.toggle(
-          "active",
-          button.dataset.specialty === specialty
-        );
+        const active = button.dataset.specialty === specialty;
+        button.classList.toggle("active", active);
+        button.setAttribute("aria-pressed", String(active));
       });
   }
 
@@ -589,7 +719,7 @@
 
     const specialty = document.createElement("span");
     specialty.className = "featured-specialty";
-    specialty.textContent = PROFILE_SPECIALTIES[profile.specialty] || "Technology";
+    specialty.textContent = specialtyText(profile.specialty) || uiText("Technology", "تقنية");
 
     const technologies = document.createElement("div");
     technologies.className = "featured-tech-list";
@@ -603,7 +733,7 @@
     const link = document.createElement("a");
     link.className = "featured-view-link";
     link.href = buildPortfolioURL(profile.username);
-    link.append("View Portfolio");
+    link.append(uiText("View Portfolio", "عرض الملف الشخصي"));
 
     const arrow = document.createElement("span");
     arrow.textContent = "↗";
@@ -620,7 +750,7 @@
     if (!container || !message) return;
 
     const requestId = ++featuredPortfolioRequestId;
-    message.textContent = "Loading featured portfolios...";
+    message.textContent = uiText("Loading featured portfolios...", "جارٍ تحميل الملفات الشخصية المميزة...");
 
     const { data, error } = await supabaseClient
       .from("profiles")
@@ -635,17 +765,18 @@
 
     if (error) {
       console.error("Featured portfolios loading error:", error);
-      message.textContent = "Could not load featured portfolios right now.";
+      message.textContent = uiText("Could not load featured portfolios right now.", "تعذر تحميل الملفات الشخصية المميزة الآن.");
       return;
     }
 
-    (data || []).forEach(profile =>
+    visibleFeaturedProfiles = data || [];
+    visibleFeaturedProfiles.forEach(profile =>
       container.appendChild(createFeaturedPortfolioCard(profile))
     );
 
     message.textContent = data?.length
       ? ""
-      : "No public portfolios are available yet.";
+      : uiText("No public portfolios are available yet.", "لا توجد ملفات شخصية عامة بعد.");
 
     initializeLandingRevealAnimations();
   }
@@ -702,8 +833,8 @@
 
     message.textContent =
       term || specialty || technology
-        ? "Searching..."
-        : "Loading public portfolios...";
+        ? uiText("Searching...", "جارٍ البحث...")
+        : uiText("Loading public portfolios...", "جارٍ تحميل الملفات الشخصية العامة...");
 
 
     try {
@@ -844,8 +975,8 @@
         profiles.length
           ? ""
           : term || specialty || technology
-            ? "No public portfolio matches your search."
-            : "No public portfolios are available yet.";
+            ? uiText("No public portfolio matches your search.", "لا يوجد ملف شخصي عام يطابق بحثك.")
+            : uiText("No public portfolios are available yet.", "لا توجد ملفات شخصية عامة بعد.");
     }
 
     catch (error) {
@@ -862,7 +993,7 @@
 
       container.innerHTML = "";
       message.textContent =
-        "Could not load public portfolios right now.";
+        uiText("Could not load public portfolios right now.", "تعذر تحميل الملفات الشخصية العامة الآن.");
     }
   }
 
@@ -1053,13 +1184,13 @@
 
     try {
       const copied = await copyText(value);
-      button.textContent = copied ? "✓ Copied" : "Copy Failed";
-      message.textContent = copied ? "Portfolio link copied successfully." : "Could not copy the link.";
+      button.textContent = copied ? uiText("✓ Copied", "✓ تم النسخ") : uiText("Copy Failed", "فشل النسخ");
+      message.textContent = copied ? uiText("Portfolio link copied successfully.", "تم نسخ رابط الملف الشخصي بنجاح.") : uiText("Could not copy the link.", "تعذر نسخ الرابط.");
       message.classList.toggle("success", copied);
     }
     catch {
-      button.textContent = "Copy Failed";
-      message.textContent = "Could not copy the link.";
+      button.textContent = uiText("Copy Failed", "فشل النسخ");
+      message.textContent = uiText("Could not copy the link.", "تعذر نسخ الرابط.");
       message.classList.remove("success");
     }
 
@@ -1095,6 +1226,9 @@
       ),
       document.getElementById(
         "landingHeroPrimaryAction"
+      ),
+      document.getElementById(
+        "landingFinalPrimaryAction"
       )
     ];
 
@@ -1117,13 +1251,15 @@
         }
 
 
-        button.textContent =
-          !currentUser
-            ? "Create Your Portfolio"
-            :
-            !signedInProfile
-              ? "Complete Your Portfolio"
-              : "Open Dashboard";
+        const english = !currentUser
+          ? (button.id === "landingPrimaryAction" ? "Create account" : "Create your portfolio")
+          : !signedInProfile ? "Complete Your Portfolio" : "Open Dashboard";
+        const arabic = !currentUser
+          ? (button.id === "landingPrimaryAction" ? "إنشاء حساب" : "أنشئ بورتفوليوك")
+          : !signedInProfile ? "أكمل ملفك الشخصي" : "افتح لوحة التحكم";
+        button.setAttribute("data-en-html", english);
+        button.setAttribute("data-ar-html", arabic);
+        button.textContent = uiText(english, arabic);
 
 
         button.onclick =
@@ -1140,10 +1276,11 @@
         }
 
 
-        button.textContent =
-          signedInProfile
-            ? "View My Portfolio"
-            : "Login";
+        const english = signedInProfile ? "View My Portfolio" : "Login";
+        const arabic = signedInProfile ? "عرض ملفي الشخصي" : "تسجيل الدخول";
+        button.setAttribute("data-en-html", english);
+        button.setAttribute("data-ar-html", arabic);
+        button.textContent = uiText(english, arabic);
 
 
         button.onclick =
@@ -1156,6 +1293,22 @@
   }
 
 
+  const AUTH_MESSAGES_AR = {
+    "Email or password is incorrect.": "البريد الإلكتروني أو كلمة المرور غير صحيحة.",
+    "Confirm your email first, then login.": "أكد بريدك الإلكتروني أولاً ثم سجّل الدخول.",
+    "This email already has an account. Try Login.": "يوجد حساب لهذا البريد الإلكتروني. جرّب تسجيل الدخول.",
+    "Password does not meet the required length.": "كلمة المرور لا تستوفي الطول المطلوب.",
+    "Too many attempts. Wait a moment and try again.": "محاولات كثيرة. انتظر قليلاً ثم حاول مجدداً.",
+    "Authentication failed. Please try again.": "فشل تسجيل الدخول. حاول مجدداً.",
+    "If an account exists for this email, a password reset link has been sent. Check your inbox and spam folder.": "إذا كان هناك حساب لهذا البريد، فقد أُرسل رابط إعادة تعيين كلمة المرور. تحقق من صندوق الوارد والرسائل غير المرغوبة.",
+    "Password must be at least 6 characters.": "يجب أن تتكون كلمة المرور من 6 أحرف على الأقل.",
+    "Passwords do not match.": "كلمتا المرور غير متطابقتين.",
+    "This reset link is invalid or has expired. Request a new link.": "رابط إعادة التعيين غير صالح أو انتهت صلاحيته. اطلب رابطاً جديداً.",
+    "Password updated successfully. Login with your new password.": "تم تحديث كلمة المرور بنجاح. سجّل الدخول بكلمة المرور الجديدة.",
+    "Account created. Confirm your email, then login to complete your portfolio.": "تم إنشاء الحساب. أكد بريدك الإلكتروني، ثم سجّل الدخول لإكمال ملفك الشخصي.",
+    "Login to open your dashboard.": "سجّل الدخول لفتح لوحة التحكم."
+  };
+
   function setAuthMessage(
     text,
     success = false
@@ -1167,7 +1320,8 @@
       );
 
 
-    message.textContent = text || "";
+    message.dataset.englishMessage = text || "";
+    message.textContent = text ? uiText(text, AUTH_MESSAGES_AR[text] || "تعذّر إكمال الطلب. تحقق من البيانات وحاول مرة أخرى.") : "";
     message.classList.toggle(
       "success",
       success
@@ -1545,7 +1699,7 @@
     finally {
 
       button.disabled = false;
-      button.textContent = "Login";
+      button.textContent = uiText("Login", "تسجيل الدخول");
 
     }
   }
@@ -1610,8 +1764,7 @@
 
 
     button.disabled = true;
-    button.textContent =
-      "Sending link...";
+    button.textContent = uiText("Sending link...", "جارٍ إرسال الرابط...");
 
 
     setAuthMessage("");
@@ -1653,8 +1806,7 @@
     finally {
 
       button.disabled = false;
-      button.textContent =
-        "Send Reset Link";
+      button.textContent = uiText("Send Reset Link", "إرسال رابط الاستعادة");
 
     }
   }
@@ -1729,8 +1881,7 @@
 
 
     button.disabled = true;
-    button.textContent =
-      "Updating password...";
+    button.textContent = uiText("Updating password...", "جارٍ تحديث كلمة المرور...");
 
 
     setAuthMessage("");
@@ -1795,8 +1946,7 @@
     finally {
 
       button.disabled = false;
-      button.textContent =
-        "Update Password";
+      button.textContent = uiText("Update Password", "تحديث كلمة المرور");
 
     }
   }
@@ -1850,8 +2000,7 @@
 
 
     button.disabled = true;
-    button.textContent =
-      "Creating account...";
+    button.textContent = uiText("Creating account...", "جارٍ إنشاء الحساب...");
     setAuthMessage("");
 
 
@@ -1910,8 +2059,7 @@
     finally {
 
       button.disabled = false;
-      button.textContent =
-        "Create Account";
+      button.textContent = uiText("Create Account", "إنشاء حساب");
 
     }
   }
@@ -2926,39 +3074,35 @@
 
 
   const LANDING_TERMINAL_SCRIPTS = {
-    create: {
-      command: "create-portfolio --username you",
+    profile: {
+      command: "portfolio profile",
       output: [
-        { text: "✓ Profile created", className: "is-success" },
-        { text: "✓ Projects connected", className: "is-success" },
-        { text: "✓ GitHub connected", className: "is-success" },
-        { text: "✓ Learning journey online", className: "is-success" },
-        { text: "✓ Portfolio published", className: "is-success" },
-        { text: "→ mydevfoliohub.github.io/?u=you", className: "is-url" }
+        { text: "→ Add your name and a short bio", ar: "← أضف اسمك ونبذة قصيرة", className: "" },
+        { text: "→ Choose your specialty", ar: "← اختر تخصصك", className: "" },
+        { text: "→ Link to your work", ar: "← أضف روابط أعمالك", className: "" },
+        { text: "→ Preview your public page", ar: "← عاين صفحتك العامة", className: "is-url" }
       ]
     },
-    deploy: {
-      command: "deploy --prod",
+    projects: {
+      command: "portfolio projects",
       output: [
-        { text: "✓ Build ready in 41s", className: "is-success" },
-        { text: "✓ SSL active", className: "is-success" },
-        { text: "✓ CDN warmed in 12 regions", className: "is-success" },
-        { text: "→ mydevfoliohub.github.io/?u=you", className: "is-url" }
+        { text: "→ Give each project a clear title", ar: "← امنح كل مشروع عنوانًا واضحًا", className: "" },
+        { text: "→ Explain what you built", ar: "← اشرح ما أنجزته", className: "" },
+        { text: "→ Add technologies and a project link", ar: "← أضف التقنيات ورابط المشروع", className: "is-url" }
       ]
     },
-    stats: {
-      command: "portfolio --stats",
+    share: {
+      command: "portfolio share",
       output: [
-        { text: "✓ 12 projects shipped", className: "is-success" },
-        { text: "✓ 8 labs documented", className: "is-success" },
-        { text: "✓ 31 learning notes", className: "is-success" },
-        { text: "✓ 6-week streak", className: "is-success" }
+        { text: "→ Review your public page", ar: "← راجع صفحتك العامة", className: "" },
+        { text: "→ Copy your portfolio link", ar: "← انسخ رابط بورتفوليوك", className: "" },
+        { text: "→ Keep it current as your work grows", ar: "← حدّثه مع تطور أعمالك", className: "is-url" }
       ]
     }
   };
 
 
-  let landingTerminalTab = "create";
+  let landingTerminalTab = "profile";
   let landingTerminalManualMode = false;
 
 
@@ -3026,7 +3170,7 @@
 
     if (name === "help") {
       appendLandingTerminalLine(
-        "try: demo - signup - login - theme - lang - whoami - clear",
+        uiText("try: demo - signup - login - theme - lang - whoami - clear", "جرّب: demo - signup - login - theme - lang - whoami - clear"),
         ""
       );
       return;
@@ -3034,7 +3178,7 @@
 
     if (name === "demo") {
       appendLandingTerminalLine(
-        "Opening demo portfolio...",
+        uiText("Opening example portfolio...", "جارٍ فتح مثال البورتفوليو..."),
         "is-success"
       );
       later(() => openDemoPortfolio());
@@ -3043,7 +3187,7 @@
 
     if (name === "signup" || name === "create") {
       appendLandingTerminalLine(
-        "Starting signup...",
+        uiText("Starting signup...", "جارٍ فتح التسجيل..."),
         "is-success"
       );
       later(() => handleLandingPrimaryAction());
@@ -3052,7 +3196,7 @@
 
     if (name === "login") {
       appendLandingTerminalLine(
-        "Opening login...",
+        uiText("Opening login...", "جارٍ فتح تسجيل الدخول..."),
         "is-success"
       );
       later(() => showAuthScreen("login"));
@@ -3062,7 +3206,7 @@
     if (name === "theme") {
       toggleTheme();
       appendLandingTerminalLine(
-        "Theme switched.",
+        uiText("Theme switched.", "تم تغيير السمة."),
         "is-success"
       );
       return;
@@ -3071,7 +3215,7 @@
     if (name === "lang" || name === "arabic") {
       toggleLanguage();
       appendLandingTerminalLine(
-        "Language switched.",
+        uiText("Language switched.", "تم تغيير اللغة."),
         "is-success"
       );
       return;
@@ -3079,7 +3223,7 @@
 
     if (name === "whoami") {
       appendLandingTerminalLine(
-        "visitor — future builder",
+        uiText("visitor — portfolio builder", "زائر — منشئ بورتفوليو"),
         "is-success"
       );
       return;
@@ -3091,7 +3235,7 @@
     }
 
     appendLandingTerminalLine(
-      `command not found: ${name} — try 'help'`,
+      uiText(`command not found: ${name} — try 'help'`, `الأمر غير معروف: ${name} — جرّب help`),
       ""
     );
   }
@@ -3156,7 +3300,7 @@
     return (
       LANDING_TERMINAL_SCRIPTS[landingTerminalTab]
       ||
-      LANDING_TERMINAL_SCRIPTS.create
+      LANDING_TERMINAL_SCRIPTS.profile
     );
   }
 
@@ -3173,7 +3317,7 @@
       .querySelectorAll("[data-terminal-tab]")
       .forEach(button => {
         button.setAttribute(
-          "aria-selected",
+          "aria-pressed",
           String(
             button.getAttribute("data-terminal-tab") === tab
           )
@@ -3202,7 +3346,7 @@
       line.className =
         "landing-terminal-output-line is-visible "
         + lineData.className;
-      line.textContent = lineData.text;
+      line.textContent = uiText(lineData.text, lineData.ar);
       output.appendChild(line);
     });
   }
@@ -3262,7 +3406,7 @@
       const line = document.createElement("div");
       line.className =
         `landing-terminal-output-line ${lineData.className}`;
-      line.textContent = lineData.text;
+      line.textContent = uiText(lineData.text, lineData.ar);
       output.appendChild(line);
 
 
@@ -3358,91 +3502,6 @@
     preview.dataset.previewTone = tone;
     preview.querySelectorAll(".studio-swatch").forEach(button => {
       button.setAttribute("aria-pressed", String(button.classList.contains("studio-swatch-" + tone)));
-    });
-  }
-
-
-  function animateLandingStats() {
-
-    const stats =
-      document.querySelectorAll(
-        ".landing-stats > div > strong[data-count]"
-      );
-
-    if (!stats.length) {
-      return;
-    }
-
-
-    const reduceMotion =
-      window.matchMedia(
-        "(prefers-reduced-motion: reduce)"
-      ).matches;
-
-
-    stats.forEach(strong => {
-
-      const target =
-        parseFloat(
-          strong.getAttribute("data-count")
-        ) || 0;
-
-      const suffix =
-        strong.getAttribute("data-suffix") || "";
-
-      if (
-        reduceMotion
-        ||
-        !("IntersectionObserver" in window)
-      ) {
-        strong.textContent = target + suffix;
-        return;
-      }
-
-      strong.textContent = "0" + suffix;
-
-      const observer =
-        new IntersectionObserver(entries => {
-
-          entries.forEach(entry => {
-
-            if (!entry.isIntersecting) {
-              return;
-            }
-
-            observer.unobserve(strong);
-
-            const duration = 1200;
-            const start = window.performance.now();
-
-            const tick = now => {
-
-              const progress =
-                Math.min(
-                  (now - start) / duration,
-                  1
-                );
-
-              const eased =
-                1 - Math.pow(1 - progress, 3);
-
-              strong.textContent =
-                Math.round(target * eased) + suffix;
-
-              if (progress < 1) {
-                window.requestAnimationFrame(tick);
-              }
-
-            };
-
-            window.requestAnimationFrame(tick);
-
-          });
-
-        }, { threshold: 0.4 });
-
-      observer.observe(strong);
-
     });
   }
 
@@ -3677,7 +3736,6 @@
     startLandingTerminalAnimation();
     initializeLandingTerminalInput();
     initializeLandingRevealAnimations();
-    animateLandingStats();
     initializeLandingTilt();
     initializeAnnounceBar();
     initializeStudioTyping();
@@ -5790,21 +5848,32 @@
     username,
     message = ""
   ) {
+    const serviceError = Boolean(message);
+    const eyebrow = document.getElementById("notFoundEyebrow");
+    const heading = document.getElementById("notFoundHeading");
+    const element = document.getElementById("userNotFoundMessage");
+    const action = document.getElementById("notFoundAction");
+    const labels = serviceError
+      ? { eyebrow: ["CONNECTION ISSUE", "مشكلة في الاتصال"], heading: ["Unable to load Deviloq", "تعذر تحميل ديفيلوك"], action: ["Try again", "حاول مجددًا"] }
+      : { eyebrow: ["404 / PORTFOLIO", "404 / البورتفوليو"], heading: ["Portfolio not found", "البورتفوليو غير موجود"], action: ["Back to platform", "العودة إلى المنصة"] };
 
-    const element =
-      document.getElementById(
-        "userNotFoundMessage"
-      );
+    [eyebrow, heading, action].forEach((node, index) => {
+      if (!node) return;
+      const [english, arabic] = [labels.eyebrow, labels.heading, labels.action][index];
+      node.setAttribute("data-en-html", english);
+      node.setAttribute("data-ar-html", arabic);
+      node.textContent = uiText(english, arabic);
+    });
 
-
-    element.textContent =
-      message
-      ||
-      `@${username} does not have a public portfolio.`;
-
-
-    document.title =
-      `Portfolio Not Found | ${BRAND.name}`;
+    element.dataset.enMessage = serviceError
+      ? "The platform could not load. Check your connection and try again."
+      : `@${username} does not have a public portfolio.`;
+    element.dataset.arMessage = serviceError
+      ? "تعذر تحميل المنصة. تحقق من اتصالك وحاول مجددًا."
+      : `لا يوجد بورتفوليو عام للحساب @${username}.`;
+    element.textContent = uiText(element.dataset.enMessage, element.dataset.arMessage);
+    action.onclick = serviceError ? () => window.location.reload() : navigateToLanding;
+    document.title = `${uiText(labels.heading[0], labels.heading[1])} | ${BRAND.name}`;
 
 
     setMetadataContent(
@@ -5814,7 +5883,9 @@
 
     setMetadataContent(
       'meta[name="description"]',
-      `This public ${BRAND.name} portfolio could not be found.`
+      serviceError
+        ? `${BRAND.name} could not load. Please try again.`
+        : `This public ${BRAND.name} portfolio could not be found.`
     );
 
 
@@ -6968,7 +7039,7 @@
 
   async function loadAllPortfolioData() {
     document.getElementById("downloadCvButton").disabled = true;
-    document.getElementById("portfolioCvStatus").textContent = "Preparing portfolio data…";
+    document.getElementById("portfolioCvStatus").textContent = uiText("Preparing portfolio data…", "جارٍ تجهيز بيانات البورتفوليو…");
 
     if (!activePortfolioUserId) {
       return;
@@ -7561,6 +7632,218 @@
   }
 
 
+  const STATIC_UI_AR = {
+    "Home": "الرئيسية", "Sections": "الأقسام", "Overview": "نظرة عامة", "Work": "الأعمال", "Journey": "الرحلة", "More": "المزيد",
+    "Projects": "المشاريع", "Labs": "المختبرات", "Learning Log": "سجل التعلم", "Currently Learning": "أتعلم حالياً",
+    "Education": "التعليم", "Badges": "الشارات", "Testimonials": "التوصيات", "Growth": "التطور", "Knowledge": "المعرفة", "Certificates": "الشهادات", "Contact": "التواصل",
+    "GitHub Highlights": "أبرز أعمال GitHub", "Achievements & Badges": "الإنجازات والشارات", "Growth Hub": "مركز التطور", "Knowledge Base": "قاعدة المعرفة",
+    "Dashboard": "لوحة التحكم", "Dashboard Overview": "نظرة عامة على اللوحة", "Manage Your Portfolio": "إدارة ملفك الشخصي", "Portfolio Owner": "مالك الملف الشخصي",
+    "OWNER DASHBOARD": "لوحة تحكم المالك", "PORTFOLIO ANALYTICS": "تحليلات الملف الشخصي", "PORTFOLIO COMPLETION": "اكتمال الملف الشخصي",
+    "Portfolio Views": "مشاهدات الملف الشخصي", "Project Views": "مشاهدات المشاريع", "Learning Post Views": "مشاهدات منشورات التعلم",
+    "Most Viewed Project": "المشروع الأكثر مشاهدة", "See what gets attention.": "اعرف ما يجذب الاهتمام.",
+    "Quick Actions": "إجراءات سريعة", "Edit Profile": "تعديل الملف الشخصي", "Share Portfolio": "مشاركة الملف الشخصي",
+    "Copy Portfolio Link": "نسخ رابط الملف الشخصي", "View Portfolio": "عرض الملف الشخصي", "View Demo": "عرض تجريبي",
+    "Account Settings": "إعدادات الحساب", "Admin Dashboard": "لوحة إدارة المنصة", "Notifications": "الإشعارات",
+    "Manage Portfolio Sections": "إدارة أقسام الملف الشخصي", "Portfolio Sections": "أقسام الملف الشخصي", "Overview Blocks": "مربعات النظرة العامة",
+    "Jump to a section or customize its order": "انتقل إلى قسم أو خصص ترتيبه", "Save Section Order": "حفظ ترتيب الأقسام",
+    "Arrange the main sections of your public portfolio. Contact always stays last.": "رتّب الأقسام الرئيسية لملفك العام. يبقى قسم التواصل أخيراً.",
+    "Arrange Socials and Tech Stack inside your README card.": "رتّب روابط التواصل والتقنيات داخل بطاقة التعريف.",
+    "Drag, or use the arrow buttons": "اسحب أو استخدم أزرار الأسهم", "↕ Customize Section Order": "↕ تخصيص ترتيب الأقسام",
+    "All": "الكل", "Name": "الاسم", "Email": "البريد الإلكتروني", "Message": "الرسالة", "Subject": "الموضوع", "Send Message": "إرسال الرسالة",
+    "Login": "تسجيل الدخول", "Logout": "تسجيل الخروج", "Profile": "الملف الشخصي", "Specialty": "التخصص", "Tech Stack": "التقنيات",
+    "Socials": "روابط التواصل", "🌐 Socials": "🌐 روابط التواصل", "💻 Tech Stack": "💻 التقنيات",
+    "Featured Projects": "مشاريع مميزة", "GitHub": "GitHub", "OPEN SOURCE": "المصدر المفتوح", "REPOSITORIES": "المستودعات",
+    "ACTIVE LEARNING PATH": "مسار التعلم الحالي", "ACADEMIC JOURNEY": "المسيرة الأكاديمية", "MILESTONES": "المحطات",
+    "CONTINUOUS GROWTH": "التطور المستمر", "PERSONAL WIKI": "دليل المعرفة", "RECOMMENDATIONS": "التوصيات",
+    "TIL — TODAY I LEARNED": "ما تعلمته اليوم", "LIVE": "مباشر", "Activity": "النشاط", "ABOUT ME": "نبذة عني", "Let's Connect": "لنتواصل",
+    "Build a complete story.": "ابنِ قصة متكاملة.", "Courses, certifications and achievements": "الدورات والشهادات والإنجازات",
+    "Completed, current and upcoming learning steps.": "خطوات التعلم المكتملة والحالية والقادمة.",
+    "Books, channels and websites worth sharing.": "كتب وقنوات ومواقع تستحق المشاركة.",
+    "Short goals and their current progress.": "أهداف قصيرة وتقدمها الحالي.",
+    "Public repositories and languages loaded from GitHub.": "المستودعات العامة ولغات البرمجة المحمّلة من GitHub.",
+    "Have a question, feedback, or want to connect? Send me a message.": "لديك سؤال أو ملاحظة أو تريد التواصل؟ أرسل لي رسالة.",
+    "Manage your public page and account from one place.": "أدر صفحتك العامة وحسابك من مكان واحد.",
+    "Theme saving is unavailable right now. Please try again later.": "حفظ السمة غير متاح الآن. حاول مجددًا لاحقًا.",
+    "If you're asked to verify your identity, request a code and enter it here before retrying.": "إذا طُلب منك تأكيد هويتك، اطلب رمزًا وأدخله هنا قبل المحاولة مجددًا.",
+    "No projects yet.": "لا توجد مشاريع بعد.", "No labs yet.": "لا توجد مختبرات بعد.", "No learning posts yet.": "لا توجد منشورات تعلم بعد.",
+    "No active learning topics yet.": "لا توجد مواضيع تعلم حالية بعد.", "No roadmap steps yet.": "لا توجد خطوات في الخطة بعد.",
+    "No monthly goals yet.": "لا توجد أهداف شهرية بعد.", "No resources yet.": "لا توجد موارد بعد.",
+    "No knowledge topics yet.": "لا توجد مواضيع معرفة بعد.", "No education entries yet.": "لا توجد مؤهلات تعليمية بعد.",
+    "No achievements or badges yet.": "لا توجد إنجازات أو شارات بعد.", "No certificates yet": "لا توجد شهادات بعد",
+    "No testimonials yet.": "لا توجد توصيات بعد.", "No social links added yet.": "لم تُضف روابط تواصل بعد.",
+    "No technologies added yet.": "لم تُضف تقنيات بعد.", "No project views yet": "لا توجد مشاهدات للمشاريع بعد",
+    "Show older posts": "عرض منشورات أقدم", "View GitHub ↗": "عرض GitHub ↗",
+    "+ Add Project": "+ إضافة مشروع", "+ Add Lab": "+ إضافة مختبر", "+ New Post": "+ منشور جديد",
+    "+ Add Focus": "+ إضافة مجال تعلم", "+ Add Goal": "+ إضافة هدف", "+ Add Step": "+ إضافة خطوة",
+    "+ Add Resource": "+ إضافة مورد", "+ Add Topic": "+ إضافة موضوع", "+ Add Education": "+ إضافة مؤهل",
+    "+ Add Badge": "+ إضافة شارة", "+ Add Testimonial": "+ إضافة توصية", "+ Add Certificate": "+ إضافة شهادة",
+    "↓ Download Contact Card": "↓ تنزيل بطاقة التواصل", "↓ Download Resume": "↓ تنزيل السيرة الذاتية",
+    "Resume Studio": "استوديو السيرة الذاتية", "▤ Resume Studio": "▤ استوديو السيرة الذاتية",
+    "FIRST-TIME SETUP": "الإعداد الأولي", "Create Your Portfolio": "أنشئ ملفك الشخصي", "Choose your public identity. You can edit the rest later from your dashboard.": "اختر هويتك العامة. يمكنك تعديل الباقي لاحقاً من لوحة التحكم.",
+    "Username": "اسم المستخدم", "Display Name": "الاسم الظاهر", "Profile Picture": "صورة الملف الشخصي",
+    "Short Bio": "نبذة قصيرة", "Choose your specialty": "اختر تخصصك", "Choose Your Tech Stack": "اختر تقنياتك",
+    "Search technologies": "ابحث عن التقنيات", "Select the technologies you want to show from day one.": "اختر التقنيات التي تريد عرضها منذ البداية.",
+    "GitHub Link": "رابط GitHub", "LinkedIn Link": "رابط LinkedIn", "Open Dashboard": "فتح لوحة التحكم",
+    "LIVE PORTFOLIO PREVIEW": "معاينة الملف الشخصي", "Your Name": "اسمك", "Your specialty": "تخصصك",
+    "Your short bio will appear here as you type.": "ستظهر نبذتك القصيرة هنا أثناء الكتابة.",
+    "Preview only — nothing is saved until you finish onboarding.": "هذه معاينة فقط، ولن يُحفظ شيء حتى تنهي الإعداد.",
+    "Optional. PNG, JPG or WebP up to 2 MB.": "اختياري. PNG أو JPG أو WebP حتى 2 ميغابايت.",
+    "English letters, numbers, _ and - only. No spaces.": "استخدم أحرفاً إنجليزية وأرقاماً و _ و - فقط، دون مسافات.",
+    "Portfolio Not Found": "الملف الشخصي غير موجود", "This username does not have a public portfolio.": "لا يوجد ملف شخصي عام لاسم المستخدم هذا.",
+    "Back to Platform": "العودة إلى المنصة",
+    "Add Project": "إضافة مشروع", "Add Certificate": "إضافة شهادة", "New Learning Post": "منشور تعلم جديد",
+    "Add Learning Focus": "إضافة مجال تعلم", "Add Growth Item": "إضافة عنصر تطور", "Add Knowledge Topic": "إضافة موضوع معرفة",
+    "Add Entry": "إضافة عنصر", "Admin Login": "دخول المسؤول", "Save": "حفظ", "Save Changes": "حفظ التغييرات",
+    "Save Certificate": "حفظ الشهادة", "Save Focus": "حفظ مجال التعلم", "Save Post": "حفظ المنشور", "Save Topic": "حفظ الموضوع",
+    "Title": "العنوان", "Description": "الوصف", "Description (optional)": "الوصف (اختياري)", "Tags": "الوسوم",
+    "Technologies / Tags": "التقنيات / الوسوم", "GitHub / Project Link": "رابط GitHub / المشروع", "Link": "الرابط",
+    "Optional": "اختياري", "Separate tags using commas.": "افصل الوسوم بفواصل.", "Separate topics using commas.": "افصل المواضيع بفواصل.",
+    "What did you learn?": "ماذا تعلمت؟", "What are you learning?": "ماذا تتعلم؟", "Topic": "الموضوع", "Topic Title": "عنوان الموضوع",
+    "Topics / Tools": "المواضيع / الأدوات", "Type": "النوع", "Type / Status": "النوع / الحالة", "Status": "الحالة",
+    "Current Level": "المستوى الحالي", "Recommendation": "توصية", "Recommended": "موصى به", "In Progress": "قيد التقدم",
+    "Certificate Name": "اسم الشهادة", "Organization": "الجهة", "Category": "الفئة", "Date": "التاريخ", "Certificate File": "ملف الشهادة",
+    "Accepted: PDF, PNG, JPG, JPEG and WebP.": "الصيغ المقبولة: PDF وPNG وJPG وJPEG وWebP.",
+    "University / Institution": "الجامعة / المؤسسة", "Degree": "الدرجة العلمية", "Major / Field of Study": "التخصص / مجال الدراسة",
+    "Graduation / Expected Date": "تاريخ التخرج / المتوقع", "GPA (optional)": "المعدل (اختياري)",
+    "Badge / Achievement Title": "عنوان الشارة / الإنجاز", "Role / Position": "الدور / المنصب", "Website": "الموقع الإلكتروني",
+    "Public Email": "البريد الإلكتروني العام", "GitHub Username": "اسم مستخدم GitHub", "Profile Link (optional)": "رابط الملف الشخصي (اختياري)",
+    "Social Icons": "أيقونات التواصل", "README / Terminal Title": "عنوان بطاقة التعريف / الطرفية",
+    "Your profile description will appear here.": "سيظهر وصف ملفك الشخصي هنا.",
+    "Your public portfolio link uses this username.": "يستخدم رابط ملفك الشخصي العام اسم المستخدم هذا.",
+    "This title appears in the terminal bar at the top of your profile.": "يظهر هذا العنوان في شريط الطرفية أعلى ملفك الشخصي.",
+    "Used to load your public repositories and languages automatically.": "يُستخدم لتحميل مستودعاتك العامة ولغات البرمجة تلقائياً.",
+    "Add only the links you want to show publicly.": "أضف الروابط التي تريد عرضها للعامة فقط.",
+    "Search and select up to 30 technologies.": "ابحث واختر حتى 30 تقنية.",
+    "Remove Picture": "إزالة الصورة", "Share Portfolio": "مشاركة الملف الشخصي", "Public Portfolio URL": "رابط الملف الشخصي العام",
+    "Your public portfolio is ready to share.": "ملفك الشخصي العام جاهز للمشاركة.", "Copy Link": "نسخ الرابط", "Open Portfolio": "فتح الملف الشخصي",
+    "Account": "الحساب", "Security": "الأمان", "Portfolio": "الملف الشخصي", "Danger Zone": "منطقة الإجراءات الحساسة",
+    "Account identity": "هوية الحساب", "Private login email": "بريد تسجيل الدخول الخاص", "Change login email": "تغيير بريد تسجيل الدخول",
+    "New email address": "البريد الإلكتروني الجديد", "Send confirmation": "إرسال التأكيد", "Change password": "تغيير كلمة المرور",
+    "New password": "كلمة المرور الجديدة", "Confirm new password": "تأكيد كلمة المرور الجديدة", "Update password": "تحديث كلمة المرور",
+    "Need a verification code?": "هل تحتاج إلى رمز تحقق؟", "Send verification code": "إرسال رمز التحقق", "Verification code": "رمز التحقق",
+    "Portfolio preferences": "تفضيلات الملف الشخصي", "Portfolio theme": "سمة الملف الشخصي", "Public portfolio": "ملف شخصي عام",
+    "Public resume": "سيرة ذاتية عامة", "Public contact email": "بريد التواصل العام", "Save preferences": "حفظ التفضيلات",
+    "Delete account permanently": "حذف الحساب نهائياً", "Delete My Account Permanently": "حذف حسابي نهائياً",
+    "Manage sign-in details and portfolio preferences.": "أدر بيانات تسجيل الدخول وتفضيلات ملفك الشخصي.",
+    "This address is used to sign in. It is separate from your public contact email.": "يُستخدم هذا العنوان لتسجيل الدخول، وهو منفصل عن بريد التواصل العام.",
+    "Use at least 8 characters. Your account’s password policy may require more.": "استخدم 8 أحرف على الأقل. قد تتطلب سياسة كلمة المرور في حسابك أكثر من ذلك.",
+    "If Supabase requests reauthentication, request a code and enter it here before retrying.": "إذا طلبت المنصة إعادة التحقق، اطلب رمزاً وأدخله هنا قبل المحاولة مجدداً.",
+    "Show your portfolio page and list it in the community. Existing uploaded image and certificate URLs remain public.": "اعرض صفحة ملفك الشخصي وأدرجها في المجتمع. تبقى روابط الصور والشهادات المرفوعة سابقاً عامة.",
+    "Allow visitors to open and export your saved resume. Off by default.": "اسمح للزوار بفتح سيرتك الذاتية المحفوظة وتصديرها. هذا الخيار معطل افتراضياً.",
+    "Manage public contact information in Edit Profile.": "أدر معلومات التواصل العامة من تعديل الملف الشخصي.",
+    "This deletes your account, portfolio content and uploaded files. This cannot be undone.": "سيُحذف حسابك ومحتوى ملفك الشخصي وملفاتك المرفوعة نهائياً. لا يمكن التراجع عن ذلك.",
+    "Resume Studio": "استوديو السيرة الذاتية", "Build a resume from your portfolio.": "أنشئ سيرة ذاتية من ملفك الشخصي.",
+    "Build it step by step": "أنشئها خطوة بخطوة", "Content": "المحتوى", "Experience": "الخبرة", "Design": "التصميم", "Review": "المراجعة",
+    "Essentials": "الأساسيات", "Professional summary": "الملخص المهني", "Target role": "الدور المستهدف", "Priority skills": "المهارات الأساسية",
+    "Used only in your resume": "تُستخدم في سيرتك الذاتية فقط", "Resume content": "محتوى السيرة الذاتية",
+    "Your resume content is separate from your public portfolio.": "محتوى سيرتك الذاتية منفصل عن ملفك الشخصي العام.",
+    "Add real work, internship or volunteer experience. Nothing is invented.": "أضف خبرات العمل أو التدريب أو التطوع الحقيقية فقط.",
+    "＋ Add experience": "＋ إضافة خبرة", "Template": "القالب", "Page spacing": "تباعد الصفحة", "Comfortable": "مريح", "Compact": "مضغوط",
+    "Fit to one page": "ملاءمة صفحة واحدة", "Fit this resume to one page": "ملاءمة هذه السيرة لصفحة واحدة",
+    "Contact & visibility": "التواصل والظهور", "Include profile photo": "إضافة صورة الملف الشخصي", "Include public email": "إضافة البريد العام",
+    "GitHub contact link": "رابط GitHub للتواصل", "LinkedIn contact link": "رابط LinkedIn للتواصل",
+    "Review & ATS check": "المراجعة وفحص ATS", "Job description": "الوصف الوظيفي", "Analyze keyword match": "تحليل تطابق الكلمات المفتاحية",
+    "Back": "رجوع", "Next": "التالي", "Preview ↓": "المعاينة ↓", "LIVE A4 PREVIEW": "معاينة A4 مباشرة",
+    "Reset changes": "إعادة ضبط التغييرات", "Saved": "تم الحفظ", "Export PDF": "تصدير PDF",
+    "Choose a polished ATS or Modern presentation.": "اختر عرضاً احترافياً من نمط ATS أو Modern.",
+    "Choose a visual style without changing your content or layout.": "اختر نمطاً بصرياً دون تغيير المحتوى أو التخطيط.",
+    "Finish the essentials, then compare your resume with a job description locally.": "أكمل الأساسيات، ثم قارن سيرتك بوصف وظيفي داخل المتصفح.",
+    "Only sections with content appear. Use arrows to set resume order.": "تظهر الأقسام التي تحتوي على محتوى فقط. استخدم الأسهم لترتيبها.",
+    "Mark all as read": "تحديد الكل كمقروء", "Load older notifications": "تحميل إشعارات أقدم", "Refresh": "تحديث",
+    "Platform Overview": "نظرة عامة على المنصة", "Platform totals and recent portfolios.": "إجماليات المنصة وأحدث الملفات الشخصية.",
+    "Recent Users / Portfolios": "أحدث المستخدمين / الملفات الشخصية", "Search username or display name": "ابحث باسم المستخدم أو الاسم الظاهر",
+    "Previous": "السابق", "Product": "المنتج", "Resources": "الموارد", "Create Portfolio": "إنشاء ملف شخصي",
+    "About the Platform": "عن المنصة", "GitHub Repository": "مستودع GitHub", "Live Website": "الموقع المباشر",
+    "Your name": "اسمك", "Your public name": "اسمك العام", "What would you like to discuss?": "عمّ تود التحدث؟",
+    "Write your message here...": "اكتب رسالتك هنا...", "Write a short description...": "اكتب وصفاً قصيراً...",
+    "Write a short description of your current focus...": "اكتب وصفاً قصيراً لمجال تعلمك الحالي...",
+    "Share a short note, command, idea, or lesson...": "شارك ملاحظة أو أمراً أو فكرة أو درساً قصيراً...",
+    "Explain your project or lab...": "اشرح مشروعك أو مختبرك...", "Add a short description...": "أضف وصفاً قصيراً...",
+    "Search JavaScript, Linux, Supabase...": "ابحث عن JavaScript أو Linux أو Supabase...",
+    "Find a portfolio…": "ابحث عن ملف شخصي…", "Enter a clear title": "أدخل عنواناً واضحاً",
+    "Developer, cybersecurity learner, or anything that describes you...": "مطور أو متعلم أمن سيبراني أو أي وصف يناسبك...",
+    "Leave blank to use your portfolio bio, or write a role-focused summary.": "اتركه فارغاً لاستخدام نبذتك، أو اكتب ملخصاً موجهاً للدور المطلوب.",
+    "Paste the job description here. It stays in this browser session and is not saved.": "ألصق الوصف الوظيفي هنا. يبقى في جلسة المتصفح ولا يُحفظ.",
+    "Example: Password Strength Analyzer": "مثال: أداة تحليل قوة كلمة المرور",
+    "Example: Introduction to Cybersecurity": "مثال: مقدمة في الأمن السيبراني", "Example: Cisco": "مثال: Cisco",
+    "Example: 2026": "مثال: 2026", "Example: Web Application Security": "مثال: أمن تطبيقات الويب",
+    "Example: 🐧 Linux": "مثال: 🐧 Linux", "e.g. Junior Cybersecurity Analyst": "مثال: محلل أمن سيبراني مبتدئ",
+    "Back to top": "العودة إلى الأعلى", "Deviloq home": "الصفحة الرئيسية لديفيلوك",
+    "Close Account Settings": "إغلاق إعدادات الحساب", "Close Admin Dashboard": "إغلاق لوحة الإدارة",
+    "Close Notifications": "إغلاق الإشعارات", "Close Resume Studio": "إغلاق استوديو السيرة الذاتية",
+    "Confirm permanent account deletion": "تأكيد حذف الحساب نهائياً", "Portfolio sections": "أقسام الملف الشخصي",
+    "Portfolio statistics": "إحصاءات الملف الشخصي", "Settings sections": "أقسام الإعدادات",
+    "Resume controls": "عناصر التحكم في السيرة الذاتية", "Resume Studio steps": "خطوات استوديو السيرة الذاتية",
+    "Resume section presets": "إعدادات أقسام السيرة الذاتية", "Resume template": "قالب السيرة الذاتية",
+    "Live A4 resume preview": "معاينة مباشرة للسيرة الذاتية A4", "Live portfolio preview": "معاينة مباشرة للملف الشخصي",
+    "Preview accent color": "معاينة لون التمييز", "Show certificates": "عرض الشهادات", "Switch color theme": "تغيير سمة الألوان",
+    "Switch language": "تغيير اللغة", "Edit": "تعديل",
+    "Cybersecurity": "الأمن السيبراني", "Frontend": "الواجهات", "Backend": "الخلفية", "Full Stack": "التطوير الشامل",
+    "Mobile": "تطبيقات الجوال", "Data & AI": "البيانات والذكاء الاصطناعي", "DevOps & Cloud": "ديف أوبس والسحابة",
+    "Linux & Networking": "لينكس والشبكات", "Programming": "البرمجة", "Web Development": "تطوير الويب", "Other": "أخرى"
+  };
+  const staticUiSources = new WeakMap();
+  const staticAttributeSources = new WeakMap();
+
+  function translateStaticInterface(isArabic, root = document) {
+    const scopes = root === document
+      ? document.querySelectorAll('#landingView,#communityView,#authView,#onboardingView,#userNotFoundView,#portfolioView,dialog,[data-legacy-dialog]')
+      : [root];
+    scopes.forEach(scope => {
+      if (scope.nodeType === Node.TEXT_NODE) {
+        translateTextNode(scope, isArabic);
+        return;
+      }
+      const walker = document.createTreeWalker(scope, NodeFilter.SHOW_TEXT);
+      while (walker.nextNode()) translateTextNode(walker.currentNode, isArabic);
+      const elements = scope.matches?.('[placeholder],[title],[aria-label]') ? [scope] : [];
+      elements.push(...scope.querySelectorAll('[placeholder],[title],[aria-label]'));
+      elements.forEach(element => {
+        for (const attribute of ['placeholder', 'title', 'aria-label']) {
+          if (!element.hasAttribute(attribute) || element.hasAttribute(`data-en-${attribute === 'placeholder' ? 'ph' : 'al'}`)) continue;
+          const current = element.getAttribute(attribute);
+          const previous = staticAttributeSources.get(element)?.[attribute];
+          const english = previous && (current === previous || current === STATIC_UI_AR[previous]) ? previous : current;
+          if (!STATIC_UI_AR[english]) continue;
+          staticAttributeSources.set(element, { ...staticAttributeSources.get(element), [attribute]: english });
+          element.setAttribute(attribute, isArabic ? STATIC_UI_AR[english] : english);
+        }
+      });
+    });
+  }
+
+  function translateTextNode(node, isArabic) {
+    const parent = node.parentElement;
+    if (!parent || parent.closest('[data-en-html],script,style,.user-result-card,.featured-portfolio-card,.project-card,.learning-post-card,.certificate-card,.education-card,.achievement-card,.testimonial-card,.knowledge-card,.goal-card,.resource-card,.roadmap-card,[contenteditable]')) return;
+    const raw = node.nodeValue.trim();
+    const current = raw.replace(/\s+/g, ' ');
+    if (!current) return;
+    const previous = staticUiSources.get(node);
+    const english = previous && (current === previous || current === STATIC_UI_AR[previous]) ? previous : current;
+    if (!STATIC_UI_AR[english]) return;
+    staticUiSources.set(node, english);
+    node.nodeValue = node.nodeValue.replace(raw, isArabic ? STATIC_UI_AR[english] : english);
+  }
+
+  function translateCommunityStatus(isArabic) {
+    const statuses = {
+      "Loading featured portfolios...": "جارٍ تحميل الملفات الشخصية المميزة...",
+      "Could not load featured portfolios right now.": "تعذر تحميل الملفات الشخصية المميزة الآن.",
+      "No public portfolios are available yet.": "لا توجد ملفات شخصية عامة بعد.",
+      "Searching...": "جارٍ البحث...",
+      "Loading public portfolios...": "جارٍ تحميل الملفات الشخصية العامة...",
+      "No public portfolio matches your search.": "لا يوجد ملف شخصي عام يطابق بحثك.",
+      "Could not load public portfolios right now.": "تعذر تحميل الملفات الشخصية العامة الآن."
+    };
+    ['featuredPortfolioMessage', 'userSearchMessage'].forEach(id => {
+      const element = document.getElementById(id);
+      if (!element) return;
+      const current = element.textContent;
+      const english = Object.keys(statuses).find(key => key === current || statuses[key] === current);
+      if (english) element.textContent = isArabic ? statuses[english] : english;
+    });
+  }
+
   function setLanguage(
     lang,
     savePreference = false
@@ -7588,7 +7871,7 @@
 
     document
       .querySelectorAll(
-        "#landingView [data-en-html], #communityView [data-en-html], #authView [data-en-html], dialog [data-en-html], #appLoading[data-en-html]"
+        "[data-en-html]"
       )
       .forEach(element => {
 
@@ -7612,7 +7895,7 @@
 
     document
       .querySelectorAll(
-        "#landingView [data-en-ph], #authView [data-en-ph]"
+        "[data-en-ph]"
       )
       .forEach(element => {
 
@@ -7639,7 +7922,7 @@
 
     document
       .querySelectorAll(
-        "#landingView [data-en-al], #authView [data-en-al]"
+        "[data-en-al]"
       )
       .forEach(element => {
 
@@ -7692,15 +7975,29 @@
     }
 
 
-    const langLabel =
-      document.getElementById(
-        "landingLangToggleLabel"
-      );
+    document.querySelectorAll("[data-language-toggle-label]").forEach(label => {
+      label.textContent = isArabic ? "EN" : "عربي";
+    });
 
-    if (langLabel) {
-      langLabel.textContent =
-        isArabic ? "EN" : "عربي";
+    translateStaticInterface(isArabic);
+    const authStatus = document.getElementById("authMessage");
+    if (authStatus?.dataset.englishMessage) {
+      const english = authStatus.dataset.englishMessage;
+      authStatus.textContent = isArabic ? AUTH_MESSAGES_AR[english] || "تعذّر إكمال الطلب. تحقق من البيانات وحاول مرة أخرى." : english;
     }
+    const notFoundStatus = document.getElementById("userNotFoundMessage");
+    if (notFoundStatus?.dataset.enMessage) {
+      notFoundStatus.textContent = isArabic ? notFoundStatus.dataset.arMessage : notFoundStatus.dataset.enMessage;
+    }
+    if (currentAppView === "community") {
+      renderPublicUserCards(visibleDirectoryProfiles);
+      const featured = document.getElementById("featuredPortfolioGrid");
+      featured?.replaceChildren(...visibleFeaturedProfiles.map(createFeaturedPortfolioCard));
+      translateCommunityStatus(isArabic);
+    }
+    if (currentAppView === "portfolio") window.dispatchEvent(new Event("scroll"));
+    if (currentAppView === "landing" && !landingTerminalManualMode) startLandingTerminalAnimation();
+    if (typeof syncResumeButton === "function" && currentAppView === "portfolio") syncResumeButton();
 
 
     const langButton =
@@ -7777,6 +8074,18 @@
 
 
   loadSavedLanguage();
+
+  const uiTranslationObserver = new MutationObserver(records => {
+    if (document.documentElement.lang !== "ar") return;
+    records.forEach(record => record.addedNodes.forEach(node => {
+      if (node.nodeType === Node.ELEMENT_NODE || node.nodeType === Node.TEXT_NODE) {
+        translateStaticInterface(true, node);
+      }
+    }));
+  });
+  document.querySelectorAll('#landingView,#communityView,#authView,#onboardingView,#userNotFoundView,#portfolioView,dialog,[data-legacy-dialog]').forEach(view => {
+    uiTranslationObserver.observe(view, { childList: true, subtree: true });
+  });
 
 
   /* =========================================
@@ -10211,6 +10520,12 @@
         }
 
 
+                ${String(item.description || '').length > 180 ? `<details class="project-hover-preview">
+                    <summary>Quick Preview</summary>
+                    <p>${escapeHTML(item.description)}</p>
+                    ${previewTools ? `<span class="project-hover-tools">${escapeHTML(previewTools)}</span>` : ""}
+                </details>` : ""}
+
                 <div class="project-card-footer">
                   ${linkHTML}
 
@@ -10234,29 +10549,6 @@
                   }
                 </div>
 
-
-                <div
-                    class="project-hover-preview"
-                    aria-hidden="true"
-                >
-                    <span class="project-hover-label">
-                        Quick Preview
-                    </span>
-
-                    <p>
-                        ${escapeHTML(item.description)}
-                    </p>
-
-                    ${
-                      previewTools
-                        ?
-                        `<span class="project-hover-tools">
-                          ${escapeHTML(previewTools)}
-                        </span>`
-                        :
-                        ""
-                    }
-                </div>
 
             `;
 
@@ -15398,6 +15690,11 @@
 
     const form = event.currentTarget;
     const setMessage = (message, success = false) => setContactFormMessage(message, success, form);
+    form.querySelectorAll(".contact-field-error").forEach(node => node.remove());
+    form.querySelectorAll('[aria-invalid="true"]').forEach(node => {
+      node.removeAttribute("aria-invalid");
+      node.removeAttribute("aria-describedby");
+    });
 
 
     const contactData = {
@@ -15449,6 +15746,28 @@
       setMessage(
         validationError
       );
+
+      const invalidName = !contactData.name || contactData.name.length > 100 ? "name"
+        : !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(contactData.email) ? "email"
+        : !contactData.subject || contactData.subject.length > 150 ? "subject"
+        : "message";
+      const invalidField = form.elements.namedItem(invalidName);
+      if (invalidField) {
+        const error = document.createElement("span");
+        error.className = "contact-field-error";
+        error.id = `${invalidField.id}Error`;
+        error.textContent = validationError;
+        invalidField.setAttribute("aria-invalid", "true");
+        invalidField.setAttribute("aria-describedby", error.id);
+        invalidField.closest(".contact-field")?.append(error);
+        invalidField.focus();
+        invalidField.addEventListener("input", () => {
+          invalidField.removeAttribute("aria-invalid");
+          invalidField.removeAttribute("aria-describedby");
+          error.remove();
+          setMessage("");
+        }, { once: true });
+      }
 
       return;
     }
@@ -15568,8 +15887,7 @@
 
       contactRequestInFlight = false;
       submitButton.disabled = false;
-      submitButton.textContent =
-        "Send Message";
+      submitButton.textContent = uiText("Send Message", "إرسال الرسالة");
 
     }
   }

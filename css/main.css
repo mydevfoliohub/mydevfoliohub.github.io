@@ -139,21 +139,37 @@
     }
 
     :root {
-      --background: #11010a;
-      --card: #2c0f25;
-      --card2: #11010a;
-      --border: #571f69;
-      --text: #fbf7ff;
-      --muted: #d8c3ec;
-      --blue: #9f8cff;
-      --green: #d89cff;
+      --background: #100d18;
+      --card: #21182d;
+      --card2: #17111f;
+      --border: #493b5a;
+      --text: #f8f5fb;
+      --muted: #c6bdd2;
+      --blue: #ada4ef;
+      --green: #d3adff;
       --red: #f85149;
-      --accent-strong: #5c3bbe;
-      --accent-hover: #5242d4;
-      --chip: #441544;
-      --grid-line: rgba(216, 156, 255, 0.055);
-      --header-background: rgba(17, 1, 10, 0.9);
-      --page-gradient: linear-gradient(to top, #11010a, #2c0f25, #441544, #571f69, #612f95, #6134a9, #5c3bbe, #5242d4, #503bd1, #4f34cf, #4d2dcc, #4c24c9);
+      --accent-strong: #6844c8;
+      --accent-hover: #7652d6;
+      --chip: #30233f;
+      --grid-line: rgba(208, 184, 241, 0.024);
+      --header-background: rgba(20, 15, 30, 0.94);
+      --page-gradient: linear-gradient(180deg, #211634, #15101f 42%, #0d0b14);
+      --control-border: #806c9b;
+      --control-height: 44px;
+      --control-radius: 10px;
+      --card-radius: 14px;
+      --space-1: 4px;
+      --space-2: 8px;
+      --space-3: 12px;
+      --space-4: 16px;
+      --space-6: 24px;
+      --space-8: 32px;
+      --space-12: 48px;
+      --space-16: 64px;
+      --section-space: clamp(64px, 7vw, 100px);
+      --shadow-card: 0 10px 28px rgba(6, 4, 12, .13);
+      --shadow-dialog: 0 28px 80px rgba(5, 3, 10, .42);
+      --on-accent: #ffffff;
     }
 
     :root[data-theme="classic"] {
@@ -171,24 +187,28 @@
       --grid-line: rgba(88, 166, 255, 0.035);
       --header-background: rgba(1, 4, 9, 0.92);
       --page-gradient: linear-gradient(to bottom, #0d1117, #010409);
+      --control-border: #687888;
     }
 
     :root[data-theme="light"] {
-      --background: #f5f2fc;
+      --background: #f7f5fb;
       --card: #ffffff;
-      --card2: #ece6f9;
-      --border: #d9cdf3;
-      --text: #1d1433;
-      --muted: #6a5d8f;
-      --blue: #5b3df0;
-      --green: #7c3aed;
+      --card2: #f0ecf7;
+      --border: #d8cfe6;
+      --text: #241b32;
+      --muted: #62576f;
+      --blue: #5e50bb;
+      --green: #693bcc;
       --red: #d92d20;
-      --accent-strong: #6d28d9;
-      --accent-hover: #7c3aed;
-      --chip: #ece4fb;
-      --grid-line: rgba(109, 40, 217, 0.07);
+      --accent-strong: #6334cc;
+      --accent-hover: #5426b8;
+      --chip: #eee8f7;
+      --grid-line: rgba(87, 55, 143, 0.025);
       --header-background: rgba(255, 255, 255, 0.88);
-      --page-gradient: linear-gradient(to bottom, #faf8ff, #efe8fb);
+      --page-gradient: linear-gradient(180deg, #fbfaff, #f4f1f9 62%, #f7f5fb);
+      --control-border: #9078ac;
+      --shadow-card: 0 10px 30px rgba(37, 22, 64, .065);
+      --shadow-dialog: 0 28px 80px rgba(35, 23, 55, .20);
     }
 
     html {
@@ -210,8 +230,8 @@
         ),
         var(--page-gradient);
       background-size:
-        34px 34px,
-        34px 34px,
+        48px 48px,
+        48px 48px,
         cover;
       background-position:
         0 0,
@@ -394,11 +414,11 @@
       align-items: center;
       justify-content: center;
 
-      min-height: 42px;
+      min-height: var(--control-height);
       padding: 10px 18px;
 
       border: 1px solid var(--border);
-      border-radius: 7px;
+      border-radius: var(--control-radius);
 
       background: var(--card);
 
@@ -407,7 +427,7 @@
       font-weight: bold;
       text-decoration: none;
 
-      transition: 0.22s ease;
+      transition: background-color .18s ease, border-color .18s ease, color .18s ease, box-shadow .18s ease, transform .18s ease;
     }
 
     .platform-button:hover {
@@ -415,7 +435,7 @@
 
       color: var(--green);
 
-      transform: translateY(-2px);
+      transform: translateY(-1px);
     }
 
     .platform-button.primary {
@@ -423,13 +443,13 @@
 
       background: var(--accent-strong);
 
-      color: var(--text);
+      color: var(--on-accent);
     }
 
     .platform-button.primary:hover {
       background: var(--accent-hover);
 
-      color: var(--text);
+      color: var(--on-accent);
     }
 
     .landing-hero {
@@ -910,7 +930,7 @@
 
       background: var(--accent-strong);
 
-      color: var(--text);
+      color: var(--on-accent);
     }
 
     .auth-submit {
@@ -1320,7 +1340,7 @@
        MAIN
     ========================================= */
 
-    main {
+    #portfolioMain {
       width: 86%;
       max-width: 1300px;
       margin: 45px auto;
@@ -1488,7 +1508,7 @@
     }
 
     .hero-text {
-      padding: 45px;
+      padding: clamp(24px, 3vw, 40px);
     }
 
     .hello {
@@ -1501,7 +1521,7 @@
     .hero-text h2 {
       margin-top: 15px;
 
-      font-size: 45px;
+      font-size: clamp(30px, 3vw, 42px);
 
       line-height: 1.15;
     }
@@ -1519,7 +1539,7 @@
     }
 
     .profile-section {
-      margin-top: 35px;
+      margin-top: var(--space-8);
     }
 
     .profile-section h3 {
@@ -4158,7 +4178,7 @@
         font-size: 11px;
       }
 
-      main {
+      #portfolioMain {
         width: 92%;
       }
 
@@ -4585,35 +4605,33 @@
       padding: 11px 20px;
       overflow: hidden;
       border-radius: 10px;
-      transition:
-        transform .22s ease,
-        border-color .22s ease,
-        background-color .22s ease,
-        color .22s ease,
-        box-shadow .22s ease;
+      transition: transform .18s ease, border-color .18s ease, background-color .18s ease, color .18s ease, box-shadow .18s ease;
     }
 
     #landingView .platform-button:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 10px 28px color-mix(in srgb, var(--accent-strong) 20%, transparent);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px color-mix(in srgb, var(--accent-strong) 12%, transparent);
     }
 
     #landingView .platform-button.primary {
-      background: linear-gradient(135deg, var(--accent-strong), var(--accent-hover));
-      box-shadow: 0 10px 34px color-mix(in srgb, var(--accent-strong) 30%, transparent);
+      background: var(--accent-strong);
+      color: var(--on-accent);
+      box-shadow: 0 5px 16px color-mix(in srgb, var(--accent-strong) 20%, transparent);
     }
 
     #landingView .platform-button.primary:hover {
-      box-shadow: 0 14px 38px color-mix(in srgb, var(--accent-hover) 38%, transparent);
+      background: var(--accent-hover);
+      color: var(--on-accent);
+      box-shadow: 0 7px 20px color-mix(in srgb, var(--accent-hover) 22%, transparent);
     }
 
     .landing-hero {
       position: relative;
       isolation: isolate;
-      min-height: 690px;
-      grid-template-columns: minmax(0, 1.05fr) minmax(410px, .95fr);
-      gap: clamp(42px, 7vw, 92px);
-      padding: 58px 0 42px;
+      min-height: 0;
+      grid-template-columns: minmax(0, 1.08fr) minmax(380px, .92fr);
+      gap: clamp(36px, 5vw, 72px);
+      padding: clamp(56px, 6vw, 86px) 0 var(--space-16);
     }
 
     .landing-copy,
@@ -4631,9 +4649,9 @@
       border-radius: 999px;
       background: color-mix(in srgb, var(--card) 88%, transparent);
       color: var(--muted);
-      font-family: monospace;
-      font-size: 12px;
-      letter-spacing: .4px;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0;
       text-decoration: none;
       transition: border-color .22s ease, color .22s ease, transform .22s ease;
     }
@@ -4649,7 +4667,7 @@
       height: 7px;
       border-radius: 50%;
       background: var(--green);
-      box-shadow: 0 0 10px var(--green);
+      box-shadow: none;
     }
 
     .landing-login-link {
@@ -4674,28 +4692,21 @@
     .landing-copy h1 {
       max-width: 780px;
       margin-top: 18px;
-      font-size: clamp(50px, 6.7vw, 88px);
-      line-height: 1;
-      letter-spacing: -0.04em;
+      font-size: clamp(44px, 5.25vw, 72px);
+      line-height: 1.06;
+      letter-spacing: -0.045em;
       text-wrap: balance;
     }
 
     .landing-gradient-title {
       display: block;
       padding-bottom: .08em;
-      background: linear-gradient(
-        100deg,
-        var(--green),
-        var(--blue),
-        #c8a7ff,
-        var(--green)
-      );
-      background-size: 220% 100%;
+      background: linear-gradient(105deg, var(--green), var(--blue));
       background-clip: text;
       -webkit-background-clip: text;
       color: transparent !important;
       -webkit-text-fill-color: transparent;
-      animation: landingGradientShift 12s ease-in-out infinite;
+      animation: none;
     }
 
     @keyframes landingGradientShift {
@@ -4721,13 +4732,13 @@
     .landing-tagline {
       max-width: 620px;
       margin-top: 22px;
-      font-size: clamp(16px, 1.55vw, 19px);
-      line-height: 1.75;
+      font-size: clamp(16px, 1.4vw, 18px);
+      line-height: 1.65;
     }
 
-    .landing-actions { margin-top: 34px; }
+    .landing-actions { margin-top: var(--space-8); }
 
-    .landing-terminal-stage { perspective: 1100px; }
+    .landing-terminal-stage { perspective: none; }
 
     #landingView .platform-button.secondary {
       background: transparent;
@@ -4751,17 +4762,12 @@
 
     .landing-terminal {
       position: relative;
-      min-height: 390px;
-      border-color: color-mix(in srgb, var(--blue) 30%, var(--border));
-      border-radius: 16px;
-      background:
-        linear-gradient(180deg, rgba(255,255,255,.035), transparent 22%),
-        color-mix(in srgb, var(--card) 94%, transparent);
-      box-shadow:
-        0 30px 90px rgba(0, 0, 0, .45),
-        0 0 0 1px rgba(255, 255, 255, .03) inset,
-        inset 0 1px 0 rgba(255, 255, 255, .06);
-      backdrop-filter: blur(16px);
+      min-height: 340px;
+      border-color: var(--border);
+      border-radius: var(--card-radius);
+      background: var(--card);
+      box-shadow: var(--shadow-card);
+      backdrop-filter: none;
     }
 
     .landing-terminal::before {
@@ -4786,10 +4792,10 @@
     }
 
     .landing-terminal-body {
-      min-height: 335px;
-      padding: 31px;
+      min-height: 270px;
+      padding: 26px;
       font-size: 13px;
-      line-height: 2.15;
+      line-height: 1.9;
     }
 
     .landing-terminal-command-line {
@@ -6051,8 +6057,6 @@
     #landingView .landing-final-cta::before { content:""; position:absolute; z-index:-1; inset:0; background:radial-gradient(ellipse at 50% 100%,color-mix(in srgb,var(--green) 11%,transparent),transparent 70%); pointer-events:none; }
     #landingView .landing-final-cta > p { color:var(--muted); font-size:14px; line-height:1.8; }
     #landingView .landing-final-cta .landing-actions { justify-content:center; margin-top:28px; }
-    #landingView .landing-final-path { margin-top:25px; color:var(--muted); font:11px monospace; overflow-wrap:anywhere; }
-    #landingView .landing-final-path span { color:var(--green); }
     #landingView :is(.studio-swatch,summary,.landing-hero-notes a):focus-visible { outline:2px solid var(--green); outline-offset:5px; }
     @media (max-width:800px) {
       #landingView .landing-studio { grid-template-columns:1fr; gap:35px; padding:35px 0 70px; }
@@ -6259,46 +6263,6 @@
     #landingView .landing-copy > *:nth-child(6) { animation-delay: .3s; }
     #landingView .landing-copy > *:nth-child(7) { animation-delay: .36s; }
 
-    .landing-proof {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      margin-top: 26px;
-    }
-
-    .proof-avatars { display: flex; align-items: center; }
-
-    .proof-avatars span {
-      width: 34px;
-      height: 34px;
-      margin-left: -10px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      border: 2px solid var(--background);
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--accent-strong), var(--accent-hover));
-      color: #fff;
-      font-family: monospace;
-      font-size: 12px;
-      font-weight: bold;
-      transition: transform .2s ease;
-    }
-
-    .proof-avatars span:first-child { margin-left: 0; }
-
-    .proof-avatars span:nth-child(2) { background: linear-gradient(135deg, #0ea5e9, #6366f1); }
-    .proof-avatars span:nth-child(3) { background: linear-gradient(135deg, #10b981, #0ea5e9); }
-    .proof-avatars span:nth-child(4) { background: linear-gradient(135deg, #a855f7, #ec4899); }
-    .proof-avatars span:last-child { background: var(--card); color: var(--green); }
-
-    .proof-avatars span:hover { transform: translateY(-4px); }
-
-    .landing-proof p { color: var(--muted); font-size: 13px; }
-
-    html[dir="rtl"] .proof-avatars span { margin-left: 0; margin-right: -10px; }
-    html[dir="rtl"] .proof-avatars span:first-child { margin-right: 0; }
-
     @keyframes heroRise {
       from { opacity: 0; transform: translateY(16px); }
       to { opacity: 1; transform: translateY(0); }
@@ -6397,28 +6361,25 @@
       50% { transform: translateY(-9px); }
     }
 
-    .landing-stats {
+    .landing-highlights {
       display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 12px;
-      margin: 6px 0 70px;
-      padding: 20px 8px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: var(--space-6);
+      margin: 0 0 var(--section-space);
+      padding: var(--space-6) 0;
       border-top: 1px solid var(--border);
       border-bottom: 1px solid var(--border);
+      list-style: none;
     }
 
-    .landing-stats div { text-align: center; }
-    .landing-stats strong {
+    .landing-highlights li { display: grid; gap: var(--space-1); min-width: 0; }
+    .landing-highlights strong {
       display: block;
-      font-family: monospace;
-      font-size: 30px;
-      font-weight: bold;
-      background: linear-gradient(120deg, var(--text), var(--green));
-      background-clip: text;
-      -webkit-background-clip: text;
-      color: transparent;
+      color: var(--text);
+      font-size: 15px;
+      font-weight: 700;
     }
-    .landing-stats span { display: block; margin-top: 5px; color: var(--muted); font-size: 11px; letter-spacing: .6px; text-transform: uppercase; }
+    .landing-highlights span { color: var(--muted); font-size: 13px; line-height: 1.5; }
 
     #landingView .platform-feature-card {
       position: relative;
@@ -6457,9 +6418,7 @@
     }
 
     @media (max-width: 900px) {
-      .float-card-top { top: -18px; right: 12px; }
-      .float-card-bottom { left: 12px; }
-      .landing-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px 12px; }
+      .landing-highlights { gap: var(--space-4); }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -6601,19 +6560,6 @@
       animation: floatY 8s ease-in-out infinite reverse;
     }
 
-    #landingView .landing-final-path {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      margin-top: 26px;
-      padding: 10px 18px;
-      border: 1px dashed color-mix(in srgb, var(--green) 45%, var(--border));
-      border-radius: 10px;
-      background: rgba(0,0,0,.25);
-      font-family: monospace;
-      font-size: 13px;
-    }
-    #landingView .landing-final-path .path-lock { color: var(--green); }
 
     #landingView .landing-studio-window,
     #landingView .landing-studio-demo {
@@ -6693,7 +6639,7 @@
     ========================================= */
 
     html[lang="ar"] body {
-      font-family: "IBM Plex Sans Arabic", "Inter", Arial, sans-serif;
+      font-family: "IBM Plex Sans Arabic", "Segoe UI", Tahoma, Arial, sans-serif;
       letter-spacing: 0;
     }
 
@@ -6706,7 +6652,7 @@
     html[lang="ar"] .landing-kicker,
     html[lang="ar"] .landing-badge,
     html[lang="ar"] .landing-build-line {
-      font-family: "IBM Plex Sans Arabic", "Inter", monospace;
+      font-family: "IBM Plex Sans Arabic", "Segoe UI", Tahoma, Arial, sans-serif;
       letter-spacing: 0;
     }
 
@@ -6714,7 +6660,7 @@
     html[dir="rtl"] .platform-header-actions,
     html[dir="rtl"] .landing-actions,
     html[dir="rtl"] .landing-hero-notes,
-    html[dir="rtl"] .landing-stats {
+    html[dir="rtl"] .landing-highlights {
       direction: rtl;
     }
 
@@ -6826,18 +6772,6 @@
       animation: statusPing 2.4s ease-out infinite;
     }
 
-    /* Stats hover */
-    .landing-stats > div {
-      border-radius: 12px;
-      padding: 10px 4px;
-      transition: background-color .25s ease, transform .25s ease;
-    }
-
-    .landing-stats > div:hover {
-      background: color-mix(in srgb, var(--card) 70%, transparent);
-      transform: translateY(-3px);
-    }
-
     /* Pressed states */
     #landingView .platform-button:active,
     #landingView .studio-swatch:active,
@@ -6877,8 +6811,7 @@
       #landingView .platform-button:active,
       #landingView .studio-swatch:active,
       #landingView .lang-toggle:active,
-      #landingView .theme-toggle:active,
-      .landing-stats > div:hover {
+      #landingView .theme-toggle:active {
         transform: none;
       }
     }
@@ -6929,40 +6862,6 @@
 
     @media (prefers-reduced-motion: reduce) {
       body::after { display: none; }
-    }
-
-    /* =========================================
-       BENTO — features grid (desktop)
-    ========================================= */
-
-    @media (min-width: 1051px) {
-
-      #landingView .platform-features {
-        grid-template-columns: repeat(6, minmax(0, 1fr));
-      }
-
-      #landingView .platform-features .platform-feature-card:nth-child(1) { grid-column: span 4; }
-      #landingView .platform-features .platform-feature-card:nth-child(2) { grid-column: span 2; }
-      #landingView .platform-features .platform-feature-card:nth-child(3) { grid-column: span 2; }
-      #landingView .platform-features .platform-feature-card:nth-child(4) { grid-column: span 2; }
-      #landingView .platform-features .platform-feature-card:nth-child(5) { grid-column: span 2; }
-
-      #landingView .platform-features .platform-feature-card:nth-child(1) {
-        min-height: 240px;
-        background:
-          radial-gradient(ellipse at 85% 15%, color-mix(in srgb, var(--accent-strong) 26%, transparent), transparent 60%),
-          color-mix(in srgb, var(--card) 88%, transparent);
-      }
-
-      #landingView .platform-features .platform-feature-card:nth-child(1) h3 {
-        font-size: 21px;
-      }
-
-      #landingView .platform-features .platform-feature-card:nth-child(1) p {
-        max-width: 420px;
-        font-size: 14px;
-      }
-
     }
 
     /* =========================================
@@ -7048,7 +6947,7 @@
       transform: translateY(-1px);
     }
 
-    .landing-terminal-tabs button[aria-selected="true"] {
+    .landing-terminal-tabs button[aria-pressed="true"] {
       border-color: color-mix(in srgb, var(--green) 55%, var(--border));
       background: color-mix(in srgb, var(--green) 12%, transparent);
       color: var(--green);

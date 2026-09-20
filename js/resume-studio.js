@@ -1,5 +1,9 @@
 /* Studio edits are local. Portfolio data is refreshed once per open, never per control. */
 const RESUME_SECTIONS = {summary:'Summary',experience:'Experience',education:'Education',skills:'Skills / Tech Stack',projects:'Projects',certificates:'Certificates',labs:'Labs',achievements:'Achievements',github:'GitHub',learning:'Learning'};
+const RESUME_SECTIONS_AR = {summary:'الملخص',experience:'الخبرة',education:'التعليم',skills:'المهارات والتقنيات',projects:'المشاريع',certificates:'الشهادات',labs:'المختبرات',achievements:'الإنجازات',github:'GitHub',learning:'التعلم'};
+const RESUME_STEPS_AR = {content:'المحتوى',experience:'الخبرة',sections:'الأقسام',design:'التصميم',review:'المراجعة'};
+function resumeSectionLabel(key) { return uiText(RESUME_SECTIONS[key] || key,RESUME_SECTIONS_AR[key] || key); }
+function resumeStepLabel(key) { return uiText(key[0].toUpperCase() + key.slice(1),RESUME_STEPS_AR[key] || key); }
 const RESUME_DEFAULT_ORDER = Object.keys(RESUME_SECTIONS);
 const RESUME_STEPS = ['content','experience','sections','design','review'];
 let resumeSnapshot = null;
@@ -65,6 +69,27 @@ function getResumePreferenceRecord(options) {
 function getResumeDocumentRecord(options,userId) {
   return {user_id:userId,target_role:options.targetRole,summary:options.summary,priority_skills:[...options.prioritySkills],experience:normalizeResumeExperience(options.experience),updated_at:new Date().toISOString()};
 }
+let resumeSavedSignature = '';
+function getResumeSignature(options) {
+  const normalized = normalizeResumeSettings(options);
+  const preferences = getResumePreferenceRecord(normalized);
+  delete preferences.readiness;
+  return JSON.stringify([preferences,normalized.targetRole,normalized.summary,normalized.prioritySkills,normalized.experience]);
+}
+function updateResumeSaveState() {
+  const state = document.getElementById('resumeSaveState');
+  if (!state) return;
+  state.hidden = !resumeOwnerMode || !resumeOptions;
+  if (state.hidden) return;
+  if (!resumeContentPersistenceAvailable || !('resume_settings' in resumeSnapshot.profile)) {
+    state.textContent = uiText('Saving unavailable','الحفظ غير متاح');
+    state.classList.add('is-dirty');
+    return;
+  }
+  const dirty = getResumeSignature(resumeOptions) !== resumeSavedSignature;
+  state.textContent = dirty ? uiText('Unsaved changes','تغييرات غير محفوظة') : uiText('Saved','تم الحفظ');
+  state.classList.toggle('is-dirty',dirty);
+}
 function syncResumeButton() {
   const button = document.getElementById('downloadCvButton');
   if (!button) return;
@@ -76,14 +101,14 @@ function syncResumeButton() {
     const saved = normalizeResumeSettings(currentProfile?.resume_settings);
     const icon = document.createElement('span'); icon.className = 'resume-trigger-icon'; icon.setAttribute('aria-hidden','true'); icon.textContent = '▤';
     const copy = document.createElement('span'); copy.className = 'resume-trigger-copy';
-    const title = document.createElement('strong'); title.textContent = 'Resume Studio';
-    const detail = document.createElement('small'); detail.textContent = saved.readiness ? `${saved.template === 'ats' ? 'ATS' : 'Modern'} · ${saved.readiness}% ready` : 'Build a tailored resume from your portfolio';
+    const title = document.createElement('strong'); title.textContent = uiText('Resume Studio','استوديو السيرة الذاتية');
+    const detail = document.createElement('small'); detail.textContent = saved.readiness ? `${saved.template === 'ats' ? 'ATS' : uiText('Modern','حديث')} · ${saved.readiness}% ${uiText('ready','جاهز')}` : uiText('Build a tailored resume from your portfolio','أنشئ سيرة ذاتية مخصصة من ملفك');
     const progress = document.createElement('span'); progress.className = 'resume-trigger-progress'; progress.setAttribute('aria-hidden','true');
     const progressBar = document.createElement('i'); progressBar.style.width = `${saved.readiness}%`; progress.append(progressBar); copy.append(title,detail,progress);
     const arrow = document.createElement('span'); arrow.className = 'resume-trigger-arrow'; arrow.setAttribute('aria-hidden','true'); arrow.textContent = '→';
-    button.append(icon,copy,arrow); button.setAttribute('aria-label',`Open Resume Studio. ${saved.readiness || 0}% ready.`);
+    button.append(icon,copy,arrow); button.setAttribute('aria-label',uiText(`Open Resume Studio. ${saved.readiness || 0}% ready.`,`افتح استوديو السيرة الذاتية. الجاهزية ${saved.readiness || 0}%.`));
   } else {
-    button.textContent = '↓ Download Resume'; button.setAttribute('aria-label','Download Resume');
+    button.textContent = uiText('↓ Download Resume','↓ تنزيل السيرة الذاتية'); button.setAttribute('aria-label',uiText('Download Resume','تنزيل السيرة الذاتية'));
   }
 }
 async function openPortfolioCv() { return openResumeStudio(); }
@@ -93,7 +118,7 @@ async function openResumeStudio() {
   const editing = requireAccount() && currentUser.id === owner;
   if (!editing && !(currentProfile.is_public === true && normalizeResumeSettings(currentProfile.resume_settings).public)) return;
   const request = ++resumeRequest;
-  productStatus('portfolioCvStatus', 'Loading resume data…');
+  productStatus('portfolioCvStatus', uiText('Loading resume data…','جارٍ تحميل بيانات السيرة الذاتية…'));
   document.getElementById('downloadCvButton').disabled = true;
   try {
     const tables = ['projects','labs','education_items','certificates','achievement_badges','learning_posts'];
@@ -115,11 +140,12 @@ async function openResumeStudio() {
     }};
     resumeOptions = normalizeResumeSettings({...profile.resume_settings,
       targetRole:resumeDocument?.target_role,summary:resumeDocument?.summary,prioritySkills:resumeDocument?.priority_skills,experience:resumeDocument?.experience});
+    resumeSavedSignature = getResumeSignature(resumeOptions);
     resumeOwnerMode = editing;
     resumeCurrentStep = 'content';
     resumeJobDescription = '';
     resumeLastPageCount = 0;
-    document.getElementById('portfolioCvHeading').textContent = editing ? 'Resume Studio' : 'Download Resume';
+    document.getElementById('portfolioCvHeading').textContent = editing ? uiText('Resume Studio','استوديو السيرة الذاتية') : uiText('Download Resume','تنزيل السيرة الذاتية');
     document.getElementById('resumeControls').hidden = !editing;
     document.getElementById('resumeSave').hidden = !editing;
     document.getElementById('resumeReset').hidden = !editing;
@@ -133,7 +159,7 @@ async function openResumeStudio() {
     openProductDialog('portfolioCvDialog');
     renderResumePreview();
     productStatus('portfolioCvStatus','');
-  } catch (error) { productStatus('portfolioCvStatus', error.message || 'Could not prepare your resume. Try again.'); }
+  } catch (error) { productStatus('portfolioCvStatus', document.documentElement.lang === 'ar' ? 'تعذّر إعداد السيرة الذاتية. حاول مرة أخرى.' : (error.message || 'Could not prepare your resume. Try again.')); }
   finally { if (request === resumeRequest) { document.getElementById('downloadCvButton').disabled = false; syncResumeButton(); } }
 }
 function availableResumeSections() {
@@ -173,10 +199,10 @@ function renderResumeControls() {
       resumeOptions.included = check.checked ? [...new Set([...resumeOptions.included,key])] : resumeOptions.included.filter(item => item !== key);
       renderResumePreview();
     });
-    label.append(check,document.createTextNode(RESUME_SECTIONS[key])); row.append(label);
+    label.append(check,document.createTextNode(resumeSectionLabel(key))); row.append(label);
     for (const direction of [-1,1]) {
       const button = document.createElement('button'); button.type = 'button'; button.textContent = direction === -1 ? '↑' : '↓';
-      button.setAttribute('aria-label',`Move ${RESUME_SECTIONS[key]} ${direction === -1 ? 'up' : 'down'}`);
+      button.setAttribute('aria-label',uiText(`Move ${RESUME_SECTIONS[key]} ${direction === -1 ? 'up' : 'down'}`,`نقل ${resumeSectionLabel(key)} ${direction === -1 ? 'لأعلى' : 'لأسفل'}`));
       button.dataset.orderKey = key; button.dataset.direction = direction;
       button.disabled = direction === -1 ? index === 0 : index === order.length - 1;
       button.addEventListener('click', () => {
@@ -201,11 +227,13 @@ function setResumeStep(step,focusStep = true) {
     if (active) button.setAttribute('aria-current','step'); else button.removeAttribute('aria-current');
   });
   const index = RESUME_STEPS.indexOf(step);
+  const progress = document.getElementById('resumeStepProgress');
+  if (progress) progress.textContent = uiText(`Step ${index + 1} of ${RESUME_STEPS.length} · ${resumeStepLabel(step)}`,`الخطوة ${index + 1} من ${RESUME_STEPS.length} · ${resumeStepLabel(step)}`);
   const back = document.getElementById('resumeStepBack');
   const next = document.getElementById('resumeStepNext');
   back.hidden = index === 0;
   next.hidden = index === RESUME_STEPS.length - 1;
-  if (!next.hidden) next.textContent = `Next: ${RESUME_SECTIONS[RESUME_STEPS[index + 1]] || RESUME_STEPS[index + 1][0].toUpperCase() + RESUME_STEPS[index + 1].slice(1)}`;
+  if (!next.hidden) next.textContent = uiText(`Next: ${resumeStepLabel(RESUME_STEPS[index + 1])}`,`التالي: ${resumeStepLabel(RESUME_STEPS[index + 1])}`);
   if (focusStep) document.querySelector(`[data-resume-step-button="${step}"]`)?.focus();
 }
 function moveResumeStep(direction) {
@@ -217,32 +245,32 @@ function renderResumeExperience() {
   if (!list || !resumeOptions) return;
   list.replaceChildren();
   if (!resumeOptions.experience.length) {
-    const empty = document.createElement('p'); empty.className = 'resume-empty-note'; empty.textContent = 'No experience added yet. Add only work you have actually completed.'; list.append(empty); return;
+    const empty = document.createElement('p'); empty.className = 'resume-empty-note'; empty.textContent = uiText('No experience added yet. Add only work you have actually completed.','لم تُضف خبرة بعد. أضف الأعمال التي أنجزتها فعلاً.'); list.append(empty); return;
   }
   resumeOptions.experience.forEach((item,index) => {
     const card = document.createElement('article'); card.className = 'resume-experience-card';
     const heading = document.createElement('div'); heading.className = 'resume-experience-heading';
-    const title = document.createElement('strong'); title.textContent = item.role || item.organization || `Experience ${index + 1}`;
-    const remove = document.createElement('button'); remove.type = 'button'; remove.className = 'resume-remove-experience'; remove.textContent = 'Remove'; remove.setAttribute('aria-label',`Remove ${title.textContent}`); remove.addEventListener('click',() => removeResumeExperience(index));
+    const title = document.createElement('strong'); title.textContent = item.role || item.organization || `${resumeSectionLabel('experience')} ${index + 1}`;
+    const remove = document.createElement('button'); remove.type = 'button'; remove.className = 'resume-remove-experience'; remove.textContent = uiText('Remove','إزالة'); remove.setAttribute('aria-label',uiText(`Remove ${title.textContent}`,`إزالة ${title.textContent}`)); remove.addEventListener('click',() => removeResumeExperience(index));
     heading.append(title,remove); card.append(heading);
     const addField = (labelText,key,type = 'text',maxLength = 160) => {
       const label = document.createElement('label'); label.textContent = labelText;
       const input = document.createElement('input'); input.type = type; input.value = item[key] || ''; if (type === 'text') input.maxLength = maxLength;
-      input.addEventListener('input',() => { item[key] = type === 'month' ? input.value : cleanResumeText(input.value,maxLength); title.textContent = item.role || item.organization || `Experience ${index + 1}`; renderResumePreview(); renderResumeAtsChecklist(); });
+      input.addEventListener('input',() => { item[key] = type === 'month' ? input.value : cleanResumeText(input.value,maxLength); title.textContent = item.role || item.organization || `${resumeSectionLabel('experience')} ${index + 1}`; renderResumePreview(); renderResumeAtsChecklist(); });
       input.addEventListener('change',() => renderResumeControls());
       label.append(input); card.append(label); return input;
     };
-    addField('Role', 'role'); addField('Organization', 'organization'); addField('Location', 'location', 'text', 120);
+    addField(uiText('Role','الدور'), 'role'); addField(uiText('Organization','الجهة'), 'organization'); addField(uiText('Location','الموقع'), 'location', 'text', 120);
     const dates = document.createElement('div'); dates.className = 'resume-experience-dates';
-    const startWrap = document.createElement('label'); startWrap.textContent = 'Start'; const start = document.createElement('input'); start.type = 'month'; start.value = item.start; start.addEventListener('input',() => { item.start = start.value; renderResumePreview(); }); startWrap.append(start);
-    const endWrap = document.createElement('label'); endWrap.textContent = 'End'; const end = document.createElement('input'); end.type = 'month'; end.value = item.end; end.disabled = item.current; end.addEventListener('input',() => { item.end = end.value; renderResumePreview(); }); endWrap.append(end); dates.append(startWrap,endWrap); card.append(dates);
-    const currentLabel = document.createElement('label'); currentLabel.className = 'product-check'; const current = document.createElement('input'); current.type = 'checkbox'; current.checked = item.current; current.addEventListener('change',() => { item.current = current.checked; if (item.current) item.end = ''; renderResumeExperience(); renderResumePreview(); }); currentLabel.append(current,document.createTextNode('I currently work here')); card.append(currentLabel);
-    const highlightsLabel = document.createElement('label'); highlightsLabel.textContent = 'Achievements and responsibilities'; const highlights = document.createElement('textarea'); highlights.rows = 5; highlights.maxLength = 900; highlights.placeholder = 'Use one result-focused bullet per line.'; highlights.value = item.highlights; highlights.addEventListener('input',() => { item.highlights = cleanResumeText(highlights.value,900); renderResumePreview(); renderResumeAtsChecklist(); }); highlights.addEventListener('change',() => renderResumeControls()); highlightsLabel.append(highlights); card.append(highlightsLabel);
+    const startWrap = document.createElement('label'); startWrap.textContent = uiText('Start','البداية'); const start = document.createElement('input'); start.type = 'month'; start.value = item.start; start.addEventListener('input',() => { item.start = start.value; renderResumePreview(); }); startWrap.append(start);
+    const endWrap = document.createElement('label'); endWrap.textContent = uiText('End','النهاية'); const end = document.createElement('input'); end.type = 'month'; end.value = item.end; end.disabled = item.current; end.addEventListener('input',() => { item.end = end.value; renderResumePreview(); }); endWrap.append(end); dates.append(startWrap,endWrap); card.append(dates);
+    const currentLabel = document.createElement('label'); currentLabel.className = 'product-check'; const current = document.createElement('input'); current.type = 'checkbox'; current.checked = item.current; current.addEventListener('change',() => { item.current = current.checked; if (item.current) item.end = ''; renderResumeExperience(); renderResumePreview(); }); currentLabel.append(current,document.createTextNode(uiText('I currently work here','ما زلت أعمل هنا'))); card.append(currentLabel);
+    const highlightsLabel = document.createElement('label'); highlightsLabel.textContent = uiText('Achievements and responsibilities','الإنجازات والمسؤوليات'); const highlights = document.createElement('textarea'); highlights.rows = 5; highlights.maxLength = 900; highlights.placeholder = uiText('Use one result-focused bullet per line.','اكتب إنجازًا محددًا في كل سطر.'); highlights.value = item.highlights; highlights.addEventListener('input',() => { item.highlights = cleanResumeText(highlights.value,900); renderResumePreview(); renderResumeAtsChecklist(); }); highlights.addEventListener('change',() => renderResumeControls()); highlightsLabel.append(highlights); card.append(highlightsLabel);
     list.append(card);
   });
 }
 function addResumeExperience() {
-  if (!resumeOwnerMode || !resumeOptions || resumeOptions.experience.length >= 6) { productStatus('resumeStatus','You can add up to six focused experience entries.'); return; }
+  if (!resumeOwnerMode || !resumeOptions || resumeOptions.experience.length >= 6) { productStatus('resumeStatus',uiText('You can add up to six focused experience entries.','يمكنك إضافة ست خبرات بحد أقصى.')); return; }
   resumeOptions.experience.push({id:`experience-${Date.now()}`,role:'',organization:'',location:'',start:'',end:'',current:false,highlights:''});
   if (!resumeOptions.included.includes('experience')) resumeOptions.included.push('experience');
   renderResumeControls(); renderResumePreview();
@@ -267,7 +295,7 @@ function applyResumeSectionPreset(preset) {
     resumeOptions.density = 'compact';
     resumeOptions.maxProjects = Math.min(3,resumeOptions.maxProjects);
     resumeOptions.maxCertificates = Math.min(3,resumeOptions.maxCertificates);
-    productStatus('resumeStatus','Compact layout applied. Check the live page count before exporting.',true);
+    productStatus('resumeStatus',uiText('Compact layout applied. Check the live page count before exporting.','تم تطبيق التخطيط المضغوط. تحقق من عدد الصفحات قبل التصدير.'),true);
   }
   renderResumeControls(); renderResumePreview();
 }
@@ -286,17 +314,24 @@ function getResumeReadiness(available) {
   ];
   return {score:checks.reduce((sum,[ready,points])=>sum+(ready?points:0),0),missing:checks.filter(([ready])=>!ready).map(([, , ,message])=>message),checks};
 }
+const RESUME_READINESS_AR = {
+  'Identity':'الهوية','Target role':'الدور المستهدف','Summary':'الملخص','Skills':'المهارات','Projects':'المشاريع','Background':'الخلفية','Contact':'التواصل','Structure':'البنية',
+  'Add your display name':'أضف اسم العرض','Add the role you are targeting':'أضف الدور الذي تستهدفه','Write a focused summary of at least 40 characters':'اكتب ملخصًا واضحًا من 40 حرفًا على الأقل',
+  'Add at least three relevant skills':'أضف ثلاث مهارات ذات صلة على الأقل','Add at least one project':'أضف مشروعًا واحدًا على الأقل','Add education or real experience':'أضف تعليمك أو خبرة عملية حقيقية',
+  'Add a public contact link':'أضف وسيلة تواصل عامة','Select at least three useful sections':'اختر ثلاثة أقسام مفيدة على الأقل'
+};
+function resumeReadinessText(value) { return uiText(value,RESUME_READINESS_AR[value] || value); }
 function renderResumeReadiness(available,selected) {
   const summary = document.getElementById('resumeDataSummary');
   const readiness = getResumeReadiness(available);
   summary.replaceChildren();
   const heading = document.createElement('div'); heading.className = 'resume-readiness-heading';
-  const title = document.createElement('strong'); title.textContent = `Resume readiness ${readiness.score}%`;
-  const meta = document.createElement('span'); meta.textContent = `${selected}/${available.length} sections selected`;
+  const title = document.createElement('strong'); title.textContent = uiText(`Resume readiness ${readiness.score}%`,`جاهزية السيرة الذاتية ${readiness.score}%`);
+  const meta = document.createElement('span'); meta.textContent = uiText(`${selected}/${available.length} sections selected`,`تم اختيار ${selected} من ${available.length} أقسام`);
   heading.append(title,meta);
-  const track = document.createElement('div'); track.className = 'resume-readiness-track'; track.setAttribute('role','progressbar'); track.setAttribute('aria-label','Resume readiness'); track.setAttribute('aria-valuenow',String(readiness.score)); track.setAttribute('aria-valuemin','0'); track.setAttribute('aria-valuemax','100');
+  const track = document.createElement('div'); track.className = 'resume-readiness-track'; track.setAttribute('role','progressbar'); track.setAttribute('aria-label',uiText('Resume readiness','جاهزية السيرة الذاتية')); track.setAttribute('aria-valuenow',String(readiness.score)); track.setAttribute('aria-valuemin','0'); track.setAttribute('aria-valuemax','100');
   const bar = document.createElement('span'); bar.style.width = readiness.score + '%'; track.append(bar);
-  const note = document.createElement('p'); note.textContent = readiness.missing[0] || `${resumeOptions.template === 'ats' ? 'ATS optimized' : 'Modern layout'} · ready to export`;
+  const note = document.createElement('p'); note.textContent = readiness.missing[0] ? resumeReadinessText(readiness.missing[0]) : uiText(`${resumeOptions.template === 'ats' ? 'ATS optimized' : 'Modern layout'} · ready to export`,`جاهز للتصدير · ${resumeOptions.template === 'ats' ? 'محسّن لأنظمة الفرز' : 'تصميم حديث'}`);
   summary.append(heading,track,note);
 }
 function renderResumeAtsChecklist() {
@@ -306,9 +341,9 @@ function renderResumeAtsChecklist() {
   host.replaceChildren();
   const heading = document.createElement('div'); heading.className = 'resume-ats-score';
   const score = document.createElement('strong'); score.textContent = `${readiness.score}%`;
-  const copy = document.createElement('span'); copy.textContent = readiness.score >= 85 ? 'Strong foundation' : readiness.score >= 65 ? 'Good start — finish the open checks' : 'Complete the essentials before exporting'; heading.append(score,copy); host.append(heading);
+  const copy = document.createElement('span'); copy.textContent = readiness.score >= 85 ? uiText('Strong foundation','أساس قوي') : readiness.score >= 65 ? uiText('Good start — finish the open checks','بداية جيدة — أكمل المتطلبات المتبقية') : uiText('Complete the essentials before exporting','أكمل الأساسيات قبل التصدير'); heading.append(score,copy); host.append(heading);
   const list = document.createElement('ul');
-  readiness.checks.forEach(([ready,,label,message]) => { const item = document.createElement('li'); item.className = ready ? 'is-ready' : 'needs-work'; const mark = document.createElement('span'); mark.textContent = ready ? '✓' : '!'; const text = document.createElement('span'); const strong = document.createElement('strong'); strong.textContent = label; text.append(strong,document.createTextNode(ready ? ' Ready' : ` ${message}`)); item.append(mark,text); list.append(item); });
+  readiness.checks.forEach(([ready,,label,message]) => { const item = document.createElement('li'); item.className = ready ? 'is-ready' : 'needs-work'; const mark = document.createElement('span'); mark.textContent = ready ? '✓' : '!'; const text = document.createElement('span'); const strong = document.createElement('strong'); strong.textContent = resumeReadinessText(label); text.append(strong,document.createTextNode(ready ? uiText(' Ready',' جاهز') : ` ${resumeReadinessText(message)}`)); item.append(mark,text); list.append(item); });
   host.append(list);
 }
 function resumeWords(value) {
@@ -328,7 +363,7 @@ function analyzeResumeForJob() {
   const host = document.getElementById('resumeKeywordResults');
   resumeJobDescription = cleanResumeText(input.value,8000);
   host.replaceChildren();
-  if (resumeJobDescription.length < 80) { const note = document.createElement('p'); note.textContent = 'Paste a fuller job description to get a useful comparison.'; host.append(note); return; }
+  if (resumeJobDescription.length < 80) { const note = document.createElement('p'); note.textContent = uiText('Paste a fuller job description to get a useful comparison.','الصق وصفًا وظيفيًا أطول للحصول على مقارنة مفيدة.'); host.append(note); return; }
   const stop = new Set(['with','this','that','from','your','will','have','into','using','work','team','role','about','their','they','them','what','when','where','which','also','must','plus','years','year','على','إلى','الى','التي','الذي','هذه','هذا','ضمن','مع','عن','من','في','أو','and','the','for','you','our','are']);
   const counts = new Map(); resumeWords(resumeJobDescription).forEach(word => { if (!stop.has(word)) counts.set(word,(counts.get(word) || 0) + 1); });
   const keywords = [...counts].sort((a,b) => b[1] - a[1] || b[0].length - a[0].length).slice(0,24).map(([word]) => word);
@@ -336,18 +371,18 @@ function analyzeResumeForJob() {
   const matched = keywords.filter(word => corpus.has(word));
   const missing = keywords.filter(word => !corpus.has(word));
   const percent = keywords.length ? Math.round(matched.length / keywords.length * 100) : 0;
-  const heading = document.createElement('div'); heading.className = 'resume-keyword-score'; const strong = document.createElement('strong'); strong.textContent = `${percent}%`; const copy = document.createElement('span'); copy.textContent = 'keyword match'; heading.append(strong,copy); host.append(heading);
-  const addGroup = (title,words,className) => { const group = document.createElement('div'); group.className = `resume-keyword-group ${className}`; const h4 = document.createElement('h4'); h4.textContent = title; const chips = document.createElement('div'); words.slice(0,12).forEach(word => { const chip = document.createElement('span'); chip.textContent = word; chips.append(chip); }); if (!words.length) { const empty = document.createElement('p'); empty.textContent = 'None'; chips.append(empty); } group.append(h4,chips); host.append(group); };
-  addGroup('Matched',matched,'matched'); addGroup('Review for relevance',missing,'missing');
-  const note = document.createElement('p'); note.textContent = 'Use missing terms only when they truthfully describe your skills or experience. This local check does not guarantee ATS ranking.'; host.append(note);
+  const heading = document.createElement('div'); heading.className = 'resume-keyword-score'; const strong = document.createElement('strong'); strong.textContent = `${percent}%`; const copy = document.createElement('span'); copy.textContent = uiText('keyword match','تطابق الكلمات المفتاحية'); heading.append(strong,copy); host.append(heading);
+  const addGroup = (title,words,className) => { const group = document.createElement('div'); group.className = `resume-keyword-group ${className}`; const h4 = document.createElement('h4'); h4.textContent = title; const chips = document.createElement('div'); words.slice(0,12).forEach(word => { const chip = document.createElement('span'); chip.textContent = word; chips.append(chip); }); if (!words.length) { const empty = document.createElement('p'); empty.textContent = uiText('None','لا يوجد'); chips.append(empty); } group.append(h4,chips); host.append(group); };
+  addGroup(uiText('Matched','متطابقة'),matched,'matched'); addGroup(uiText('Review for relevance','راجع مدى الصلة'),missing,'missing');
+  const note = document.createElement('p'); note.textContent = uiText('Use missing terms only when they truthfully describe your skills or experience. This local check does not guarantee ATS ranking.','استخدم الكلمات الناقصة فقط إذا كانت تصف مهاراتك أو خبراتك بصدق. هذا الفحص المحلي لا يضمن ترتيبًا محددًا.'); host.append(note);
 }
 function resetResumePreferences() {
   if (!resumeOwnerMode || !resumeSnapshot) return;
   const document = resumeSnapshot.resumeDocument;
   resumeOptions = normalizeResumeSettings({...resumeSnapshot.profile.resume_settings,
     targetRole:document?.target_role,summary:document?.summary,prioritySkills:document?.priority_skills,experience:document?.experience});
-  renderResumeControls(); renderResumePreview();
-  productStatus('resumeStatus','Unsaved changes reset to your saved resume preferences.',true);
+  renderResumeControls(); renderResumePreview(); updateResumeSaveState();
+  productStatus('resumeStatus',uiText('Unsaved changes reset to your saved resume preferences.','تمت استعادة تفضيلات السيرة الذاتية المحفوظة.'),true);
 }
 function scrollResumePreviewIntoView() {
   document.querySelector('.resume-workspace')?.scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',block:'start'});
@@ -372,7 +407,7 @@ function fitResumeToOnePage() {
   resumeOptions.maxProjects = Math.min(3,resumeOptions.maxProjects);
   resumeOptions.maxCertificates = Math.min(3,resumeOptions.maxCertificates);
   renderResumeControls(); renderResumePreview();
-  productStatus('resumeStatus','One-page mode applied. The preview will confirm whether the selected content fits.',true);
+  productStatus('resumeStatus',uiText('One-page mode applied. The preview will confirm whether the selected content fits.','تم تطبيق وضع الصفحة الواحدة. ستوضح المعاينة ما إذا كان المحتوى مناسبًا.'),true);
 }
 function buildResumeStudioDocument(snapshot, options) {
   // Reuse the original CV data mapping, escaping, dates, public-contact helpers.
@@ -518,6 +553,8 @@ function fitResumePreview() {
 }
 function renderResumePreview() {
   if (!resumeSnapshot) return;
+  productStatus('resumeStatus','');
+  updateResumeSaveState();
   resumePreviewReady = false;
   const revision = ++resumeRevision;
   const frame = document.getElementById('portfolioCvFrame'); const print = document.getElementById('printPortfolioCvButton'); print.disabled = true;
@@ -531,9 +568,9 @@ function renderResumePreview() {
       resumeLastPageCount = count; resumePreviewReady = true; print.disabled = false;
       const pages = document.getElementById('resumePages');
       pages.classList.toggle('needs-trim',resumeOptions.onePage && count > 1);
-      pages.textContent = `${count} A4 page${count === 1 ? '' : 's'} · ${resumeOptions.template === 'ats' ? 'ATS' : 'Modern'} · ${resumeOptions.onePage ? (count === 1 ? 'One-page fit' : 'Trim content') : resumeOptions.density === 'compact' ? 'Compact' : 'Comfortable'}`;
-      if (resumeOptions.onePage && count > 1) productStatus('resumeStatus','One-page mode is active, but the selected content still needs more space. Hide a section or shorten long entries.');
-    } catch { productStatus('resumeStatus','Could not lay out this resume. Reduce the selected content and retry.'); }
+      pages.textContent = uiText(`${count} A4 page${count === 1 ? '' : 's'} · ${resumeOptions.template === 'ats' ? 'ATS' : 'Modern'} · ${resumeOptions.onePage ? (count === 1 ? 'One-page fit' : 'Trim content') : resumeOptions.density === 'compact' ? 'Compact' : 'Comfortable'}`,`${count} صفحة A4 · ${resumeOptions.template === 'ats' ? 'ATS' : 'حديث'} · ${resumeOptions.onePage ? (count === 1 ? 'مناسب لصفحة واحدة' : 'اختصر المحتوى') : resumeOptions.density === 'compact' ? 'مضغوط' : 'مريح'}`);
+      if (resumeOptions.onePage && count > 1) productStatus('resumeStatus',uiText('One-page mode is active, but the selected content still needs more space. Hide a section or shorten long entries.','وضع الصفحة الواحدة مفعل، لكن المحتوى يحتاج مساحة إضافية. أخفِ قسمًا أو اختصر النصوص الطويلة.'));
+    } catch { productStatus('resumeStatus',uiText('Could not lay out this resume. Reduce the selected content and retry.','تعذّر تنسيق السيرة الذاتية. قلّل المحتوى المحدد وحاول مرة أخرى.')); }
   };
   frame.srcdoc = buildResumeStudioDocument(resumeSnapshot,resumeOptions);
 }
@@ -553,8 +590,10 @@ async function saveResumePreferences() {
     signedInProfile = profileResult.data;
     if (activePortfolioUserId === owner) currentProfile.resume_settings = preferences;
     if (resumeSnapshot?.profile.user_id === owner) { resumeSnapshot.profile.resume_settings = preferences; resumeSnapshot.resumeDocument = structuredClone(documentResult.data); }
-    syncResumeButton(); productStatus('resumeStatus','Resume preferences saved. Your portfolio section order is unchanged.',true);
-  } catch { productStatus('resumeStatus','Could not save. Verify the Resume Studio SQL migrations are installed and try again.'); }
+    resumeSavedSignature = getResumeSignature(options);
+    updateResumeSaveState();
+    syncResumeButton(); productStatus('resumeStatus',uiText('Resume preferences saved. Your portfolio section order is unchanged.','تم حفظ تفضيلات السيرة الذاتية. ترتيب أقسام الملف الشخصي لم يتغير.'),true);
+  } catch { productStatus('resumeStatus',uiText('Could not save this resume right now. Please try again later.','تعذّر حفظ السيرة الذاتية الآن. حاول مجددًا لاحقًا.')); }
   finally { button.disabled = false; }
 }
 function printPortfolioCv() {
@@ -562,11 +601,11 @@ function printPortfolioCv() {
   const frame = document.getElementById('portfolioCvFrame');
   const fileName = [resumeSnapshot.profile.display_name || resumeSnapshot.profile.username,resumeOptions.targetRole || 'Resume'].map(value => cleanResumeText(value,80).replace(/[^\p{L}\p{N}]+/gu,'-').replace(/^-|-$/g,'')).filter(Boolean).join('-');
   if (frame.contentDocument) frame.contentDocument.title = fileName || 'Deviloq-Resume';
-  productStatus('resumeStatus','In the print dialog, select Save as PDF as the destination. A4 pages are already prepared.');
+  productStatus('resumeStatus',uiText('In the print dialog, select Save as PDF as the destination. A4 pages are already prepared.','في نافذة الطباعة، اختر الحفظ بصيغة PDF. صفحات A4 جاهزة.'));
   frame.contentWindow.focus(); frame.contentWindow.print();
 }
 function clearResumePreview() {
-  ++resumeRequest; ++resumeRevision; resumePreviewReady = false; resumeSnapshot = null; resumeOptions = null; resumeJobDescription = ''; resumeLastPageCount = 0; resumeCurrentStep = 'content'; resumeContentPersistenceAvailable = false;
+  ++resumeRequest; ++resumeRevision; resumePreviewReady = false; resumeSnapshot = null; resumeOptions = null; resumeSavedSignature = ''; resumeJobDescription = ''; resumeLastPageCount = 0; resumeCurrentStep = 'content'; resumeContentPersistenceAvailable = false;
   const frame = document.getElementById('portfolioCvFrame'); frame.onload = null; frame.srcdoc = '';
 }
 function closePortfolioCv() { closeProductDialog('portfolioCvDialog'); }

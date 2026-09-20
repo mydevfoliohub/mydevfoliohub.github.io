@@ -99,6 +99,8 @@
 
 <body>
 
+<a class="skip-link" id="skipToContent" href="#landingMain" data-en-html="Skip to content" data-ar-html="انتقل إلى المحتوى">Skip to content</a>
+
 <div id="scrollProgress" aria-hidden="true"></div>
 <div id="cursorGlow" aria-hidden="true"></div>
 
@@ -123,12 +125,12 @@
 
   <div class="announce-bar" id="announceBar" hidden>
     <span class="announce-dot" aria-hidden="true"></span>
-    <p data-en-html="Deviloq v2.3.0: a new identity for the same portfolio platform" data-ar-html="Deviloq v2.3.0: هوية جديدة لنفس منصة البورتفوليو">Deviloq v2.3.0: a new identity for the same portfolio platform</p>
+    <p data-en-html="Deviloq has a new name and look." data-ar-html="ديفيلوك باسم وهوية جديدين.">Deviloq has a new name and look.</p>
     <a href="#platformUpdates" data-en-html="See what's new" data-ar-html="شاهد الجديد">See what's new</a>
     <button type="button" class="announce-close" onclick="dismissAnnounceBar()" aria-label="Dismiss announcement" data-en-al="Dismiss announcement" data-ar-al="إغلاق الإعلان">&times;</button>
   </div>
 
-  <div class="platform-header">
+  <header class="platform-header">
 
     <a class="platform-logo" href="/" aria-label="Deviloq home">
       <img src="/assets/brand/deviloq-mark.svg" alt="" aria-hidden="true" width="34" height="34">
@@ -171,7 +173,7 @@
         title="Switch language / تغيير اللغة"
       >
         <span aria-hidden="true">🌐</span>
-        <span id="landingLangToggleLabel">عربي</span>
+        <span id="landingLangToggleLabel" data-language-toggle-label>عربي</span>
       </button>
 
       <button
@@ -198,33 +200,40 @@
 
     </div>
 
-  </div>
+    <details class="mobile-site-nav" id="mobileSiteNav">
+      <summary data-en-html="Menu" data-ar-html="القائمة">Menu</summary>
+      <nav aria-label="Site navigation" data-en-al="Site navigation" data-ar-al="التنقل في الموقع">
+        <a href="?view=community" data-en-html="Community" data-ar-html="المجتمع">Community</a>
+        <a href="#howItWorksTitle" data-en-html="How It Works" data-ar-html="كيف يعمل">How It Works</a>
+        <a href="#portfolioStudio" data-en-html="Portfolio Studio" data-ar-html="استوديو الملف الشخصي">Portfolio Studio</a>
+        <a href="#landingFeaturesTitle" data-en-html="Features" data-ar-html="الميزات">Features</a>
+        <a href="#landingFaqTitle" data-en-html="FAQ" data-ar-html="الأسئلة الشائعة">FAQ</a>
+        <button type="button" onclick="showAuthScreen('login')" data-en-html="Login" data-ar-html="تسجيل الدخول">Login</button>
+      </nav>
+    </details>
 
+  </header>
+
+  <main id="landingMain" tabindex="-1">
 
   <section class="landing-hero" aria-labelledby="landingHeroTitle">
 
-    <div class="landing-glow landing-glow-one" aria-hidden="true"></div>
-    <div class="landing-glow landing-glow-two" aria-hidden="true"></div>
-    <div class="landing-glow landing-glow-three" aria-hidden="true"></div>
-
     <div class="landing-copy">
 
-      <a class="landing-badge" href="#portfolioStudio" data-en-html='<span class="landing-badge-dot" aria-hidden="true"></span> A portfolio platform for every tech path <span aria-hidden="true">→</span>' data-ar-html='<span class="landing-badge-dot" aria-hidden="true"></span> منصة بورتفوليو لكل مسار تقني <span aria-hidden="true">→</span>'>
+      <a class="landing-badge" href="#portfolioStudio" data-en-html='<span class="landing-badge-dot" aria-hidden="true"></span> Explore the portfolio builder <span aria-hidden="true">→</span>' data-ar-html='<span class="landing-badge-dot" aria-hidden="true"></span> استكشف أداة إنشاء البورتفوليو <span aria-hidden="true">→</span>'>
         <span class="landing-badge-dot" aria-hidden="true"></span>
-        A portfolio platform for every tech path
+        Explore the portfolio builder
         <span aria-hidden="true">→</span>
       </a>
 
-      <p class="landing-build-line" data-en-html="Build. Learn. Share. Grow." data-ar-html="ابنِ. تعلّم. شارك. انمُ.">Build. Learn. Share. Grow.</p>
-
-      <h1 id="landingHeroTitle" data-en-html='Build Your <span class="landing-gradient-title">Developer Portfolio</span>' data-ar-html='ابنِ <span class="landing-gradient-title">بورتفوليو المطور الخاص بك</span>'>
-        Build Your
-        <span class="landing-gradient-title">Developer Portfolio</span>
+      <h1 id="landingHeroTitle" data-en-html='Build a portfolio <span class="landing-gradient-title">that shows your work.</span>' data-ar-html='أنشئ بورتفوليو <span class="landing-gradient-title">يعرض أعمالك بوضوح.</span>'>
+        Build a portfolio
+        <span class="landing-gradient-title">that shows your work.</span>
       </h1>
 
-      <p class="landing-tagline" data-en-html="Your projects tell a story. Your learning adds the chapters. Bring it all together in a developer portfolio that grows with you." data-ar-html="مشاريعك تحكي قصة، وتعلّمك يضيف الفصول. اجمع كل ذلك في بورتفوليو مطور ينمو معك.">
-        Your projects tell a story. Your learning adds the chapters.
-        Bring it all together in a developer portfolio that grows with you.
+      <p class="landing-tagline" data-en-html="Bring projects, skills, learning notes, and credentials into one public profile. Keep it current without editing code." data-ar-html="اجمع مشاريعك ومهاراتك وملاحظات تعلّمك وشهاداتك في ملف عام واحد، وحدّثه دون تعديل الكود.">
+        Bring projects, skills, learning notes, and credentials into one public profile.
+        Keep it current without editing code.
       </p>
 
       <div class="landing-actions">
@@ -234,10 +243,10 @@
           class="platform-button primary"
           id="landingHeroPrimaryAction"
           onclick="handleLandingPrimaryAction()"
-          data-en-html='Create Your Portfolio <span aria-hidden="true">→</span>'
+          data-en-html='Create your portfolio <span aria-hidden="true">→</span>'
           data-ar-html='أنشئ بورتفوليوك <span aria-hidden="true">→</span>'
         >
-          Create Your Portfolio
+          Create your portfolio
           <span aria-hidden="true">→</span>
         </button>
 
@@ -245,11 +254,10 @@
           type="button"
           class="platform-button secondary"
           onclick="openDemoPortfolio()"
-          data-en-html='<span aria-hidden="true">▷</span> View Demo'
-          data-ar-html='<span aria-hidden="true">▷</span> شاهد العرض'
+          data-en-html='Explore an example'
+          data-ar-html='استكشف مثالًا'
         >
-          <span aria-hidden="true">▷</span>
-          View Demo
+          Explore an example
         </button>
 
       </div>
@@ -261,22 +269,10 @@
         <button type="button" class="landing-login-link" id="landingHeroSecondaryAction" onclick="showAuthScreen('login')" data-en-html="Login" data-ar-html="تسجيل الدخول">Login</button>
       </div>
 
-      <div class="landing-proof">
-        <div class="proof-avatars" aria-hidden="true">
-          <span>S</span><span>M</span><span>A</span><span>R</span><span>+</span>
-        </div>
-        <p data-en-html="Join developers, students &amp; technology learners" data-ar-html="انضم إلى مطورين وطلاب ومتعلمي التقنية">Join developers, students &amp; technology learners</p>
-      </div>
-
     </div>
 
 
     <div class="landing-terminal-stage">
-      <span class="floating-code floating-code-one" aria-hidden="true">{ }</span>
-      <span class="floating-code floating-code-two" aria-hidden="true">&lt;/&gt;</span>
-      <span class="floating-code floating-code-three" aria-hidden="true">01</span>
-      <span class="floating-code floating-code-four" aria-hidden="true">$_</span>
-
       <div
         class="landing-terminal"
         aria-label="Animated portfolio creation preview"
@@ -288,16 +284,16 @@
         <span class="landing-terminal-dot"></span>
         <span class="landing-terminal-dot"></span>
         <span class="landing-terminal-dot"></span>
-        <span class="landing-terminal-title">portfolio-builder — bash</span>
+        <span class="landing-terminal-title">deviloq / portfolio preview</span>
       </div>
 
-      <div class="landing-terminal-tabs" role="tablist" aria-label="Terminal demo scripts">
-        <button type="button" role="tab" aria-selected="true" data-terminal-tab="create" onclick="switchLandingTerminalTab('create')">create</button>
-        <button type="button" role="tab" aria-selected="false" data-terminal-tab="deploy" onclick="switchLandingTerminalTab('deploy')">deploy</button>
-        <button type="button" role="tab" aria-selected="false" data-terminal-tab="stats" onclick="switchLandingTerminalTab('stats')">stats</button>
+      <div class="landing-terminal-tabs" role="group" aria-label="Portfolio preview examples" data-en-al="Portfolio preview examples" data-ar-al="أمثلة لمعاينة البورتفوليو">
+        <button type="button" aria-pressed="true" data-terminal-tab="profile" onclick="switchLandingTerminalTab('profile')" data-en-html="profile" data-ar-html="الملف">profile</button>
+        <button type="button" aria-pressed="false" data-terminal-tab="projects" onclick="switchLandingTerminalTab('projects')" data-en-html="projects" data-ar-html="المشاريع">projects</button>
+        <button type="button" aria-pressed="false" data-terminal-tab="share" onclick="switchLandingTerminalTab('share')" data-en-html="share" data-ar-html="المشاركة">share</button>
       </div>
 
-      <div class="landing-terminal-body" aria-live="polite">
+      <div class="landing-terminal-body">
         <div class="landing-terminal-command-line">
           <span class="terminal-prompt">$</span>
           <span id="landingTerminalCommand"></span><span class="landing-terminal-cursor" aria-hidden="true"></span>
@@ -323,31 +319,21 @@
         </div>
       </div>
 
-      <div class="landing-terminal-status" aria-hidden="true">
-        <span class="status-pulse"></span> live preview
+      <div class="landing-terminal-status" aria-hidden="true" data-en-html='<span class="status-pulse"></span> interactive example' data-ar-html='<span class="status-pulse"></span> مثال تفاعلي'>
+        <span class="status-pulse"></span> interactive example
       </div>
 
       </div>
 
-      <div class="float-card float-card-top" aria-hidden="true">
-        <span class="float-card-icon">✓</span>
-        <div><strong>Deployed</strong><span>your link is live</span></div>
-      </div>
-
-      <div class="float-card float-card-bottom" aria-hidden="true">
-        <span class="float-card-icon">↗</span>
-        <div><strong>Share anywhere</strong><span>CV · GitHub · LinkedIn</span></div>
-      </div>
     </div>
 
   </section>
 
-  <div class="landing-stats" aria-label="Platform highlights" data-en-al="Platform highlights" data-ar-al="أبرز مزايا المنصة">
-    <div><strong data-count="5" data-suffix="+">5+</strong><span data-en-html="portfolio sections" data-ar-html="أقسام البورتفوليو">portfolio sections</span></div>
-    <div><strong data-count="3" data-suffix="">3</strong><span data-en-html="steps to go live" data-ar-html="خطوات للإطلاق">steps to go live</span></div>
-    <div><strong data-count="1" data-suffix="">1</strong><span data-en-html="link for everything" data-ar-html="رابط واحد لكل شيء">link for everything</span></div>
-    <div><strong data-count="0" data-suffix="">0</strong><span data-en-html="code required" data-ar-html="كود مطلوب">code required</span></div>
-  </div>
+  <ul class="landing-highlights" aria-label="What you can do with Deviloq" data-en-al="What you can do with Deviloq" data-ar-al="ما يمكنك فعله في ديفيلوك">
+    <li><strong data-en-html="Show your work" data-ar-html="اعرض أعمالك">Show your work</strong><span data-en-html="Projects, labs, and skills in one profile" data-ar-html="المشاريع والمختبرات والمهارات في ملف واحد">Projects, labs, and skills in one profile</span></li>
+    <li><strong data-en-html="Record your progress" data-ar-html="وثّق تقدّمك">Record your progress</strong><span data-en-html="Learning notes, goals, and credentials" data-ar-html="ملاحظات التعلّم والأهداف والشهادات">Learning notes, goals, and credentials</span></li>
+    <li><strong data-en-html="Share what matters" data-ar-html="شارك ما يهم">Share what matters</strong><span data-en-html="A public link and an exportable resume" data-ar-html="رابط عام وسيرة ذاتية قابلة للتصدير">A public link and an exportable resume</span></li>
+  </ul>
 
 
   <section class="landing-tech-showcase" aria-labelledby="landingTechTitle">
@@ -377,7 +363,7 @@
         <span class="how-step-number">01</span>
         <span class="how-step-icon" aria-hidden="true">＋</span>
         <h3 data-en-html="Create Account" data-ar-html="إنشاء حساب">Create Account</h3>
-        <p data-en-html="Create your Deviloq account in seconds." data-ar-html="أنشئ حسابك في Deviloq خلال ثوانٍ.">Create your Deviloq account in seconds.</p>
+        <p data-en-html="Create an account to start your portfolio." data-ar-html="أنشئ حسابًا لتبدأ بورتفوليوك.">Create an account to start your portfolio.</p>
       </article>
 
       <span class="how-step-connector" aria-hidden="true">→</span>
@@ -411,7 +397,7 @@
         <li><span aria-hidden="true">02</span><div><strong data-en-html="Make it feel like you" data-ar-html="اجعله يشبهك">Make it feel like you</strong><p data-en-html="Choose a theme and arrange your sections." data-ar-html="اختر ثيمًا ورتب أقسامك.">Choose a theme and arrange your sections.</p></div></li>
         <li><span aria-hidden="true">03</span><div><strong data-en-html="One link. Your whole journey." data-ar-html="رابط واحد. رحلتك كاملة.">One link. Your whole journey.</strong><p data-en-html="A public page ready to share when you are." data-ar-html="صفحة عامة جاهزة للمشاركة متى جهزت.">A public page ready to share when you are.</p></div></li>
       </ul>
-      <button type="button" class="platform-button" onclick="openDemoPortfolio()" data-en-html='See a real portfolio <span aria-hidden="true">↗</span>' data-ar-html='شاهد بورتفوليو حقيقيًا <span aria-hidden="true">↗</span>'>See a real portfolio <span aria-hidden="true">↗</span></button>
+      <button type="button" class="platform-button" onclick="openDemoPortfolio()" data-en-html='Explore an example portfolio <span aria-hidden="true">↗</span>' data-ar-html='استكشف مثالًا لبورتفوليو <span aria-hidden="true">↗</span>'>Explore an example portfolio <span aria-hidden="true">↗</span></button>
     </div>
     <div class="landing-studio-demo" data-preview-tone="emerald">
       <div class="landing-studio-toolbar">
@@ -547,14 +533,13 @@
   <section class="landing-final-cta" aria-labelledby="landingFinalTitle">
     <div class="final-orb final-orb-one" aria-hidden="true"></div>
     <div class="final-orb final-orb-two" aria-hidden="true"></div>
-    <div class="landing-kicker" data-en-html='<span class="studio-status-dot" aria-hidden="true"></span> YOUR NEXT COMMIT STARTS HERE' data-ar-html='<span class="studio-status-dot" aria-hidden="true"></span> خطوتك التالية تبدأ من هنا'><span class="studio-status-dot" aria-hidden="true"></span> YOUR NEXT COMMIT STARTS HERE</div>
+    <div class="landing-kicker" data-en-html='READY TO SHARE?' data-ar-html='هل أنت مستعد للمشاركة؟'>READY TO SHARE?</div>
     <h2 id="landingFinalTitle" data-en-html='You build the work.<br><span>Give it a place to shine.</span>' data-ar-html='أنت تبني العمل.<br><span>امنحه مكانًا يتألق فيه.</span>'>You build the work.<br><span>Give it a place to shine.</span></h2>
     <p data-en-html="You do not need a finished journey to start sharing it." data-ar-html="لا تحتاج رحلة مكتملة لتبدأ مشاركتها.">You do not need a finished journey to start sharing it.</p>
     <div class="landing-actions">
-      <button type="button" class="platform-button primary" onclick="handleLandingPrimaryAction()" data-en-html='Start building <span aria-hidden="true">↗</span>' data-ar-html='ابدأ البناء <span aria-hidden="true">↗</span>'>Start building <span aria-hidden="true">↗</span></button>
-      <button type="button" class="platform-button secondary" onclick="openDemoPortfolio()" data-en-html="Take a look first" data-ar-html="ألقِ نظرة أولًا">Take a look first</button>
+      <button type="button" class="platform-button primary" id="landingFinalPrimaryAction" onclick="handleLandingPrimaryAction()" data-en-html='Create your portfolio <span aria-hidden="true">↗</span>' data-ar-html='أنشئ بورتفوليوك <span aria-hidden="true">↗</span>'>Create your portfolio <span aria-hidden="true">↗</span></button>
+      <button type="button" class="platform-button secondary" onclick="openDemoPortfolio()" data-en-html="Explore an example" data-ar-html="استكشف مثالًا">Explore an example</button>
     </div>
-    <div class="landing-final-path" aria-label="Example portfolio address" data-en-al="Example portfolio address" data-ar-al="مثال على عنوان البورتفوليو"><span class="path-lock" aria-hidden="true">⌁</span> mydevfoliohub.github.io/<span>?u=you</span></div>
   </section>
 
   <section class="landing-contact-section" id="landingContact" aria-labelledby="landingContactHeading">
@@ -678,6 +663,8 @@
     </div>
   </section>
 
+  </main>
+
   <footer class="platform-footer landing-platform-footer">
     <div class="platform-footer-brand">
       <strong class="footer-brand-lockup"><img src="/assets/brand/deviloq-mark.svg" alt="" aria-hidden="true" width="32" height="32"><span>DEVILOQ</span></strong>
@@ -714,19 +701,45 @@
      PUBLIC COMMUNITY DIRECTORY
 ========================================= -->
 <div class="platform-screen community-screen" id="communityView" hidden>
-  <header class="platform-header community-header"><button type="button" class="platform-button" onclick="navigateToLanding()">← Home</button><a class="platform-logo" href="/" aria-label="Deviloq home"><img src="/assets/brand/deviloq-mark.svg" alt="" aria-hidden="true" width="34" height="34"><span class="platform-logo-word">DEVILOQ</span></a><div class="platform-header-actions"><button type="button" class="platform-button" data-account-control hidden onclick="openAccountSettings()">Account Settings</button><button type="button" class="platform-button" data-platform-admin hidden onclick="openPlatformAdmin()">Admin Dashboard</button><button type="button" class="platform-button notification-bell" data-account-control data-notification-bell hidden aria-label="Notifications" aria-expanded="false" aria-haspopup="dialog" aria-controls="notificationsDialog" onclick="openNotifications()"><span aria-hidden="true">🔔</span><span class="notification-badge" data-notification-count hidden></span></button><button type="button" class="platform-button primary" onclick="handleLandingPrimaryAction()">My Portfolio</button></div></header>
-  <main class="community-main"><section class="featured-portfolios-section" aria-labelledby="featuredPortfolioHeading"><div class="landing-section-heading featured-heading"><div><div class="landing-kicker">COMMUNITY</div><h1 id="featuredPortfolioHeading">Discover portfolios.</h1><p>Explore public work, learning journeys, and technical interests from the Deviloq community.</p></div></div><div class="featured-portfolio-grid" id="featuredPortfolioGrid"></div><p class="user-search-message" id="featuredPortfolioMessage" role="status" aria-live="polite"></p></section>
-  <section class="user-directory" aria-labelledby="communityDirectoryHeading"><div class="user-directory-heading"><div><div class="landing-kicker">PORTFOLIO DIRECTORY</div><h2 id="communityDirectoryHeading">Find a builder.</h2><p>Search by username or display name, then narrow the results.</p></div></div><div class="user-search-controls"><label class="user-search-box" for="userSearchInput"><span aria-hidden="true">⌕</span><input type="search" id="userSearchInput" maxlength="80" autocomplete="off" placeholder="Search username or display name" oninput="handleUserSearchInput(this.value)"></label><label><span>Specialty</span><select id="userSpecialtyFilter" onchange="handleDirectoryFilterChange()"><option value="">All specialties</option><option value="cybersecurity">Cybersecurity</option><option value="frontend">Frontend</option><option value="backend">Backend</option><option value="fullstack">Full Stack</option><option value="mobile">Mobile</option><option value="data_ai">Data &amp; AI</option><option value="devops_cloud">DevOps &amp; Cloud</option><option value="other">Other</option></select></label><label><span>Technology</span><select id="userTechFilter" onchange="handleDirectoryFilterChange()"><option value="">All technologies</option></select></label><label><span>Sort</span><select id="userSortFilter" onchange="handleDirectoryFilterChange()"><option value="newest">Newest</option><option value="name">Name</option><option value="most_viewed">Most viewed</option></select></label></div><div class="directory-quick-filters" aria-label="Quick specialty filters"><button type="button" class="directory-filter-chip active" data-specialty="" onclick="setDirectorySpecialty('',this)">All</button><button type="button" class="directory-filter-chip" data-specialty="cybersecurity" onclick="setDirectorySpecialty('cybersecurity',this)">Cybersecurity</button><button type="button" class="directory-filter-chip" data-specialty="frontend" onclick="setDirectorySpecialty('frontend',this)">Frontend</button><button type="button" class="directory-filter-chip" data-specialty="backend" onclick="setDirectorySpecialty('backend',this)">Backend</button><button type="button" class="directory-filter-chip" data-specialty="fullstack" onclick="setDirectorySpecialty('fullstack',this)">Full Stack</button><button type="button" class="directory-filter-chip" data-specialty="data_ai" onclick="setDirectorySpecialty('data_ai',this)">Data &amp; AI</button></div><div class="user-search-results" id="userSearchResults"></div><p class="user-search-message" id="userSearchMessage" role="status" aria-live="polite"></p></section></main>
+  <header class="platform-header community-header">
+    <button type="button" class="platform-button" onclick="navigateToLanding()" data-en-html="← Home" data-ar-html="الرئيسية →">← Home</button>
+    <a class="platform-logo" href="/" aria-label="Deviloq home" data-en-al="Deviloq home" data-ar-al="الصفحة الرئيسية لديفيلوك"><img src="/assets/brand/deviloq-mark.svg" alt="" aria-hidden="true" width="34" height="34"><span class="platform-logo-word">DEVILOQ</span></a>
+    <div class="platform-header-actions">
+      <button type="button" class="platform-button" data-account-control hidden onclick="openAccountSettings()" data-en-html="Account Settings" data-ar-html="إعدادات الحساب">Account Settings</button>
+      <button type="button" class="platform-button" data-platform-admin hidden onclick="openPlatformAdmin()" data-en-html="Admin Dashboard" data-ar-html="لوحة إدارة المنصة">Admin Dashboard</button>
+      <button type="button" class="platform-button notification-bell" data-account-control data-notification-bell hidden aria-label="Notifications" data-en-al="Notifications" data-ar-al="الإشعارات" aria-expanded="false" aria-haspopup="dialog" aria-controls="notificationsDialog" onclick="openNotifications()"><span aria-hidden="true">🔔</span><span class="notification-badge" data-notification-count hidden></span></button>
+      <button type="button" class="lang-toggle" onclick="toggleLanguage()" aria-label="Switch language" data-en-al="Switch language" data-ar-al="تغيير اللغة"><span aria-hidden="true">🌐</span><span data-language-toggle-label>عربي</span></button>
+      <button type="button" class="platform-button primary" onclick="handleLandingPrimaryAction()" data-en-html="My Portfolio" data-ar-html="ملفي الشخصي">My Portfolio</button>
+    </div>
+  </header>
+  <main class="community-main" id="communityMain" tabindex="-1">
+    <section class="featured-portfolios-section" aria-labelledby="featuredPortfolioHeading">
+      <div class="landing-section-heading featured-heading"><div><div class="landing-kicker" data-en-html="COMMUNITY" data-ar-html="المجتمع">COMMUNITY</div><h1 id="featuredPortfolioHeading" data-en-html="Discover portfolios." data-ar-html="اكتشف الملفات الشخصية.">Discover portfolios.</h1><p data-en-html="Explore public work, learning journeys, and technical interests from the Deviloq community." data-ar-html="استكشف الأعمال العامة ومسارات التعلم والاهتمامات التقنية لأعضاء مجتمع ديفيلوك.">Explore public work, learning journeys, and technical interests from the Deviloq community.</p></div></div>
+      <div class="featured-portfolio-grid" id="featuredPortfolioGrid"></div><p class="user-search-message" id="featuredPortfolioMessage" role="status" aria-live="polite"></p>
+    </section>
+    <section class="user-directory" aria-labelledby="communityDirectoryHeading">
+      <div class="user-directory-heading"><div><div class="landing-kicker" data-en-html="PORTFOLIO DIRECTORY" data-ar-html="دليل الملفات الشخصية">PORTFOLIO DIRECTORY</div><h2 id="communityDirectoryHeading" data-en-html="Find a builder." data-ar-html="ابحث عن مبدع.">Find a builder.</h2><p data-en-html="Search by username or display name, then narrow the results." data-ar-html="ابحث باسم المستخدم أو الاسم الظاهر، ثم صفِّ النتائج.">Search by username or display name, then narrow the results.</p></div></div>
+      <div class="user-search-controls">
+        <label class="user-search-box" for="userSearchInput"><span aria-hidden="true">⌕</span><input type="search" id="userSearchInput" maxlength="80" autocomplete="off" placeholder="Search username or display name" data-en-ph="Search username or display name" data-ar-ph="ابحث باسم المستخدم أو الاسم الظاهر" oninput="handleUserSearchInput(this.value)"></label>
+        <label><span data-en-html="Specialty" data-ar-html="التخصص">Specialty</span><select id="userSpecialtyFilter" onchange="handleDirectoryFilterChange()"><option value="" data-en-html="All specialties" data-ar-html="كل التخصصات">All specialties</option><option value="cybersecurity" data-en-html="Cybersecurity" data-ar-html="الأمن السيبراني">Cybersecurity</option><option value="frontend" data-en-html="Frontend" data-ar-html="تطوير الواجهات">Frontend</option><option value="backend" data-en-html="Backend" data-ar-html="تطوير الخلفية">Backend</option><option value="fullstack" data-en-html="Full Stack" data-ar-html="التطوير الشامل">Full Stack</option><option value="mobile" data-en-html="Mobile" data-ar-html="تطبيقات الجوال">Mobile</option><option value="data_ai" data-en-html="Data &amp; AI" data-ar-html="البيانات والذكاء الاصطناعي">Data &amp; AI</option><option value="devops_cloud" data-en-html="DevOps &amp; Cloud" data-ar-html="ديف أوبس والسحابة">DevOps &amp; Cloud</option><option value="other" data-en-html="Other" data-ar-html="أخرى">Other</option></select></label>
+        <label><span data-en-html="Technology" data-ar-html="التقنية">Technology</span><select id="userTechFilter" onchange="handleDirectoryFilterChange()"><option value="" data-en-html="All technologies" data-ar-html="كل التقنيات">All technologies</option></select></label>
+        <label><span data-en-html="Sort" data-ar-html="الترتيب">Sort</span><select id="userSortFilter" onchange="handleDirectoryFilterChange()"><option value="newest" data-en-html="Newest" data-ar-html="الأحدث">Newest</option><option value="name" data-en-html="Name" data-ar-html="الاسم">Name</option><option value="most_viewed" data-en-html="Most viewed" data-ar-html="الأكثر مشاهدة">Most viewed</option></select></label>
+      </div>
+      <div class="directory-quick-filters" aria-label="Quick specialty filters" data-en-al="Quick specialty filters" data-ar-al="تصفية سريعة حسب التخصص"><button type="button" class="directory-filter-chip active" data-specialty="" onclick="setDirectorySpecialty('',this)" data-en-html="All" data-ar-html="الكل">All</button><button type="button" class="directory-filter-chip" data-specialty="cybersecurity" onclick="setDirectorySpecialty('cybersecurity',this)" data-en-html="Cybersecurity" data-ar-html="الأمن السيبراني">Cybersecurity</button><button type="button" class="directory-filter-chip" data-specialty="frontend" onclick="setDirectorySpecialty('frontend',this)" data-en-html="Frontend" data-ar-html="الواجهات">Frontend</button><button type="button" class="directory-filter-chip" data-specialty="backend" onclick="setDirectorySpecialty('backend',this)" data-en-html="Backend" data-ar-html="الخلفية">Backend</button><button type="button" class="directory-filter-chip" data-specialty="fullstack" onclick="setDirectorySpecialty('fullstack',this)" data-en-html="Full Stack" data-ar-html="التطوير الشامل">Full Stack</button><button type="button" class="directory-filter-chip" data-specialty="data_ai" onclick="setDirectorySpecialty('data_ai',this)" data-en-html="Data &amp; AI" data-ar-html="البيانات والذكاء الاصطناعي">Data &amp; AI</button></div>
+      <div class="user-search-results" id="userSearchResults"></div><p class="user-search-message" id="userSearchMessage" role="status" aria-live="polite"></p>
+    </section>
+  </main>
 </div>
 
 <!-- =========================================
      AUTHENTICATION
 ========================================= -->
 
-<div
+<main
   class="platform-screen auth-screen"
   id="authView"
   hidden
+  tabindex="-1"
 >
 
   <div class="platform-card">
@@ -994,17 +1007,18 @@
 
   </div>
 
-</div>
+</main>
 
 
 <!-- =========================================
      FIRST-TIME ONBOARDING
 ========================================= -->
 
-<div
+<main
   class="platform-screen onboarding-screen"
   id="onboardingView"
   hidden
+  tabindex="-1"
 >
 
   <div class="platform-card wide">
@@ -1234,42 +1248,46 @@
 
   </div>
 
-</div>
+</main>
 
 
 <!-- =========================================
      USER NOT FOUND
 ========================================= -->
 
-<div
+<main
   class="platform-screen not-found-screen"
   id="userNotFoundView"
   hidden
+  tabindex="-1"
 >
 
   <div class="platform-card">
-    <div class="landing-kicker">
-      404 / USER_NOT_FOUND
+    <div class="landing-kicker" id="notFoundEyebrow" data-en-html="404 / PORTFOLIO" data-ar-html="404 / البورتفوليو">
+      404 / PORTFOLIO
     </div>
 
     <div class="platform-card-header">
-      <h1>Portfolio Not Found</h1>
+      <h1 id="notFoundHeading" data-en-html="Portfolio not found" data-ar-html="البورتفوليو غير موجود">Portfolio not found</h1>
 
-      <p id="userNotFoundMessage">
+      <p id="userNotFoundMessage" role="status">
         This username does not have a public portfolio.
       </p>
     </div>
 
     <button
+      id="notFoundAction"
       type="button"
       class="platform-button primary"
       onclick="navigateToLanding()"
+      data-en-html="Back to platform"
+      data-ar-html="العودة إلى المنصة"
     >
-      Back to Platform
+      Back to platform
     </button>
   </div>
 
-</div>
+</main>
 
 
 <!-- =========================================
@@ -1343,6 +1361,8 @@
     </span>
   </button>
 
+  <button type="button" class="lang-toggle portfolio-lang-toggle" onclick="toggleLanguage()" aria-label="Switch language" data-en-al="Switch language" data-ar-al="تغيير اللغة"><span aria-hidden="true">🌐</span><span data-language-toggle-label>عربي</span></button>
+
     <button
       type="button"
       id="adminLoginButton"
@@ -1370,12 +1390,13 @@
     </button>
 
     <button type="button" class="portfolio-menu-button" id="portfolioMenuButton"
-      aria-controls="portfolioSectionNav" aria-expanded="false" onclick="togglePortfolioMenu()">Sections <span aria-hidden="true">☰</span></button>
+      aria-controls="portfolioSectionNav" aria-expanded="false" onclick="togglePortfolioMenu()"><span>Sections</span><small id="portfolioCurrentSection">Overview</small><span aria-hidden="true">☰</span></button>
   </div>
   </div>
 
   <nav id="portfolioSectionNav" aria-label="Portfolio sections"
     onclick="if(event.target.closest('a')) document.getElementById('portfolioMenuButton').setAttribute('aria-expanded','false')">
+    <span class="portfolio-nav-heading">Work</span>
     <a href="#home">
       Overview
     </a>
@@ -1404,6 +1425,8 @@
       Currently Learning
     </a>
 
+    <span class="portfolio-nav-heading">Journey</span>
+
     <a href="#education">Education</a>
 
     <a href="#achievements">Badges</a>
@@ -1417,6 +1440,8 @@
     <a href="#knowledge">
       Knowledge
     </a>
+
+    <span class="portfolio-nav-heading">More</span>
 
     <a href="#certificates">
       Certificates
@@ -1456,34 +1481,8 @@
       </span>
 
       <p>
-        Every change is saved to your account and protected by Row Level Security.
+        Manage your public page and account from one place.
       </p>
-    </div>
-
-    <div class="dashboard-actions">
-      <button
-        type="button"
-        class="platform-button"
-        onclick="openSharePortfolioModal()"
-      >
-        Share Portfolio
-      </button>
-
-      <button
-        type="button"
-        class="platform-button"
-        onclick="copyMyPortfolioLink(this)"
-      >
-        Copy Portfolio Link
-      </button>
-
-      <button
-        type="button"
-        class="platform-button primary"
-        onclick="viewMyPortfolio()"
-      >
-        View My Portfolio
-      </button>
     </div>
 
   </div>
@@ -1514,7 +1513,7 @@
           <span>PORTFOLIO ANALYTICS</span>
           <h3 id="portfolioAnalyticsTitle">See what gets attention.</h3>
         </div>
-        <span class="analytics-live-dot">LIVE</span>
+        <span class="analytics-live-dot">Activity</span>
       </div>
 
       <div class="analytics-stat-grid">
@@ -1528,16 +1527,17 @@
         <strong id="analyticsMostViewedProject">No project views yet</strong>
       </div>
 
-      <p class="analytics-migration-note" id="analyticsMigrationNote" hidden>
-        Portfolio page views activate after running portfolio_analytics_migration.sql.
+      <p class="analytics-migration-note" id="analyticsMigrationNote" hidden data-en-html="Portfolio views are unavailable right now. Project activity may still appear." data-ar-html="مشاهدات البورتفوليو غير متاحة الآن. قد يستمر ظهور نشاط المشاريع.">
+        Portfolio views are unavailable right now. Project activity may still appear.
       </p>
     </section>
   </div>
 
   <h3>Quick Actions</h3>
-  <div class="dashboard-quick-actions"><button type="button" class="platform-button" onclick="openProfileEditor()">Edit Profile</button><button type="button" class="platform-button" onclick="openResumeStudio()">▤ Resume Studio</button><button type="button" class="platform-button" onclick="openSharePortfolioModal()">Share Portfolio</button><button type="button" class="platform-button" onclick="viewMyPortfolio()">View Portfolio</button></div>
+  <div class="dashboard-quick-actions"><button type="button" class="platform-button" onclick="openProfileEditor()">Edit Profile</button><button type="button" class="platform-button" onclick="openResumeStudio()">▤ Resume Studio</button><button type="button" class="platform-button" onclick="openSharePortfolioModal()">Share Portfolio</button><button type="button" class="platform-button" onclick="copyMyPortfolioLink(this)">Copy Portfolio Link</button><button type="button" class="platform-button" onclick="viewMyPortfolio()">View Portfolio</button></div>
   <div class="dashboard-account-actions"><button type="button" class="platform-button" data-account-control onclick="openAccountSettings()">Account Settings</button><button type="button" class="platform-button" data-platform-admin hidden onclick="openPlatformAdmin()">Admin Dashboard</button><button type="button" class="platform-button notification-bell" data-account-control data-notification-bell aria-label="Notifications" aria-expanded="false" aria-haspopup="dialog" aria-controls="notificationsDialog" onclick="openNotifications()"><span aria-hidden="true">🔔</span><span class="notification-badge" data-notification-count hidden></span></button></div>
-  <h3>Manage Portfolio Sections</h3>
+  <details class="dashboard-section-tools" id="dashboardSectionTools">
+    <summary><span>Manage Portfolio Sections</span><small>Jump to a section or customize its order</small></summary>
   <div class="dashboard-shortcuts">
     <a href="#home">Profile</a>
     <a href="#projects">Projects</a>
@@ -1599,12 +1599,13 @@
 
   </details>
 
+  </details>
+
 </div>
 
 
 
-<main>
-
+<main id="portfolioMain" tabindex="-1">
 
   <!-- =========================================
        HOME
@@ -1717,18 +1718,9 @@
         <p
           class="about-description"
           id="aboutDescription"
-        >
+        >Computer Science Student | Aspiring Cybersecurity Professional
 
-          Computer Science Student |
-          Aspiring Cybersecurity Professional
-
-          <br><br>
-
-          Dedicated to learning cybersecurity fundamentals,
-          networking, and ethical hacking while building
-          practical experience through projects.
-
-        </p>
+Dedicated to learning cybersecurity fundamentals, networking, and ethical hacking while building practical experience through projects.</p>
 
 
 
@@ -2709,6 +2701,10 @@
 <div
   class="profile-modal"
   id="profileModal"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="profileModalTitle"
+  data-legacy-dialog
 >
 
   <div class="profile-modal-content">
@@ -2716,7 +2712,7 @@
 
     <div class="modal-header">
 
-      <h2>
+      <h2 id="profileModalTitle">
         Edit Profile
       </h2>
 
@@ -3031,8 +3027,8 @@
         </label>
       </div>
 
-      <p class="profile-file-hint theme-migration-note" id="portfolioThemeMigrationNote" hidden>
-        Run portfolio_theme_migration.sql once in Supabase to save this choice.
+      <p class="profile-file-hint theme-migration-note" id="portfolioThemeMigrationNote" hidden data-en-html="Theme saving is unavailable right now. Please try again later." data-ar-html="حفظ السمة غير متاح الآن. حاول مجددًا لاحقًا.">
+        Theme saving is unavailable right now. Please try again later.
       </p>
     </div>
 
@@ -3102,6 +3098,10 @@
 <div
   class="learning-post-modal"
   id="learningPostModal"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="learningPostModalTitle"
+  data-legacy-dialog
 >
 
   <div class="learning-post-modal-content">
@@ -3194,6 +3194,10 @@
 <div
   class="current-learning-modal"
   id="currentLearningModal"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="currentLearningModalTitle"
+  data-legacy-dialog
 >
 
   <div class="current-learning-modal-content">
@@ -3307,6 +3311,10 @@
 <div
   class="growth-modal"
   id="growthItemModal"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="growthItemModalTitle"
+  data-legacy-dialog
 >
 
   <div class="growth-modal-content">
@@ -3408,6 +3416,10 @@
 <div
   class="knowledge-modal"
   id="knowledgeModal"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="knowledgeModalTitle"
+  data-legacy-dialog
 >
 
   <div class="knowledge-modal-content">
@@ -3480,7 +3492,7 @@
      EDUCATION / BADGE / TESTIMONIAL MODAL
 ========================================= -->
 
-<div class="profile-entry-modal" id="profileEntryModal">
+<div class="profile-entry-modal" id="profileEntryModal" role="dialog" aria-modal="true" aria-labelledby="profileEntryModalTitle" data-legacy-dialog>
   <div class="profile-entry-modal-content">
     <div class="modal-header">
       <h2 id="profileEntryModalTitle">Add Entry</h2>
@@ -3576,7 +3588,7 @@
   <header class="product-dialog-header"><div><p class="product-eyebrow dialog-brand"><img src="/assets/brand/deviloq-mark.svg" alt="" aria-hidden="true" width="22" height="22"><span>DEVILOQ RESUME STUDIO</span></p><h2 id="portfolioCvHeading">Resume Studio</h2><p>Build a resume from your portfolio.</p></div><button type="button" class="platform-button" data-close-dialog aria-label="Close Resume Studio">Close</button></header>
   <div class="resume-studio-body" id="resumeStudioBody">
     <aside id="resumeControls" class="resume-controls" aria-label="Resume controls" oninput="changeResumeOption(event)">
-      <div class="resume-controls-intro"><span>LIVE A4</span><h3>Build it step by step</h3><p>Your resume content is separate from your public portfolio.</p></div>
+      <div class="resume-controls-intro"><span>LIVE A4</span><h3>Build it step by step</h3><p>Your resume content is separate from your public portfolio.</p><p id="resumeStepProgress" class="resume-step-progress">Step 1 of 5 · Content</p></div>
       <nav class="resume-step-nav" aria-label="Resume Studio steps">
         <button type="button" data-resume-step-button="content" aria-current="step" onclick="setResumeStep('content')"><span>1</span>Content</button>
         <button type="button" data-resume-step-button="experience" onclick="setResumeStep('experience')"><span>2</span>Experience</button>
@@ -3618,7 +3630,7 @@
         <label class="product-check"><input id="resume-onePage" type="checkbox" data-resume-option="onePage">Fit to one page</label><p>Uses compact spacing and prioritizes your first entries. The preview warns you if the selected content still needs another page.</p>
         <button type="button" class="resume-fit-button" onclick="fitResumeToOnePage()">Fit this resume to one page</button>
         <h3>Contact &amp; visibility</h3><label class="product-check"><input id="resume-photo" type="checkbox" data-resume-option="photo">Include profile photo</label><label class="product-check"><input id="resume-email" type="checkbox" data-resume-option="email">Include public email</label><label class="product-check"><input id="resume-github" type="checkbox" data-resume-option="github">GitHub contact link</label><label class="product-check"><input id="resume-linkedin" type="checkbox" data-resume-option="linkedin">LinkedIn contact link</label>
-        <label class="product-check"><input id="resume-public" type="checkbox" data-resume-option="public">Public resume</label><p>Visitors see Download Resume only after you save this preference and your portfolio is public.</p><p id="resumeMigrationNote" class="migration-note" hidden>Export remains available. Saving tailored content requires sql/resume_content_migration.sql after the existing resume settings migration.</p>
+        <label class="product-check"><input id="resume-public" type="checkbox" data-resume-option="public">Public resume</label><p>Visitors see Download Resume only after you save this preference and your portfolio is public.</p><p id="resumeMigrationNote" class="migration-note" hidden data-en-html="You can export this resume, but saving edited content is unavailable right now." data-ar-html="يمكنك تصدير هذه السيرة الذاتية، لكن حفظ المحتوى المعدّل غير متاح الآن.">You can export this resume, but saving edited content is unavailable right now.</p>
       </section>
 
       <section class="resume-control-panel" data-resume-step-panel="review" hidden>
@@ -3634,14 +3646,14 @@
     </aside>
     <div class="resume-workspace"><div class="resume-preview-label"><span>LIVE A4 PREVIEW</span><span id="resumePages" aria-live="polite"></span></div><div id="resumePaper" class="resume-paper"><iframe id="portfolioCvFrame" title="Live A4 resume preview" sandbox="allow-same-origin allow-modals"></iframe></div></div>
   </div>
-  <footer class="resume-toolbar"><p id="resumeStatus" class="product-status" role="status" aria-live="polite"></p><div class="product-actions"><button type="button" class="platform-button" id="resumeReset" onclick="resetResumePreferences()">Reset changes</button><button type="button" class="platform-button" id="resumeSave" onclick="saveResumePreferences()">Save preferences</button><button type="button" class="platform-button primary" id="printPortfolioCvButton" onclick="printPortfolioCv()" disabled>Export PDF</button></div></footer>
+  <footer class="resume-toolbar"><div class="resume-toolbar-feedback"><span id="resumeSaveState" class="resume-save-state" role="status" aria-live="polite">Saved</span><p id="resumeStatus" class="product-status" role="status" aria-live="polite"></p></div><div class="product-actions"><button type="button" class="platform-button" id="resumeReset" onclick="resetResumePreferences()">Reset changes</button><button type="button" class="platform-button" id="resumeSave" onclick="saveResumePreferences()">Save preferences</button><button type="button" class="platform-button primary" id="printPortfolioCvButton" onclick="printPortfolioCv()" disabled>Export PDF</button></div></footer>
 </dialog>
 
 
-<div class="share-portfolio-modal" id="sharePortfolioModal">
+<div class="share-portfolio-modal" id="sharePortfolioModal" role="dialog" aria-modal="true" aria-labelledby="sharePortfolioTitle" data-legacy-dialog>
   <div class="share-portfolio-modal-content">
     <div class="modal-header">
-      <h2>Share Portfolio</h2>
+      <h2 id="sharePortfolioTitle">Share Portfolio</h2>
       <button type="button" class="close-modal" onclick="closeSharePortfolioModal()">×</button>
     </div>
 
@@ -3669,6 +3681,10 @@
 <div
   class="item-modal"
   id="itemModal"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="itemModalTitle"
+  data-legacy-dialog
 >
 
   <div class="item-modal-content">
@@ -3778,6 +3794,10 @@
 <div
   class="certificate-modal"
   id="certificateModal"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="certificateModalTitle"
+  data-legacy-dialog
 >
 
   <div class="certificate-modal-content">
@@ -3786,7 +3806,7 @@
     <div class="modal-header">
 
 
-      <h2>
+      <h2 id="certificateModalTitle">
         Add Certificate
       </h2>
 
@@ -3908,13 +3928,17 @@
 <div
   class="admin-login-modal"
   id="adminLoginModal"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="adminLoginModalTitle"
+  data-legacy-dialog
 >
 
   <div class="admin-login-box">
 
     <div class="modal-header">
 
-      <h2>
+      <h2 id="adminLoginModalTitle">
         Admin Login
       </h2>
 
@@ -4007,8 +4031,8 @@
       <section data-settings-section="account"><h3>Account identity</h3><dl class="account-identity"><dt>Username</dt><dd id="settingsUsername"></dd><dt>Private login email</dt><dd id="settingsEmail"></dd></dl>
         <form id="accountSettingsForm" onsubmit="changeAccountEmail(event)"><h3>Change login email</h3><p>This address is used to sign in. It is separate from your public contact email.</p><label for="settingsNewEmail">New email address</label><input id="settingsNewEmail" type="email" autocomplete="email" required maxlength="254"><button class="platform-button primary" type="submit">Send confirmation</button><p id="accountEmailStatus" class="product-status" role="status" aria-live="polite"></p></form>
       </section>
-      <section data-settings-section="security" hidden><h3>Change password</h3><form id="accountPasswordForm" onsubmit="changeAccountPassword(event)"><label for="settingsNewPassword">New password</label><input id="settingsNewPassword" type="password" autocomplete="new-password" minlength="8" maxlength="128" required><label for="settingsConfirmPassword">Confirm new password</label><input id="settingsConfirmPassword" type="password" autocomplete="new-password" minlength="8" maxlength="128" required><p>Use at least 8 characters. Your account’s password policy may require more.</p><details><summary>Need a verification code?</summary><p>If Supabase requests reauthentication, request a code and enter it here before retrying.</p><button type="button" id="settingsReauthenticate" class="platform-button" onclick="sendPasswordReauthentication()">Send verification code</button><label for="settingsPasswordNonce">Verification code</label><input id="settingsPasswordNonce" autocomplete="one-time-code" inputmode="numeric" maxlength="20"></details><button class="platform-button primary" type="submit">Update password</button><p id="accountPasswordStatus" class="product-status" role="status" aria-live="polite"></p></form></section>
-      <section data-settings-section="portfolio" hidden><h3>Portfolio preferences</h3><form onsubmit="saveAccountPortfolioSettings(event)"><label for="settingsTheme">Portfolio theme</label><select id="settingsTheme"></select><label class="product-check"><input type="checkbox" id="settingsPublicPortfolio">Public portfolio</label><p>Show your portfolio page and list it in the community. Existing uploaded image and certificate URLs remain public.</p><p id="settingsPrivacyNote" class="migration-note">Changing portfolio visibility requires sql/portfolio_privacy_migration.sql.</p><label class="product-check"><input type="checkbox" id="settingsPublicResume">Public resume</label><p>Allow visitors to open and export your saved resume. Off by default.</p><p id="settingsResumeNote" class="migration-note">Resume persistence requires sql/resume_settings_migration.sql.</p><h4>Public contact email</h4><p id="settingsPublicEmail"></p><p>Manage public contact information in Edit Profile.</p><button class="platform-button primary" id="settingsSave" type="submit">Save preferences</button></form></section>
+      <section data-settings-section="security" hidden><h3>Change password</h3><form id="accountPasswordForm" onsubmit="changeAccountPassword(event)"><label for="settingsNewPassword">New password</label><input id="settingsNewPassword" type="password" autocomplete="new-password" minlength="8" maxlength="128" required><label for="settingsConfirmPassword">Confirm new password</label><input id="settingsConfirmPassword" type="password" autocomplete="new-password" minlength="8" maxlength="128" required><p>Use at least 8 characters. Your account’s password policy may require more.</p><details><summary>Need a verification code?</summary><p>If you're asked to verify your identity, request a code and enter it here before retrying.</p><button type="button" id="settingsReauthenticate" class="platform-button" onclick="sendPasswordReauthentication()">Send verification code</button><label for="settingsPasswordNonce">Verification code</label><input id="settingsPasswordNonce" autocomplete="one-time-code" inputmode="numeric" maxlength="20"></details><button class="platform-button primary" type="submit">Update password</button><p id="accountPasswordStatus" class="product-status" role="status" aria-live="polite"></p></form></section>
+      <section data-settings-section="portfolio" hidden><h3>Portfolio preferences</h3><form onsubmit="saveAccountPortfolioSettings(event)"><label for="settingsTheme">Portfolio theme</label><select id="settingsTheme"></select><label class="product-check"><input type="checkbox" id="settingsPublicPortfolio">Public portfolio</label><p>Show your portfolio page and list it in the community. Existing uploaded image and certificate URLs remain public.</p><p id="settingsPrivacyNote" class="migration-note" data-en-html="Portfolio visibility changes are unavailable right now." data-ar-html="تغيير ظهور البورتفوليو غير متاح الآن.">Portfolio visibility changes are unavailable right now.</p><label class="product-check"><input type="checkbox" id="settingsPublicResume">Public resume</label><p>Allow visitors to open and export your saved resume. Off by default.</p><p id="settingsResumeNote" class="migration-note" data-en-html="Saving resume preferences is unavailable right now." data-ar-html="حفظ تفضيلات السيرة الذاتية غير متاح الآن.">Saving resume preferences is unavailable right now.</p><h4>Public contact email</h4><p id="settingsPublicEmail"></p><p>Manage public contact information in Edit Profile.</p><button class="platform-button primary" id="settingsSave" type="submit">Save preferences</button></form></section>
       <section data-settings-section="danger" hidden><h3>Delete account permanently</h3><p>This deletes your account, portfolio content and uploaded files. This cannot be undone.</p><p id="settingsDeleteNote"></p><button type="button" id="settingsDelete" class="danger-button" onclick="openDeleteAccountModal()">Delete My Account Permanently</button></section>
       <p id="settingsStatus" class="product-status" role="status" aria-live="polite"></p>
     </div>

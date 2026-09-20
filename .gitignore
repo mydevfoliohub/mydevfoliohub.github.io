@@ -1,0 +1,22 @@
+# Local design skill packages and review notes
+/.agents/
+/docs/
+
+# Secrets and local configuration
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Generated files
+node_modules/
+dist/
+build/
+mobile-build/
+android/.gradle/
+android/build/
+android/app/build/
+*.apk
+*.aab
+*.log

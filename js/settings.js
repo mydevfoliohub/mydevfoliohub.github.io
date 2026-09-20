@@ -7,11 +7,11 @@ async function openAccountSettings() {
   const owner = currentUser.id;
   document.getElementById('accountSettingsForm').reset();
   document.getElementById('accountPasswordForm').reset();
-  productStatus('settingsStatus', 'Checking your account…');
+  productStatus('settingsStatus', uiText('Checking your account…', 'جارٍ التحقق من حسابك…'));
   productStatus('accountEmailStatus', '');
   productStatus('accountPasswordStatus', '');
   document.getElementById('settingsUsername').textContent = '@' + signedInProfile.username;
-  document.getElementById('settingsEmail').textContent = currentUser.email || 'Unavailable';
+  document.getElementById('settingsEmail').textContent = currentUser.email || uiText('Unavailable', 'غير متاح');
   document.getElementById('settingsSave').disabled = true;
   openProductDialog('accountSettingsDialog');
   selectSettingsSection('account');
@@ -25,8 +25,9 @@ async function openAccountSettings() {
     if (authResult.error || authResult.data?.user?.id !== owner || profileResult.error) throw new Error('Could not verify your account. Please sign in again.');
     currentUser = authResult.data.user;
     signedInProfile = profileResult.data;
-    document.getElementById('settingsEmail').textContent = currentUser.email || 'Unavailable';
-    document.getElementById('settingsTheme').replaceChildren(...Object.entries(PORTFOLIO_THEMES).map(([value, label]) => new Option(label, value)));
+    document.getElementById('settingsEmail').textContent = currentUser.email || uiText('Unavailable', 'غير متاح');
+    const themeNamesAr = { cyber: 'سيبراني', minimal: 'بسيط', github: 'GitHub', modern: 'حديث', purple: 'بنفسجي' };
+    document.getElementById('settingsTheme').replaceChildren(...Object.entries(PORTFOLIO_THEMES).map(([value, label]) => new Option(uiText(label, themeNamesAr[value] || label), value)));
     document.getElementById('settingsTheme').value = normalizePortfolioTheme(signedInProfile.portfolio_theme);
     document.getElementById('settingsTheme').disabled = !('portfolio_theme' in signedInProfile);
     portfolioPrivacyReady = !privacyResult.error && privacyResult.data === true;
@@ -36,12 +37,14 @@ async function openAccountSettings() {
     document.getElementById('settingsPublicResume').checked = normalizeResumeSettings(signedInProfile.resume_settings).public;
     document.getElementById('settingsPublicResume').disabled = !('resume_settings' in signedInProfile);
     document.getElementById('settingsResumeNote').hidden = 'resume_settings' in signedInProfile;
-    document.getElementById('settingsPublicEmail').textContent = getProfileSocialLinks(signedInProfile).email || 'No public email. Add one in Edit Profile.';
+    document.getElementById('settingsPublicEmail').textContent = getProfileSocialLinks(signedInProfile).email || uiText('No public email. Add one in Edit Profile.', 'لا يوجد بريد عام. أضف واحداً من تعديل الملف الشخصي.');
     document.getElementById('settingsDelete').disabled = isPlatformAdmin;
-    document.getElementById('settingsDeleteNote').textContent = isPlatformAdmin ? 'Platform Admin accounts are protected from self-deletion.' : 'Deletion requires your current password and the exact confirmation phrase.';
+    document.getElementById('settingsDeleteNote').textContent = isPlatformAdmin
+      ? uiText('Platform Admin accounts are protected from self-deletion.', 'حسابات مسؤولي المنصة محمية من الحذف الذاتي.')
+      : uiText('Deletion requires your current password and the exact confirmation phrase.', 'يتطلب الحذف كلمة مرورك الحالية وعبارة التأكيد الدقيقة.');
     document.getElementById('settingsSave').disabled = false;
     productStatus('settingsStatus', '');
-  } catch (error) { productStatus('settingsStatus', error.message || 'Could not load settings. Try again.'); }
+  } catch (error) { productStatus('settingsStatus', uiText(error.message || 'Could not load settings. Try again.', 'تعذر تحميل الإعدادات. حاول مجدداً.')); }
 }
 function selectSettingsSection(name) {
   document.querySelectorAll('[data-settings-section]').forEach(section => section.hidden = section.dataset.settingsSection !== name);
@@ -55,7 +58,7 @@ async function changeAccountEmail(event) {
   const button = form.querySelector('button[type=submit]');
   button.disabled = true;
   const owner = currentUser.id;
-  productStatus('accountEmailStatus', 'Requesting email change…');
+  productStatus('accountEmailStatus', uiText('Requesting email change…', 'جارٍ طلب تغيير البريد الإلكتروني…'));
   try {
     const email = document.getElementById('settingsNewEmail').value.trim();
     const redirect = new URL(PUBLIC_SITE_URL);
@@ -64,8 +67,8 @@ async function changeAccountEmail(event) {
     if (error) throw error;
     if (currentUser?.id !== owner) return;
     form.reset();
-    productStatus('accountEmailStatus', 'Email change requested. Follow the confirmation links sent by Supabase; your current and new inboxes may both need confirmation. Your public contact email is unchanged.', true);
-  } catch (error) { productStatus('accountEmailStatus', getFriendlyAuthError(error)); }
+    productStatus('accountEmailStatus', uiText('Email change requested. Follow the confirmation links in your inboxes; both addresses may need confirmation. Your public contact email is unchanged.', 'تم طلب تغيير البريد الإلكتروني. اتبع روابط التأكيد في صندوقي البريد؛ قد يلزم تأكيد العنوانين. بريد التواصل العام لم يتغير.'), true);
+  } catch (error) { productStatus('accountEmailStatus', uiText(getFriendlyAuthError(error), 'تعذّر تغيير البريد الإلكتروني. تحقق من البيانات وحاول مرة أخرى.')); }
   finally { button.disabled = false; }
 }
 async function sendPasswordReauthentication() {
@@ -75,8 +78,8 @@ async function sendPasswordReauthentication() {
   try {
     const { error } = await supabaseClient.auth.reauthenticate();
     if (error) throw error;
-    productStatus('accountPasswordStatus', 'Verification code requested. Check the email or phone registered with Supabase.', true);
-  } catch (error) { productStatus('accountPasswordStatus', getFriendlyAuthError(error)); }
+    productStatus('accountPasswordStatus', uiText('Verification code requested. Check the email or phone linked to your account.', 'تم طلب رمز التحقق. تحقق من البريد الإلكتروني أو الهاتف المرتبط بحسابك.'), true);
+  } catch (error) { productStatus('accountPasswordStatus', uiText(getFriendlyAuthError(error), 'تعذّر طلب رمز التحقق. حاول مرة أخرى.')); }
   finally { button.disabled = false; }
 }
 async function changeAccountPassword(event) {
@@ -86,12 +89,12 @@ async function changeAccountPassword(event) {
   if (!form.reportValidity()) return;
   const password = document.getElementById('settingsNewPassword').value;
   if (password !== document.getElementById('settingsConfirmPassword').value) {
-    productStatus('accountPasswordStatus', 'The new passwords do not match.'); return;
+    productStatus('accountPasswordStatus', uiText('The new passwords do not match.', 'كلمتا المرور الجديدتان غير متطابقتين.')); return;
   }
   const button = form.querySelector('button[type=submit]');
   button.disabled = true;
   const owner = currentUser.id;
-  productStatus('accountPasswordStatus', 'Updating password…');
+  productStatus('accountPasswordStatus', uiText('Updating password…', 'جارٍ تحديث كلمة المرور…'));
   try {
     const { data, error: verifyError } = await supabaseClient.auth.getUser();
     if (verifyError || data?.user?.id !== owner) throw new Error('Sign in again before changing your password.');
@@ -100,8 +103,8 @@ async function changeAccountPassword(event) {
     if (error) throw error;
     if (currentUser?.id !== owner) return;
     form.reset();
-    productStatus('accountPasswordStatus', 'Password updated successfully.', true);
-  } catch (error) { productStatus('accountPasswordStatus', getFriendlyAuthError(error)); }
+    productStatus('accountPasswordStatus', uiText('Password updated successfully.', 'تم تحديث كلمة المرور بنجاح.'), true);
+  } catch (error) { productStatus('accountPasswordStatus', uiText(getFriendlyAuthError(error), 'تعذّر تحديث كلمة المرور. تحقق من البيانات وحاول مرة أخرى.')); }
   finally { button.disabled = false; }
 }
 async function saveAccountPortfolioSettings(event) {
@@ -110,7 +113,7 @@ async function saveAccountPortfolioSettings(event) {
   const owner = currentUser.id;
   const button = document.getElementById('settingsSave');
   button.disabled = true;
-  productStatus('settingsStatus', 'Saving portfolio preferences…');
+  productStatus('settingsStatus', uiText('Saving portfolio preferences…', 'جارٍ حفظ تفضيلات الملف الشخصي…'));
   try {
     // Fetch the latest resume options so changing visibility never overwrites a studio save.
     const { data: latest, error: readError } = await supabaseClient.from('profiles').select('*').eq('user_id', owner).single();
@@ -119,14 +122,14 @@ async function saveAccountPortfolioSettings(event) {
     if ('portfolio_theme' in latest) updates.portfolio_theme = normalizePortfolioTheme(document.getElementById('settingsTheme').value);
     if (portfolioPrivacyReady) updates.is_public = document.getElementById('settingsPublicPortfolio').checked;
     if ('resume_settings' in latest) updates.resume_settings = { ...normalizeResumeSettings(latest.resume_settings), public: document.getElementById('settingsPublicResume').checked };
-    if (!Object.keys(updates).length) throw new Error('Install the settings migrations before saving.');
+    if (!Object.keys(updates).length) throw new Error(uiText('These preferences cannot be saved right now. Please try again later.','لا يمكن حفظ هذه التفضيلات الآن. حاول مجددًا لاحقًا.'));
     const { data, error } = await supabaseClient.from('profiles').update(updates).eq('user_id', owner).select('*').single();
     if (error) throw error;
     if (currentUser?.id !== owner) return;
     signedInProfile = data;
     if (activePortfolioUserId === owner) configurePortfolioIdentity(data);
     syncAccountControls();
-    productStatus('settingsStatus', 'Portfolio preferences saved.', true);
-  } catch (error) { productStatus('settingsStatus', 'Could not save preferences. ' + (error.message || 'Try again.')); }
+    productStatus('settingsStatus', uiText('Portfolio preferences saved.', 'تم حفظ تفضيلات الملف الشخصي.'), true);
+  } catch (error) { productStatus('settingsStatus', uiText('Could not save preferences. ' + (error.message || 'Try again.'), 'تعذر حفظ التفضيلات. حاول مجدداً.')); }
   finally { button.disabled = false; }
 }

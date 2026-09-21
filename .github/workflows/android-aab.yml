@@ -1,4 +1,4 @@
-name: Build Android AAB
+﻿name: Build Android APK and AAB
 
 on:
   workflow_dispatch:
@@ -7,26 +7,27 @@ permissions:
   contents: read
 
 jobs:
-  build-aab:
+  build-android:
     runs-on: ubuntu-latest
     timeout-minutes: 30
 
     steps:
-      - name: Check out website
+      - name: Check out website and Android project
         uses: actions/checkout@v5
 
       - name: Set up Node.js
         uses: actions/setup-node@v5
         with:
-          node-version: 20
+          node-version: 24
+          cache: npm
 
-      - name: Set up Java 17
+      - name: Set up Java 21
         uses: actions/setup-java@v5
         with:
           distribution: temurin
-          java-version: 17
+          java-version: 21
 
-      - name: Install Android 16 SDK
+      - name: Ensure Android SDK packages are available
         shell: bash
         run: |
           SDK_ROOT="${ANDROID_SDK_ROOT:-$ANDROID_HOME}"
@@ -35,101 +36,30 @@ jobs:
             echo "sdkmanager was not found under $SDK_ROOT/cmdline-tools" >&2
             exit 1
           fi
-          yes | "$SDKMANAGER_PATH" --licenses >/dev/null || true
-          "$SDKMANAGER_PATH" "platforms;android-36" "build-tools;36.0.0" "platform-tools" >/dev/null
+          "$SDKMANAGER_PATH" "platforms;android-36" "build-tools;35.0.0" "platform-tools" >/dev/null
 
-      - name: Create Capacitor project
-        shell: bash
-        run: |
-          mkdir -p mobile-build/www mobile-build/resources
-          cp index.html mobile-build/www/
-          for dir in assets css img js; do
-            if [ -d "$dir" ]; then
-              cp -R "$dir" mobile-build/www/
-            fi
-          done
-          cp favicon-192x192.png favicon-32x32.png favicon-512x512.png favicon.ico favicon.svg icon.png icon.svg site.webmanifest mobile-build/www/
-          cp favicon-512x512.png mobile-build/resources/icon.png
+      - name: Install pinned Capacitor dependencies
+        run: npm ci --no-audit --no-fund
 
-          cat > mobile-build/package.json <<'JSON'
-          {
-            "name": "mydevfoliohub-android",
-            "version": "2.3.0",
-            "private": true,
-            "dependencies": {
-              "@capacitor/android": "6.2.2",
-              "@capacitor/core": "6.2.2"
-            },
-            "devDependencies": {
-              "@capacitor/assets": "3.0.5",
-              "@capacitor/cli": "6.2.2"
-            }
-          }
-          JSON
+      - name: Sync current website into Android app
+        run: npm run mobile:sync
 
-          cat > mobile-build/capacitor.config.json <<'JSON'
-          {
-            "appId": "io.mydevfoliohub.app",
-            "appName": "MyDevFolioHub",
-            "webDir": "www",
-            "server": {
-              "androidScheme": "https",
-              "cleartext": false
-            },
-            "android": {
-              "allowMixedContent": false,
-              "backgroundColor": "#070b12"
-            }
-          }
-          JSON
+      - name: Build debug APK and AAB
+        working-directory: android
+        run: ./gradlew assembleDebug bundleDebug --no-daemon
 
-      - name: Install Capacitor
-        working-directory: mobile-build
-        run: npm install --no-audit --no-fund
-
-      - name: Add Android platform and branded assets
-        working-directory: mobile-build
-        shell: bash
-        run: |
-          npx cap add android
-          npx capacitor-assets generate --android --iconBackgroundColor '#070b12' --iconBackgroundColorDark '#070b12'
-
-      - name: Configure Android 16 build
-        working-directory: mobile-build
-        shell: bash
-        run: |
-          python3 - <<'PY'
-          from pathlib import Path
-
-          variables = Path('android/variables.gradle')
-          text = variables.read_text(encoding='utf-8')
-          text = text.replace('compileSdkVersion = 34', 'compileSdkVersion = 36')
-          text = text.replace('targetSdkVersion = 34', 'targetSdkVersion = 36')
-          variables.write_text(text, encoding='utf-8')
-
-          build = Path('android/app/build.gradle')
-          text = build.read_text(encoding='utf-8').replace('versionName "1.0"', 'versionName "2.3.0"')
-          build.write_text(text, encoding='utf-8')
-
-          manifest = Path('android/app/src/main/AndroidManifest.xml')
-          text = manifest.read_text(encoding='utf-8')
-          text = text.replace('android:allowBackup="true"', 'android:allowBackup="false"')
-          text = text.replace('android:supportsRtl="true"', 'android:supportsRtl="true"\n        android:usesCleartextTraffic="false"')
-          manifest.write_text(text, encoding='utf-8')
-
-          properties = Path('android/gradle.properties')
-          properties.write_text(properties.read_text(encoding='utf-8') + '\nandroid.suppressUnsupportedCompileSdk=36\n', encoding='utf-8')
-          PY
-          npx cap sync android
-
-      - name: Build debug AAB
-        working-directory: mobile-build/android
-        run: ./gradlew bundleDebug --no-daemon
-
-      - name: Upload AAB artifact
+      - name: Upload installable debug APK
         uses: actions/upload-artifact@v4
         with:
-          name: MyDevFolioHub-v2.3.0-debug-AAB
-          path: mobile-build/android/app/build/outputs/bundle/debug/app-debug.aab
+          name: Deviloq-v2.3.0-debug-APK
+          path: android/app/build/outputs/apk/debug/app-debug.apk
+          if-no-files-found: error
+          retention-days: 14
+
+      - name: Upload debug AAB
+        uses: actions/upload-artifact@v4
+        with:
+          name: Deviloq-v2.3.0-debug-AAB
+          path: android/app/build/outputs/bundle/debug/app-debug.aab
           if-no-files-found: error
           retention-days: 14

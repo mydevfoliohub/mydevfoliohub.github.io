@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Deviloq</string>
+    <string name="title_activity_main">Deviloq</string>
+    <string name="package_name">io.mydevfoliohub.app</string>
+    <string name="custom_url_scheme">io.mydevfoliohub.app</string>
+</resources>

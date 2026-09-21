@@ -1,19 +1,32 @@
 {
-  "short_name": "Deviloq",
+  "id": "/",
   "name": "Deviloq | Developer Portfolio Builder",
+  "short_name": "Deviloq",
+  "description": "Build and share a developer portfolio with projects, skills, certificates, and learning updates.",
+  "lang": "en",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#11010a",
+  "theme_color": "#11010a",
   "icons": [
     {
       "src": "/favicon-192x192.png",
       "type": "image/png",
-      "sizes": "192x192"
+      "sizes": "192x192",
+      "purpose": "any"
     },
     {
       "src": "/favicon-512x512.png",
       "type": "image/png",
-      "sizes": "512x512"
+      "sizes": "512x512",
+      "purpose": "any"
+    },
+    {
+      "src": "/pwa-maskable-512.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "maskable"
     }
-  ],
-  "start_url": "/?utm_source=homescreen",
-  "background_color": "#11010a",
-  "theme_color": "#11010a"
+  ]
 }

@@ -8,12 +8,17 @@
 !.env.example
 *.pem
 *.key
+*.jks
+*.keystore
+google-services.json
 
 # Generated files
 node_modules/
 dist/
 build/
 mobile-build/
+/www/
+android/local.properties
 android/.gradle/
 android/build/
 android/app/build/

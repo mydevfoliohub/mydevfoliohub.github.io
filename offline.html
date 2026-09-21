@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#11010a">
+  <title>Offline | Deviloq</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <style>
+    :root{color-scheme:dark;font-family:Inter,system-ui,sans-serif;background:#100d18;color:#f8f5fb}
+    *{box-sizing:border-box}
+    body{margin:0;min-height:100dvh;display:grid;place-items:center;padding:24px}
+    main{width:min(100%,440px);padding:clamp(24px,6vw,40px);border:1px solid #493b5a;border-radius:20px;background:#21182d;box-shadow:0 20px 60px #0003}
+    .brand{display:flex;align-items:center;gap:12px;margin-bottom:32px;font-size:14px;font-weight:800;letter-spacing:.08em}
+    .brand img{width:38px;height:38px}
+    h1{margin:0 0 12px;font-size:clamp(28px,7vw,38px);line-height:1.15;letter-spacing:-.03em}
+    p{margin:0 0 28px;color:#c6bbd0;line-height:1.65}
+    button{min-height:44px;padding:10px 20px;border:1px solid #d3adff;border-radius:10px;background:#d3adff;color:#241b32;font:inherit;font-size:14px;font-weight:700;line-height:1.4;cursor:pointer}
+    button:hover{background:#e2c8ff}
+    button:focus-visible{outline:3px solid #fff;outline-offset:3px}
+    :root.light{color-scheme:light;background:#f7f5fb;color:#241b32}
+    :root.light main{background:#fff;border-color:#d8cfe6;box-shadow:0 20px 50px #29124712}
+    :root.light p{color:#5a5067}
+    :root.light button{background:#693bcc;border-color:#693bcc;color:#fff}
+    :root.light button:hover{background:#542ba8}
+    :root.light button:focus-visible{outline-color:#241b32}
+  </style>
+</head>
+<body>
+  <main>
+    <div class="brand"><img src="/assets/brand/deviloq-mark.svg" alt="" width="38" height="38"><span>DEVILOQ</span></div>
+    <h1 id="offlineHeading">You're offline</h1>
+    <p id="offlineDescription">Reconnect to open Deviloq. Portfolio and account information needs an internet connection.</p>
+    <button type="button" id="retryButton" onclick="location.reload()">Try again</button>
+  </main>
+  <script>
+    try {
+      if (localStorage.getItem('bassamTheme') === 'light') {
+        document.documentElement.classList.add('light');
+        document.querySelector('meta[name="theme-color"]').content = '#f5f2fc';
+      }
+      if (localStorage.getItem('bassamLang') === 'ar') {
+        document.documentElement.lang = 'ar';
+        document.documentElement.dir = 'rtl';
+        document.title = 'غير متصل | Deviloq';
+        document.getElementById('offlineHeading').textContent = 'أنت غير متصل';
+        document.getElementById('offlineDescription').textContent = 'اتصل بالإنترنت لفتح Deviloq. تحتاج معلومات المحفظة والحساب إلى اتصال بالإنترنت.';
+        document.getElementById('retryButton').textContent = 'حاول مرة أخرى';
+      }
+    } catch (_) { /* Storage may be unavailable in private browsing. */ }
+  </script>
+</body>
+</html>

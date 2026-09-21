@@ -1,0 +1,13 @@
+{
+  "appId": "io.mydevfoliohub.app",
+  "appName": "Deviloq",
+  "webDir": "www",
+  "server": {
+    "androidScheme": "https",
+    "cleartext": false
+  },
+  "android": {
+    "allowMixedContent": false,
+    "backgroundColor": "#11010a"
+  }
+}

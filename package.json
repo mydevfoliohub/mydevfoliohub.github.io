@@ -1,0 +1,18 @@
+{
+  "name": "deviloq-mobile",
+  "version": "2.3.0",
+  "private": true,
+  "scripts": {
+    "mobile:prepare": "node scripts/prepare-mobile.cjs",
+    "mobile:sync": "npm run mobile:prepare && cap sync android",
+    "mobile:apk": "npm run mobile:sync && cd android && gradlew.bat assembleDebug"
+  },
+  "dependencies": {
+    "@capacitor/android": "8.5.2",
+    "@capacitor/core": "8.5.2"
+  },
+  "devDependencies": {
+    "@capacitor/assets": "3.0.5",
+    "@capacitor/cli": "8.5.2"
+  }
+}

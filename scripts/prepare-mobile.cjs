@@ -22,7 +22,15 @@ for (const file of files) {
   fs.copyFileSync(path.join(root, file), path.join(webDir, file));
 }
 for (const directory of directories) {
-  fs.cpSync(path.join(root, directory), path.join(webDir, directory), { recursive: true });
+  const source = path.join(root, directory);
+  const destination = path.join(webDir, directory);
+  if (fs.existsSync(source)) {
+    fs.cpSync(source, destination, { recursive: true });
+  } else {
+    // Empty optional asset folders are not retained by Git. Keep the mobile
+    // preparation deterministic when one of them is absent in a fresh clone.
+    fs.mkdirSync(destination, { recursive: true });
+  }
 }
 
 console.log(`Prepared ${webDir} from the website source.`);

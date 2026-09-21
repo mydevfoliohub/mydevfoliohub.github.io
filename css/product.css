@@ -451,3 +451,92 @@ body::after{display:none}
 @media(prefers-reduced-motion:reduce){
   :is(.platform-button,.button,.project-card,.platform-feature-card,.how-step-card,.user-result-card){transition:none}
 }
+
+/* v2.3 product shell refinements: clearer navigation, touch ergonomics and calm states. */
+body{text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased}
+::selection{background:color-mix(in srgb,var(--green) 32%,transparent);color:var(--text)}
+#landingView .platform-header,.community-header,#portfolioView .portfolio-header{
+  position:sticky;inset-block-start:0;z-index:120;
+  background:color-mix(in srgb,var(--header-background) 92%,transparent);
+  -webkit-backdrop-filter:blur(18px) saturate(135%);backdrop-filter:blur(18px) saturate(135%);
+  box-shadow:0 1px 0 var(--border),0 12px 30px rgba(6,4,12,.08)
+}
+#landingView .platform-header{padding-inline:var(--space-3);border-radius:0 0 var(--control-radius) var(--control-radius)}
+.community-header{padding:var(--space-3);border-radius:var(--control-radius)}
+#portfolioMain>section{scroll-margin-top:150px}
+#landingView :is(#howItWorksTitle,#portfolioStudio,#landingFeaturesTitle,#landingFaqTitle){scroll-margin-top:96px}
+
+:is(.platform-button,.button,.auth-tab,.directory-filter-chip,.portfolio-header-controls button){
+  -webkit-tap-highlight-color:transparent;touch-action:manipulation
+}
+:is(.platform-button,.button,.auth-tab,.directory-filter-chip,.portfolio-header-controls button):active{
+  transform:translateY(1px);box-shadow:none
+}
+:is(.platform-card,.project-card,.user-result-card,.platform-feature-card,.how-step-card):focus-within{
+  border-color:color-mix(in srgb,var(--green) 65%,var(--border));
+  box-shadow:0 0 0 3px color-mix(in srgb,var(--green) 12%,transparent),var(--shadow-card)
+}
+
+#landingView .landing-section-heading{max-width:760px}
+#landingView .landing-section-heading p{max-width:66ch}
+#landingView .landing-copy>p{max-width:60ch}
+#landingView .landing-actions{margin-top:var(--space-6)}
+#landingView .landing-final-cta .landing-actions{justify-content:center}
+#landingView .landing-contact-card{box-shadow:var(--shadow-card)}
+
+#dashboardBar .dashboard-overview-title,#dashboardBar>h3{margin-top:var(--space-6)}
+#dashboardBar .dashboard-quick-actions .platform-button{gap:8px;border-color:var(--control-border);background:var(--card2)}
+#dashboardBar .dashboard-quick-actions .platform-button:hover{background:color-mix(in srgb,var(--green) 8%,var(--card2))}
+#dashboardBar .dashboard-account-actions{align-items:center}
+#dashboardBar .notification-bell{margin-inline-start:auto}
+
+:is(.items-empty,.growth-empty,.certificates-empty,.social-buttons-empty,.tech-stack-empty,.resume-empty-note){
+  min-height:96px;padding:var(--space-6);border:1px dashed var(--control-border);border-radius:var(--card-radius);
+  background:color-mix(in srgb,var(--card2) 88%,transparent);color:var(--muted);line-height:1.65
+}
+.product-dialog-header{position:sticky;inset-block-start:0;z-index:20;background:color-mix(in srgb,var(--card) 94%,transparent);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
+.product-dialog :is(input:not([type=checkbox]),select,textarea){transition:border-color .18s ease,box-shadow .18s ease,background-color .18s ease}
+.product-dialog .product-status:not(:empty){padding:10px 12px;border-inline-start:3px solid var(--green);border-radius:var(--control-radius);background:color-mix(in srgb,var(--green) 8%,var(--card2))}
+.product-dialog .product-status:not(:empty):not(.success){border-inline-start-color:var(--blue)}
+
+html[dir=rtl] body{font-family:"IBM Plex Sans Arabic","Inter",Arial,sans-serif}
+html[dir=rtl] :is(h1,h2,h3,h4,p,button,a,label,input,textarea,select){letter-spacing:normal}
+html[dir=rtl] :is(.landing-copy>p,.landing-section-heading p,.about-description,.project-card>p){line-height:1.85}
+html[dir=rtl] :is(.landing-actions,.platform-header-actions,.portfolio-header-controls,.product-actions){direction:rtl}
+
+@media(pointer:coarse){
+  :root{--control-height:48px}
+  :is(.platform-button,.button,.auth-tab,.directory-filter-chip,.portfolio-header-controls button){min-height:48px}
+}
+@media(max-width:800px){
+  #landingView .platform-header{padding-inline:0;background:var(--header-background);border-radius:0}
+  #landingView #landingCommunityButton{display:none}
+  #landingView .platform-header-actions{width:auto;max-width:calc(100% - 124px);margin-inline-start:auto;gap:6px}
+  #landingView .platform-header-actions :is(.theme-toggle,.lang-toggle){margin:0;padding-inline:10px}
+  #portfolioView .portfolio-header{background:var(--header-background);box-shadow:0 1px 0 var(--border),0 14px 34px rgba(6,4,12,.16)}
+  #portfolioView #portfolioSectionNav{overscroll-behavior:contain}
+  #portfolioMain>section{scroll-margin-top:132px}
+  .product-dialog:not(.resume-dialog){width:min(100%,620px);max-width:100%;max-height:calc(100dvh - 8px);margin:auto 0 0;border-radius:20px 20px 0 0;padding-bottom:env(safe-area-inset-bottom)}
+  .notification-dialog{margin:auto 0 0}
+}
+@media(max-width:560px){
+  #landingView .platform-header-actions .platform-button{padding-inline:10px}
+  #landingView .landing-copy h1{font-size:clamp(38px,11vw,50px);line-height:1.04}
+  #landingView .landing-actions{display:grid;grid-template-columns:1fr 1fr;width:100%}
+  #landingView .landing-actions .platform-button{width:100%;padding-inline:10px;text-align:center}
+  #landingView .landing-final-cta .landing-actions{max-width:330px;margin-inline:auto}
+  #dashboardBar .dashboard-quick-actions{grid-template-columns:repeat(2,minmax(0,1fr))}
+  #dashboardBar .dashboard-quick-actions .platform-button{justify-content:center;min-width:0;padding-inline:8px;text-align:center}
+  #dashboardBar .dashboard-quick-actions .platform-button:nth-child(5){grid-column:1/-1}
+  #dashboardBar .dashboard-account-actions{display:grid;grid-template-columns:minmax(0,1fr) auto}
+  #dashboardBar .dashboard-account-actions [data-platform-admin]{grid-column:1/-1}
+  #dashboardBar .notification-bell{margin:0}
+  .product-dialog-header{gap:var(--space-2)}
+  .product-dialog-header>div{min-width:0}
+  .product-dialog-header h2{font-size:20px}
+  .product-dialog-header>button{flex:0 0 auto;padding-inline:12px}
+  .back-to-top{inset-inline-end:max(16px,env(safe-area-inset-right));inset-block-end:max(16px,env(safe-area-inset-bottom))}
+}
+@media(prefers-reduced-motion:reduce){
+  .product-dialog :is(input:not([type=checkbox]),select,textarea){transition:none}
+}

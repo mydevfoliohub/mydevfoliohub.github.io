@@ -19,6 +19,7 @@ build/
 mobile-build/
 /www/
 android/local.properties
+android/keystore.properties
 android/.gradle/
 android/build/
 android/app/build/

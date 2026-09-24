@@ -20,3 +20,11 @@ npm run mobile:release-apk
 ```
 
 The output is `android/app/build/outputs/apk/release/app-release.apk`. The GitHub Actions workflow intentionally produces testing-only debug artifacts because a shared release key is not stored in the repository.
+
+## One-time update from Android v2.3.1 without uninstalling
+
+`Deviloq-Android-v2.3.1-debug.apk` used the Android debug signing certificate. The regular v2.3.4 release APK uses the stable release certificate, so Android rejects a direct update with `INSTALL_FAILED_UPDATE_INCOMPATIBLE`.
+
+On Android 9 or newer, install `Deviloq-v2.3.4-update-without-uninstall.apk` over v2.3.1 once. This APK contains an Android signing certificate lineage from the old debug certificate to the stable release certificate, with installed-data migration enabled. It keeps the package ID and uses `versionCode 5`. After that update, the regular stable-signed APK is accepted; future releases must continue using the stable release key and increasing version codes.
+
+The transition was tested on an Android 15 emulator: v2.3.1 debug to the transition APK succeeded without uninstalling; an app-data marker remained; installing the regular v2.3.4 release APK afterward also succeeded and kept that marker. Signature verification passed for Android API levels 24, 28, 32, 33, and 35. Only the Android 9+ certificate rotation path is intended for this update. Keep the two v2.3.4 APKs clearly labeled so users of v2.3.1 choose the transition APK.

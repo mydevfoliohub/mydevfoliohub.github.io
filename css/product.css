@@ -684,3 +684,83 @@ html,body{max-width:100%;overflow-x:hidden}
     color:var(--text);font:inherit;text-align:start;text-decoration:none;cursor:pointer
   }
 }
+
+/* Desktop navigation uses one control language across the site and portfolio. */
+@media(min-width:981px){
+  #landingView .platform-header{min-height:78px}
+  #landingView .platform-header-actions{gap:8px}
+  #landingView .platform-header-actions :is(.platform-button,.theme-toggle,.lang-toggle){
+    min-height:46px;margin:0;padding:10px 16px;
+    border:1px solid var(--border);border-radius:12px;
+    background:color-mix(in srgb,var(--card) 90%,transparent);
+    color:var(--text);font-size:14px;font-weight:700;line-height:1.2;
+    box-shadow:none
+  }
+  #landingView .platform-header-actions .theme-toggle,
+  #landingView #landingSecondaryAction{margin-inline-start:10px}
+  #landingView .platform-header-actions :is(.platform-button,.theme-toggle,.lang-toggle):hover{
+    border-color:var(--green);background:color-mix(in srgb,var(--green) 9%,var(--card));
+    color:var(--text);box-shadow:0 6px 18px rgba(0,0,0,.1)
+  }
+  #landingView .platform-header-actions .platform-button.primary{
+    border-color:var(--accent-hover);background:var(--accent-strong);
+    color:var(--on-accent);box-shadow:0 5px 16px color-mix(in srgb,var(--accent-strong) 20%,transparent)
+  }
+  #landingView .platform-header-actions .platform-button.primary:hover{
+    background:var(--accent-hover);color:var(--on-accent)
+  }
+
+  #portfolioView .portfolio-header{padding:14px clamp(22px,5vw,96px) 16px}
+  #portfolioView .portfolio-header-top{min-height:54px}
+  #portfolioView .portfolio-header-controls{flex-wrap:nowrap;gap:8px}
+  #portfolioView .portfolio-header-controls button{
+    min-height:46px;margin:0;padding:10px 15px;
+    border:1px solid var(--border);border-radius:12px;
+    background:color-mix(in srgb,var(--card) 90%,transparent);
+    color:var(--text);font-size:14px;font-weight:650;line-height:1.2
+  }
+  #portfolioView .portfolio-header-controls .theme-toggle{margin-inline-start:10px}
+  #portfolioView .portfolio-header-controls button:hover{
+    border-color:var(--green);background:color-mix(in srgb,var(--green) 9%,var(--card));
+    color:var(--text)
+  }
+  #portfolioView #dashboardButton{
+    border-color:color-mix(in srgb,var(--green) 45%,var(--border));
+    background:color-mix(in srgb,var(--green) 10%,var(--card))
+  }
+  #portfolioView #portfolioSectionNav{
+    align-items:center;gap:4px;min-width:0;min-height:62px;
+    margin-top:14px;padding:7px;
+    border:1px solid var(--border);border-radius:14px;
+    background:color-mix(in srgb,var(--card) 70%,transparent);
+    box-shadow:inset 0 1px 0 color-mix(in srgb,var(--text) 4%,transparent)
+  }
+  #portfolioView #portfolioSectionNav a{
+    display:inline-flex;align-items:center;justify-content:center;
+    min-height:44px;padding:10px 14px;
+    border:1px solid transparent;border-radius:10px;
+    color:var(--muted);font-size:13px;font-weight:600;line-height:1.2;
+    transition:background-color .18s ease,border-color .18s ease,color .18s ease
+  }
+  #portfolioView #portfolioSectionNav a:hover{
+    border-color:var(--border);background:var(--card2);color:var(--text)
+  }
+  #portfolioView #portfolioSectionNav a:is(.active,[aria-current="location"]){
+    border-color:color-mix(in srgb,var(--green) 55%,var(--border));
+    background:color-mix(in srgb,var(--green) 14%,var(--card));
+    color:var(--text);font-weight:750
+  }
+}
+
+@media(min-width:981px) and (max-width:1200px){
+  #landingView .platform-header-actions{gap:6px}
+  #landingView .platform-header-actions :is(.platform-button,.theme-toggle,.lang-toggle){padding-inline:11px;font-size:12px}
+  #landingView .platform-header-actions .theme-toggle,
+  #landingView #landingSecondaryAction{margin-inline-start:4px}
+  #portfolioView .portfolio-header-top{flex-wrap:wrap}
+  #portfolioView .portfolio-header-controls{margin-inline-start:auto}
+}
+
+@media(min-width:981px) and (max-width:1500px){
+  #portfolioView #portfolioSectionNav{flex-wrap:wrap;overflow:visible;white-space:normal}
+}

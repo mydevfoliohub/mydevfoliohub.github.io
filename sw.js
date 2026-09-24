@@ -1,4 +1,4 @@
-const CACHE_NAME = 'deviloq-static-v4';
+const CACHE_NAME = 'deviloq-static-v7';
 const CACHE_PREFIX = 'deviloq-static-';
 const STATIC_URLS = [
   '/offline.html',
@@ -10,9 +10,19 @@ const STATIC_URLS = [
   '/favicon.svg',
   '/assets/brand/deviloq-mark.svg',
   '/assets/brand/deviloq-logo.svg',
+  '/assets/fonts/inter-latin-wght-normal.woff2',
+  '/assets/fonts/ibm-plex-sans-arabic-arabic-400-normal.woff2',
+  '/assets/fonts/ibm-plex-sans-arabic-arabic-600-normal.woff2',
+  '/assets/fonts/ibm-plex-sans-arabic-arabic-700-normal.woff2',
+  '/assets/fonts/ibm-plex-sans-arabic-latin-400-normal.woff2',
+  '/assets/fonts/ibm-plex-sans-arabic-latin-600-normal.woff2',
+  '/assets/fonts/ibm-plex-sans-arabic-latin-700-normal.woff2',
+  '/css/fonts.css',
   '/css/main.css',
   '/css/product.css',
   '/js/config.js',
+  '/js/vendor/supabase.js',
+  '/js/vendor/icon-manifest.js',
   '/js/main.js',
   '/js/dialogs.js',
   '/js/settings.js',
@@ -57,7 +67,7 @@ self.addEventListener('fetch', event => {
     return;
   }
 
-  if (url.search || !STATIC_PATHS.has(url.pathname)) return;
+  if (url.search || (!STATIC_PATHS.has(url.pathname) && !url.pathname.startsWith('/assets/icons/'))) return;
 
   // Cache only the explicit, public app assets above. Supabase and API traffic
   // stays on the network and is never stored by this worker.

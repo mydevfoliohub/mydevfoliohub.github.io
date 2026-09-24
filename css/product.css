@@ -623,7 +623,7 @@ html,body{max-width:100%;overflow-x:hidden}
   #portfolioView .portfolio-header-top{align-items:stretch;flex-direction:column;gap:12px}
   #portfolioView .portfolio-header .logo{width:100%;font-size:18px}
   #portfolioView .portfolio-header-controls{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));width:100%;gap:8px}
-  #portfolioView .portfolio-header-controls button{display:flex;justify-content:center;width:100%;min-width:0;min-height:48px;padding:9px 10px;white-space:normal;line-height:1.25}
+  #portfolioView .portfolio-header-controls button{display:flex;align-items:center;justify-content:center;gap:6px;width:100%;min-width:0;min-height:48px;padding:9px 10px;white-space:normal;line-height:1.25;font-size:13px}
   #portfolioView .portfolio-header-controls .theme-toggle-label{display:inline}
   #portfolioView .portfolio-menu-button{
     display:flex!important;grid-column:1/-1;justify-content:space-between!important;
@@ -653,9 +653,14 @@ html,body{max-width:100%;overflow-x:hidden}
   #landingView .landing-highlights li{padding:12px 0;border-inline-start:0!important;border-top:1px solid var(--border)}
   #landingView .landing-highlights li:first-child{border-top:0}
   #portfolioView .portfolio-header-controls{grid-template-columns:repeat(2,minmax(0,1fr))}
+  #portfolioView .portfolio-header-controls #adminLogoutButton{grid-column:1/-1}
   #portfolioView .portfolio-menu-button{grid-column:1/-1}
   #portfolioView #portfolioSectionNav{grid-template-columns:1fr}
   #portfolioView .portfolio-nav-heading{grid-column:1}
+  #landingView .landing-hero-notes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));align-items:start;gap:8px 12px}
+  #landingView .landing-hero-notes .landing-notes-dot{display:none}
+  #landingView .landing-hero-notes .landing-login-link{grid-column:1/-1;justify-self:start;min-height:40px;margin-top:2px;padding:8px 14px;border:1px solid var(--border);border-radius:999px;background:var(--card);font-weight:650}
+  html[lang="ar"] #landingView .landing-copy h1{font-size:clamp(34px,10vw,46px);line-height:1.3}
 }
 
 /* Keep forms and directory controls inside the viewport at narrow widths. */

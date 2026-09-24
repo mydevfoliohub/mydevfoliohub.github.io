@@ -86,13 +86,18 @@
   <link rel="apple-touch-icon" href="/favicon-192x192.png">
   <link rel="manifest" href="/site.webmanifest?v=2">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;600;700&family=Inter:wght@400;600;700;800&display=swap"
-  >
+  <script>
+    (() => {
+      const route = new URLSearchParams(location.search);
+      if (!route.has('u') && !route.has('view')) {
+        document.documentElement.classList.add('landing-entry');
+      }
+    })();
+  </script>
+  <style>html.landing-entry #appLoading{display:none!important}</style>
 
+  <link rel="preload" href="/assets/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="css/fonts.css">
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/product.css">
 
@@ -449,7 +454,11 @@
     <!-- Add new release notes here, newest first. -->
     <div class="release-list" id="releaseList">
       <article class="release-entry">
-        <div class="release-date"><time datetime="2026-09-24">Sep 24, 2026</time><span data-en-html="Navigation update" data-ar-html="تحديث التنقل">Navigation update</span><span class="release-latest" data-en-html="LATEST" data-ar-html="الأحدث">LATEST</span></div>
+        <div class="release-date"><time datetime="2026-09-24">Sep 24, 2026</time><span data-en-html="Reliability update" data-ar-html="تحديث الاعتمادية">Reliability update</span><span class="release-latest" data-en-html="LATEST" data-ar-html="الأحدث">LATEST</span></div>
+        <div><h3 data-en-html="v2.3.5 — Faster, more dependable" data-ar-html="v2.3.5 — أسرع وأكثر اعتمادية">v2.3.5 — Faster, more dependable</h3><p data-en-html="The homepage, fonts, and technology icons now load without third-party asset services. Mobile navigation and account controls have clearer spacing, and Android updates use the next version code." data-ar-html="تُحمّل الصفحة الرئيسية والخطوط وأيقونات التقنيات الآن دون الاعتماد على خدمات خارجية للملفات. أصبحت قوائم الجوال وأزرار الحساب أوضح، ويستخدم تحديث أندرويد رقم إصدار أعلى.">The homepage, fonts, and technology icons now load without third-party asset services. Mobile navigation and account controls have clearer spacing, and Android updates use the next version code.</p><div class="release-tags"><span>v2.3.5</span><span data-en-html="Reliability" data-ar-html="الاعتمادية">Reliability</span><span data-en-html="Mobile UX" data-ar-html="تجربة الجوال">Mobile UX</span><span data-en-html="Android" data-ar-html="أندرويد">Android</span></div></div>
+      </article>
+      <article class="release-entry release-history-item" hidden>
+        <div class="release-date"><time datetime="2026-09-24">Sep 24, 2026</time><span data-en-html="Navigation update" data-ar-html="تحديث التنقل">Navigation update</span></div>
         <div><h3 data-en-html="v2.3.4 — Navigation that feels at home" data-ar-html="v2.3.4 — قوائم أكثر تناسقًا">v2.3.4 — Navigation that feels at home</h3><p data-en-html="The homepage and portfolio headers now share consistent controls, spacing and touch targets. Portfolio sections sit in a clearer navigation bar with a stronger active state, while mobile layouts and Arabic RTL remain comfortable to use." data-ar-html="أصبحت أزرار هيدر الرئيسية والبورتفوليو أكثر تناسقًا في الشكل والمسافات ومناطق اللمس. وتظهر أقسام البورتفوليو في شريط تنقل أوضح مع إبراز القسم الحالي، مع الحفاظ على تجربة الجوال والعربية واتجاه RTL.">The homepage and portfolio headers now share consistent controls, spacing and touch targets. Portfolio sections sit in a clearer navigation bar with a stronger active state, while mobile layouts and Arabic RTL remain comfortable to use.</p><div class="release-tags"><span>v2.3.4</span><span data-en-html="Navigation" data-ar-html="التنقل">Navigation</span><span data-en-html="Portfolio" data-ar-html="البورتفوليو">Portfolio</span><span data-en-html="Android" data-ar-html="أندرويد">Android</span></div></div>
       </article>
       <article class="release-entry release-history-item" hidden>
@@ -670,7 +679,7 @@
 
     <div class="platform-footer-bottom">
       <span>© 2026 Deviloq</span>
-      <span>Deviloq v2.3.4</span>
+      <span>Deviloq v2.3.5</span>
     </div>
   </footer>
 
@@ -3993,7 +4002,7 @@ Dedicated to learning cybersecurity fundamentals, networking, and ethical hackin
 
   <div class="platform-footer-bottom">
     <span>© <span id="year"></span> Deviloq</span>
-    <span>Deviloq v2.3.4</span>
+    <span>Deviloq v2.3.5</span>
   </div>
 </footer>
 
@@ -4028,7 +4037,8 @@ Dedicated to learning cybersecurity fundamentals, networking, and ethical hackin
   <div class="product-dialog-content"><div class="product-actions"><button type="button" class="platform-button" id="notificationMarkAll" onclick="markNotificationsRead()" disabled>Mark all as read</button><button type="button" class="platform-button" onclick="loadNotifications(true)">Refresh</button></div><p id="notificationStatus" class="product-status" role="status" aria-live="polite" tabindex="-1"></p><div id="notificationItems"></div><button type="button" class="platform-button" id="notificationMore" onclick="loadMoreNotifications()" hidden>Load older notifications</button></div>
 </dialog>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/vendor/supabase.js" defer></script>
+<script src="js/vendor/icon-manifest.js" defer></script>
 
   <script src="js/config.js" defer></script>
   <script src="js/main.js" defer></script>

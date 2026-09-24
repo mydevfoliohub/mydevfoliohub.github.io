@@ -28,3 +28,7 @@ The output is `android/app/build/outputs/apk/release/app-release.apk`. The GitHu
 On Android 9 or newer, install `Deviloq-v2.3.4-update-without-uninstall.apk` over v2.3.1 once. This APK contains an Android signing certificate lineage from the old debug certificate to the stable release certificate, with installed-data migration enabled. It keeps the package ID and uses `versionCode 5`. After that update, the regular stable-signed APK is accepted; future releases must continue using the stable release key and increasing version codes.
 
 The transition was tested on an Android 15 emulator: v2.3.1 debug to the transition APK succeeded without uninstalling; an app-data marker remained; installing the regular v2.3.4 release APK afterward also succeeded and kept that marker. Signature verification passed for Android API levels 24, 28, 32, 33, and 35. Only the Android 9+ certificate rotation path is intended for this update. Keep the two v2.3.4 APKs clearly labeled so users of v2.3.1 choose the transition APK.
+
+## Updating to v2.3.5
+
+The v2.3.5 release APK uses the stable release certificate, package ID `io.mydevfoliohub.app`, and `versionCode 6`. It updates an installation already using the stable certificate. If the installed version is the original v2.3.1 debug APK, first install `Deviloq-v2.3.4-update-without-uninstall.apk` from the releases folder, then install the v2.3.5 release APK. Keep both APKs available for that one-time signing transition.

@@ -3783,7 +3783,7 @@
         .replace(/[^a-z0-9]/g, "");
 
 
-    if (!safeIconName) {
+    if (!safeIconName || !window.DEVILOQ_LOCAL_ICONS?.includes(safeIconName)) {
       const fallback =
         document.createElement("span");
 
@@ -3802,7 +3802,7 @@
 
 
     image.src =
-      `https://cdn.simpleicons.org/${safeIconName}/d8c7ff`;
+      `assets/icons/${safeIconName}.svg`;
 
     image.alt = "";
     image.loading = "lazy";

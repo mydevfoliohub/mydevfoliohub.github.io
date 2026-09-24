@@ -51,7 +51,7 @@ jobs:
       - name: Upload testing-only debug APK
         uses: actions/upload-artifact@v4
         with:
-          name: Deviloq-v2.3.4-TESTING-ONLY-debug-APK
+          name: Deviloq-v2.3.5-TESTING-ONLY-debug-APK
           path: android/app/build/outputs/apk/debug/app-debug.apk
           if-no-files-found: error
           retention-days: 14
@@ -59,7 +59,7 @@ jobs:
       - name: Upload debug AAB
         uses: actions/upload-artifact@v4
         with:
-          name: Deviloq-v2.3.4-TESTING-ONLY-debug-AAB
+          name: Deviloq-v2.3.5-TESTING-ONLY-debug-AAB
           path: android/app/build/outputs/bundle/debug/app-debug.aab
           if-no-files-found: error
           retention-days: 14

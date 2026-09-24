@@ -354,7 +354,7 @@
     if (mobileSiteNav?.open && !mobileSiteNav.contains(event.target)) mobileSiteNav.open = false;
   });
   window.addEventListener("resize", () => {
-    if (window.innerWidth > 800 && mobileSiteNav) mobileSiteNav.open = false;
+    if (window.innerWidth > 980 && mobileSiteNav) mobileSiteNav.open = false;
   });
 
   function initPortfolioSectionNavigation() {

@@ -208,10 +208,11 @@
       <summary data-en-html="Menu" data-ar-html="القائمة">Menu</summary>
       <nav aria-label="Site navigation" data-en-al="Site navigation" data-ar-al="التنقل في الموقع">
         <a href="?view=community" data-en-html="Community" data-ar-html="المجتمع">Community</a>
-        <a href="#howItWorksTitle" data-en-html="How It Works" data-ar-html="كيف يعمل">How It Works</a>
         <a href="#portfolioStudio" data-en-html="Portfolio Studio" data-ar-html="استوديو الملف الشخصي">Portfolio Studio</a>
         <a href="#landingFeaturesTitle" data-en-html="Features" data-ar-html="الميزات">Features</a>
         <a href="#landingFaqTitle" data-en-html="FAQ" data-ar-html="الأسئلة الشائعة">FAQ</a>
+        <button type="button" onclick="toggleTheme()" data-en-html="Switch theme" data-ar-html="تغيير المظهر">Switch theme</button>
+        <button type="button" onclick="toggleLanguage()" data-en-html="العربية / English" data-ar-html="English / العربية">العربية / English</button>
         <button type="button" onclick="showAuthScreen('login')" data-en-html="Login" data-ar-html="تسجيل الدخول">Login</button>
       </nav>
     </details>
@@ -355,42 +356,6 @@
   </section>
 
 
-  <section class="how-it-works-section" aria-labelledby="howItWorksTitle">
-    <div class="landing-section-heading centered-heading">
-      <div class="landing-kicker" data-en-html="HOW IT WORKS" data-ar-html="كيف يعمل">HOW IT WORKS</div>
-      <h2 id="howItWorksTitle" data-en-html="From account to portfolio in three steps." data-ar-html="من الحساب إلى البورتفوليو في ثلاث خطوات.">From account to portfolio in three steps.</h2>
-      <p data-en-html="Create your space, make it yours, then share your work with the world." data-ar-html="أنشئ مساحتك، وخصصها، ثم شارك أعمالك مع العالم.">Create your space, make it yours, then share your work with the world.</p>
-    </div>
-
-    <div class="how-it-works-timeline">
-      <article class="how-step-card">
-        <span class="how-step-number">01</span>
-        <span class="how-step-icon" aria-hidden="true">＋</span>
-        <h3 data-en-html="Create Account" data-ar-html="إنشاء حساب">Create Account</h3>
-        <p data-en-html="Create an account to start your portfolio." data-ar-html="أنشئ حسابًا لتبدأ بورتفوليوك.">Create an account to start your portfolio.</p>
-      </article>
-
-      <span class="how-step-connector" aria-hidden="true">→</span>
-
-      <article class="how-step-card">
-        <span class="how-step-number">02</span>
-        <span class="how-step-icon" aria-hidden="true">⌘</span>
-        <h3 data-en-html="Customize Portfolio" data-ar-html="خصص بورتفوليوك">Customize Portfolio</h3>
-        <p data-en-html="Add your projects, skills, certificates, learning journey and profile information." data-ar-html="أضف مشاريعك ومهاراتك وشهاداتك ورحلة تعلمك ومعلوماتك.">Add your projects, skills, certificates, learning journey and profile information.</p>
-      </article>
-
-      <span class="how-step-connector" aria-hidden="true">→</span>
-
-      <article class="how-step-card">
-        <span class="how-step-number">03</span>
-        <span class="how-step-icon" aria-hidden="true">↗</span>
-        <h3 data-en-html="Share Your Link" data-ar-html="شارك رابطك">Share Your Link</h3>
-        <p data-en-html="Publish and share your portfolio using your personal public URL." data-ar-html="انشر بورتفوليوك وشاركه عبر رابطك العام.">Publish and share your portfolio using your personal public URL.</p>
-      </article>
-    </div>
-  </section>
-
-
   <section class="landing-studio" id="portfolioStudio" aria-labelledby="landingStudioTitle">
     <div class="landing-studio-copy">
       <div class="landing-kicker" data-en-html="YOUR SPACE ON THE INTERNET" data-ar-html="مساحتك على الإنترنت">YOUR SPACE ON THE INTERNET</div>
@@ -484,7 +449,11 @@
     <!-- Add new release notes here, newest first. -->
     <div class="release-list" id="releaseList">
       <article class="release-entry">
-        <div class="release-date"><time datetime="2026-09-21">Sep 21, 2026</time><span data-en-html="Experience update" data-ar-html="تحديث التجربة">Experience update</span><span class="release-latest" data-en-html="LATEST" data-ar-html="الأحدث">LATEST</span></div>
+        <div class="release-date"><time datetime="2026-09-24">Sep 24, 2026</time><span data-en-html="Layout update" data-ar-html="تحديث الواجهة">Layout update</span><span class="release-latest" data-en-html="LATEST" data-ar-html="الأحدث">LATEST</span></div>
+        <div><h3 data-en-html="v2.3.3 — Wider layout and clearer mobile menus" data-ar-html="v2.3.3 — واجهة أوسع وقوائم جوال أوضح">v2.3.3 — Wider layout and clearer mobile menus</h3><p data-en-html="The homepage now uses wide screens more effectively, its header and hero align consistently, and the redundant three-step section has been removed. Landing, community and portfolio menus now use clearer mobile controls, stronger contrast and comfortable touch targets." data-ar-html="تستفيد الصفحة الرئيسية الآن من الشاشات الواسعة بشكل أفضل، مع محاذاة متناسقة للهيدر والواجهة الرئيسية، وإزالة قسم الخطوات الثلاث غير الضروري. كما أصبحت قوائم الرئيسية والمجتمع والبورتفوليو أوضح على الجوال، بتباين أقوى ومساحات لمس مريحة.">The homepage now uses wide screens more effectively, its header and hero align consistently, and the redundant three-step section has been removed. Landing, community and portfolio menus now use clearer mobile controls, stronger contrast and comfortable touch targets.</p><div class="release-tags"><span>v2.3.3</span><span data-en-html="Wide layout" data-ar-html="واجهة أوسع">Wide layout</span><span data-en-html="Mobile menus" data-ar-html="قوائم الجوال">Mobile menus</span><span data-en-html="Android" data-ar-html="أندرويد">Android</span></div></div>
+      </article>
+      <article class="release-entry release-history-item" hidden>
+        <div class="release-date"><time datetime="2026-09-21">Sep 21, 2026</time><span data-en-html="Experience update" data-ar-html="تحديث التجربة">Experience update</span></div>
         <div><h3 data-en-html="v2.3.1 — A more polished product experience" data-ar-html="v2.3.1 — تجربة منتج أكثر احترافية">v2.3.1 — A more polished product experience</h3><p data-en-html="Navigation now stays within reach, mobile controls have larger touch targets, owner actions are more compact, dialogs adapt cleanly to small screens, and empty and status states are easier to understand. Arabic spacing and reading flow were refined while the existing authentication, portfolio and Resume Studio behavior remains unchanged." data-ar-html="أصبح التنقل قريبًا أثناء التصفح، وكبرت مناطق اللمس على الجوال، وصارت إجراءات المالك أكثر اختصارًا، وتتكيف النوافذ بشكل أفضل مع الشاشات الصغيرة، كما أصبحت الحالات الفارغة ورسائل الحالة أوضح. وتحسنت المسافات وتدفق القراءة بالعربية مع الحفاظ على المصادقة والبورتفوليو واستديو السيرة كما هي.">Navigation now stays within reach, mobile controls have larger touch targets, owner actions are more compact, dialogs adapt cleanly to small screens, and empty and status states are easier to understand. Arabic spacing and reading flow were refined while the existing authentication, portfolio and Resume Studio behavior remains unchanged.</p><div class="release-tags"><span>v2.3.1</span><span data-en-html="Mobile UX" data-ar-html="تجربة الجوال">Mobile UX</span><span data-en-html="Navigation" data-ar-html="التنقل">Navigation</span><span data-en-html="Arabic + RTL" data-ar-html="العربية وRTL">Arabic + RTL</span><span data-en-html="Android update" data-ar-html="تحديث أندرويد">Android update</span></div></div>
       </article>
       <article class="release-entry release-history-item" hidden>
@@ -683,7 +652,6 @@
       <div>
         <h3 data-en-html="Product" data-ar-html="المنتج">Product</h3>
         <button type="button" onclick="handleLandingPrimaryAction()" data-en-html="Create Portfolio" data-ar-html="إنشاء بورتفوليو">Create Portfolio</button>
-        <a href="#howItWorksTitle" data-en-html="How It Works" data-ar-html="كيف يعمل">How It Works</a>
         <a href="#platformUpdates" data-en-html="What's New" data-ar-html="الجديد">What's New</a>
         <a href="#landingContact" data-en-html="Contact" data-ar-html="تواصل">Contact</a>
         <button type="button" onclick="openDemoPortfolio()" data-en-html="View Demo" data-ar-html="شاهد العرض">View Demo</button>
@@ -698,7 +666,7 @@
 
     <div class="platform-footer-bottom">
       <span>© 2026 Deviloq</span>
-      <span>Deviloq v2.3.1</span>
+      <span>Deviloq v2.3.3</span>
     </div>
   </footer>
 
@@ -716,6 +684,7 @@
       <button type="button" class="platform-button" data-account-control hidden onclick="openAccountSettings()" data-en-html="Account Settings" data-ar-html="إعدادات الحساب">Account Settings</button>
       <button type="button" class="platform-button" data-platform-admin hidden onclick="openPlatformAdmin()" data-en-html="Admin Dashboard" data-ar-html="لوحة إدارة المنصة">Admin Dashboard</button>
       <button type="button" class="platform-button notification-bell" data-account-control data-notification-bell hidden aria-label="Notifications" data-en-al="Notifications" data-ar-al="الإشعارات" aria-expanded="false" aria-haspopup="dialog" aria-controls="notificationsDialog" onclick="openNotifications()"><span aria-hidden="true">🔔</span><span class="notification-badge" data-notification-count hidden></span></button>
+      <button type="button" class="platform-button" onclick="toggleTheme()" data-en-html="Switch theme" data-ar-html="تغيير المظهر">Switch theme</button>
       <button type="button" class="lang-toggle" onclick="toggleLanguage()" aria-label="Switch language" data-en-al="Switch language" data-ar-al="تغيير اللغة"><span aria-hidden="true">🌐</span><span data-language-toggle-label>عربي</span></button>
       <button type="button" class="platform-button primary" onclick="handleLandingPrimaryAction()" data-en-html="My Portfolio" data-ar-html="ملفي الشخصي">My Portfolio</button>
     </div>
@@ -4020,7 +3989,7 @@ Dedicated to learning cybersecurity fundamentals, networking, and ethical hackin
 
   <div class="platform-footer-bottom">
     <span>© <span id="year"></span> Deviloq</span>
-    <span>Deviloq v2.3.1</span>
+    <span>Deviloq v2.3.3</span>
   </div>
 </footer>
 

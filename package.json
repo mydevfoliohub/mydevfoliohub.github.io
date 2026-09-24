@@ -1,6 +1,6 @@
 {
   "name": "deviloq-mobile",
-  "version": "2.3.2",
+  "version": "2.3.3",
   "private": true,
   "scripts": {
     "mobile:prepare": "node scripts/prepare-mobile.cjs",

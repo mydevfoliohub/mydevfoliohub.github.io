@@ -542,7 +542,7 @@ html[dir=rtl] :is(.landing-actions,.platform-header-actions,.portfolio-header-co
 }
 
 /* v2.3.3 shell fixes: use wide screens well and keep every mobile menu readable. */
-html,body{max-width:100%;overflow-x:hidden}
+html,body{max-width:100%;overflow-x:clip}
 #landingView{
   width:min(1920px,calc(100% - clamp(24px,4vw,96px)));
   overflow:visible;
@@ -768,4 +768,118 @@ html,body{max-width:100%;overflow-x:hidden}
 
 @media(min-width:981px) and (max-width:1500px){
   #portfolioView #portfolioSectionNav{flex-wrap:wrap;overflow:visible;white-space:normal}
+}
+
+/* Give primary actions and the current portfolio section a clear hierarchy. */
+@media(min-width:981px){
+  #landingView .platform-header-actions{gap:6px}
+  #landingView .platform-header-actions :is(.theme-toggle,.lang-toggle),
+  #portfolioView .portfolio-header-controls :is(.theme-toggle,.portfolio-lang-toggle){
+    min-height:42px;padding:8px 11px;border-color:transparent;
+    background:transparent;color:var(--muted);font-size:12px;box-shadow:none
+  }
+  #landingView .platform-header-actions .theme-toggle,
+  #landingView #landingSecondaryAction,
+  #portfolioView .portfolio-header-controls .theme-toggle{margin-inline-start:0}
+  #landingView .platform-header-actions :is(.community-entry,#landingSecondaryAction),
+  #portfolioView .portfolio-header-controls :is(.portfolio-home-button,#adminLogoutButton){
+    border-color:transparent;background:transparent;color:var(--muted);box-shadow:none
+  }
+  #landingView .platform-header-actions :is(.community-entry,#landingSecondaryAction):hover,
+  #portfolioView .portfolio-header-controls :is(.portfolio-home-button,#adminLogoutButton):hover{
+    border-color:var(--border);background:var(--card2);color:var(--text)
+  }
+  #portfolioView .portfolio-header-controls :is(#dashboardButton,#adminLoginButton){
+    border-color:var(--accent-hover);background:var(--accent-strong);
+    color:var(--on-accent);font-weight:750
+  }
+  #portfolioView .portfolio-header-controls :is(#dashboardButton,#adminLoginButton):hover{
+    border-color:var(--accent-hover);background:var(--accent-hover);color:var(--on-accent)
+  }
+  #portfolioView #portfolioSectionNav{
+    position:relative;flex-wrap:nowrap;overflow:visible;white-space:nowrap;
+    justify-content:flex-start;gap:5px;min-height:58px;margin-top:12px;padding:6px
+  }
+  #portfolioView #portfolioSectionNav>a{flex:0 1 auto;min-width:0;padding-inline:clamp(9px,1vw,14px)}
+  #portfolioView .portfolio-nav-more{position:relative;flex:0 0 auto;margin-inline-start:auto}
+  #portfolioView .portfolio-nav-more>summary{
+    display:flex;align-items:center;justify-content:center;gap:8px;
+    min-height:44px;padding:10px 14px;border:1px solid transparent;border-radius:10px;
+    color:var(--muted);font-size:13px;font-weight:700;line-height:1.2;
+    cursor:pointer;list-style:none;transition:background-color .18s ease,border-color .18s ease,color .18s ease
+  }
+  #portfolioView .portfolio-nav-more>summary::-webkit-details-marker{display:none}
+  #portfolioView .portfolio-nav-more>summary:hover,
+  #portfolioView .portfolio-nav-more[open]>summary,
+  #portfolioView .portfolio-nav-more:has(a[aria-current="location"])>summary{
+    border-color:color-mix(in srgb,var(--green) 48%,var(--border));
+    background:color-mix(in srgb,var(--green) 12%,var(--card));color:var(--text)
+  }
+  #portfolioView .portfolio-nav-more-panel{
+    position:absolute;z-index:180;inset-block-start:calc(100% + 10px);inset-inline-end:0;
+    display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;
+    box-sizing:border-box;width:min(440px,calc(100vw - 48px));max-height:min(65dvh,560px);
+    padding:14px;border:1px solid var(--control-border);border-radius:14px;
+    background:var(--card);box-shadow:0 24px 56px rgba(0,0,0,.34);overflow-y:auto;
+    animation:portfolio-nav-reveal .18s ease-out both
+  }
+  #portfolioView .portfolio-nav-more:not([open]) .portfolio-nav-more-panel{display:none}
+  #portfolioView .portfolio-nav-more-panel .portfolio-nav-heading{
+    grid-column:1/-1;padding:7px 4px 4px;color:var(--green);font-size:11px;font-weight:750;letter-spacing:.08em
+  }
+  #portfolioView .portfolio-nav-more-panel a{
+    justify-content:flex-start;min-height:44px;padding:9px 11px;
+    border:1px solid var(--border);background:var(--card2);white-space:normal
+  }
+}
+
+@keyframes portfolio-nav-reveal{
+  from{opacity:0;transform:translateY(-5px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+@media(max-width:980px){
+  #portfolioView .portfolio-header-controls :is(#dashboardButton,#adminLoginButton){
+    border-color:var(--accent-hover);background:var(--accent-strong);
+    color:var(--on-accent);font-weight:750
+  }
+  #portfolioView .portfolio-header-controls .theme-toggle{margin-inline-start:0}
+  #portfolioView .portfolio-nav-more{grid-column:1/-1;min-width:0}
+  #portfolioView .portfolio-nav-more>summary{display:none}
+  #portfolioView .portfolio-nav-more-panel{
+    display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;min-width:0
+  }
+  #portfolioView .portfolio-nav-more-panel .portfolio-nav-heading{
+    grid-column:1/-1;margin:5px 0 0;padding:8px 10px;
+    border-bottom:1px solid var(--border);color:var(--green)
+  }
+}
+@media(max-width:560px){
+  #portfolioView .portfolio-header-controls .portfolio-home-button{order:0}
+  #portfolioView .portfolio-header-controls :is(#dashboardButton,#adminLoginButton){order:1}
+  #portfolioView .portfolio-header-controls .theme-toggle{order:2}
+  #portfolioView .portfolio-header-controls .portfolio-lang-toggle{order:3}
+  #portfolioView .portfolio-header-controls #adminLogoutButton{order:4}
+  #portfolioView .portfolio-header-controls .portfolio-menu-button{order:5}
+  #portfolioView .portfolio-nav-more-panel{grid-template-columns:1fr}
+}
+
+/* Consistent rhythm across public pages and the owner dashboard. */
+:is(#landingView,.community-screen,#portfolioView) :is(h1,h2,h3){text-wrap:balance}
+:is(#landingView,.community-screen,#portfolioView) :is(.platform-button,.button,.portfolio-header-controls button){
+  transition:background-color .18s ease,border-color .18s ease,color .18s ease,box-shadow .18s ease,transform .18s ease
+}
+:is(.platform-feature-card,.user-result-card,.project-card,.dashboard-insight-card){
+  transition:border-color .2s ease,box-shadow .2s ease,transform .2s ease
+}
+@media(hover:hover){
+  :is(.platform-feature-card,.user-result-card,.project-card,.dashboard-insight-card):hover{
+    transform:translateY(-2px);box-shadow:var(--shadow-card)
+  }
+}
+@media(prefers-reduced-motion:reduce){
+  :is(#landingView,.community-screen,#portfolioView) :is(.platform-button,.button,.portfolio-header-controls button),
+  :is(.platform-feature-card,.user-result-card,.project-card,.dashboard-insight-card),
+  #portfolioView .portfolio-nav-more>summary{transition:none}
+  #portfolioView .portfolio-nav-more-panel{animation:none}
 }

@@ -357,6 +357,25 @@
     if (window.innerWidth > 980 && mobileSiteNav) mobileSiteNav.open = false;
   });
 
+  const portfolioNavMore = document.getElementById("portfolioNavMore");
+  const compactPortfolioNav = window.matchMedia("(max-width: 980px)");
+  const syncPortfolioNavMore = () => {
+    if (portfolioNavMore) portfolioNavMore.open = compactPortfolioNav.matches;
+  };
+  syncPortfolioNavMore();
+  compactPortfolioNav.addEventListener("change", syncPortfolioNavMore);
+  document.addEventListener("click", event => {
+    if (!compactPortfolioNav.matches && portfolioNavMore?.open && !portfolioNavMore.contains(event.target)) {
+      portfolioNavMore.open = false;
+    }
+  });
+  portfolioNavMore?.addEventListener("keydown", event => {
+    if (event.key === "Escape" && portfolioNavMore.open && !compactPortfolioNav.matches) {
+      portfolioNavMore.open = false;
+      portfolioNavMore.querySelector("summary")?.focus();
+    }
+  });
+
   function initPortfolioSectionNavigation() {
     const view = document.getElementById("portfolioView");
     const nav = document.getElementById("portfolioSectionNav");
@@ -364,6 +383,8 @@
     if (!view || !nav || !header) return;
     const links = [...nav.querySelectorAll('a[href^="#"]')];
     const menuButton = document.getElementById("portfolioMenuButton");
+    const moreMenu = document.getElementById("portfolioNavMore");
+    const moreSummary = moreMenu?.querySelector("summary");
     let activeLink = null;
     let scheduled = false;
     const update = () => {
@@ -371,10 +392,16 @@
       if (view.hidden || getComputedStyle(view).display === "none") return;
       const edge = header.getBoundingClientRect().bottom + 24;
       let current = links.find(link => !link.hidden && link.getAttribute("href") === "#home");
+      let nearestTop = -Infinity;
       links.forEach(link => {
         if (link.hidden) return;
         const section = document.getElementById(link.hash.slice(1));
-        if (section && section.getBoundingClientRect().top <= edge) current = link;
+        if (!section || !section.getClientRects().length) return;
+        const top = section.getBoundingClientRect().top;
+        if (top <= edge && top > nearestTop) {
+          nearestTop = top;
+          current = link;
+        }
       });
       links.forEach(link => {
         const active = link === current;
@@ -387,10 +414,16 @@
         menuButton?.setAttribute("aria-label", uiText(`Sections. Current: ${section}`, `الأقسام. الحالي: ${section}`));
         const currentLabel = document.getElementById("portfolioCurrentSection");
         if (currentLabel) currentLabel.textContent = section;
+        if (moreSummary) {
+          const inMore = moreMenu.contains(current);
+          moreSummary.setAttribute("aria-label", inMore
+            ? uiText(`More sections. Current: ${section}`, `أقسام إضافية. الحالي: ${section}`)
+            : uiText("More sections", "أقسام إضافية"));
+        }
       }
       if (current && current !== activeLink) {
         activeLink = current;
-        if (getComputedStyle(nav).display === "flex") {
+        if (current.parentElement === nav && getComputedStyle(nav).display === "flex") {
           const navRect = nav.getBoundingClientRect();
           const linkRect = current.getBoundingClientRect();
           if (linkRect.left < navRect.left || linkRect.right > navRect.right) {
@@ -406,8 +439,12 @@
       requestAnimationFrame(update);
     };
     nav.addEventListener("click", event => {
-      if (event.target.closest('a[href^="#"]')) schedule();
+      if (event.target.closest('a[href^="#"]')) {
+        if (moreMenu && !compactPortfolioNav.matches) moreMenu.open = false;
+        schedule();
+      }
     });
+    moreMenu?.addEventListener("toggle", schedule);
     nav.addEventListener("keydown", event => {
       if (event.key === "Escape" && menuButton?.getAttribute("aria-expanded") === "true") {
         menuButton.setAttribute("aria-expanded", "false");

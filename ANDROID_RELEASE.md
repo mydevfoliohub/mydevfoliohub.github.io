@@ -32,3 +32,7 @@ The transition was tested on an Android 15 emulator: v2.3.1 debug to the transit
 ## Updating to v2.3.5
 
 The v2.3.5 release APK uses the stable release certificate, package ID `io.mydevfoliohub.app`, and `versionCode 6`. It updates an installation already using the stable certificate. If the installed version is the original v2.3.1 debug APK, first install `Deviloq-v2.3.4-update-without-uninstall.apk` from the releases folder, then install the v2.3.5 release APK. Keep both APKs available for that one-time signing transition.
+
+## Updating to v2.3.6
+
+The v2.3.6 release APK keeps the stable release certificate and package ID `io.mydevfoliohub.app`, and increases `versionCode` to 7. It installs over v2.3.4 or v2.3.5 stable releases. An installation still signed with the original v2.3.1 debug certificate must first use the v2.3.4 one-time transition APK described above, then install v2.3.6.

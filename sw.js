@@ -1,4 +1,4 @@
-const CACHE_NAME = 'deviloq-static-v7';
+const CACHE_NAME = 'deviloq-static-v8';
 const CACHE_PREFIX = 'deviloq-static-';
 const STATIC_URLS = [
   '/offline.html',

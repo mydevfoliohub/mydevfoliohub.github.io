@@ -454,7 +454,11 @@
     <!-- Add new release notes here, newest first. -->
     <div class="release-list" id="releaseList">
       <article class="release-entry">
-        <div class="release-date"><time datetime="2026-09-24">Sep 24, 2026</time><span data-en-html="Reliability update" data-ar-html="تحديث الاعتمادية">Reliability update</span><span class="release-latest" data-en-html="LATEST" data-ar-html="الأحدث">LATEST</span></div>
+        <div class="release-date"><time datetime="2026-09-25">Sep 25, 2026</time><span data-en-html="Interface update" data-ar-html="تحديث الواجهة">Interface update</span><span class="release-latest" data-en-html="LATEST" data-ar-html="الأحدث">LATEST</span></div>
+        <div><h3 data-en-html="v2.3.6 — A calmer, clearer interface" data-ar-html="v2.3.6 — واجهة أوضح وأكثر تناسقًا">v2.3.6 — A calmer, clearer interface</h3><p data-en-html="The headers now emphasize the main action. Portfolio sections are easier to scan, with extra sections grouped under More on desktop and all sections reachable from the mobile menu. Spacing, interaction feedback, Arabic RTL, and Android layouts have been refined." data-ar-html="أصبحت الإجراءات الأساسية أوضح في الهيدر، وأقسام البورتفوليو أسهل تصفحًا؛ الأقسام الإضافية تحت «المزيد» على الكمبيوتر، وجميع الأقسام متاحة في قائمة الجوال. تحسّنت المسافات والتفاعل والعربية واتجاه RTL وواجهة أندرويد.">The headers now emphasize the main action. Portfolio sections are easier to scan, with extra sections grouped under More on desktop and all sections reachable from the mobile menu. Spacing, interaction feedback, Arabic RTL, and Android layouts have been refined.</p><div class="release-tags"><span>v2.3.6</span><span data-en-html="Navigation" data-ar-html="التنقل">Navigation</span><span data-en-html="Mobile UX" data-ar-html="تجربة الجوال">Mobile UX</span><span data-en-html="Android" data-ar-html="أندرويد">Android</span></div></div>
+      </article>
+      <article class="release-entry release-history-item" hidden>
+        <div class="release-date"><time datetime="2026-09-24">Sep 24, 2026</time><span data-en-html="Reliability update" data-ar-html="تحديث الاعتمادية">Reliability update</span></div>
         <div><h3 data-en-html="v2.3.5 — Faster, more dependable" data-ar-html="v2.3.5 — أسرع وأكثر اعتمادية">v2.3.5 — Faster, more dependable</h3><p data-en-html="The homepage, fonts, and technology icons now load without third-party asset services. Mobile navigation and account controls have clearer spacing, and Android updates use the next version code." data-ar-html="تُحمّل الصفحة الرئيسية والخطوط وأيقونات التقنيات الآن دون الاعتماد على خدمات خارجية للملفات. أصبحت قوائم الجوال وأزرار الحساب أوضح، ويستخدم تحديث أندرويد رقم إصدار أعلى.">The homepage, fonts, and technology icons now load without third-party asset services. Mobile navigation and account controls have clearer spacing, and Android updates use the next version code.</p><div class="release-tags"><span>v2.3.5</span><span data-en-html="Reliability" data-ar-html="الاعتمادية">Reliability</span><span data-en-html="Mobile UX" data-ar-html="تجربة الجوال">Mobile UX</span><span data-en-html="Android" data-ar-html="أندرويد">Android</span></div></div>
       </article>
       <article class="release-entry release-history-item" hidden>
@@ -679,7 +683,7 @@
 
     <div class="platform-footer-bottom">
       <span>© 2026 Deviloq</span>
-      <span>Deviloq v2.3.5</span>
+      <span>Deviloq v2.3.6</span>
     </div>
   </footer>
 
@@ -1386,7 +1390,6 @@
 
   <nav id="portfolioSectionNav" aria-label="Portfolio sections"
     onclick="if(event.target.closest('a')) document.getElementById('portfolioMenuButton').setAttribute('aria-expanded','false')">
-    <span class="portfolio-nav-heading">Work</span>
     <a href="#home">
       Overview
     </a>
@@ -1411,35 +1414,22 @@
       Learning Log
     </a>
 
-    <a href="#currently-learning">
-      Currently Learning
-    </a>
+    <a href="#contact">Contact</a>
 
-    <span class="portfolio-nav-heading">Journey</span>
-
-    <a href="#education">Education</a>
-
-    <a href="#achievements">Badges</a>
-
-    <a href="#testimonials">Testimonials</a>
-
-    <a href="#growth">
-      Growth
-    </a>
-
-    <a href="#knowledge">
-      Knowledge
-    </a>
-
-    <span class="portfolio-nav-heading">More</span>
-
-    <a href="#certificates">
-      Certificates
-    </a>
-
-    <a href="#contact">
-      Contact
-    </a>
+    <details class="portfolio-nav-more" id="portfolioNavMore">
+      <summary data-en-html="More <span aria-hidden='true'>⌄</span>" data-ar-html="المزيد <span aria-hidden='true'>⌄</span>">More <span aria-hidden="true">⌄</span></summary>
+      <div class="portfolio-nav-more-panel">
+        <span class="portfolio-nav-heading" data-en-html="Learning" data-ar-html="التعلّم">Learning</span>
+        <a href="#currently-learning">Currently Learning</a>
+        <a href="#growth">Growth</a>
+        <a href="#knowledge">Knowledge</a>
+        <span class="portfolio-nav-heading" data-en-html="Background" data-ar-html="الخلفية">Background</span>
+        <a href="#education">Education</a>
+        <a href="#achievements">Badges</a>
+        <a href="#testimonials">Testimonials</a>
+        <a href="#certificates">Certificates</a>
+      </div>
+    </details>
 
   </nav>
 
@@ -4002,7 +3992,7 @@ Dedicated to learning cybersecurity fundamentals, networking, and ethical hackin
 
   <div class="platform-footer-bottom">
     <span>© <span id="year"></span> Deviloq</span>
-    <span>Deviloq v2.3.5</span>
+    <span>Deviloq v2.3.6</span>
   </div>
 </footer>
 

@@ -117,6 +117,70 @@ test('public portfolio renders with sample data at mobile width', async ({ page 
   expect(errors).toEqual([]);
 });
 
+test('portfolio navigation keeps extra sections reachable on desktop and mobile', async ({ page }) => {
+  const errors = [];
+  page.on('pageerror', error => errors.push(error.message));
+  await page.route('**/rest/v1/**', route => {
+    const url = new URL(route.request().url());
+    const data = url.pathname.endsWith('/profiles')
+      ? [{user_id:'00000000-0000-4000-8000-000000000001',username:'sample',display_name:'Sample Developer',bio:'Building useful things.',is_public:true,tech_stack:[]}]
+      : [];
+    return route.fulfill({json:data});
+  });
+  await page.route('**/rpc/**', route => route.fulfill({json:null}));
+  await page.goto('/?u=sample');
+  await expect(page.locator('#portfolioView')).toBeVisible();
+
+  for (const width of [1920, 1440, 1024]) {
+    await page.setViewportSize({width,height:900});
+    const more = page.locator('#portfolioNavMore');
+    await expect(more).not.toHaveAttribute('open', '');
+    await more.locator('summary').click();
+    await expect(more).toHaveAttribute('open', '');
+    await expect(more.getByRole('link', {name:'Education'})).toBeVisible();
+    const bounds = await more.locator('.portfolio-nav-more-panel').boundingBox();
+    expect(bounds.x).toBeGreaterThanOrEqual(-1);
+    expect(bounds.x + bounds.width).toBeLessThanOrEqual(width + 1);
+    await page.keyboard.press('Escape');
+    await expect(more).not.toHaveAttribute('open', '');
+    expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(width);
+  }
+
+  await page.emulateMedia({reducedMotion:'reduce'});
+  await page.locator('#portfolioNavMore summary').click();
+  expect(await page.locator('.portfolio-nav-more-panel').evaluate(element => getComputedStyle(element).animationName)).toBe('none');
+  await page.keyboard.press('Escape');
+  await page.emulateMedia({reducedMotion:'no-preference'});
+
+  await page.locator('#contact').evaluate(element => element.scrollIntoView({block:'start',behavior:'instant'}));
+  await expect(page.locator('#portfolioSectionNav a[href="#contact"]')).toHaveAttribute('aria-current','location');
+  await page.evaluate(() => scrollTo(0,0));
+
+  for (const width of [768, 430, 375]) {
+    await page.setViewportSize({width,height:900});
+    const menu = page.locator('#portfolioMenuButton');
+    await menu.click();
+    await expect(menu).toHaveAttribute('aria-expanded','true');
+    await expect(page.locator('#portfolioNavMore')).toHaveAttribute('open','');
+    const extra = page.locator('#portfolioNavMore a[href="#certificates"]');
+    await expect(extra).toBeVisible();
+    await extra.scrollIntoViewIfNeeded();
+    const bounds = await extra.boundingBox();
+    expect(bounds.x).toBeGreaterThanOrEqual(-1);
+    expect(bounds.x + bounds.width).toBeLessThanOrEqual(width + 1);
+    expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(width);
+    await page.keyboard.press('Escape');
+    await expect(menu).toHaveAttribute('aria-expanded','false');
+  }
+
+  await page.evaluate(() => setLanguage('ar', false));
+  await expect(page.locator('html')).toHaveAttribute('dir','rtl');
+  await page.locator('#portfolioMenuButton').click();
+  await expect(page.locator('#portfolioNavMore a[href="#certificates"]')).toBeVisible();
+  expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(375);
+  expect(errors).toEqual([]);
+});
+
 test('owner dashboard mobile sections open without overflow', async ({ page }) => {
   const errors = [];
   page.on('pageerror', error => errors.push(error.message));
